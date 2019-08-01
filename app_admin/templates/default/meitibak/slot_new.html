@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  	{part ("/media.main.nav.slot.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			广告位
+    	</div>
+    	<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media.slot">广告位列表</a>
+		</div>
+	</div>
+  
+	<form action="/media.slot.add{if !empty($slot['slot_id'])}.{$slot['slot_id']}{/if}" method="post">
+  
+    <!--基本信息-->
+    <div class="comForm" style="border:1px solid #EEEEEE; border-top:none;">
+      <h1>{if !empty($slot)}修改{else}新建{/if}广告位</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>网站：</dt>
+        <dd>
+			<select id="website" name="website_id">
+{foreach $websites->items as $website}
+			<option {if $slot['website_id']==$website['website_id']}selected{/if} value="{$website['website_id']}">{$website['website_name']}</option>
+{/foreach}
+			</select>
+		</dd>
+      </dl>
+      <dl>
+        <dt>广告位名称：</dt>
+        <dd><input type="text" class="itxt" size="30" name="slot_name" value="{$slot['slot_name']}" /></dd>
+      </dl>
+      <dl>
+        <dt>所在页面URL：</dt>
+        <dd><input type="text" class="itxt" size="30" name="url" value="{$slot['url']}"/></dd>
+      </dl>
+      <dl>
+        <dt>展现形式：</dt>
+        <dd>
+          <label class="irad" for="qg">			<input name="view_screen" {if $slot['view_screen']==1}checked{/if} value="1" id="qg" type="radio"/> 首屏</label>
+          <label class="irad ml20" for="xztf">	<input name="view_screen" {if $slot['view_screen']==2}checked{/if} value="2" id="xztf" type="radio"/> 非首屏</label>
+        </dd>
+      </dl>
+{*
+      <dl>
+        <dt>所在页面URL：</dt>
+        <dd><input type="text" class="itxt" size="30" /></dd>
+      </dl>
+*}
+      <dl>
+        <dt>尺寸(宽*高)：</dt>
+        <dd>
+			<input type="text" class="itxt" name="width" value="{$slot['width']}" size="4" /> *
+			<input type="text" class="itxt" name="height" value="{$slot['height']}" size="4" />
+		</dd>
+{*<dd>
+            <select id="selYear">
+              <option>请选择</option>
+              <option>400*300</option>
+            </select>
+        </dd>
+*}
+      </dl>
+      <dl>
+        <dt>低价：</dt>
+        <dd><input type="text" class="itxt" name="min_price" value="{$slot['min_price']}" size="30" />分/千次曝光</dd>
+      </dl>
+      <dl>
+        <dt>物料类型：</dt>
+        <dd>
+{*<label class="" for="mrf"><input name="rqxz" id="mrf" type="checkbox" value="" /> 全部</label>*}
+          <label class="ml30" for="mrf"><input name="creative_type" id="mrf" {if $slot['creative_type']==1}checked{/if} type="checkbox" value="1" /> 图片</label>
+        </dd>
+      </dl>
+{*
+      <dl>
+        <dt>投放黑名单：</dt>
+        <dd>
+        <label class="" for="mrf"><input name="rqxz" id="mrf" type="checkbox" value="" /> 不限</label>
+        <label class="ml30" for="mrf" id="mtym" onClick="ShowDIV('phmd')"><input name="rqxz" id="mrf" type="checkbox" value="" /> 设置黑名单</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="phmd" class="popdiv pop_hmd" style="display:none;top:300px;">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">设置黑名单</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('phmd')"><img src="../images/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+              
+                  <div class="toolbar">
+                    <div id="zhuantai" class="selMenu smw_1">
+                      <span class="smtit">广告主</span>
+                      <ul>
+                        <li><a href="javascript:;">所有媒体</a></li>
+                        <li><a href="javascript:;">新浪</a></li>
+                      </ul>
+                    </div>
+                    <div id="zhuantai" class="selMenu smw_1 ml10">
+                      <span class="smtit">素材类型</span>
+                      <ul>
+                        <li><a href="javascript:;">所有类型</a></li>
+                        <li><a href="javascript:;">综合</a></li>
+                      </ul>
+                    </div>
+                    <span class="iSearch ml10">
+                       <a class="isicon" href="#"><img src="../images/i_search.gif" alt="搜索" /></a>
+                       <input type="text" class="itxt fc7" value="素材名称" size="30" />
+                    </span>
+                  </div> 
+                  
+                  <div class="mt20 clear">
+                  <table class="listab" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <th scope="col">已允许或已屏蔽</th>
+                      <th scope="col">类别名称</th>
+                    </tr>
+                    <tr>
+                      <td><div class="xzif"><a class="sel" href="">允许</a><a href="">屏蔽</a></div></td>
+                      <td>消费食品</td>
+                    </tr>
+                  </table>
+                  <!--turnpage start-->
+                  <div class="turnpage">
+                    <a href="#"><em>&lt;</em> 上一页</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <span>...</span>
+                    <a href="#">65</a>
+                    <a href="#">下一页 <em>&gt;</em></a>
+                  </div>
+                  <!--turnpage end-->
+                  
+                  <div class="mt20 clear">
+                    输入屏蔽广告客户名单<br />
+                    <textarea name="" cols="100" rows="7"></textarea>
+                  </div>
+                  
+                  
+                  </div>
+                                   
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('phmd')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('phmd')" /></span>
+                    </div>
+                  </div>
+                  
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+        </dd>
+      </dl>
+*}
+{*
+      <dl>
+        <dt>第三方素材审核：</dt>
+        <dd>
+          <label class="irad" for="qg"><input name="dxdq" id="qg" type="radio" value="" /> 审核</label>
+          <label class="irad ml20" for="xztf"><input name="dxdq" id="xztf" type="radio" value="" /> 不审核</label>
+        </dd>
+      </dl>
+*}
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="comment">{$slot['comment']}</textarea></dd>
+      </dl>
+	  
+	  <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

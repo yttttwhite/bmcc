@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+<style>
+    .scll{
+    display:inline-block;
+    width:200px;
+    height;25px;
+    font-family:STXihei;
+    font-size:16px;
+}
+    .hrll{
+    border-top:2px solid gray;
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:20px;
+    margin-right:10px;
+    width:800px;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+	  {part ("/admin.caiwu.left")} 
+  </div>
+  
+<div class="mcon">
+    <div class="toolbar-bc fl mb-10">
+        <div class="fl sub-title sc-title">
+            <a href="/baichuan_advertisement_manage/admin.caiwu.list" >高级管理</a>
+            <i class="fa fa-angle-double-right" ></i>
+            <a href="/baichuan_advertisement_manage/admin.caiwu.list" >财务管理</a>
+            <i class="fa fa-angle-double-right" ></i>
+            <a href="/baichuan_advertisement_manage/admin.caiwu.list" >用户帐务</a>
+            <i class="fa fa-angle-double-right" ></i>
+            财务录入
+        </div>
+    </div>
+    <div class="clear"></div>
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-white">
+				<div class="panel-heading" style="display:none;">
+					<h4 class="panel-title">创建用户</h4>
+				</div>
+				<div class="panel-body" style="padding-right:100px; padding-top: 0;">
+					<form action="/admin.caiwu.add.{$user->uid}" method="post" enctype="multipart/form-data" role="form" id="form-add">
+						<div class="row">
+							<div class="col-md-12">
+								{if($error['count']>0)}
+								<div class="errorHandler alert alert-danger">
+									<i class="fa fa-times-sign"></i> 表单包含错误信息，请仔细核对：{$error['msg']}
+								</div>
+								{/if}
+								<div class="errorHandler alert alert-danger no-display">
+									<i class="fa fa-times-sign"></i> 表单包含错误信息，请仔细核对：
+								</div>
+								<div class="successHandler alert alert-success no-display">
+									<i class="fa fa-ok"></i> 表单验证通过!
+								</div>
+							</div>
+                            <div class="col-md-12">
+                                <h4>• 账户信息</h4>
+                                <hr class="hrll">
+                                <div class="dvll">
+                                    账户名称：<span class="scll"><strong>{$user->user_name}</strong></span> 联系名称：<span class="scll"><strong>{$user->host}</strong></span>
+                                </div>
+                                <div class="dvll">
+                                    账户类型：<span class="scll"><strong>{$roleList[$user->role_id][name]}</strong></span>
+                                    账户状态：<span class="scll"><strong>{if $user->account_status==1}启用{elseif $user->account_status==2}禁用{/if}</strong></span>
+                                </div>
+                                <div class="dvll">
+                                    <span >当前余额：<strong class="ye">￥{$user->account}</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h4>• 业务信息</h4>
+                                <hr class="hrll">
+                                <div class="dvll">
+                                    <span >业务单号：</span>
+                                    <input class="scll" style="line-height:25px;" type="text" name="business_id" maxlength="50" placeholder="任意字符，长度50">
+                                    注：业务订单号为EDSMP（CRM）传入，非必填
+                                </div>
+                                <div class="dvll">
+                                    <span >合同编号：</span>
+                                    <input class="scll" style="line-height:25px;" type="text" name="contract_id" maxlength="50"placeholder="任意字符，长度50" required> <span class="text-red"> *</span>
+                                    注：合同中的编号
+                                </div>
+                                <div class="dvll">
+                                    <span >合同图片：</span>
+                                    <span class="sbtng " style="position:relative;display:inline-block;zoom:1;cursor:pointer;overflow:hidden;vertical-align:middle;float:none">
+                                    <button {$readonly} name="contract" class="ibtng" style="background: #EEEEEE; border: 1px solid #DDDDDD;" >上传合同</button>
+                                    <input {$readonly} name="contract[]" style="position:absolute;left:0;width: 180px;top:0;_zoom:30;font-size:300px\9;height:100%;_height:auto;opacity:0;filter:alpha(opacity=0);-ms-filter:"alpha(opacity=0)";cursor:pointer;float:none" type="file" multiple accept="image/*" id="contract" class="ibtng" value="批量上传" />                                  
+                                    </span>
+                                    <span  id="preview"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h4>• 财务信息</h4>
+                                <hr class="hrll">
+                                <div class="dvll">
+                                    <span >财务类型：</span>
+                                    <label>
+                                        <input style="line-height:25px;" type="radio" value="1" name="operate_code" checked></input>
+                                        充值
+                                    </label>
+                                    <label>
+                                        <input style="line-height:25px;" type="radio" value="2" name="operate_code" ></input>
+                                        补差
+                                    </label>
+                                    <label>
+                                        <input style="line-height:25px;" type="radio" value="3" name="operate_code" ></input>
+                                        冲正
+                                    </label>
+                                </div>
+                                <div class="dvll">
+                                    <span id="op_in" class="text-green">入账金额：</span>
+                                    <span id="op_out" class="text-red" style="display: none;">出账金额：</span>
+                                    <input class="scll" style="line-height:25px;" type="number" min="0" step="0.1" name="operate_num" maxlength="8" placeholder="数字，8位，支持小数后4位" required></input>
+                                    元
+                                    <span class="text-red"> *</span>
+                                </div>
+                                <div class="dvll">
+                                    <span style="margin-bottom:30px; float:left">其他备注：</span>
+                                    <textarea rows="10" name="note"></textarea>
+                            </div>
+                            <input style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:30px 300px 0px 260px; text-align:center;border: 0;" type="submit" value="确定提交">
+								<script>
+									function setPassword(){
+										$("#password").attr('disabled',false);
+										$("#password_again").attr('disabled',false);
+									}
+									function unSetPassword(){
+										$("#password").attr('disabled',true);
+										$("#password_again").attr('disabled',true);
+									}
+								</script>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+{part "/main.main.footer"}
+
+<script>
+	$(document).ready(function()  {
+		$('.icheck').iCheck( {
+			//checkboxClass : 'icheckbox_minimal-green',
+			checkboxClass : 'icheckbox_square-green',
+			radioClass : 'iradio_minimal',
+			increaseArea : '-10%'
+		} );
+	} );
+
+    var op_in = $('#op_in');
+    var op_out = $('#op_out');
+    $('input[type="radio"][name="operate_code"]').change(function(){
+        if($(this).val()==3){
+            op_in.hide();
+            op_out.show();
+        }else{
+            op_in.show();
+            op_out.hide();
+        }
+    })
+
+	FormValidator.init();
+    $("#contract").change(function(){  
+        var preview = document.getElementById('preview');
+        console.log(this);
+        debugger
+        var cnt = this.files.length;
+        for(var i=0; i<cnt;i++){
+
+            if(this.files[i].type.search('image')<0){ alert("仅支持图片格式，请重新选择"); break; } 
+
+            var objUrl = getObjectURL(this.files[i]) ;  
+            var img = new Image();  
+            img.src = objUrl;
+            img.style.margin = "0 10px";
+            img.style.border = "1px solid #eee";
+            img.height = 60;
+            img.width = 60;
+            img.onclick = (function(){
+                    return function(){
+                        var w = window.open("about:blank","_blank","toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=550, height=650");
+                        w.eval("self.document.write('<img width=\"100%\" src=\"" + objUrl + "\">')" );
+                        setTimeout(function(){ w.close();},1000*5);
+                    }
+                })();
+        preview.appendChild(img);
+        }
+    });
+    function getObjectURL(file) {  
+        var url = null ;   
+        if (window.createObjectURL!=undefined) { // basic  
+            url = window.createObjectURL(file) ;  
+        } else if (window.URL!=undefined) { // mozilla(firefox)  
+            url = window.URL.createObjectURL(file) ;  
+        } else if (window.webkitURL!=undefined) { // webkit or chrome  
+            url = window.webkitURL.createObjectURL(file) ;  
+        }  
+        return url ;  
+    }
+</script>
+</body>
+</html>

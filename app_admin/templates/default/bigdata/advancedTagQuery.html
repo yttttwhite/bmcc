@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+{part "/main.main.header"}
+<style>
+#chartSummary .c3-line-data2 {
+  	stroke-width: 2px;
+}
+</style>
+</head>
+<body>
+<form method="post" action="bigdata.main.AdvancedQuery">
+		<div class="panel panel-white mtb-0">
+			<div class="panel-body">
+				<div class="queryTab mb-30">
+					<ul>
+						<li {if($queryType == 2)}class="current"{/if}><a href="bigdata.main.AdvancedQuery?queryType=2">关键字查询</a></li>
+						<li {if($queryType == 3)}class="current"{/if}><a href="bigdata.main.AdvancedQuery?queryType=3">URL查询</a></li>
+						<li {if($queryType == 1)}class="current"{/if}><a href="bigdata.main.AdvancedQuery?queryType=1">标签组合查询</a></li>
+					</ul>
+				</div>
+				    <div class="container" style="width: 500px;">
+    					<div class="row">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label>查询名称：</label>
+    							</div>
+    							<div class="w-380 fl">
+    								<span class="input-icon">
+    									<input type="text" class="form-control" name="queryName" placeholder="给这次查询起个名字">
+    									<input type="text" class="form-control" name="queryType" value="{$queryType}" placeholder="查询类型" style="display:none;">
+    								</span>
+    							</div>
+    						</div>
+    					</div>
+    					
+    					<div class="row">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label>选择标签：</label>
+    							</div>
+    							<div class="w-380 fl">
+    								<span class="input-icon">
+    									<span class="btn btn-squared input-group-addon"  onclick="openTagLayer()">选择标签</span>
+    								</span>
+    							</div>
+    						</div>
+    					</div>
+    					
+    					<div class="row">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label>已选标签：</label>
+    							</div>
+    							<div class="w-380 fl" style="border:1px solid #DDDDDD;" onclick="openTagLayer()">
+    								<ul id="selectedTags" style="width:100%; height:240px; overflow:scroll; padding: 10px 0; line-height: 18px;"></ul>
+    							</div>
+    						</div>
+    					</div>
+    					
+    					<div class="row mt-10">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label></label>
+    							</div>
+    							<div class="w-380 fl">
+    								<span class="input-icon">
+    									<button type="submit" class="btn btn-success btn-squared" style="float: right;">提交</button>
+    								</span>
+    							</div>
+    						</div>
+    					</div>
+					</div>
+			</div>
+		</div>
+		
+		<div id="tagContainerLayer" onclick="closeTagLayer()" style="position:fixed;margin:auto;left:0; right:0; top:0; bottom:0; z-index:90; background:rgba(0,0,0,0.5); display:none;"></div>
+				<div class="tagContainer" id="tagContainer" style="position:fixed; margin:auto; left:0; right:0; top:0; bottom:0; z-index:100; display:none;">
+					<div class="tagContainerLeft">
+						<ul class="fl">
+								{foreach $rootTags as $rootTag}
+								{if(!isset($leafTagStruct[$rootTag['tid']]))}
+								<!-- 
+								<li><a name="{$rootTag['tid']}" style="color:#CCCCCC;" onclick="selectThisTag(this)">{$rootTag['tname']}</a></li>
+								 -->
+								<li>
+									<input id="checkbox-{$rootTag['tid']}" type="checkbox" name="tags[]" value="{$rootTag['tid']}" onclick="selectThisTag(this)" alt="{$rootTag['tname']}"  checked=""/>
+									<label for="checkbox-{$rootTag['tid']}">{$rootTag['tname']}</label>
+								</li>
+								{else}
+								{/if}
+								{/foreach}
+						</ul>
+						<ul class="fl">
+								
+								{foreach $rootTags as $rootTag}
+								{if(isset($leafTagStruct[$rootTag['tid']]))}
+								<li><a name="{$rootTag['tid']}" onclick="showLeafTagsByPid(this.name)">{$rootTag['tname']}</a></li>
+								{else}
+								{/if}
+								{/foreach}
+						</ul>
+					</div>
+					<div class="tagContainerRight">
+						{foreach $leafTagStruct as $pid=>$leafTagArray}
+							<ul id="tagUl-{$pid}" style="display:none;">
+								{foreach $leafTagArray as $leafTag}
+								<!-- 
+								<li><a name="{$leafTag['tid']}" onclick="selectThisTag(this)">{$leafTag['tname']}</a></li>
+								 -->
+								<li>
+									<input id="checkbox-{$leafTag['tid']}" type="checkbox" name="tags[]" value="{$leafTag['tid']}" onclick="selectThisTag(this)" alt="{$leafTag['tname']}" checked=""/>
+									<label for="checkbox-{$leafTag['tid']}">{$leafTag['tname']}</label>
+								</li>
+								{/foreach}
+							</ul>
+						{/foreach}
+						<div style="position: absolute; right: 0; top: 0; margin: 5px;"><a onclick="closeTagLayer()">[确认]</a></div>
+					</div>
+					<script type="text/javascript">
+						window.onload=function(){ 
+							var checkBox=document.getElementsByName("tags[]");
+							for(var i=0; i<checkBox.length;i++){
+								checkBox[i].checked = false;
+							}
+						}
+						
+						function showLeafTagsByPid(pid){
+							{foreach $leafTagStruct as $pid=>$leafTagArray}
+								$('#tagUl-{$pid}').hide();
+							{/foreach}
+							$('#tagUl-'+pid).show();
+						}
+						
+						function selectThisTag(e){
+							var tagId = e.value;
+							var tagName = e.alt;
+							var tagHtmlId = "tag-"+tagId;
+							
+							if(document.getElementById(tagHtmlId) && !e.checked){
+								var temp = document.getElementById(tagHtmlId);
+								temp.parentNode.removeChild(temp); 
+							}else{
+								if(e.checked){
+									var newTag = "<li id='tag-"+tagId+"'>"+tagName+"</li>";
+									var selectedTags = document.getElementById('selectedTags').innerHTML;
+									selectedTags = selectedTags + newTag;
+									document.getElementById('selectedTags').innerHTML = selectedTags;
+								}
+							}
+						}
+						
+						function closeTagLayer(){
+							document.getElementById('tagContainerLayer').style.display = "none";
+							document.getElementById('tagContainer').style.display = "none";
+						}
+						
+						function openTagLayer(){
+							document.getElementById('tagContainerLayer').style.display = "block";
+							document.getElementById('tagContainer').style.display = "block";
+						}
+					</script>
+				</div>
+	</form>
+</body>
+</html>

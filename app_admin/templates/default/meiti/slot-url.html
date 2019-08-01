@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.slot.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/media">媒体管理</a>&nbsp;&gt;&nbsp;<a href="/baichuan_advertisement_manage/media.slot">广告位</a>&nbsp;&gt;&nbsp;网址屏蔽</div>
+	<form action="/media.slot.url.{$slot['slot_id']}" method="post">
+  
+    <!--基本信息-->
+    <div class="comForm">
+      <h1>推广连接屏蔽</h1>
+	  <dl>
+	  使用此网页屏蔽指向特定网址的广告在您的网站上展示，具体方法为在下框中输入网址。
+	  输入广告上出现的显示网址或广告的目标网址可屏蔽新广告和现有广告。
+
+	  </dl>
+
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>屏蔽网址：https://</dt>
+        <dd><textarea cols="50" rows="5" name="urls"></textarea></dd>
+      </dl>
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+      <tr>
+        <th width="300px">已屏蔽网址</th>
+        <th>操作</th>
+      </tr>
+{foreach $ban_urls->items as $item}
+      <tr>
+        <td>{$item['ban_url']}</td>
+        <td>
+				已屏蔽 <a href="?ban_url={urlencode($item['ban_url'])}&flag=cancel">取消</a>
+		</td>
+      </tr>
+{/foreach}
+    </table>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

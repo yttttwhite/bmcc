@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.schedule.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon" >
+    <div class="toolbar-bc fl" style="margin-bottom:13px;">
+      <div class="fl sub-title sc-title">
+            <a href="/baichuan_advertisement_manage/media?nav=2">媒体管理</a>
+            <i class="fa fa-angle-double-right"></i>
+            广告位排期
+      </div>
+      <form method="get" >
+        <input name="nav" type="hidden" value="2">
+        <div class="fl" >
+          <div class="selMenu" >
+            <span class="iSearch">
+                   <input id="media_name" name="media_name" type="text" class="itxt fc7" placeholder="所属媒体名称" value="{$_GET['media_name']}" size="30" />
+            </span>
+          </div>
+          <div class="selMenu" style="margin-left: 10px;">
+            <span class="iSearch">
+                   <input id="channel_name" name="channel_name" type="text" class="itxt fc7" placeholder="所属频道名称" value="{$_GET['channel_name']}" size="30" />
+            </span>
+          </div>
+          <div class="selMenu" style="margin-left: 20px;">
+            <span class="iSearch">
+                   <input id="position_name" name="position_name" type="text" class="itxt fc7" placeholder="广告位名称" value="{$_GET['position_name']}" size="30" />
+            </span>
+          </div>
+          <div class="selMenu smzt ml-10" >
+            <span class="iSearch">
+              <select name="tag" class="itxt fc7" style="height: 34px;width: 120px;">
+                <!--<option value="">类型标签</option>-->
+                <option value="">--广告位类型--</option>
+                {foreach $tags as $_tag}
+                  <option value="{$_tag['tag_ident']}" {if $_GET['tag']==$_tag['tag_ident']}selected{/if}>{$_tag['tag_ident']}</option>
+                {/foreach}
+              </select>
+            </span>
+          </div>
+          <div class="selMenu smzt ml-10" >
+            <span class="iSearch">
+              <input id="search_date" name="date"  type="text" class="itxt idate fc7" value="{$start_date}" placeholder="选择日期" />
+            </span>
+          </div>
+
+        </div>
+        <div class="fr">
+          <input type="submit" id="search" class="btn btn-squared btn-success" value="搜索">
+        </div>
+      </form>
+      <div class="clear"></div>
+    </div>
+
+    <div class="clear"></div>
+
+    <!--<div style="overflow: auto;height: 1300px;">-->
+    <!--toolbar start--> 
+    <!--<table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab" style="white-space: nowrap;">-->
+    <!--<div class="infoTable" style="width: 100%;height: 1750px;" >-->
+    <div class="infoTable" style="width: 100%;margin-bottom: 10px;" >
+      <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th style="width: 55px;">所属媒体</th>
+        <th style="width: 70px;">所属频道</th>
+        <th style="width: 130px;">广告位名称</th>
+        <th>位置标识</th>
+        <th>广告位类型</th>
+        <!--<th>类型标签</th>-->
+        <th style="width: 55px;">计费标签</th>
+        <!-- week -->
+        {foreach $week as $_index3=>$_day}
+          <th>{$date[$_index3]}<br>{$_day|default:'无'}</th>
+        {/foreach}
+        </tr>
+{foreach $schedule as $item}
+      <tr style="font-size:12px;">
+        <td>{$item['media_name']}</td>
+        <td>{$item['channel_name']}</td>
+        <td>{$item['position_name']}</td>
+        <td>{$item['position_identification']}</td>
+        <td>{$item['tag_identification']}</td>
+        <td>{$item['tag']|default:'未知'}</td>
+        <!-- week -->
+        {foreach $week as $index=>$_}
+          <td>预计投放: {$item[$index]['cpm']} CPM <br>预计投放: {$item[$index]['cpt']} CPT  </td>
+        {/foreach}
+      </tr>
+{/foreach}
+    </table>
+      <div class="turnpage" style="margin-top:0px;">
+        {turnpager $totalPage|html}
+      </div>
+</div>
+
+
+  </div>
+  <!--mcon end-->
+</div>
+{part "/main.main.footer"}
+
+<script type="text/javascript">
+$(function(){
+    $("#search_date").datepicker({ dateFormat: "yy-mm-dd" });
+});
+</script>
+</body>
+</html>

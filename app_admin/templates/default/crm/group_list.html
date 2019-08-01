@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<!--main-->
+<style>
+.selMenu ul{
+	z-index:999;
+}
+</style>
+<div class="main">
+  <div class="side">
+{part "/ad.plan.listpart"}
+  </div>
+  <!--mcon start-->
+  <div class="mcon">
+	<script>
+	var paras={ };
+	paras.start="{$start}";
+	paras.end="{$end}";
+	//$(document).ready(function(){
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d');}"){
+			$("#r_today").addClass('sel');
+		}
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d',time()-3600*24);}"){
+			$("#r_yesterday").addClass('sel');
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-1 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('+0 week Sunday'));}"){
+			$("#r_week").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-2 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('-1 week Sunday'));}"){
+			$("#r_lastweek").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}" && paras.end=="{date('Y-m-d',time());}"){
+			$("#r_month").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}" && paras.end=="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}"){
+			$("#r_lastmoth").addClass("sel");
+		}
+
+	//});
+  function setV(){
+	  $("#startdate").val(paras.start);
+	  $("#enddate").val(paras.end);
+	  location="/ad.plan?start="+paras.start+"&end="+paras.end;
+  }
+	$("#r_menu a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+	$("#startdate").change(function(){
+			paras.start=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#enddate").change(function(){
+			paras.end=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#r_today").click(function(){
+		paras.start="{date('Y-m-d');}";
+		paras.end="{date('Y-m-d');}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_week").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-1 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('+0 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastweek").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-2 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('-1 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_month").click(function(){
+		paras.start="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}";
+		paras.end="{date('Y-m-d',time());}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastmoth").click(function(){
+		paras.start="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}";
+		paras.end="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	//report("#chartShow",paras);
+	report_echarts("chartShow",paras);
+	</script>
+    
+    
+    <!--toolbar-bc start--> 
+    <div class="toolbar-bc">
+      <div id="zhuantai" class="selMenu smzt">
+        <span class="smtit">
+			{if $status==1}已启动
+			{elseif $status==2}已暂停
+			{elseif $status==3}已过期
+			{elseif $status==4}删除
+			{elseif $status==5}冻结
+			{else}所有状态{/if}</span>
+        <ul id="status">
+          <li><a status="0">所有状态</a></li>
+          <li><a status="1">已启动</a></li>
+          <li><a status="2">已暂停</a></li>
+		  <li><a status="3">已过期</a></li>
+		  <!-- 
+		  <li><a status="4">已删除</a></li>
+		   -->
+		  <li><a status="5">冻结</a></li>
+        </ul>
+      </div>
+      
+      <div class="selMenu ml30">
+        <div class="smtbg">
+          <input type="text" class="itxt_1 fl idate" id="startdate2" value="{$start|default:'开始时间'}" size="15" />
+          <input type="text" class="itxt_1 fl idate" id="enddate2" value="{$end|default:'结束时间'}" size="15" />
+        </div>
+      </div>
+	  <script>
+	var paras2={ };
+	paras2.start="{$start}";
+	paras2.end="{$end}";
+	paras2.status="{$status}";
+	paras2.uid="{$uid}";
+	function reload(){
+		location="/ad.plan?start="+paras2.start+"&end="+paras2.end+"&status="+paras2.status+"&uid="+paras2.uid;
+	}
+	$("#status a").click(function(){
+			paras2.status=$(this).attr("status");
+			reload();
+	});
+	  $("#startdate2").change(function(){
+			  paras2.start=$(this).val();
+			  reload();
+	});
+	  $("#enddate2").change(function(){
+			  paras2.end=$(this).val();
+			  reload();
+	});
+	  </script>
+      
+      <div class="tbGroup ml30">
+        <span class="tbgBtn">
+          <a type="start" class="status-change tbgiba"  title="启动"><i class="fa fa-play"></i></a>
+          <a type="stop" class="status-change tbgiba nobr"  title="暂停"><i class="fa fa-pause"></i></a>
+          <a type="del" class="status-change tbgiba nobr" title="删除"><i class="fa fa-trash-o"></i></a>
+        </span>
+		</div>
+      <div style="float:right" class="tbGroup ml30">
+        <span >
+		<a href="#"  style="padding-left:10px;padding-right:10px;height: 33px; line-height: 33px; font-size: 12px;" class="nobr" onclick="tableToExcel('report_dat','数据报表');return false;">导出</a>
+        </span>
+      </div>
+      <script>
+      $(document).ready(function(){
+		$(".status-change").click(function(){
+			var checked = $(".reportab input:checkbox:checked[value]");
+			var type=$(this).attr("type");
+			if(checked.size()<=0){
+				alert("请选择");
+			}else{
+				 var planid=[];
+				 checked.each(function(i,item){
+					 planid.push($(item).val());
+				 })
+				 $.ajax({ 
+					type: "POST",
+					url: "/ad.plan.status."+type,
+					data: { plan_ids:planid },
+					dataType:"json",
+					success: function(msg){
+						location.reload();
+					}
+				});
+			}
+			return false;
+		});
+	});
+      </script>
+{*
+      
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgiba" href="#" title="锁定"><i class="ilock"></i></a>
+          <a class="tbgiba" href="#" title="设置"><i class="iset"></i></a>
+          <a class="tbgiba" href="#" title="复制"><i class="icopy"></i></a>
+        </span>
+      </div>
+	*}
+      <div class="clear"></div>
+    </div>
+    <!--toolbar-bc end--> 
+    
+    <table id="report_dat" width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" class="checkall" id="checkedAll" type="checkbox"/></th>
+        <th>广告组</th>
+        <th>状态</th>
+        <th>创建时间</th>
+        <th class="tac">设置</th>
+      </tr>
+{foreach $list as $group}
+      <tr>
+        <td class="tac"><input name="group_id[]" type="checkbox" value="{$group['group_id']}" /></td>
+        <td><a href="/baichuan_advertisement_manage/ad.plan.list.{$group['group_id']}">{$group['group_name']}</a></td>
+        <td>{if($group['enable']==1)}正常{elseif $group['enable']==2}暂停{elseif $group['enable']==3}过期{elseif $group['enable']==4}已删除{elseif $group['enable']==5}冻结{elseif $group['enable']==6}没预算{else}没有开始{/if}</td>
+        <td>{date("Y-m-d H:i:s",$group['ctime'])|default:'未设置'}</td>
+        <td class="tac">
+        	<a href="/baichuan_advertisement_manage/crm.group.detail?group_id={$group['group_id']}">详情</a>
+        	<a href="#" onclick="layerConfirmGet('/crm.group.delete?group_id={$group['group_id']}', '确认删除这条数据？');">删除</a>
+        	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" onclick="layerIframe('新建素材','/crm.ad.addIframe?type=1&group_id={$group['group_id']}',640,480)">新建素材</a>
+		</td>
+      </tr>
+{/foreach}
+    </table>
+    
+    <!--turnpage start-->
+{*
+    <div class="turnpage">
+      <a href="#"><em>&lt;&lt;</em>上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页<em>&gt;&gt;</em></a>
+    </div>
+	*}
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+<div class="main">
+
+  <!--side-->
+  <div class="side">
+  
+        <div class="leftNav">
+      <ul>
+        <li><a href="/baichuan_advertisement_manage/audient">监控管理</a></li>
+        <li class="nobotbor"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <script>function func(){
+	
+         if( document.getElementById("manager").checked){
+    document.getElementById("js").value = "";
+	document.getElementById('js').disabled=true;
+}else{
+	document.getElementById("js").value = document.getElementById("dm").value;
+    document.getElementById('js').disabled=false;
+}}
+</script>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a>&nbsp;&gt;&nbsp;<a href="/baichuan_advertisement_manage/audient">监控管理</a>&nbsp;&gt;&nbsp;新增</div>
+    
+    <div class="chartMenu">
+     <div class="fl"><span class="sbtnb"><input name="" type="button" class="ibtnb" value="创建人群分析" onclick="top.location='/baichuan_advertisement_manage/audient.main.newcrowd'"/></span></div>
+     <div class="fr">
+      <span class="cms">
+        <select class="formSel ml5">
+          <option>创建时间</option>
+          <option>昨天</option>
+          <option>前天</option>
+        </select>
+        <select class="formSel ml5">
+          <option>全部网站</option>
+          <option>百度</option>
+          <option>新浪网</option>
+        </select>
+        <select class="formSel ml5">
+          <option>全部状态</option>
+          <option>运行中</option>
+          <option>暂停</option>
+          <option>结束</option>
+        </select>
+        </span>
+        <span class="cms cmsSearch">
+           <a class="itsearch" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+           <input type="text" class="itxt_1 fc7" value="域名/名称" size="30" />
+        </span>
+      </div>
+    </div>
+    
+    
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="listab mt20 fs14">
+        <tr>                 
+          <th class="tac">编号</th>
+          <th>网站名称</th>
+          <th>人群名称</th>
+          <th>状态</th>
+          <th class="tac">人数</th>
+          <th class="tac">有效时间(天)</th>
+          <th class="tac">创建时间</th>
+          <th>操作</th>
+        </tr><!--
+        <tr>            
+          <td class="tac">1</td>
+          <td>百度</td>
+          <td>90后青少年</td>
+          <td>运行中</td>
+          <td class="tac">300</td>
+          <td class="tac">15</td>
+          <td class="tac">2012-05-08</td>
+          <td><a href="#">修改</a><a href="#">报表</a><a href="#">删除</a></td>
+        </tr>
+        <tr>            
+          <td class="tac">2</td>
+          <td>百度</td>
+          <td>90后青少年</td>
+          <td>结束</td>
+          <td class="tac">300</td>
+          <td class="tac">15</td>
+          <td class="tac">2012-05-08</td>
+          <td><a href="#">修改</a><a href="#">报表</a><a href="#">删除</a></td>
+        </tr>
+        <tr>            
+          <td class="tac">3</td>
+          <td>百度</td>
+          <td>90后青少年</td>
+          <td>暂停</td>
+          <td class="tac">300</td>
+          <td class="tac">15</td>
+          <td class="tac">2012-05-08</td>
+          <td><a href="#">修改</a><a href="#">报表</a><a href="#">删除</a></td>
+        </tr>-->
+        {foreach($result as $k=>$v)}
+                        <tr><td>{$v['id']}</td><td>{$v['wname']}</td><td>{$v['name']}</td><td>{$v['status']}</td><td>{$v['number']}</td><td>{$v['valid_time']}</td><td>{$v['create_time']}</td><td>{$v['op']}</td></tr>
+                    {/foreach}
+                    
+      </table>
+    
+    <!--turnpage start-->
+{$pager}
+    <!--turnpage end-->
+    
+
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+
+{part "/main.main.footer"}
+
+</body>
+</html>

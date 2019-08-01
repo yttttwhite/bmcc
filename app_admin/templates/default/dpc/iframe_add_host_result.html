@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body class="w-auto">
+	<div class="container-content p-0 mt-20">
+		<div class="panel panel-white mtb-0">
+			<div class="panel-body">
+				{if(is_array($insertStatus['ok']))}
+				<h4 class="mb-30">以下URL添加成功：</h4>
+				<table class="table table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>已添加内容</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach ($insertStatus['ok'] as $url)}
+						<tr>
+							<td>{$url}</td>
+						</tr>
+						{/foreach;}
+					</tbody>
+				</table>
+				{/if}
+				
+				{if(is_array($insertStatus['exist']))}
+				<h4 class="mb-30">{$title}</h4>
+				<table class="table table-striped table-hover table-bordered">
+					<thead>
+						<tr>
+							<th>重复内容</th>
+							<th>所在分组</th>
+							<th>添加人</th>
+							<th>添加时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach ($insertStatus['exist'] as $existDetail)}
+						<tr>
+							<td>{$existDetail['url']}</td>
+							<td>{$existDetail['group_id']}<a class="ml-20" href="/baichuan_advertisement_manage/dpc.main.host.beijing_unicom?gid={$existDetail['group_id']}" target="_blank">打开</a></td>
+							<td>{$existDetail['user']}</td>
+							<td>{$existDetail['uptime']}</td>
+						</tr>
+						{/foreach;}
+					</tbody>
+				</table>
+				{/if}
+				{if($referer !== 0)}
+				<a class="btn btn-squared btn-success btn-x-30 fr ml-30" href="{$referer}">返回</a>
+				{/if}
+				<a class="btn btn-squared btn-danger btn-x-30 fr" onclick="top.location.reload();">刷新页面</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

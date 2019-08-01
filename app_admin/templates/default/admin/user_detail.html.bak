@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+	<!--side-->
+	<div class="side">
+	{part ("/admin.user.left")} 
+	</div>
+	
+	<div class="mcon">
+		<div class="row">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-white">
+				<div class="panel-heading" style="display:none;">
+					<h4 class="panel-title">用户详情</h4>
+				</div>
+				<div class="panel-body" style="padding-right:100px; padding-top: 0;">
+					<form action="/admin.user.edit.{$user->uid}" method="post" role="form" id="form">
+						<div class="row">
+							<div class="col-md-4">
+								<h5><i class="fa fa-pencil-square"></i> 账号信息</h5>
+								<hr style="margin:5px 0;">
+								<div class="row">
+									<label class="control-label col-md-3">用户ID： </label>
+									<div class=" col-md-9">{$user->uid}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">用户名： </label>
+									<div class=" col-md-9">{$user->user_name}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">账号类型： </label>
+									<div class=" col-md-9">{$roleList[$user->role_id]}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">账号状态： </label>
+									<div class=" col-md-9">{if $user->account_status==1}正常{else}禁用{/if}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">用户名： </label>
+									<div class=" col-md-9">{$user->user_name}</div>
+								</div>
+							</div>
+							
+							<div class="col-md-4">
+								<h5><i class="fa fa-pencil-square"></i>  结算信息</h5>
+								<hr style="margin:5px 0;">
+								<div class="row mt-10">
+									<label class="control-label col-md-3">结算类型： </label>
+									<div class=" col-md-9">
+										{if $user->type==0}实际花费结算{/if}
+										{if $user->type==1}差价结算方式{/if}
+										{if $user->type==2}固定CPM方式{/if}
+										{if $user->type==3}固定CPC方式{/if}
+									</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">差价率： </label>
+									<div class=" col-md-9">{$user->diffrate}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">技术支持费： </label>
+									<div class=" col-md-9">{$user->supportfee}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">CPM结算价格： </label>
+									<div class=" col-md-9">{$user->cpm_charge}</div>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-30">
+							<div class="col-md-8">
+								<h5><i class="fa fa-pencil-square"></i> 客户资料</h5>
+								<hr style="margin:5px 0;">
+								<div class="row mt-10">
+									<label class="control-label col-md-3">公司/联系人姓名： </label>
+									<div class=" col-md-9">{$user->host}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">电话： </label>
+									<div class=" col-md-9">{$user->cell_phone}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">办公地址： </label>
+									<div class=" col-md-9">{$user->address}</div>
+								</div>
+								<div class="row mt-10">
+									<label class="control-label col-md-3">描述： </label>
+									<div class=" col-md-9">{$user->colum2}</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8">
+								<hr>
+								<a class="btn btn-squared btn-success btn-block btn-100-30 fr" href="/admin.user.edit.{$user->uid}">编辑 </a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+		{if($config['crm']['display'])}
+		<div class="row">
+			<div class="col-md-8">
+				<div class="tabbable">
+	                <ul class="nav nav-tabs tab-padding tab-space-3 tab-gray" id="myTab4">
+	                    <li class="active">
+	                        <a data-toggle="tab" href="#tab-1">可用触点</a>
+	                    </li>
+	                    <li>
+	                        <a data-toggle="tab" href="#tab-2">可用号码库</a>
+	                    </li>
+	                </ul>
+	                <div class="tab-content" style="text-align:center;">
+	                    <div id="tab-1" class="tab-pane fade in  active">
+	                    	<a class="btn btn-success btn-sm fl mb-30" href="#" onclick="layerIframe('添加分组','/crm.chudian.add?uid={$user->uid}',800,400);">添加</a>
+	                    	{part "/crm.chudian.list"}
+						</div>
+	                    <div id="tab-2" class="tab-pane fade">
+	                    	<a class="btn btn-success btn-sm fl mb-30" href="#" onclick="layerIframe('添加分组','/crm.number.authadd?uid={$user->uid}',600,320);">添加</a>
+	                    	{part "/crm.number.authlist"}
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+		</div>
+		{/if}
+		
+	</div>
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

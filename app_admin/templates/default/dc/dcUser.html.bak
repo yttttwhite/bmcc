@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+<link type="text/css" rel="stylesheet" href="/assets_admin/css/jquery.vector-map.css" />
+<script src="/baichuan_advertisement_manage/assets_admin/js/jquery.vector-map.js" type="text/javascript"></script> 
+<script src="/baichuan_advertisement_manage/assets_admin/js/china-zh.js" type="text/javascript"></script> 
+</head>
+<body>
+{part "/main.main.nav.dc"}
+<!--main-->
+<style>
+.selMenu ul{
+	z-index:999;
+}
+.accordion{
+	margin-top:0px;
+}
+</style>
+<script>
+var paras={ };
+paras.start="{$start}";
+paras.end="{$end}";
+paras.uid="{$uid}";
+paras.plan_id="{$plan_id}";
+paras.group_id="{$group_id}";
+paras.type="{$type}";
+paras.index_id="{$index_id}";
+paras.sort_id="{$sort_id}";
+paras.sort_order= {$sort_order};
+paras.month = {$month};
+paras.week = {$week};
+function rel(){
+			var url="/dc.main.ad?"+jQuery.param(paras); 
+			location.href= url;
+			console.log(url)
+}
+function sort_table(key){
+            paras.sort_id=key; 
+            paras.sort_order=1-paras.sort_order;
+            rel();
+            //console.log(paras.sort_order);
+}
+$(document).ready(function(){
+    {if($month >0)}
+    var ret = getInfo({$month},1);
+        var week_count = ret[2];
+        var h = "";
+        h+="<option value='0'>请选择</option>";
+        for(i=1;i<week_count+1;i++){
+            h+="<option value='"+i+"'>"+i+"周</option>";
+        }
+        $("#Uweek").html(h);
+        $("#Uweek option").each(function(){
+            if($(this).val() == {$week}){
+                $(this).attr("selected", "selected");
+            }
+        });   
+    {/if}
+	$(".paras").change(function(){
+			var n = $(this).attr("name");
+			var v = $(this).val();//attr("name");
+			paras[n]=v;
+			rel();
+			});
+	$(".paras_a").click(function(){
+			var n = $(this).attr("name");
+			var v = $(this).attr("val");
+			paras[n]=v;
+			rel();
+			return false;
+			});
+	$(".type").click(function(){
+			paras.type=$(this).attr("val");
+			rel();
+		return false;
+		});
+	$(".type").each(function(i,item){
+			if($(item).attr("val")==paras.type){
+				$(item).addClass("sel");
+			}
+		});
+
+	});
+
+    function getInfo(month,week) {
+        var d = new Date();
+        var year = d.getFullYear()
+        // what day is first day
+        d.setFullYear(year, month-1, 1);
+        var w1 = d.getDay();
+        if (w1 == 0) w1 = 7;
+        // total day of month
+        d.setFullYear(year, month, 0);
+        var dd = d.getDate();
+        // first Monday
+        if (w1 != 1) d1 = 7 - w1 + 2;
+        else d1 = 1;
+        week_count = Math.ceil((dd-d1+1)/7);
+
+        var monday = d1+(week-1)*7;
+        var sunday = monday + 6;
+        var from = year.toString()+"-"+PrefixInteger(month)+"-"+PrefixInteger(monday);
+        var to;
+        if (sunday <= dd) {
+            to = year.toString()+"-"+PrefixInteger(month)+"-"+PrefixInteger(sunday);
+        } else {
+            d.setFullYear(year, month-1, sunday);
+            to = year.toString()+"-"+PrefixInteger(d.getMonth()+1)+"-"+PrefixInteger(d.getDate());
+        }
+        return [from,to,week_count];
+        
+    }
+    function PrefixInteger(num) {
+        return (num/Math.pow(10,2)).toFixed(2).substr(2);
+    }
+
+</script>
+<div class="main">
+   <div class="side">
+     {include "v2/dc/left_navi.tpl"}
+   </div>
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+    <div class="toolbar" style="height:auto; max-height:200px;">
+       <div class="tbGroup">
+	  <style>
+	  .tbgBtn{
+		cursor:pointer;
+	  }</style>
+      </div>
+
+     <script> 
+	 $(document).ready(function(){
+	 $(".idate").datepicker({ dateFormat: "yy-mm-dd" ,maxDate:1}); 
+	 });
+     </script> 
+      <div class="selMenu ml10">
+		
+        <div class="smtbg">
+		选择用户
+		<select class="paras" name="uid">
+        {if($adminFlag == true)}<option {if empty($uid)}selected{/if} value="0">所有用户</option>{/if}
+{foreach $_users as $__user}
+		<option {if $uid==$__user['uid']}selected{/if} value="{$__user['uid']}">{$__user['uid']}:{$__user['user_name']}</option>
+{/foreach}
+		</select>
+        </div>
+      </div>
+
+      <div class="selMenu ml10">
+        <div class="smtbg">
+		选择广告计划
+		<select class="paras" name="plan_id">
+		<option {if empty($plan_id)}selected{/if} value="0">所有计划</option>
+{foreach $_plans as $__plan}
+		<option {if $plan_id==$__plan['plan_id']}selected{/if} value="{$__plan['plan_id']}">{$__plan['plan_id']}:{$__plan['plan_name']}</option>
+{/foreach}
+		</select>
+        </div>
+      </div>
+
+
+      <div class="selMenu ml10">
+        <div class="smtbg">
+		选择广告组
+		<select class="paras" name="group_id">
+		<option {if empty($group_id)}selected{/if} value="0">所有广告组</option>
+{foreach $_groups as $__group}
+		<option {if $group_id==$__group['group_id']}selected{/if} value="{$__group['group_id']}">{$__group['group_id']}:{$__group['group_name']}</option>
+{/foreach}
+		</select>
+        </div>
+      </div>
+      <div class="tbGroup ml10">
+	  <style>
+	  .tbgBtn{
+		cursor:pointer;
+        }
+      </style>
+        <h2></h2>
+        <span id="r_menu" class="tbgBtn">
+          <a  class="tbgba type" val="all">汇总</a>
+          <a  class="tbgba type" val="week">周</a>
+          <a  class="tbgba type" val="day">天</a>
+          <a  class="tbgba type" val="hour">小时</a>
+          <a  class="tbgba type" val="area">地域</a>
+          <a class="tbgba type" val="source">来源</a>
+          <a class="tbgba type" val="media">媒体</a>
+          <a class="tbgba type" val="ta">TA频道</a>
+        </span>
+      </div>
+      <div style="height:20px" class="clear"></div>
+       <div class="tbGroup">
+
+      <div class="selMenu ml10">
+		
+        <div class="smtbg">
+          <input type="text" class="itxt_1 fl idate" id="startdate" value="{$start|default:'开始时间'}" size="15" />
+          <input type="text" class="itxt_1 fl idate" id="enddate" value="{$end|default:'结束时间'}" size="15" />
+        </div>
+      </div>
+      
+      <div class="tbGroup ml10">
+	  <style>
+	  .tbgBtn{
+		cursor:pointer;
+        }
+      </style>
+        <h2></h2>
+        <span id="r_menu" class="tbgBtn">
+          <a id="r_today" class="tbgba">今天</a>
+          <a id="r_yesterday" class="tbgba">昨天</a>
+          <a id="r_week" class="tbgba">本周</a>
+          <a id="r_lastweek" class="tbgba">上周</a>
+          <a id="r_month" class="tbgba">本月</a>
+          <a id="r_lastmoth" class="tbgba nobr">上月</a>
+        </span>
+      </div>
+	  </div>
+        {if($isPie)}
+        <div class="selMenu ml10">                                                                                                     
+        <div class="smtbg">
+        选择指标
+        <select class="paras" name="index_id">
+        <option {if empty($index_id)}selected{/if} value="pv">(PV)</option>
+        <option {if ($index_id == "pc")}selected{/if} value="pc">(PC)</option>
+        <option {if ($index_id == "uv")}selected{/if} value="uv">(UV)</option>
+        <option {if ($index_id == "uc")}selected{/if} value="uc">(UC)</option>
+        <option {if ($index_id == "ipv")}selected{/if} value="ipv">(IP)</option>
+        <option {if ($index_id == "ipc")}selected{/if} value="ipc">(IPC)</option>
+        </select>
+        </div>
+      </div> 
+        {/if}
+        <div class="selMenu ml10">
+        <div class="smtbg">
+        选择月、周
+        <select  id="Umonth">
+            <option value="0">请选择</option>
+            {for ($i=1;$i<=12;$i=$i+1) }
+            <option value="{$i}" {if($month==$i)}selected{/if}>{$i}月</option>
+            {/for}
+        </select>
+        <select id="Uweek" name="Uweek">
+        <select >
+        </div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+    <!--toolbar end--> 
+    <div class="chartCon mt20">
+      <div class="chartShow" style="height:420px" id="chartShow">{*<img src="/baichuan_advertisement_manage/assets_admin/img/tmp_chart.gif" />*}</div>
+    </div>
+      <div style="float:right" class="tbGroup ml30">
+        <span >
+		<a href="#"  style="padding-left:10px;padding-right:10px;height: 33px; line-height: 33px; font-size: 12px;" class="nobr" onclick="tableToExcel('report_dat','数据报表');return false;">导出</a>
+        </span>
+      </div>
+    
+	<script>
+    $("#Umonth").change(function(){
+        Umonth = $(this).val();
+        var ret = getInfo(Umonth,1);
+        var week_count = ret[2];
+        var h = "";
+        h+="<option value='0'>请选择</option>";
+        for(i=1;i<week_count+1;i++){
+            h+="<option  {if($week==$i)}selected{/if} value='"+i+"'>"+i+"周</option>";
+        }
+        $("#Uweek").html(h);
+    });
+    $("#Uweek").change(function(){
+        Umonth = $("#Umonth").val();
+        Uweek = $(this).val();
+        var ret = getInfo(Umonth,Uweek);
+        paras.start = ret[0];
+        paras.end = ret[1];
+        paras.month = Umonth;
+        paras.week = Uweek;
+        rel();
+        
+    });
+	//$(document).ready(function(){
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d');}"){
+			$("#r_today").addClass('sel');
+		}
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d',time()-3600*24);}"){
+			$("#r_yesterday").addClass('sel');
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-1 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('+0 week Sunday'));}"){
+			$("#r_week").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-2 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('-1 week Sunday'));}"){
+			$("#r_lastweek").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}" && paras.end=="{date('Y-m-d',time());}"){
+			$("#r_month").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}" && paras.end=="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}"){
+			$("#r_lastmoth").addClass("sel");
+		}
+
+	//});
+  function setV(){
+	  $("#startdate").val(paras.start);
+	  $("#enddate").val(paras.end);
+	  rel();
+  }
+    $("#report_Category a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+
+	$("#area").click(function(){
+		paras.report_category="area";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_menu a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+
+	$("#startdate").change(function(){
+			paras.start=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#enddate").change(function(){
+			paras.end=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#r_today").click(function(){
+		paras.start="{date('Y-m-d');}";
+		paras.end="{date('Y-m-d');}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_week").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-1 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('+0 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastweek").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-2 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('-1 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_month").click(function(){
+		paras.start="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}";
+		paras.end="{date('Y-m-d',time());}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastmoth").click(function(){
+		paras.start="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}";
+		paras.end="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}";
+		setV();
+		//report("#chartShow",paras);
+	});
+    $("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+
+if(paras.type=="day" || paras.type=="all" || paras.type=="hour"||paras.type=="ta"||paras.type=="week"){
+		options = {
+		    title : {
+		        text: '数据报表',
+		    },
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['PV(cpm)','PC(次)','UV(cpm)','UC(次)','IPV(cpm)','IPC(次)','花费(元)']
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : { show: true},
+		            dataView : { show: true, readOnly: false},
+		            magicType : { show: true, type: ['line', 'bar']},
+		            restore : { show: true},
+		            saveAsImage : { show: true}
+		        }
+		    },
+		    calculable : true,
+			{if !empty($data_json['id'])}
+		    xAxis : [
+		        {
+		            type : 'category',
+		            data : {$data_json['name']}//['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value'
+		        }
+		    ],
+		    series : [
+		        {
+					{if !empty($data_json['pv'])}
+		            name:'PV(cpm)',
+		            type:'bar',
+		            data:{$data_json['pv']},//[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+		            markPoint : {
+		                data : [
+		                    { type : 'max', name: '最大值'},
+		                    { type : 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine : {
+		                data : [
+		                    { type : 'average', name: '平均值'}
+		                ]
+		            }
+					 {/if}
+		        } 
+                ,{
+                    {if !empty($data_json['pc'])}
+                    name:'PC(次)',
+                    type:'bar',
+                    data:{$data_json['pc']},//[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    markPoint : {
+                        data : [
+                            { type : 'max', name: '最大值'},
+                            { type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            { type : 'average', name: '平均值'}
+                        ]
+                    }
+                     {/if}
+                }
+                ,{
+                    {if !empty($data_json['uv'])}
+                    name:'UV(cpm)',
+                    type:'bar',
+                    data:{$data_json['uv']},//[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    markPoint : {
+                        data : [
+                            { type : 'max', name: '最大值'},
+                            { type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            { type : 'average', name: '平均值'}
+                        ]
+                    }
+                     {/if}
+                }
+                ,{
+                    {if !empty($data_json['uc'])}
+                    name:'UC(次)',
+                    type:'bar',
+                    data:{$data_json['uc']},//[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    markPoint : {
+                        data : [
+                            { type : 'max', name: '最大值'},
+                            { type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            { type : 'average', name: '平均值'}
+                        ]
+                    }
+                     {/if}
+                }
+                ,{
+                    {if !empty($data_json['ipv'])}
+                    name:'IPV(cpm)',
+                    type:'bar',
+                    data:{$data_json['ipv']},//[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    markPoint : {
+                        data : [
+                            { type : 'max', name: '最大值'},
+                            { type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            { type : 'average', name: '平均值'}
+                        ]
+                    }
+                     {/if}
+                }
+				,{
+					{if !empty($data_json['ipc'])}
+		            name:'IPC(次)',
+		            type:'bar',
+		            data:{$data_json['ipc']},//[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+		            markPoint : {
+		                data : [
+		                    { type : 'max', name: '最大值'},
+		                    { type : 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine : {
+		                data : [
+		                    { type : 'average', name : '平均值'}
+		                ]
+		            }
+					{/if}
+		        }
+				,{
+					{if !empty($data_json['cost'])}
+		            name:'花费(元)',
+		            type:'bar',
+		            data:{$data_json['cost']},//[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+		            markPoint : {
+		                data : [
+		                    { type : 'max', name: '最大值'},
+		                    { type : 'min', name: '最小值'}
+		                ]
+		            },
+		            markLine : {
+		                data : [
+		                    { type : 'average', name : '平均值'}
+		                ]
+		            }
+						 {/if}
+		        }
+		    ]
+			{/if}
+		};
+}else{
+		options = {
+		    title : {
+		        text: '来源分布图-展示',
+		        x:'left'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		    },
+		    legend: {
+		        x : 'center',
+		        y : 'bottom',
+		        data:[{$data_json['title']}]//}'rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+		    },
+		    toolbox: {
+		        show : true,
+		        feature : {
+		            mark : { show: true},
+		            dataView : { show: true, readOnly: false},
+                    magicType : { show: true, type: ['pie', 'funnel'],option: {
+                    funnel: {
+                        x: '25%',
+                        width: '50%',
+                        funnelAlign: 'left',
+                        max: 1548
+                    }
+                }},
+		            restore : { show: true},
+		            saveAsImage : { show: true}
+		        }
+		    },
+		    calculable : true,
+		    series : [
+		        {
+		            name:'媒体分布',
+		            type:'pie',
+		            radius : [20, 110],
+		            roseType : 'radius',
+		            itemStyle :　{
+		                normal : {
+		                    label : {
+		                        show : true
+		                    },
+		                    labelLine : {
+		                        show : true
+		                    }
+		                },
+		                emphasis : {
+		                    label : {
+		                        show : true
+		                    },
+		                    labelLine : {
+		                        show : true
+		                    }
+		                }
+		            },
+		            data:[{$data_json['data']}/*
+		                { value:10, name:'rose1'},
+		                { value:5, name:'rose2'},
+		                { value:15, name:'rose3'},
+		                { value:25, name:'rose4'},
+		                { value:20, name:'rose5'},
+		                { value:35, name:'rose6'},
+		                { value:30, name:'rose7'},
+		                { value:40, name:'rose8'}*/
+		            ]
+		        }
+		    ]
+		};
+}
+		                    
+		var myChart = echarts.init(document.getElementById("chartShow"));
+		myChart.setOption(options);
+	</script>
+    <table id="report_dat" width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th >ID</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('pv')">页面展示量{if($sort_id == "pv")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('pc')">页面点击量{if($sort_id == "pc")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('uv')">用户展示量{if($sort_id == "uv")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('uc')">用户点击量{if($sort_id == "uc")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('ipv')">ip展示量{if($sort_id == "ipv")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('ipc')">ip点击量{if($sort_id == "ipc")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+        <th class="tac" style="cursor:pointer" onclick="sort_table('cost')">花费{if($sort_id == "cost")}<span {if($sort_order==1)}class="glyphicon glyphicon-arrow-up"}{else}class="glyphicon glyphicon-arrow-down">{/if}</span>{/if}</th>
+      </tr>
+{if !empty($r->data)}
+	{foreach $r->data as $__data}
+      <tr>
+        <td>
+{if $patchName=="user"}
+			<a class="paras_a" href="#" name="uid" val="{$__data->id}">{$__data->id} {if !empty($__data->name)}:{$__data->name}{/if}</a>
+{elseif $patchName=="plan"}
+			<a class="paras_a" href="#" name="plan_id" val="{$__data->id}">{$__data->id} {if !empty($__data->name)}:{$__data->name}{/if}</a>
+{elseif $patchName=="group"}
+			<a class="paras_a" href="#" name="group_id" val="{$__data->id}">{$__data->id} {if !empty($__data->name)}:{$__data->name}{/if}</a>
+{elseif $patchName=="ad"}
+			<a target="_blank" href="/ad.preview.entry.{$__data->id}" title="预览">{$__data->name}</a>
+{else} 
+			<a target="_blank" href="#" title="预览">{$__data->name}</a> 
+{/if}
+		</td>
+        <td class="tac">{$__data->pv}</td>
+        <td class="tac">{$__data->pc}</td>
+        <td class="tac">{$__data->uv}</td>
+        <td class="tac">{$__data->uc}</td>
+        <td class="tac">{$__data->ipv}</td>
+        <td class="tac">{$__data->ipc}</td>
+        <td class="tac">{$__data->cost}元</td>
+      </tr>
+	{/foreach}
+{/if}
+    </table>
+    
+   <!-- <table id="page1" width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+   </table> -->
+   {if $cur_uid=='1'}
+       {part "/dc.main.ReportUserTable"}    
+   {else}
+       {part "/dc.main.ReportPlanTable.".$cur_uid}    
+   {/if}
+   
+     </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

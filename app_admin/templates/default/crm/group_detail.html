@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {part "/main.main.header"}
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}<!--main-->
+        <div class="main">
+            <div class="side">
+                {part "/crm.plan.left"}
+            </div>
+            <!--mcon start-->
+            <div class="mcon">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs tab-padding tab-space-3 tab-gray" id="myTab4">
+                                <li>
+                                    <a data-toggle="tab" href="#panel_group">广告组</a>
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="tab" href="#panel_stuff">广告内容</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="panel_group" class="tab-pane fade">
+                                	{if($groupInfo !== 0)}
+                                	<div class="row">
+                                		<h5 class="title">
+                                			广告组名称：{$groupInfo['group_name']}
+											<span class="ml-20">(广告组ID:{$groupInfo['group_id']}，广告计划ID:{$groupInfo['plan_id']})</span>
+										</h5>
+                                	</div>
+									
+                                	<div class="row">
+                                		<h5 class="title">时间信息</h5>
+	                                	<div class="col-sm-6">
+	                                		<table class="table table-striped table-hover table-bordered">
+												<tbody>
+													<tr>
+												        <td width="25%">创建时间</td>
+												        <td width="25%">最后修改</td>
+		                                			</tr>
+													<tr>
+														<td>{$groupInfo['ctime']}</td>
+														<td>{$groupInfo['mtime']}</td>
+													</tr>
+												</tbody>
+		                                	</table>
+	                                	</div>
+                                	</div>
+									
+                                	<div class="row">
+                                		<h5 class="title">精准定向</h5>
+										<div class="col-sm-6">
+											<table class="table table-striped table-hover table-bordered">
+												<tbody>
+													<tr>
+												        <td width="25%">关键词定向</td>
+												        <td width="75%">{if(strlen($groupInfo['keyword_list'])>0)}{$groupInfo['keyword_list']}{else}无{/if}</td>
+		                                			</tr>
+													
+													<tr>
+												        <td width="25%">人群定向</td>
+												        <td width="75%">{if(strlen($groupInfo['usertags'])>0)}{$groupInfo['usertags']}{else}无{/if}</td>
+		                                			</tr>
+													
+													<tr>
+												        <td width="25%">网民定向[包含]</td>
+												        <td width="75%">{if(strlen($groupInfo['include_host'])>0)}{$groupInfo['include_host']}{else}无{/if}</td>
+		                                			</tr>
+													
+													<tr>
+												        <td width="25%">网民定向[不包含]</td>
+												        <td width="75%">{if(strlen($groupInfo['exclude_host'])>0)}{$groupInfo['exclude_host']}{else}无{/if}</td>
+		                                			</tr>
+												</tbody>
+		                                	</table>
+										</div>
+									</div>
+									
+                                	<div class="row">
+                                		<h5 class="title">投放地区</h5>
+										<div class="col-sm-6">
+											<table class="table table-striped table-hover table-bordered">
+												<thead>
+													<tr>
+														<th width="25%">省份</th>
+														<th width="75%">城市</th>
+													</tr>
+												</thead>
+												<tbody>
+													{if(is_array($groupInfo['area_info']))}
+													{foreach($groupInfo['area_info'] as $item)}
+													<tr>
+												        <td>{$item['province']}</td>
+												        <td>{$item['city']}</td>
+		                                			</tr>
+													{/foreach}
+													{/if}
+												</tbody>
+		                                	</table>
+										</div>
+									</div>
+									{/if}
+                                </div>
+                                <div id="panel_stuff" class="tab-pane fade in  active">
+                                	<table class="table table-striped table-hover table-bordered">
+                                		<thead>
+                                			<tr>
+                                				<th>广告ID</th>
+	                                			<th>广告名称</th>
+												<!--
+	                                			<th>广告素材ID</th>
+	                                			<th>广告素材名称</th>
+												-->
+	                                			<th>创意内容</th>
+	                                			<th>操作</th>
+												<!--
+	                                			<th>审核状态</th>
+												-->
+                                			</tr>
+                                		</thead>
+										<tbody>
+											{foreach($adList as $item)}
+											<tr>
+												<td>{$item['adid']}</td>
+												<td>{$item['adname']}</td>
+												<!--
+												<td>{$item['creative_id']}</td>
+												<td>{$item['name']}</td>
+												-->
+												<td>{$item['text']}</td>
+												<td><a href="#" onclick="layerConfirmGet('/crm.ad.delete?adid={$item['adid']}','确认删除这条数据？')">删除</a></td>
+												<!--
+												<td>{if($item['enabled'] == 2)}审核通过{elseif($item['enabled'] == 3)}未通过{else}正在审核{/if}</td>
+												-->
+											</tr>
+											{/foreach;}
+										</tbody>
+										<tfoot>
+										</tfoot>
+                                	</table>
+                                    <div class="row mt-20">
+                                    	<!--
+                                    	<a type="button" class="btn btn-success btn-squared btn-sm w-100 fr mr-15">导入素材</a>
+										-->
+                                    	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" onclick="layerIframe('新建素材','/crm.ad.addIframe?type=1&group_id={$get['group_id']}',640,480)">新建素材</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--mcon end-->
+        </div>{part "/main.main.footer"}
+    </body>
+</html>

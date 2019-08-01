@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+    {part ("/media.main.nav.tag.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="toolbar-bc fl" style="margin-bottom:13px;">
+        <div class="fl sub-title sc-title">
+            <a href="/baichuan_advertisement_manage/media?nav=2">媒体管理</a>
+            <i class="fa fa-angle-double-right"></i>
+            <a href="/baichuan_advertisement_manage/media.tag?nav=2">广告位分类</a>
+            <i class="fa fa-angle-double-right"></i>
+            {if !empty($tagsView)}修改{else}创建{/if}广告位分类
+        </div>
+    </div>
+
+    <form action="/media.tag.add.{if !empty($tagsView['id'])}{$tagsView['id']}{/if}?nav=2" method="post">
+      <!--<input id="hidden_id" type="hidden" value="{$tagsView['perent_id']}"/>-->
+      <input id="hidden_id" type="hidden" value="{$tagsView['plan_id']}"/>
+
+    <!--基本信息-->
+    <div class="comForm" style="border:1px solid #EEEEEE; border-top:none;">
+      <h1>基础信息</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>分类名称：</dt>
+        <dd>
+            <input type="text" name="tag_name" id="" class="itxt" value="{$tagsView['tag_name']}" required>
+            <span class="fcr">*</span>
+        </dd>
+      </dl>
+    {*
+      <dl>
+        <dt>分类标识：</dt>
+        <dd>
+            <input type="text" name="tag_ident" id="" class="itxt" value="{$tagsView['tag_ident']}" required>
+        </dd>
+      </dl>
+      <dl>
+        <dt>使用广告位数量：</dt>
+        <dd>
+            <input type="number" min="0" name="using_nums" id="" class="itxt" value="{$tagsView['using_nums']}" required>
+        </dd>
+      </dl>
+    *}
+      <h1>刊例价格</h1>
+      <dl>
+        <dt><span style="color:orange;">按天单价：</span></dt>
+        <dd>
+        <input type="number" class="itxt" name="cpt_price" value="{number_format($tagsView['cpt_price'],2)}" min='0' size="10" placeholder="0.00"/>元/CPT
+        </dd>
+        <span style="font-size:10px;color:grey;margin-left:167px;">注：按天刊例价</span>
+      </dl>
+      <dl>
+        <dt><span style="color:red;">展示单价：</span></dt>
+        <dd>
+        <input type="number" class="itxt" name="cpm_price" value="{number_format($tagsView['cpm_price'],2)}"  min='0' size="10" placeholder="0.00"/>元/CPM
+        </dd>
+        <span style="font-size:10px;color:grey;margin-left:165px;">注：展示刊例价</span>
+      </dl>
+      <dl>
+        <dt><span style="color:orange;">点击单价：</span></dt>
+        <dd>
+        <input type="number" class="itxt" name="cpc_price" value="{number_format($tagsView['cpc_price'],2)}"  min='0' size="10" placeholder="0.00"/>元/CPC
+        </dd>
+        <span style="font-size:10px;color:grey;margin-left:167px;">注：点击刊例价</span>
+      </dl>
+
+      <h1>其他信息</h1>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="tag_comment">{$tagsView['tag_comment']}</textarea></dd>
+      </dl>
+
+      <hr>
+      
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    </form>
+    
+  </div>
+  <!--mcon end-->
+</div>
+{part "/main.main.footer"}
+<script>
+$(function(){
+  $("form").validate({ errorClass:"fcr"});
+})
+
+</script>
+</body>
+</html>

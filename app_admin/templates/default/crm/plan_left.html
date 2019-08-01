@@ -1,0 +1,43 @@
+<div>
+	<a class="btn btn-success btn-squared" style="background:#12C243; width:235px;" href="/baichuan_advertisement_manage/crm.plan.add">新建广告订单</a>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+		/*
+    $(".accordion h3[current=active]").addClass("active");
+    $(".accordion .snav:not([current=active])").hide();
+
+    $(".accordion h3").click(function(){
+        $(this).next(".snav").slideToggle("fast")
+        .siblings(".snav").slideUp("fast");
+        $(this).toggleClass("active");
+        $(this).siblings("h3").removeClass("active");
+    });
+	*/
+$(".checkall").change(function(){
+	var ck=$(this).prop("checked");
+	$(this).parents("table").find("input:checkbox").prop("checked",ck);
+	});
+
+});
+</script>
+<div class="accordion mt-10">
+<h2>
+	<a href="/baichuan_advertisement_manage/crm.plan.list">{user_api::name()}全部有效计划</a>
+</h2>
+{foreach $planList as $planTemp}
+<h3 id="plan_{$planTemp['plan_id']}" {if $plan_id==$planTemp['plan_id']} class="bort active" current="active"{else} class="bort" {/if} onclick="location='/baichuan_advertisement_manage/crm.plan.detail?plan_id={$planTemp['plan_id']}'">{$planTemp['plan_name']}</h3>
+<div class="snav" style="display:block;" {if $plan_id==$planTemp['plan_id']} class="active" current="active"{/if}>
+  <ul>
+	{if $planTemp['plan_id']==$plan_id}
+		{foreach $groups as $group}
+		    <li {if $group_id==$group['group_id']}class="sel"{/if}>
+				<a href="/baichuan_advertisement_manage/crm.group.detail?plan_id={$planTemp['plan_id']}&group_id={$group['group_id']}">{$group['group_name']}</a>
+			</li>
+		{/foreach}
+	{/if}
+  </ul>
+</div>
+{/foreach}
+</div>

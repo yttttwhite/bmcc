@@ -1,0 +1,44 @@
+<div style="margin-bottom:20px;">
+	<div class="left-nav-title bg-blue">
+		<i class="fa fa-home fa-2x"></i>
+		<a href="/baichuan_advertisement_manage/dpc.main.host">可管理项目</a>
+	</div>
+	<div class="left-nav">
+	<form id="consumerGroupForm" name="consumerGroup" method="post" action="">
+		<ul>
+			<li>
+				<label>
+					<a href="/baichuan_advertisement_manage/dpc.manage.adsllist?mongo={$mongo}">ADSL管理</a>
+				</label>
+			</li>
+			<li>
+				<label>
+					<a href="/baichuan_advertisement_manage/dpc.manage.jslist?mongo={$mongo}">JS黑白名单</a>
+				</label>
+			</li>
+			<li>
+				<label>
+					<a href="/baichuan_advertisement_manage/dpc.host.hostlist?mongo={$mongo}">HOST管理</a>
+				</label>
+			</li>
+			{if(!user_api::auth("dpcRule"))}
+			<li>
+				<label>
+					<a href="/baichuan_advertisement_manage/dpc.url.urllist?mongo={$mongo}">URL管理</a>
+				</label>
+			</li>
+			<li>
+				<label>
+					<a href="/baichuan_advertisement_manage/dpc.main.host.{$mongo}">网站分组管理</a>
+				</label>
+			</li>
+			<li>
+				<label>
+					<a href="/baichuan_advertisement_manage/dpc.manage.DomainGroup.{$mongo}">域名分组管理</a>
+				</label>
+			</li>
+			{/if}
+		</ul>
+	</form>
+	</div>
+</div>

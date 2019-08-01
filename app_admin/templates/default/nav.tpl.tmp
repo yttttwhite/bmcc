@@ -1,0 +1,43 @@
+<div class="header">
+	<div class="header-logo">
+		<a class="navbar-logo" href="#">
+			<img alt="百川广告系统" src="/baichuan_advertisement_manage/assets_admin/v5/img/logo.png" width="210px" height="70px">
+		</a>
+	</div>
+	<div class="header-nav">
+		<ul class="nav">
+			<li>
+				<h3 class="">
+					<em class="harrow"></em>
+					<a class="ndl" href="/baichuan_advertisement_manage/ad.plan" title="广告管理">广告管理</a>
+				</h3>
+				<div class="i-list" style="display: none;">
+					<a href="/baichuan_advertisement_manage/ad.plan">广告计划</a>
+					<a href="/baichuan_advertisement_manage/ad.plan.add">创建广告计划</a>
+				</div>
+			</li>
+			<li>
+				<a href="#">广告计划</a>
+			</li>
+			<li>
+				<a href="#">广告素材</a>
+			</li>
+			<li>
+				<a href="#">客户管理</a>
+			</li>
+			<li>
+				<a href="#">人群分析</a>
+			</li>
+		</ul>
+	</div>
+	<div class="header-user">
+		<a href="account">
+			<i class="fa fa-user fa-x2 fa-fw"></i>
+			您好： {user_api::name()}
+		</a>
+		<a href="#" style="margin-left: 10px;">
+			<i class="fa fa-envelope fa-x2 fa-fw"></i>
+			收件箱
+		</a>
+	</div>
+</div>

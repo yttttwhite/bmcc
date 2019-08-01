@@ -1,0 +1,49 @@
+业务系统（JS,后台,素材系统）安装手册(by hetal,2014/9/13)
+在线版本（https://docs.google.com/a/hetao.name/spreadsheets/d/1MKRzi6dejme05VG1as71-He3ZAKozVIjJQi26c4BSZs/edit#gid=1873397955）
+
+1安装php,nginx
+	yum install php php-fpm install php-pecl-apc php-pdo php-mysql
+	yum install nginx
+	chkconfig nginx on
+	chkconfig php-fpm on
+
+2建立目录
+	mkdir /data/www/bcsvn/ -p
+
+3下载代码
+	cd /data/www/bcsvn/
+	svn co svn://115.29.174.6:36901/bcsvn/bs bs
+	用户名，密码都是bs
+	make 
+
+4增加配置文件
+	cd /data/www/bcsvn/bs/config
+	cp db.conf.dist db.conf
+	cp js.conf.dist js.conf
+	cp mongo.conf.dist mongo.conf
+	cp site.conf.dist site.conf
+	cp thrift.conf.dist thrift.conf
+
+5安装swfdump
+	cd /data/www/bcsvn/bs/backend/
+	tar xzf swftools-0.9.2.tar.gz
+	cd /data/www/bcsvn/bs/backend/swftools-0.9.2
+	./configure && make && make install
+
+6剩下的工作
+	1.配置各配置文件 /data/www/bcsvn/bs/config
+	2.把 /data/www/bcsvn/bs/nginx/nginx.conf加到nginx里
+	3.启动nginx ,php-fpm
+
+7启动服务
+	/etc/init.d/nginx restart
+	/etc/init.d/php-fpm restart
+
+8配置说明
+	91端口，js系统
+	94端口，业务系统
+	96端口，素材系统
+
+9额外的安装（JS混淆工具）
+	yum install npm
+	npm install uglify-js -g

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {part "/main.main.header"}
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}<!--main-->
+        <div class="main">
+            <div class="side">
+                {part "/crm.plan.left"}
+            </div>
+            <!--mcon start-->
+            <div class="mcon">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs tab-padding tab-space-3 tab-gray" id="myTab4">
+                                <li>
+                                    <a data-toggle="tab" href="#panel_plan">订单信息</a>
+                                </li>
+                                <li class="active">
+                                    <a data-toggle="tab" href="#panel_group">广告组列表</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" style="text-align:center;">
+                                <div id="panel_plan" class="tab-pane fade in">
+                                {if($planInfo !== 0)}
+                                	<div class="row">
+                                		<h5 class="title">订单名称：{$planInfo['plan_name']}<span class="ml-20">(ID:{$planInfo['plan_id']})</span></h5>
+                                	</div>
+									
+                                	<div class="row">
+                                		<h5 class="title">时间信息：
+											<span class="ml-20">
+												{if($planInfo['repeat_type'] == 0)}
+													{$planInfo['adtime']} / {$planInfo['repeat_value']} 
+												{elseif($planInfo['repeat_type'] == 1)}
+													{$planInfo['adtime']} / {$sendType[$planInfo['repeat_type']]}
+												{elseif($planInfo['repeat_type'] == 2)}
+													{$planInfo['adtime']} / {$week[$planInfo['repeat_value']]}
+												{elseif($planInfo['repeat_type'] == 3)}
+													{$planInfo['adtime']} / 每月{$planInfo['repeat_value']}号 
+												{/if}
+											</span>
+										</h5>
+										<!--
+	                                	<div class="col-sm-6">
+	                                		<table class="table table-striped table-hover table-bordered">
+												<tbody>
+													<tr>
+												        <td width="25%">创建时间</td>
+												        <td width="25%">最后修改</td>
+												        <td width="25%">投放开始时间</td>
+												        <td width="25%">投放结束时间</td>
+		                                			</tr>
+													<tr>
+														<td>{$planInfo['ctime']}</td>
+														<td>{$planInfo['mtime']}</td>
+														<td>{$planInfo['start_date']}</td>
+														<td>{$planInfo['end_date']}</td>
+													</tr>
+												</tbody>
+		                                	</table>
+	                                	</div>
+										-->
+                                	</div>
+									<div class="row">
+                                		<h5 class="title">发送清单：<a class="btn" href="/baichuan_advertisement_manage/crm.group.NumberList?plan_id={$planInfo['plan_id']}" target="_blank">查看</a></h5>
+                                	</div>
+									<!--
+                                	<div class="row">
+                                		<h5 class="title">预算信息</h5>
+										<div class="col-sm-12" style="text-align:left; line-height:40px;">
+											总预算：{$planInfo['sms_budget']+$planInfo['mms_budget']+$planInfo['email_budget']+$planInfo['cc_budget']}
+											<br>
+											总开销：{$planInfo['sms_cost']+$planInfo['mms_cost']+$planInfo['email_cost']+$planInfo['cc_cost']}
+										</div>
+										<div class="col-sm-6">
+											<table class="table table-striped table-hover table-bordered">
+												<tbody>
+													<tr>
+												        <td width="25%">短信</td>
+												        <td width="25%">彩信</td>
+												        <td width="25%">Email</td>
+												        <td width="25%">电话</td>
+		                                			</tr>
+													<tr>
+														<td>{if($planInfo['sms_budget']>0)}{$planInfo['sms_cost']>0?$planInfo['sms_cost']:0}/{$planInfo['sms_budget']}{else}未投放{/if}</td>
+														<td>{if($planInfo['mms_budget']>0)}{$planInfo['mms_cost']>0?$planInfo['mms_cost']:0}/{$planInfo['mms_budget']}{else}未投放{/if}</td>
+												        <td>{if($planInfo['email_budget']>0)}{$planInfo['email_cost']>0?$planInfo['email_cost']:0}/{$planInfo['email_budget']}{else}未投放{/if}</td>
+												        <td>{if($planInfo['cc_budget']>0)}{$planInfo['cc_cost']>0?$planInfo['cc_cost']:0}/{$planInfo['cc_budget']}{else}未投放{/if}</td>
+													</tr>
+												</tbody>
+		                                	</table>
+										</div>
+									</div>
+									
+                                	<div class="row">
+                                		<h5 class="title">投放时间</h5>
+										<div class="col-sm-6">
+											<table class="table table-striped table-hover table-bordered">
+												<thead>
+													<tr>
+														<th width="25%">星期</th>
+														<th width="75%">投放时段</th>
+													</tr>
+												</thead>
+												<tbody>
+													{foreach($planInfo['adtime'] as $item)}
+													<tr>
+												        <td>{$week[$item['day']]}</td>
+												        <td>{$item['hour']}</td>
+		                                			</tr>
+													{/foreach}
+												</tbody>
+		                                	</table>
+										</div>
+									</div>
+									-->
+									{/if}
+									
+									
+									<div>
+										{$shenheList = json_decode($planInfo['remark'],true)}
+										{if(is_array($shenheList) && count($shenheList)>0)}
+										<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+											<tbody>
+												<thead>
+												      <tr style="background:#000000; color:#FFFFFF;">
+												        <th>审批意见</th>
+												        <th>审批原因</th>
+														<th width="140">操作时间</th>
+												        <th width="140">操作人</th>
+												      </tr>
+												</thead>
+												{foreach($shenheList as $shenheInfo)}
+												<tr>
+													<td style="color:#C40000;">{$shenheInfo['status']}</td>
+													<td>{$shenheInfo['text']}</td>
+													<td>{date("Y-m-d H:i:s",$shenheInfo['time'])}</td>
+													<td>{$shenheInfo['uname']}</td>
+												</tr>
+												{/foreach}
+											</tbody>
+										</table>
+										{/if}
+									</div>
+									
+                                </div>
+                                <div id="panel_group" class="tab-pane fade in active">
+                                	<table class="table table-striped table-hover table-bordered">
+                                		<thead>
+                                			<tr>
+                                				<th class="tac">ID</th>
+										        <th>广告组</th>
+										        <th>状态</th>
+										        <th>创建时间</th>
+										        <th class="tac">设置</th>
+                                			</tr>
+                                		</thead>
+										<tbody>
+											{foreach $groupList as $group}
+												{if($group['uid']==user_api::id())}
+											      <tr>
+											        <td class="tac">{$group['group_id']}</td>
+											        <td><a href="/baichuan_advertisement_manage/crm.group.detail?group_id={$group['group_id']}">{$group['group_name']}</a></td>
+											        <td>{if($group['enable']==1)}正常{elseif $group['enable']==2}暂停{elseif $group['enable']==3}过期{elseif $group['enable']==4}已删除{elseif $group['enable']==5}冻结{elseif $group['enable']==6}没预算{else}没有开始{/if}</td>
+											        <td>{date("Y-m-d H:i:s",$group['ctime'])|default:'未设置'}</td>
+											        <td class="tac">
+											        	<a class="btn" href="/baichuan_advertisement_manage/crm.group.detail?group_id={$group['group_id']}&plan_id={$get['plan_id']}">详情</a>
+														<a class="btn" href="/baichuan_advertisement_manage/crm.group.NumberList?group_id={$group['group_id']}" target="_blank">发送清单</a>
+														<a class="btn" onclick="layerIframe('新建素材','/crm.ad.addIframe?type=1&group_id={$group['group_id']}',640,480)">新建素材</a>
+														<a class="btn" href="#" onclick="layerConfirmGet('/crm.group.delete?group_id={$group['group_id']}', '确认删除这条数据？');">删除</a>
+													</td>
+											      </tr>
+												{/if}
+											{/foreach}
+										</tbody>
+										<tfoot>
+										</tfoot>
+                                	</table>
+                                    <div class="row mt-20">
+                                    	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" href="/baichuan_advertisement_manage/crm.group.add?plan_id={$get['plan_id']}">添加广告组</a>
+                                    </div>
+                                </div>
+                                <div id="panel_stuff" class="tab-pane fade">
+                                	
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--mcon end-->
+        </div>{part "/main.main.footer"}
+    </body>
+</html>

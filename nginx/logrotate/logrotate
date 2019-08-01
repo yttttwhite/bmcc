@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/sbin/logrotate -fv /data/www/bcsvn/bs/nginx/logrotate/*conf >/dev/null 2>&1

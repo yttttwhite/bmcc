@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<script>
+$(document).ready(function(){
+		$(".toufang").click(function(){
+			var t=$(this).parents("td").find("textarea").text();
+			$("#adcode_t").text(t);
+			ShowDIV('pgetCode')
+			event.preventDefault()
+		});
+});
+</script>
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.slot.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			广告位
+    	</div>
+    	<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media.slot.add">新建广告位</a>
+		</div>
+	</div>
+  
+	<!--遮罩pop start-->
+        <div id="BgDiv"></div>
+        <div id="pgetCode" class="popdiv pop_getCode" style="display:none">
+          <div class="dbg">
+            <div class="pmain">
+            <div class="ptit">
+              <div class="ptname">获取投放代码</div>
+              <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pgetCode')"><img src="/baichuan_advertisement_manage/assets_admin/img//i_close.png" alt="关闭" /></a></div>
+            </div>
+            <div class="dcon">
+                
+                <div class="gcform clear">
+                投放代码：<br /><textarea id="adcode_t" class="gctxtea" name="" cols="80" rows="10"></textarea>
+                </div>
+                                 
+                <div class="dpbtn">
+                  <div class="fr">
+                    <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="复制" onClick="closeDiv('pgetCode')" /></span>
+                    <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pgetCode')" /></span>
+                  </div>
+                </div>
+  
+            </div>
+            </div>
+          </div>
+        </div>
+        <!--遮罩pop end-->
+  
+    <!--toolbar start--> 
+    <div class="">
+{*
+      <div id="zhuantai" class="selMenu smw_1">
+          <span class="smtit">媒体</span>
+          <ul>
+            <li><a href="javascript:;">所有媒体</a></li>
+            <li><a href="javascript:;">新浪</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smw_1 ml10">
+          <span class="smtit">媒体类型</span>
+          <ul>
+            <li><a href="javascript:;">所有类型</a></li>
+            <li><a href="javascript:;">综合</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smw_1 ml10">
+          <span class="smtit">网站</span>
+          <ul>
+            <li><a href="javascript:;">所有网站</a></li>
+            <li><a href="javascript:;">百度</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smw_1 ml10">
+          <span class="smtit">广告类型</span>
+          <ul>
+            <li><a href="javascript:;">所有广告类型</a></li>
+            <li><a href="javascript:;">综合</a></li>
+          </ul>
+        </div>
+        <span class="iSearch ml10">
+           <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+           <input type="text" class="itxt fc7" value="媒体名称" size="30" />
+        </span>
+      <div class="clear"></div>
+    </div>
+	*}
+  
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+      <tr>
+        <th class="tac">ID</th>
+        <th>网站</th>
+        <th>广告位名称</th>
+        <th>展现形式</th>
+        <th>尺寸</th>
+        <th class="tac">低价(分/千次曝光)</th>
+        <th>素材类型</th>
+        <th>审核状态</th>
+        <th>默认素材</th>
+        <th>操作</th>
+      </tr>
+{foreach $slots->items as $item}
+      <tr>
+        <td class="tac">{$item['slot_id']}</td>
+        <td>{$item['website_name']}</td>
+        <td>{$item['slot_name']}</td>
+        <td>{if $item['view_screen']==1}首屏{else}非首屏{/if}</td>
+        <td>{$item['width']}*{$item['height']}</td>
+        <td class="tac">{$item['min_price']}</td>
+        <td>图片</td>
+        <td>通过</td>
+        <td>关联</td>
+        <td>
+			<a href="#" class="toufang">投放代码</a>
+			<a href="/baichuan_advertisement_manage/media.slot.add.{$item['slot_id']}">修改</a>
+			{*<a href="#">删除</a>*}
+			<a href="/baichuan_advertisement_manage/media.slot.adnetwork.{$item['slot_id']}" class="">流量控制</a>
+			<br/>
+			<a href="/baichuan_advertisement_manage/media.slot.dsp.{$item['slot_id']}" class="">DSP控制</a>
+			<a href="/baichuan_advertisement_manage/media.slot.category.{$item['slot_id']}" class="">行业控制</a>
+			<a href="/baichuan_advertisement_manage/media.slot.url.{$item['slot_id']}" class="">网址控制</a>
+			<textarea style="display:none"><script type="text/javascript">var mim_slotid="{$item['slot_id']}";</script>
+<script id="mim_main_js" src="https://{$config_js->host->js}/main.js.Orgin" type="text/javascript"></script></textarea>
+		</td>
+      </tr>
+{/foreach}
+{*
+      <tr>
+        <td class="tac">1</td>
+        <td>新浪</td>
+        <td>综合</td>
+        <td>新浪体育</td>
+        <td>首屏</td>
+        <td>首屏</td>
+        <td>400*300</td>
+        <td class="tac">5</td>
+        <td>.gif, .jpg</td>
+        <td>通过</td>
+        <td>
+          <a id="mtym" value="" onClick="ShowDIV('plinksc')" href="#">变更</a>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="plinksc" class="popdiv pop_linksc" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">关联素材</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('plinksc')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+              
+                  <div class="toolbar">
+                    <div id="zhuantai" class="selMenu smw_1">
+                      <span class="smtit">广告主</span>
+                      <ul>
+                        <li><a href="javascript:;">所有媒体</a></li>
+                        <li><a href="javascript:;">新浪</a></li>
+                      </ul>
+                    </div>
+                    <div id="zhuantai" class="selMenu smw_1 ml10">
+                      <span class="smtit">素材类型</span>
+                      <ul>
+                        <li><a href="javascript:;">所有类型</a></li>
+                        <li><a href="javascript:;">综合</a></li>
+                      </ul>
+                    </div>
+                    <span class="iSearch ml10">
+                       <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+                       <input type="text" class="itxt fc7" value="素材名称" size="30" />
+                    </span>
+                  </div> 
+                  
+                  <div class="mt20 clear">
+                  <table class="listab" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">广告主</th>
+                      <th scope="col">素材名称</th>
+                      <th scope="col">素材类型</th>
+                      <th scope="col">尺寸</th>
+                      <th scope="col">类型</th>
+                    </tr>
+                    <tr>
+                      <td><input name="" type="radio" value="" /></td>
+                      <td>大众汽车</td>
+                      <td>汽车320</td>
+                      <td>jpg</td>
+                      <td>320*150</td>
+                      <td><img src="/baichuan_advertisement_manage/assets_admin/img//tmp_ad.jpg" width="80" height="80" /></td>
+                    </tr>
+                    <tr>
+                      <td><input name="" type="radio" value="" /></td>
+                      <td>大众汽车</td>
+                      <td>汽车320</td>
+                      <td>jpg</td>
+                      <td>320*150</td>
+                      <td><img src="/baichuan_advertisement_manage/assets_admin/img/tmp_ad.jpg" width="80" height="80" /></td>
+                    </tr>
+                  </table>
+                  <!--turnpage start-->
+                  <div class="turnpage">
+                    <a href="#"><em>&lt;</em> 上一页</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <span>...</span>
+                    <a href="#">65</a>
+                    <a href="#">下一页 <em>&gt;</em></a>
+                  </div>
+                  <!--turnpage end-->
+                  </div>
+                                   
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('plinksc')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('plinksc')" /></span>
+                    </div>
+                  </div>
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          <a href="#">默认</a>
+        </td>
+        <td><a href="#">修改</a><a href="#">删除</a><a href="#">投放代码</a></td>
+      </tr>
+*}
+    </table>
+	{$pager}
+    
+  </div>
+  <!--mcon end-->
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

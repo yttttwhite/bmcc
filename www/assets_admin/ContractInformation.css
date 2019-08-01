@@ -1,0 +1,25 @@
+.ContractInformation {
+    width: 530px;height: 180px;
+    display: none;
+    border: 1px solid red;
+    position: absolute;top:0px;left: 564px;
+    background: #fff;
+    box-shadow: 0 0 8px 1px #b4b4b4;transition: all 1s;cursor: pointer;z-index: 3;
+}
+.ContractInformation:hover {
+    box-shadow: 0 0 20px 3px #b4b4b4;margin-top: -5px;
+}
+.ContractInformation form {
+    border: 1px solid red;
+}
+.ContractInformation span {
+    display: inline-block;
+    width: 585px;
+    height: 30px;
+    text-align: center;line-height: 30px;
+    /*border: 1px solid red;*/
+}
+.ContractInformation .form-control {
+    display: inline-block;width: 180px;border: 1px solid #e6e8e8;
+    border-radius: 5px;
+}

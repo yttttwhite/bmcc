@@ -1,0 +1,15 @@
+<div class="accordion" style="margin-top:0;">
+	<h2>财务管理</h2>
+	<a href="/baichuan_advertisement_manage/admin.caiwu.list?admin={$admin}&menu=1&nav=5">
+	    <h3 class="bort {if($_GET['menu'] ==1)}active{/if}">用户账务</h3>
+	</a>
+	<a href="/baichuan_advertisement_manage/admin.caiwu.stream?admin={$admin}&menu=2&nav=5">
+	    <h3 class="bort {if($_GET['menu'] ==2)}active{/if}">财务流水</h3>
+	</a>
+	<a href="/baichuan_advertisement_manage/admin.caiwu.userbill?admin={$admin}&menu=3&nav=5" >
+	    <h3 class="bort {if($_GET['menu'] ==3)}active{/if}">用户账单【天】</h3>
+	</a>
+	<a href="/baichuan_advertisement_manage/admin.caiwu.planbill?admin={$admin}&menu=4&nav=5" >
+	    <h3 class="bort {if($_GET['menu'] ==4)}active{/if}">广告计划账单【天】</h3>
+	</a>
+</div>

@@ -1,0 +1,35 @@
+adinfo{
+	host 115.239.138.137;
+	port 10011;
+	timeout 2000;
+}
+adgroup{
+	host 115.239.138.137;
+	port 10012;
+	timeout 2000;
+}
+adplan{
+	host 115.239.138.137;
+	port 10014;
+	timeout 2000;
+}
+aduser{
+	host 115.239.138.137;
+	port 10015;
+	timeout 2000;
+}
+stuffinfo{
+	host 115.239.138.137;
+	port 10016;
+	timeout 2000;
+}
+status{
+	host 115.239.138.137;
+	port 10017;
+	timeout 2000;
+}
+report{
+	host 115.239.138.137;
+	port 12546;
+	timeout 2000;
+}

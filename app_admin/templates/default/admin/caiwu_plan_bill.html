@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+    <!--side-->
+    <div class="side">
+        {part ("/admin.caiwu.left")} 
+    </div>
+    <!--mcon start-->
+    <div class="mcon">
+        <div class="toolbar-bc fl mb-10">
+            <div class="fl sub-title sc-title">
+                <a href="/baichuan_advertisement_manage/admin.caiwu.list?nav=5&menu=1" >高级管理</a>
+                <i class="fa fa-angle-double-right" ></i>
+                <a href="/baichuan_advertisement_manage/admin.caiwu.stream?nav=5&menu=4" >财务管理</a>
+                <i class="fa fa-angle-double-right" ></i>
+                广告计划账单【天】
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="panel panel-white" style="border:1px solid #EEEEEE;">
+            <!--表头-->
+            <div class="panel-heading border-light panel-head-md">
+                <form id="queryFrom" action="{$url['date']}" method="get">
+                    <input name="menu" type="hidden" value="4">
+                    <input name="nav" type="hidden" value="5">
+                    <div class="fl mr-10" >
+                        <input type="text" name="username" class="form-control input-small"  placeholder="账户名称" value="{$get['username']}"/>
+                    </div>
+                    <div class="fl mr-10" >
+                        <input type="text" name="planname" class="form-control input-small"  placeholder="广告计划名称" value="{$get['planname']}"/>
+                    </div>
+                    <div class="fl">
+                      <input type="text" name="dateStart" class="form-control input-small idate" id="start_date" value="{$dateStart}" size="15" />
+                    </div>
+                    <div class="fl">
+                      <input type="text" name="dateEnd" class="form-control input-small idate" id="end_date" value="{$dateEnd}" size="15" />
+                    </div>
+
+                    <div class="fl" style="position: relative; left: 10px;">
+                        <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+                    </div>
+                    <span style="line-height:28px; position: relative; left: 20px;">共计：{$total}条</span>
+                    <ul class="panel-heading-tabs border-light" style="display:none;">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-squared btn-success w-140" data-toggle="dropdown">
+                                筛选<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </form>
+                 <script> 
+//                 $(document).ready(function(){
+//                    $(".idate").datepicker({ dateFormat: "yy-mm-dd" ,maxDate:1});
+//                 });
+                 $(function(){
+                     if($("#start_date").val()=="开始时间"){
+                         $("#start_date").val("{date("Y-m-d")}");
+                     }
+                     if($("#end_date").val()=="结束时间"){
+                         $("#end_date").val("{date("Y-m-d")}");
+                     }
+                     $("#start_date").datepicker({ dateFormat: "yy-mm-dd",maxDate:1});
+                     $("#end_date").datepicker({ dateFormat: "yy-mm-dd",maxDate:1});
+                 });
+
+                 function endBeforeStart(){
+                     var startDate = Date.parse($("input[name='dateStart']").val());
+                     var endDate = Date.parse($("input[name='dateEnd']").val());
+                     if(endDate < startDate){
+                         layer.alert('注意：结束时间早于开始时间');
+                         $("input[name='dateStart']").val($("input[name='dateEnd']").val());
+                     }
+                 }
+                 $("input[name='dateStart']").change(function(){ endBeforeStart(); });
+                 $("input[name='dateEnd']").change(function(){ endBeforeStart(); });
+
+
+                 </script> 
+            </div>
+
+            <!--表头:结束-->
+            <div class="panel-body" style="overflow-x: auto;">
+                <table class="reportab" id="sample-table-2">
+                    <thead>
+                        <tr>
+                            <th>UID</th>
+                            <th>日期</th>
+                            <th>广告计划名称</th>
+                            <th>所属账户</th>
+                            <th>结算类型</th>
+                            <th>页面展示量</th>
+                            <th>页面点击量</th>
+                            <th>页面点击率</th>
+                            <th>用户展示量</th>
+                            <th>用户点击量</th>
+                            <th>用户点击率</th>
+                            <th>IP展示量</th>
+                            <th>IP点击量</th>
+                            <th>IP点击率</th>
+                            <th>花费</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $billData as $_data}
+                              <tr>
+                                <td>{$_data['uid']}</td>
+                                <td>{date('Y-m-d',$_data['ctime'])}</td>
+                                <td>{$_data['plan_name']}</td>
+                                <td>{$_data['user_name']}</td>
+                                <td>{$_data['billing_type']}</td>
+                                <td>{$_data['page_show_num']}</td>
+                                <td>{$_data['page_click_num']}</td>
+                                <td>{number_format($_data['page_click_rate']*100)}%</td>
+                                <td>{$_data['user_show_num']}</td>
+                                <td>{$_data['user_click_num']}</td>
+                                <td>{number_format($_data['user_click_rate']*100)}%</td>
+                                <td>{$_data['ip_show_num']}</td>
+                                <td>{$_data['ip_click_num']}</td>
+                                <td>{number_format($_data['ip_click_rate']*100)}%</td>
+                                <td>{number_format($_data['cost'],2)}</td>
+                                <td><a class="btn btn-xs btn-squared btn-info" href="/baichuan_advertisement_manage/dc.main.ad?{$_data['url']}&nav=3&menu_left=1&start={$dateStart}&end={$dateEnd}">查看报表</a></td>
+                              </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+                <div class="turnpage">
+                {turnpager $totalPage|html}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ZH-CN">
+<head>
+    <title>未通过合同审核列表</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta https-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/contractManagement_list.css" />
+    <head>
+        {part "/main.main.header"}
+    </head>
+<body>
+{part "/main.main.nav.ad"}
+<div class="left_nav">
+    <ul>
+        <li class="left_nav_1">合同管理</li>
+        <li class="left_nav_2" style="background: #666666;">
+            <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+            <a href="javascript:;" style="color: #fff;">
+                合同计划审核
+            </a>
+        </li>
+        <li class="left_nav_3"><span style="color: #1182d1;" > ▪ </span>待审核</li>
+        <li class="left_nav_4" ><a style="color: #fff;margin-left: -25px;color: #3e7ac6;display: inline-block;width: 176px;max-height: 35px;" href="/baichuan_advertisement_manage/admin.contract.audited"><span style="color: #3e7ac6;" > ▪ </span>已通过</a></li>
+        <li class="left_nav_5" style="background: #12c043;"><a style="color: #fff;margin-left: -25px;display: inline-block;width: 176px;max-height: 35px;" href="/baichuan_advertisement_manage/admin.contract.unaudit"><span style="color: #fff;" > ▪ </span>未通过</a></li>
+    </ul>
+</div>
+<div class="top_nav">
+    合同 <span style="color:#3f3333">>></span> 合同审核列表
+    <!--<span class="CreateContract_btn"><a  href="/baichuan_advertisement_manage/admin.contract.list">返回合同信息列表</a></span>-->
+</div>
+<div class="infoTable">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab"  style="font-size:12px;">
+        <tr>
+            <th><input class="checkall" type="checkbox"/></th>
+            <th>ID</th>
+            <th>合同名称</th>
+            <th>合同序号</th>
+            <th>广告单价</th>
+            <th>广告预算</th>
+            <th>状态</th>
+            <th>审核状态</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td><input class="checkall" type="checkbox"/></td>
+            <td>1</td>
+            <td>测试合同01</td>
+            <td>0001</td>
+            <td>10元/小时</td>
+            <td>10000</td>
+            <td>正常</td>
+            <td>未通过</td>
+            <td>
+                <a href="javascript:;">通过</a>
+                <a href="javascript:;">拒绝</a>
+            </td>
+        </tr>
+        <tr>
+            <td><input class="checkall" type="checkbox"/></td>
+            <td>1</td>
+            <td>测试合同01</td>
+            <td>0001</td>
+            <td>10元/小时</td>
+            <td>10000</td>
+            <td>正常</td>
+            <td>未通过</td>
+            <td>
+                <a href="javascript:;">通过</a>
+                <a href="javascript:;">拒绝</a>
+            </td>
+        </tr>
+    </table>
+    <ul class="pagination">
+        <li><a href="#">&laquo第一页</a></li>
+        <li><a href="#">7</a></li>
+        <li><a href="#">8</a></li>
+        <li><a href="#">9</a></li>
+        <li><a href="#">10</a></li>
+        <li><a href="#">&laquo最后一页</a></li>
+    </ul>
+
+</div>
+{part "/main.main.footer"}
+</body>
+</html>
+<script>
+    $(function(){
+        $(".left_nav_2").click(function () {
+            $(".left_nav_3").stop().toggle();
+            $(".left_nav_4").stop().toggle();
+            $(".left_nav_5").stop().toggle();
+
+        });
+    });
+</script>

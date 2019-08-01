@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="/baichuan_advertisement_manage/assets_admin/js/dc.js" type="text/javascript"></script> 
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.dc"}
+<!--main-->
+<style>
+.selMenu ul{
+	z-index:999;
+}
+</style>
+<script>
+
+</script>
+<div class="main">
+   <div class="side">
+     <div class="leftNav">
+      <ul>
+        <li><a href="/baichuan_advertisement_manage/dc">广告投放</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.dsp">DSP竞价</a></li>
+        <li class="nobotbor"><a href="/baichuan_advertisement_manage/dc.media">媒体收益</a></li>
+      </ul>
+     </div>
+   </div>
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+    <div class="toolbar-bc">
+        {part "/dc.main.displayuserselect"}
+       <div class="tbGroup">
+	  <style>
+	  .tbgBtn{
+		cursor:pointer;
+	  }</style>
+        <h2>统计维度</h2>
+        <span id="report_Category" class="tbgBtn">
+          <a id="area" class="tbgba">地域</a>
+          <a id="media" class="tbgba">媒体</a>
+          <a id="date" class="tbgba">时间</a>
+          <a id="size" class="tbgba">尺寸</a>
+        </span>
+      </div>
+
+     <script> 
+	 $(document).ready(function(){
+	 $(".idate").datepicker({ dateFormat: "yy-mm-dd" ,maxDate:1}); 
+	 });
+     </script> 
+      <div class="selMenu ml10">
+        <h2>时间选择</h2>
+        <div class="smtbg">
+          <input type="text" class="itxt_1 fl idate" id="startdate" value="{$start|default:'开始时间'}" size="15" />
+          <input type="text" class="itxt_1 fl idate" id="enddate" value="{$end|default:'结束时间'}" size="15" />
+        </div>
+      </div>
+      
+      <div class="tbGroup ml10 mt20">
+	  <style>
+	  .tbgBtn{
+		cursor:pointer;
+        }
+      </style>
+        <h2></h2>
+        <span id="r_menu" class="tbgBtn">
+          <a id="r_today" class="tbgba">今天</a>
+          <a id="r_yesterday" class="tbgba">昨天</a>
+          <a id="r_week" class="tbgba">本周</a>
+          <a id="r_lastweek" class="tbgba">上周</a>
+          <a id="r_month" class="tbgba">本月</a>
+          <a id="r_lastmoth" class="tbgba nobr">上月</a>
+        </span>
+      </div>
+      
+
+      <div class="clear"></div>
+    </div>
+    <!--toolbar end--> 
+  
+    <div class="chartCon mt20">
+      <div class="chartShow" style="height:400px" id="chartShow">{*<img src="/baichuan_advertisement_manage/assets_admin/img/tmp_chart.gif" />*}</div>
+    </div>
+    
+	<script>
+	var paras={ };
+	paras.start="{$start}";
+	paras.end="{$end}";
+	//$(document).ready(function(){
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d');}"){
+			$("#r_today").addClass('sel');
+		}
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d',time()-3600*24);}"){
+			$("#r_yesterday").addClass('sel');
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-1 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('+0 week Sunday'));}"){
+			$("#r_week").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-2 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('-1 week Sunday'));}"){
+			$("#r_lastweek").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}" && paras.end=="{date('Y-m-d',time());}"){
+			$("#r_month").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}" && paras.end=="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}"){
+			$("#r_lastmoth").addClass("sel");
+		}
+
+	//});
+  function setV(){
+	  $("#startdate").val(paras.start);
+	  $("#enddate").val(paras.end);
+	//  location="/dc?report_category="+paras.report_category;
+  }
+    $("#report_Category a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+
+	$("#area").click(function(){
+		paras.report_category="area";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_menu a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+
+	$("#startdate").change(function(){
+			paras.start=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#enddate").change(function(){
+			paras.end=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#r_today").click(function(){
+		paras.start="{date('Y-m-d');}";
+		paras.end="{date('Y-m-d');}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_week").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-1 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('+0 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastweek").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-2 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('-1 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_month").click(function(){
+		paras.start="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}";
+		paras.end="{date('Y-m-d',time());}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastmoth").click(function(){
+		paras.start="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}";
+		paras.end="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}";
+		setV();
+		//report("#chartShow",paras);
+	});
+    $("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	report_dc("#chartShow",paras);
+
+	</script>
+   <!-- <table id="page1" width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+   </table> -->
+   {part "/dc.main.ajaxresareareport.table"}    
+   
+     </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/v5/js/jquery.min.js"></script>
+<title>财务流水【查看详情】</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 账户信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">账户名称：{$user->user_name}</span><span class="scll">联系名称：{$user->host}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">账户类型：{$roleList[$user->role_id][name]}</span><span class="scll">账户状态：{if($user->account_status==1)}正常{elseif($user->account_status==2)}<span style="color:#CC0000;">禁用</span>{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">当前余额：<strong class="ye">￥{$user->account}</strong></span>
+        </div>
+    </div>
+    <div style="width:800px">
+        <h3>• 业务信息</h3>
+        <hr class="hrll">
+        {if empty($data)}
+        <div class="dvll">
+            您当前无业务信息!
+        </div>
+        {else}
+        <div class="dvll">
+            <span class="scll">业务单号：{$data[business_id]}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">合同编号：{$data[contract_id]}</span>
+        </div>
+        <div class="dvll">
+            <span style="margin-left:20px">合同图片：</span><span  id="preview"></span>
+        </div>
+        {/if}
+    </div>
+    <div style="width:800px">
+        <h3>• 财务信息</h3>
+        <hr class="hrll">
+        {if empty($data)}
+        <div class="dvll">
+            您当前无财务信息!
+        </div>
+        {else}
+        <div class="dvll">
+            <span class="scll">财务类型：{if($data[operate_code]==1)}充值{elseif($data[operate_code]==2)}补差{else}减额{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">历史余额：<strong class="ye">￥{number_format($data[history_money],2)}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">入账金额：<strong class="ye">￥{if($data[operate_code] != 3)}{number_format($data[operate_num],2)}{else}0.00{/if}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">出账金额：<strong class="ye">￥{if($data[operate_code] == 3)}{number_format($data[operate_num],3)}{else}0.00{/if}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">流水余额：<strong class="ye">￥{number_format($data[flow_money],2)}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">创建时间：{date('Y-m-d H:i:s',$data[op_time])}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">操作账户：{$data[operator_name]}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">其他备注：{$data[note]}</span>
+        </div>
+        {/if}
+    </div>
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer;" onclick="window.close();" >关闭</div>
+<script>
+    $(document).ready(function(){
+        var contract_files = "{$data[contract_file]}";
+        var urls = new Array();
+        urls = contract_files.split(',');
+        var preview = document.getElementById('preview');
+        for(i=0;i<urls.length;i++){
+            if(urls[i] !== ""){
+                var img = new Image();  
+                img.src = urls[i];
+                img.style.margin = "0 10px";
+                img.height = 50;
+                img.width = 50;
+                preview.appendChild(img);
+            }
+        }
+    });
+</script>
+</body>
+</html>

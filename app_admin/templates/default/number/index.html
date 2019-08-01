@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}
+        <div class="main">
+            <div class="side">
+                {part "/crm.plan.left"}
+            </div>
+            <!--mcon start-->
+            <div class="mcon">
+	            <div class="toolbar-right-top bg-gray">
+	                <ul class="ul-x">
+	                    <li>
+	                        <a>广告计划</a>
+	                    </li>
+	                    <li>
+	                        <a href="/baichuan_advertisement_manage/crm.plan.add">新建广告计划</a>
+	                    </li>
+	                </ul>
+	            </div>
+				<div class="table-container pt-10">
+					<table class="table table-striped table-hover">
+						<thead>
+                			<tr>
+                				<th class="tac"><input name="" class="checkall" id="checkedAll" type="checkbox"/></th>
+                				<th>广告计划</th>
+						        <th>短信预算</th>
+						        <th>Email预算</th>
+						        <th>呼叫中心预算</th>
+						        <th>状态</th>
+						        <th>类型</th>
+						        <th>有效期</th>
+						        <th class="tac">设置</th>
+                			</tr>
+                		</thead>
+						<tbody>
+							{foreach $list as $plan}
+							      <tr>
+							        <td class="tac"><input name="plan_id[]" type="checkbox" value="{$plan['plan_id']}" /></td>
+							        <td><a href="/baichuan_advertisement_manage/crm.plan.detail?plan_id={$plan['plan_id']}">{$plan['plan_name']}</a></td>
+							        <td>{if($plan['sms_budget']>0)}{$plan['sms_cost']>0?$plan['sms_cost']:0}/{$plan['sms_budget']}{else}未投放{/if}</td>
+							        <td>{if($plan['email_budget']>0)}{$plan['email_cost']>0?$plan['email_cost']:0}/{$plan['email_budget']}{else}未投放{/if}</td>
+							        <td>{if($plan['cc_budget']>0)}{$plan['cc_cost']>0?$plan['cc_cost']:0}/{$plan['cc_budget']}{else}未投放{/if}</td>
+							        <td>{if($plan['enable']==1)}正常{elseif $plan['enable']==2}暂停{elseif $plan['enable']==3}过期{elseif $plan['enable']==4}已删除{elseif $plan['enable']==5}冻结{elseif $plan['enable']==6}没预算{else}没有开始{/if}</td>
+							        <td>{if $_plan->billing_type==1}CPC{else}CPM{/if}</td>
+							        <td>{date("Y-m-d",$plan['start_date'])|default:'未设置'} - {date("Y-m-d",$plan['end_date'])|default:"未设置"}</td>
+							        <td class="tac">
+							        	<a href="/baichuan_advertisement_manage/crm.plan.detail?plan_id={$plan['plan_id']}">详情</a>
+							        	<a href="/baichuan_advertisement_manage/crm.group.add?plan_id={$plan['plan_id']}">添加广告组</a>
+									</td>
+							      </tr>
+							{/foreach}
+						</tbody>
+						<tfoot>
+						</tfoot>
+                	</table>
+				</div>
+        </div>
+	</div>
+	{part "/main.main.footer"}
+    </body>
+</html>

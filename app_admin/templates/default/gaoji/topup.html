@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+<style>
+input.itxt{
+}
+</style>
+</head>
+<body>
+{part "/main.main.nav.admin"}
+
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+      {*  {part ("/admin.main.nav.user.add")} *}
+      <div class="accordion">
+          <h2>账户充值</h2>
+      </div>
+
+
+  </div>
+  
+
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/admin.user.list">广告主管理</a>&nbsp;&gt;&nbsp;账户充值</div>
+    <!--<h1 class="mtit">修改信息</h1>-->
+    <!--基本信息-->
+	<form id="myForm" action="/admin.user.topup.{$user->uid}" method="post">
+	<input type="hidden" name="uid" value="{$user->uid}" />
+    <div class="comForm">
+      <dl>
+        <dt>充值账户：</dt>
+        <dd><input type="text" class="itxt" size="30" name="topup" value="{$user->user_name}" readonly="readonly"/></dd>
+      </dl>
+      <dl>
+        <dt>充值金额：</dt>
+        <dd><input type="text" class="itxt" size="30" name="topup" /></dd>
+      </dl>
+	</div>
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb"><input name="btbc" type="submit" class="ibtnb" value="保存"  /></span>
+          <span class="sbtng ml10"><input name="btqx" type="reset" class="ibtng" value="取消"  /></span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+
+    <script>
+        $(document).ready(function(){
+            var options={ success:function(){ window.location.pathname="/admin.user.list" }};
+            $('#myForm').ajaxForm(options); 
+                        
+            $("[name='btqx']").click(function(){
+                window.location.pathname="/admin.user.list";
+            });
+        });
+    
+    
+    </script>
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

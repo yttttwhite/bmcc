@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+	<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{part "/main.main.header"}
+	</head>
+	<body>
+		{part "/main.main.nav.ad"}
+		<div class="container-content">
+			<div class="contianer-left">
+				{part "/crm.consumer.groups"}
+				<div class="left-btn-group">
+					<a class="btn btn-default  btn-240-34 btn-squared" href="bcdata-tag.html" target="_blank">分析所选分组</a>
+					<a class="btn btn-default  btn-240-34 btn-squared">给所选分组发邮件</a>
+					<a class="btn btn-default  btn-240-34 btn-squared">给所选分组发短信</a>
+					<a class="btn btn-primary bg-blue btn-240-34 btn-squared mt-10" id="addGroup">+新建分组</a>
+					<a class="btn btn-danger btn-240-34 btn-squared">删除所选分组</a>
+				</div>
+			</div>
+				<div class="content">
+					<div class="content-inside">
+						<div class="toolbar-right-top bg-blue">
+							<ul class="ul-x" style="color:#FFFFFF;">
+								<li>基本信息</li>
+								<li onClick="editConsumerByCid({$consumer['id']})">编辑</li>
+								<li>删除</li>
+							</ul>
+						</div>
+						<div class="table-container">
+							<form id="consumerListForm" name="consumerList" method="post" action="">
+								<table class="table table-striped table-hover" id="sample-table-2">
+									<thead>
+										<tr>
+											<th>姓名</th>
+											<th class="hidden-xs">手机</th>
+											<th class="hidden-xs">固定电话</th>
+											<th class="hidden-xs">Email</th>
+											<th class="hidden-xs">省份</th>
+											<th class="hidden-xs">城市</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>{$consumer['name']}</td>
+											<td class="hidden-xs">{$consumer['mobile']}</td>
+											<td class="hidden-xs">{$consumer['phone']}</td>
+											<td class="hidden-xs">{$consumer['email']}</td>
+											<td class="hidden-xs">{$consumer['state']}</td>
+											<td class="hidden-xs">{$consumer['city']}</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						</div>
+					</div>
+					{if(isset($rootTag) && is_array($rootTag))}
+					{foreach $rootTag as $rid=>$root}
+						{if $root == 1}
+						<div class="content-inside" style="margin-top:30px;">
+							<div class="toolbar-right-top bg-blue">
+								<ul class="ul-x" style="color:#FFFFFF;">
+									<li>{$tag[$rid]['tname']}</li>
+								</ul>
+							</div>
+							<div class="table-container">
+								<form id="consumerListForm" name="consumerList" method="post" action="">
+									<table class="table table-striped table-hover" id="sample-table-2">
+										<thead>
+											<tr>
+												<th>标签分类</th>
+												<th class="hidden-xs">标签</th>
+												<th class="hidden-xs">权重总和</th>
+											</tr>
+										</thead>
+										<tbody>
+										{if(isset($outputUser[$rid]) && is_array($outputUser[$rid]))}
+										{foreach $outputUser[$rid] as $output}
+											<tr>
+												<td class="col-sm-3">{$output['pname']}</td>
+												<td class="col-sm-3">{$output['tagStr']}</td>
+												<td class="col-sm-2">{$output['weight_sum']}</td>
+											</tr>
+										{/foreach}
+										{/if}
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+						{/if}
+					{/foreach}
+					{/if}
+				</div>
+			</div>
+		<div class="footer"></div>
+		
+		<div id="addGroupLayer" style="width:400px; height:200px; display:none;">
+			<div class="form-container form-addGroup">
+				<form class="form-inline" action="crm.consumer.addGroup" method="post" id="addGroupFrom">
+				<div class="input-group w-230">
+					<input type="text" name="groupName" class="form-control form-sm" placeholder="输入组名">
+				</div>
+				<input id="addGroupSubmit" type="submit" value="确认添加" class="btn btn-success btn-squared">
+				</form>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-green',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+			
+			
+			$('#addGroup').on('click', function() {
+				layerDivById('addGroupLayer');
+			} );
+			
+			$('#addConsumer').on('click', function() {
+				var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer';
+				var layerIndex = layerIframe(url,800,430);
+			} );
+			
+			$('#copyConsumerToGroup').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.addConsumerToGroup");
+				$("#consumerListForm").submit();
+			} );
+			
+			$('#deleteSelectedConsumers').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.operation.delete");
+				$("#consumerListForm").submit();
+			} );
+		} );
+		
+		function deleteConsumerByCid(cid){
+			var msg = "确认删除这条数据？";
+			var url = "crm.consumer.operation.delete."+cid;
+			layerConfirmGet(url,msg);
+		}
+		
+		function editConsumerByCid(cid){
+			var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer.'+cid;
+			var layerIndex = layerIframe(url,800,430);
+		}
+	</script>
+</html>

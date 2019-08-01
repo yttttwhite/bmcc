@@ -1,0 +1,42 @@
+<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+    <thead>
+        <tr>
+            <th class="center">ID</th>
+            <th class="center">客户名称</th>
+            <th class="center">接入类型</th>
+            <th class="center">合作方</th>
+            <th class="center">接入号码（API_KEY）</th>
+            <th class="center">接入密码（API_SECRET）</th>
+            <th class="center">接入地址</th>
+            <th class="center">结算规则</th>
+            <th class="center">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $list as $item}
+        <tr>
+            <td>{$item['id']}</td>
+            <td>{$item['uname']}</td>
+            <td>{$apiType[$item['api_type']]}</td>
+            <td>{$item['api_partner']}</td>
+			<td>{$item['api_key']}</td>
+            <td>{$item['api_secret']}</td>
+            <td>{$item['api_address']}</td>
+            <td>{$item['api_charge']}</td>
+            <td>
+            	<a href="#" onclick="layerIframe('添加分组','/crm.chudian.add?uid={$item['uid']}&id={$item['id']}',800,400);">修改</a>
+				<a href="#" onclick="deleteChudianById('{$item['id']}')">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </tbody>
+</table>
+
+<script>
+;
+function deleteChudianById(id){
+    var msg = "确认删除这条数据？";
+    var url = "/crm.chudian.delete?id=" + id;
+    layerConfirmGet(url, msg);
+}
+</script>

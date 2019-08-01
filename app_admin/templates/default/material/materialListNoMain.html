@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {part "/main.main.header"} 
+  <script src="/baichuan_advertisement_manage/assets_admin/js/jquery.form.min.js"></script>
+  <title>素材列表</title>
+  <style type="text/css">
+    table th,tr,td {
+      text-align: center;text-align: center;
+    }
+    tr.selected{
+      background-color: #ccc;
+    }
+    table.reportab tr.selected td{
+      background-color: #ccc;
+    }
+    .font-po{
+      margin:0 4px;
+    }
+  </style>
+  <link rel="stylesheet" href="/baichuan_advertisement_manage/assets_admin/v5/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
+  <script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+</head> 
+<body>
+<div class="main">
+  <div class="panel panel-white" style="border:1px solid #EEEEEE;">
+    <div class="panel-heading border-light panel-head-md">
+      <form method="get">
+        <div class="fl">
+          <input type="text"  placeholder="素材名称" value="{$_GET['stuff_name']}" class="form-control ml-10 input-small" name="stuff_name" value="">
+        </div>
+        <div class="fl">
+          <input class="btn btn-squared btn-sm btn-success ml-20" type="submit" value="查询" style="display: inline-block;margin-right: 15px;">
+        </div>
+        <span style="line-height:28px; position: relative; left: 20px;">共计：{$total|default:0}条</span>
+      </form>
+    </div>
+
+
+<!--搜索 end-->
+    <div class="panel-body" style="overflow-x: auto;">
+      <table class="reportab" width="100%" border="0" cellspacing="0" cellpadding="0">
+          <thead>
+          <tr>
+              <th>ID</th>
+              <th>素材名称</th>
+              <th>素材内容</th>
+              <th>素材类型</th>
+              <th>素材尺寸</th>
+              <th>审核状态</th>
+              <th>创建者</th>
+              <th>创建时间</th>
+              <!--<th>审核管理</th>-->
+          </tr>
+          </thead>
+          <tbody>
+          {foreach $stuff_lib_list as $_stuff}
+          <tr item_id ="{$_stuff->stuff_id}" item_name="{$_stuff->name}" item_type="{$_stuff->type}" item_addr="{$_stuff->addr}"
+             item_wh="{$_stuff->width}*{$_stuff->height}" item_uid="{$_stuff->uid}">
+
+              <td>{$_stuff->stuff_id}</td>
+              <td>{$_stuff->name}</td>
+              <td>
+                  {if $_stuff->type==2}
+                  <embed src="{$_stuff->addr}" width="{$_stuff->width}" height="{$_stuff->height}" style="max-width:180px;max-height:80px"></embed>
+                  {elseif $_stuff->type==1}
+                  <a href="{$_stuff->addr}" target="_blank">
+                      <img class="addr" style="max-width:180px;max-height:80px" src="{$_stuff->addr}" />
+                  </a>
+                  {elseif($_stuff->type==6)}
+                  <video width="320" controls="controls">
+                      <source src="{$_stuff->addr}" type="application/octet-stream" />
+                      <source src="{$_stuff->addr}" type="video/x-ms-asf" />
+                      <source src="{$_stuff->addr}" type="video/x-mplayer2" />
+                      <source src="{$_stuff->addr}" type="video/mp4" />
+                      <source src="{$_stuff->addr}" type="video/ogg" />
+                      <source src="{$_stuff->addr}" type="video/webm" />
+                      <object data="{$_stuff->addr}" width="320">
+                          <embed src="{$_stuff->addr}" width="320"/>
+                      </object>
+                  </video>
+                  {elseif($_stuff->type ==10)}
+                  <video width="320" controls="controls">
+                      <source src="{$_stuff->addr}" type="application/octet-stream" />
+                      <source src="{$_stuff->addr}" type="video/x-ms-asf" />
+                      <source src="{$_stuff->addr}" type="video/x-mplayer2" />
+                      <source src="{$_stuff->addr}" type="video/mp4" />
+                      <source src="{$_stuff->addr}" type="video/ogg" />
+                      <source src="{$_stuff->addr}" type="video/webm" />
+                      <object data="{$_stuff->addr}" width="320">
+                          <embed src="{$_stuff->addr}" width="320"/>
+                      </object>
+                  </video>
+                  {else}
+                  <textarea readonly style="width:200px;height:100px" name="text[{$_stuff->adid}]">{$_stuff->text}</textarea>
+                  {/if}
+              </td>
+
+              <td>{if $_stuff->type==1}
+                  图片
+                  {elseif($_stuff->type==2)}
+                  Flash
+                  {elseif($_stuff->type==3)}
+                  文字
+                  {elseif($_stuff->type==6)}
+                  视频
+                  {else}
+                  其它
+                  {/if}
+              </td>
+              <td>{$_stuff->width}*{$_stuff->height}</td>
+              <td>{if $_stuff->verified_or_not ==1}待审
+                  {elseif $_stuff->verified_or_not ==2}通过
+                  {elseif $_stuff->verified_or_not ==3}未通过
+                  {/if}</td>
+              <td>{$adSopnsorArray[$_stuff->uid]}</td>
+              <td>{if empty($_stuff->ctime)}未设置
+                  {else}{date("Y-m-d H:i:s",$_stuff->ctime)}
+                  {/if}
+              </td>
+
+          </tr>
+
+          {/foreach}
+
+          </tbody>
+      </table>
+        <div class="turnpage">
+        </div>
+
+    </div>
+  </div>  
+  </div>  
+</div>
+</body>
+<script>
+  function getSelected(){
+    var $table = $('.reportab'),$tr = $table.find('tr.selected');
+    var data = null;
+    if($tr.length > 0) {
+      data = new Object();
+      data.id = $tr.attr("item_id");
+      data.name = $tr.attr("item_name");
+      data.type = $tr.attr("item_type");
+      data.addr = $tr.attr("item_addr");
+      data.wh = $tr.attr("item_wh");
+      data.uid = $tr.attr("item_uid");
+    }
+    return data
+  }
+  $(document).ready(function(){
+    var $table = $('.reportab')
+    $table.on('click', 'tr', function(e){
+      var ev = e || window.event,$this = $(this);
+      ev.stopPropagation();
+      $this.siblings().removeClass('selected');
+      if($this.hasClass("selected"))$this.removeClass("selected");
+      else $this.addClass("selected")
+    })
+    
+  })
+  
+</script>
+</html>

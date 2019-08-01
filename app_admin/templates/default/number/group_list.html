@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body>
+    	{part "/main.main.nav.ad"}
+        <div class="main">
+            <div class="side">
+                {part "/crm.number.GroupLeft"}
+            </div>
+            <!--mcon start-->
+            <div class="mcon">
+	            <div class="toolbar-right-top bg-gray">
+	                <ul class="ul-x">
+	                    <li>
+	                        <a>号码库管理</a>
+	                    </li>
+	                </ul>
+	            </div>
+				<div class="table-container pt-10">
+					<table class="table table-striped table-hover">
+						<thead>
+                			<tr>
+                				<th>ID</th>
+								<th>分组名称</th>
+								<th>类型</th>
+								<th>备注</th>
+						        <th>创建者</th>
+						        <th>创建时间</th>
+						        <th>操作</th>
+                			</tr>
+                		</thead>
+						<tbody>
+							{foreach $list as $item}
+							      <tr>
+							        <td>{$item['id']}</td>
+							        <td>{$item['name']}</td>
+									<td>{$typeArray[$item['type']]}</td>
+							        <td>{$item['remark']}</td>
+							        <td>{$item['creator_name']}</td>
+							        <td>{date('Y-m-d H:i:s',$item['ctime'])}</td>
+							        <td>
+							        	<a href="/baichuan_advertisement_manage/crm.number.list?group_id={$item['id']}">查看</a>
+										<a href="#" onclick="layerIframe('修改','/crm.number.GroupAddIframe?group_id={$item['id']}',800,480);">修改</a>
+								        <a href="#" onclick="deleteNumberGroupById('{$item['id']}')">删除</a>
+									</td>
+							      </tr>
+							{/foreach}
+						</tbody>
+						<tfoot>
+						</tfoot>
+                	</table>
+				</div>
+        </div>
+	</div>
+	<script>
+		;
+	function deleteNumberGroupById(id){
+	    var msg = "确认删除这条数据？";
+	    var url = "/crm.number.groupDelete?id=" + id;
+	    layerConfirmGet(url, msg);
+	}
+	</script>
+	{part "/main.main.footer"}
+    </body>
+</html>

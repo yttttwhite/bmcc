@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body class="w-auto">
+	<div class="container-content p-0 mt-20">
+		<div class="panel panel-white" style="margin:0;">
+			<div class="panel-body">
+				<form  method="post" action="/dpc.main.hostGroup.{$collection}.save">
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-7">
+								<label>分组名称</label>
+								<span class="input-icon">
+									<input type="text" class="form-control" name="collection" value="{$collection}" style="display:none;">
+									<input type="text" class="form-control" id="bidder" name="bidder" value="0" style="display:none;">
+									{if(isset($hostGroup['group_id']))}
+									<input type="text" class="form-control" name="group_id" value="{$hostGroup['group_id']}"  style="display:none;">
+									{/if}
+									<input type="text" placeholder="分组名称" class="form-control" name="group_name" value="{$hostGroup['group_name']}"
+											{if(isset($hostGroup['group_id']) and $hostGroup['group_id'] < 2)}
+												readonly="readonly"
+											{/if}>
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<label>投放频次<span style="color:#c40000;">（数值范围：0~255）</span></label>
+								<span class="input-icon">
+									<input type="text" placeholder="投放频率，0~255之间" class="form-control" name="times" value="{$hostGroup['max_push_times']}">
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div id="advance" class="row mt-20" style="display:none">
+						<div class="form-group">
+							<div class="col-sm-7">
+								<label>Bidder地址</label>
+								<span class="input-icon">
+									<input type="text" placeholder="Bidder URL" class="form-control" name="bidder_url" value="{$hostGroup['bidder_url']}">
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<label>流量比例<span style="color:#c40000;">（数值范围：0~1）</span></label>
+								<span class="input-icon">
+									<input type="text" placeholder="Traffic Ratio，0~1之间" class="form-control" name="traffic_ratio" value="{$hostGroup['traffic_ratio']}">
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row mt-20">
+						<div class="col-sm-11">
+							<button type="submit" class="btn btn-100-10 btn-success btn-squared" style="float: right;">提交</button>
+							<a id="showAdvance" class="fr mt-10 mr-20" onclick="showAdvance()">显示高级选项</a>
+							<a id="hideAdvance" class="fr mt-10 mr-20" onclick="hideAdvance()" style="display:none;">隐藏高级选项</a>
+						</div>
+					</div>
+					<script>
+						function showAdvance(){
+							$("#advance").css('display','block'); 
+							$("#bidder").val(1); 
+							$("#showAdvance").css('display','none'); 
+							$("#hideAdvance").css('display','block'); 
+						}
+						function hideAdvance(){
+							$("#bidder").val(0);
+							$("#advance").css('display','none'); 
+							$("#hideAdvance").css('display','none');
+							$("#showAdvance").css('display','block');
+						}
+					</script>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

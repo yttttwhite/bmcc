@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}
+		<div class="main">
+		    <div class="side">
+		        {part ("/ad.plan.listpart.".$plan_id.".".$group_id)}
+		    </div>
+		    <!--mcon-->
+		    <div class="mcon">
+			    <!--toolbar start-->
+			    <div class="toolbar-bc fl" style="margin-bottom:13px;">
+			    	<div class="fl sub-title sc-title">
+			    		<a href="/baichuan_advertisement_manage/ad.plan.list.{$plan->plan_id}" title="{$plan->plan_name}">{$plan->plan_name|wordbraek}</a>
+						<i class="fa fa-angle-double-right"></i>
+						<a href="/baichuan_advertisement_manage/ad.group.list.{$plan->plan_id}.{$group->group_id}" title="{$group->name}">{$group->name|wordbraek}</a>
+						<i class="fa fa-angle-double-right"></i>
+						素材
+			    	</div>
+			    	<div class="fr">
+						<a class="btn btn-squared btn-blue" href="/baichuan_advertisement_manage/ad.plan.list.{$plan_id}">广告组列表</a>
+					    <!--<a class="btn btn-squared btn-blue" href="/baichuan_advertisement_manage/ad.group.list.{$plan_id}.{$group_id}">素材列表</a>-->
+					    <a class="btn btn-squared btn-blue" href="/baichuan_advertisement_manage/ad.group.list.{$plan_id}.{$group_id}">广告列表</a>
+					    <!--<a class="btn btn-squared btn-red" href="/baichuan_advertisement_manage/ad.stuff.addExchangeStuff.{$plan_id}.{$group_id}">添加灵集素材</a>-->
+					    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.plan.add.{$plan_id}">编辑广告计划</a>
+					    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.group.add.{$plan_id}.{$group_id}">编辑广告组</a>
+					    <!--<a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.stuff.add.{$plan_id}.{$group_id}">编辑素材</a>-->
+					    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.stuff.add.{$plan_id}.{$group_id}">编辑广告</a>
+					</div>
+				    <!--<div id="zhuantai" class="selMenu smzt ml10" style="margin:0 10px 0 0;">-->
+				        <!--<span class="smtit">素材状态</span>-->
+				        <!--<ul>-->
+				            <!--<li>-->
+				                <!--<a href="javascript:;">素材状态</a>-->
+				            <!--</li>-->
+				            <!--<li>-->
+				                <!--<a href="javascript:;">正常</a>-->
+				            <!--</li>-->
+				            <!--<li>-->
+				                <!--<a href="javascript:;">禁用</a>-->
+				            <!--</li>-->
+				        <!--</ul>-->
+				    <!--</div>-->
+				    <div class="tbGroup">
+				        <span class="tbgBtn">
+				        	<a type="start" class="status-change tbgiba" title="启动">
+				        		<i class="fa fa-play"></i>
+							</a>
+							<a type="stop" class="status-change tbgiba nobr" title="暂停">
+				        		<i class="fa fa-pause"></i>
+							</a>
+							<a type="del" class="status-del tbgiba nobr" title="删除">
+				        		<i class="fa fa-trash-o"></i>
+							</a>
+						</span>
+				    </div>
+				  	<div style="position:absolute;top:33px;left:33px" id="addr_pre"></div>
+			    </div>
+			    <!--toolbar end-->
+			    <div class="comForm clear" style="margin:0;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="listab fs14 font-size-12 table table-bordered  table-striped table-hover">
+						<tr>
+							<th width="30" class="center"><input {$readonly} class="checkall" type="checkbox" /></th>
+							<th width="100">广告ID:素材ID</th>
+							 <th width="100">广告位置信息</th>
+							<th width="200">素材内容</th>
+							<th width="80" style="text-align:center;">素材大小</th>
+							<th width="80" class="narrow-hide">名称</th>
+                            {if($plan->platform == 1)}
+                                <th width="200">素材标题</th>
+                            {/if}
+                            {if($plan->platform != 1)}
+                            <th width="100" scope="col" width="140px">展示类型<br>位置<br>素材类型</th>
+                            {/if}
+							<th width="80">状态</th>
+							<th width="80">是否可达</th>
+							<th width="80">审核状态</th>
+							<th width="120">下载信息</th>
+							{if(isset($_GET['more']))}
+								<th width="100">上传时间</th>
+								<th width="100">修改时间</th>
+								<th width="80" class="tac narrow-hide">总花费数</th>
+								<th width="80" class="tac narrow-hide">展现数</th>
+								<th width="80" class="tac narrow-hide">点击数</th>
+								<th width="80" class="tac narrow-hide">点击率</th>
+							{/if}
+							<th width="80" class="tac">操作</th>
+						</tr>
+						{foreach $ads as $ad}
+							<tr id="tr_{$ad->adid}">
+								<td class="center" ><input {$readonly} name="" type="checkbox" value="{$ad->adid}" /></td>
+
+								<td class="tac" style="text-align: left !important;">
+									<a href="/baichuan_advertisement_manage/ad.preview.entry.{$ad->adid}" target="_blank" title="预览">{$ad->adid}:{$ad->stuff->stuff_id}</a>
+								</td>
+								<!-- 广告位置信息 -->
+								<td class="center" > 形式：{if $adpostion->first_screen ==1}首屏{else}非首屏{/if}<br/>
+									素材：{if $adpostion->stuff_type ='pic'}图片
+									{elseif $adpostion->stuff_type ='video'}视频
+									{elseif $adpostion->stuff_type ='pictxt'}图文
+									{elseif $adpostion->stuff_type ='txt'}文字
+									{else $adpostion->stuff_type ='others'}其他
+									{/if}
+									<br/>
+									尺寸：{$adpostion->width}*{$adpostion->height}</td>
+								<td>
+									{if $ad->stuff->type==2}
+									<embed src="{$ad->stuff->addr}" width="{$ad->stuff->width}" height="{$ad->stuff->height}" style="max-width:180px;max-height:80px"></embed>
+									{elseif $ad->stuff->type==1}
+									<a href="{$ad->stuff->addr}" target="_blank">
+										<img class="addr" style="max-width:180px;max-height:80px" src="{$ad->stuff->addr}" />
+									</a>
+									{elseif($ad->stuff->type==6)}
+									<video width="320" controls="controls">
+										<source src="{$ad->stuff->addr}" type="application/octet-stream" />
+										<source src="{$ad->stuff->addr}" type="video/x-ms-asf" />
+										<source src="{$ad->stuff->addr}" type="video/x-mplayer2" />
+										<source src="{$ad->stuff->addr}" type="video/mp4" />
+										<source src="{$ad->stuff->addr}" type="video/ogg" />
+										<source src="{$ad->stuff->addr}" type="video/webm" />
+										<object data="{$ad->stuff->addr}" width="320">
+											<embed src="{$ad->stuff->addr}" width="320"/>
+										</object>
+									</video>
+									{elseif($ad->stuff->type==10)}
+									<video width="320" controls="controls">
+										<source src="{$ad->stuff->addr}" type="application/octet-stream" />
+										<source src="{$ad->stuff->addr}" type="video/x-ms-asf" />
+										<source src="{$ad->stuff->addr}" type="video/x-mplayer2" />
+										<source src="{$ad->stuff->addr}" type="video/mp4" />
+										<source src="{$ad->stuff->addr}" type="video/ogg" />
+										<source src="{$ad->stuff->addr}" type="video/webm" />
+										<object data="{$ad->stuff->addr}" width="320">
+											<embed src="{$ad->stuff->addr}" width="320"/>
+										</object>
+									</video>
+									{else}
+									<textarea readonly style="width:200px;height:100px" name="text[{$ad->adid}]">{$ad->stuff->text}</textarea>
+									{/if}
+								</td>
+								<td class="tac">
+									{if $ad->stuff->type!=8}
+										{$ad->stuff->width}*{$ad->stuff->height}<br/>
+									{/if}
+								</td>
+								<td class="narrow-hide">
+									{$ad->adname}
+								</td>
+                                {if($plan->platform == 1)}
+                                <td>{$ad->stuff->title}</td>
+                                {/if}
+                                {if($plan->platform != 1)}
+                                <td>{$viewType[$ad->view_type]}<br>{$position[$ad->colum1]}<br>{$stuffType[$ad->stuff->type]} </td>
+                                {/if}
+								<td>{if $ad->play_status==1}正常{else}无效{/if}</td>
+								<td>{if $ad->stuff->landing_page_reachable==1}可达{else}不可达{/if}</td>
+								<td>{$status[$ad->stuff->verified_or_not]}</td>
+								<td>应用类型：{if $ad->stuff->app_type ==0}Android {else} IOS {/if}<br/>
+									应用包名称：{$ad->stuff->packagename}<br/>
+									应用名称：{$ad->stuff->appname}<br/>
+									{if $ad->stuff->app_type ==0 }Android应用介绍URL：{$ad->stuff->app_intro_url}{/if}<br/>
+									应用大小：{$ad->stuff->app_size}<br/>
+									应用版本：{$ad->stuff->app_ver}<br/>
+									{if $ad->stuff->app_type ==0}appid：{$ad->stuff->app_id} {else} App Store ID：{$ad->stuff->itunesId}{/if}<br/>
+								</td>
+								{if(isset($_GET['more']))}
+									<td class="tac narrow-hide">{date("Y-m-d H:i:s",$ad->ctime)}</td>
+									<td class="tac narrow-hide">{date("Y-m-d H:i:s",$ad->mtime)}</td>
+									<td class="tac narrow-hide">{number_format($ad->report->cost,2,".",",")}</td>
+									<td class="tac narrow-hide">{$ad->report->show}</td>
+									<td class="tac narrow-hide">{$ad->report->click}</td>
+									<td class="tac narrow-hide">{if(!empty($ad->report->show))}{round($ad->report->click*100/$ad->report->show,3)}%{/if}</td>
+								{/if}
+								<td class="tac" style="text-align:center;">
+									<a class="btn btn-squared btn-xs btn-primary" style="margin-right:0;" href="#tr_{$ad->adid}"  onclick="layerIframeNew('广告：#{$ad->adid}','/ad.ad.info?aid={$ad->adid}',720,650)">快速操作</a><br>
+									<a class="btn btn-squared btn-xs btn-default mt-10" style="margin-right:0;" href="/baichuan_advertisement_manage/ad.ad.info?aid={$ad->adid}" target="_blank">查看详情</a>
+								</td>
+							</tr>
+						{/foreach}
+					</table>
+				</div>
+		  </div>
+		</div>
+		<div class="clear"></div>
+		<script>
+	        $(document).ready(function(){
+	            $(".status-change").click(function(){
+	                var checked = $(".listab input:checkbox:checked[value]");
+	                var type = $(this).attr("type");
+	                if (checked.size() <= 0) {
+	                    alert("请选择");
+	                }
+	                else {
+	                    var planid = [];
+	                    checked.each(function(i, item){
+	                        planid.push($(item).val());
+	                    })
+	                    $.ajax({
+	                        type: "POST",
+	                        url: "/ad.stuff.status." + type,
+	                        data: {
+	                            adids: planid
+	                        },
+	                        dataType: "json",
+	                        success: function(msg){
+	                            location.reload();
+	                        },
+	                        error: function(XMLHttpRequest, textStatus, errorThrown){
+	                            alert(errorThrown);
+	                        }
+	                    });
+	                }
+	                return false;
+	            });
+	            $(".status-del").click(function(){
+	                var checked = $(".listab input:checkbox:checked[value]");
+	                var type = $(this).attr("type");
+	                if (checked.size() <= 0) {
+	                    alert("请选择");
+	                }
+	                else {
+	                    var planid = [];
+	                    checked.each(function(i, item){
+	                        planid.push($(item).val());
+	                    })
+	                    $.ajax({
+	                        type: "POST",
+	                        url: "/ad.stuff.del." + type,
+	                        data: {
+	                            adids: planid
+	                        },
+	                        dataType: "json",
+	                        success: function(msg){
+	                            location.reload();
+	                        },
+	                        error: function(XMLHttpRequest, textStatus, errorThrown){
+	                            alert(errorThrown);
+	                        }
+	                    });
+	                }
+	                return false;
+	            });
+	            $(".addr").mouseover(function(){
+	                var d = '<img src="' + $(this).attr("src") + '">';
+	                var p = ($(this).position());
+	                $("#addr_pre").html(d).css({
+	                    left: p.left,
+	                    top: p.top + $(this).height() + 20
+	                }).show();
+	            }).mouseout(function(){
+	                $("#addr_pre").hide();
+	            });
+	        });
+	    </script>
+		{part "/main.main.footer"}
+	</body>
+</html>

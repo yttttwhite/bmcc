@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {part "/main.main.header"}
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}
+        <!--main-->
+        <div class="main">
+            <div class="side">
+				{part "/crm.plan.left"}
+            </div>
+            <!--mcon-->
+            <div class="mcon addForm">
+                <div class="step">
+                    <div class="step1">
+                    </div>
+                </div>
+                <form method="post" action="/crm.plan.save">
+                    <input type="hidden" name="plan_id" value="{$plan->plan_id|default:0}" />
+					<!--基本信息-->
+                    <div class="comForm clear">
+                        <h1>基本信息</h1>
+                        <dl>
+                            <dt>计划名称：</dt>
+                            <dd>
+                                <input name="plan_id" value="{$plan['plan_id']}" type="text" class="itxt" size="30" readonly="readonly" style="display:none;"/>
+                                <input name="plan_name" value="{$plan['plan_name']}" type="text" class="itxt" size="30" />
+                            </dd>
+                            <dd class="tips_correct" style="display:none">
+                            </dd>
+                            {if(!empty($error['plan_name']))}
+                            <dd class="tips_error">
+                            </dd>
+                            {/if}
+                        </dl>
+                    </div>
+					<!--计划设置-->
+                    <div class="comForm clear">
+                        <h1>计划设置</h1>
+                        <div class="row h-40 mt-30">
+                           	<dt>广告类型：</dt>
+                           	<div class="col-sm-1">
+								<label><input type="checkbox" class="flat-grey icheck" name="adType[]" value="sms" checked="checked">短信</label>
+                          	</div>
+                          	<div class="col-sm-1">
+								<label><input type="checkbox" class="flat-grey icheck" name="adType[]" value="mms" disabled="true">彩信</label>
+                          	</div>
+                          	<div class="col-sm-1">
+								<label><input type="checkbox" class="flat-grey icheck" name="adType[]" value="email" disabled="true">Email</label>
+                         	</div>
+                          	<div class="col-sm-1">
+								<label><input type="checkbox" class="flat-grey icheck" name="adType[]" value="call" disabled="true">呼叫中心</label>
+                        	</div>
+						</div>
+						
+                        <div class="row h-40 mt-30" style="display:none;">
+                           	<dt>广告预算：</dt>
+                           	<div class="col-sm-2">
+								<div class="row input-group">
+                                    <span class="input-group-addon">短信</span>
+                                    <input type="text" placeholder="元" class="form-control text-right input-sm" name="smsBudget"/>
+                                </div>
+								<div class="row input-group mt-10">
+                                    <span class="input-group-addon">彩信</span>
+                                    <input type="text" placeholder="元" class="form-control text-right input-sm" name="mmsBudget"/>
+                                </div>
+								<div class="row input-group mt-10">
+                                    <span class="input-group-addon">Email</span>
+                                    <input type="text" placeholder="元" class="form-control text-right input-sm" name="emailBudget"/>
+                                </div>
+								<div class="row input-group mt-10">
+                                    <span class="input-group-addon">呼叫中心</span>
+                                    <input type="text" placeholder="元" class="form-control text-right input-sm" name="callBudget"/>
+                                </div>
+                            </div>
+						</div>
+                    </div>
+					<!--投放时间设置-->
+                    <div class="comForm clear">
+                        <h1>投放时间设置</h1>
+                        <dl>
+                            <dt>循环方式：</dt>
+                            <dd>
+								<select name="repeat_type">
+									<option value="0">不循环</option>
+									<option value="1">按天循环</option>
+									<option value="2">按周循环</option>
+									<option value="3">按月循环</option>
+                                </select>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>投放时间：</dt>
+                            <dd>
+                                <input id="ad_date" name="ad_date" type="text" class="itxt idate fc7" value="投放日期" size="12" />
+								<select name="ad_hour">
+                                	{for($hour = 0;$hour<=24;$hour++)}
+									<option value="{$hour}">{$hour}</option>
+									{/for}
+                                </select>
+								时
+                                <select name="ad_minute">
+                                	{for($minute = 0;$minute<=60;$minute++)}
+									<option value="{$minute}">{$minute}</option>
+									{/for}
+                                </select>
+								分
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>投放周期：</dt>
+                            <dd>
+                                <input id="start_date" name="start_date" type="text" class="itxt idate fc7" value="开始日期" size="12" />
+								至
+								<input id="end_date" name="end_date" type="text" class="itxt idate fc7" value="结束日期" size="12" />
+                            </dd>
+                        </dl>
+                        <div class="tipstxt">结束时间为空表示不限结束时间。</div>
+                        <dl>
+                            <dt>广告投放时间：</dt>
+                            <dd>
+                                <input id="intervals" type="hidden" name="intervals" value="{$plan->intervals}" />
+                                <label class="irad" for="qt">
+                                    <input name="all_day_or_not" id="qt" type="radio" value="1" {if($plan->all_day_or_not==1)}checked{/if} 
+                                    {if !isset($plan)}checked{/if}/>全天投放
+                                </label>
+                                <label class="irad ml20" for="fsd" id="btnShow1" onClick="ShowDIV('ptime')">
+                                    <input name="all_day_or_not" {if($plan->all_day_or_not===0)}checked{/if} id="fsd" type="radio" value="0" />分时段投放
+                                </label>
+								
+                            </dd>
+                        </dl>
+                        <script>
+                            $(document).ready(function(){
+                                $("#frequency_control").change(function(){
+                                    if ($(this).val() != -1) {
+                                        $("#limit_1").show();
+                                    }
+                                    else {
+                                        $("#limit_1").hide();
+                                    }
+                                }).trigger("change");
+                                ;
+                            });
+                        </script>
+                        <!--
+                        <dl>
+                        <dt>投放限制：</dt>
+                        <dd>
+                        每天的CPC控制:<input type="text" class="itxt" size="5" name="day_cpc" value="{$plan->day_cpc|default:-1}"><br />
+                        每天的CPM控制:<input type="text" class="itxt" size="5" name="day_cpm" value="{$plan->day_cpm|default:-1}"><br />
+                        </dd>
+                        </dl>
+                        <div class="tipstxt">这里限制每天的投放设置，-1为不限制</div>
+                        -->
+                    </div><!--btn-->
+                    <div class="comForm">
+                        <dl>
+                            <dt>
+                                &nbsp;
+                            </dt>
+                            <dd>
+                                <span class="sbtnb">{if !empty($plan_id)}
+								<input name="" type="submit" class="ibtnb save" value="保存" />
+								{else}
+								<input name="" type="submit" class="ibtnb save" value="保存并继续" />
+								{/if}
+								</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </form>
+            </div>
+        </div> {part "/main.main.footer"}
+        </div>
+		
+        <!--遮罩pop start-->
+        <div id="BgDiv">
+        </div>
+        <div class="layer-bg-full">
+            <div id="ptime" class="popdiv pop_time" style="display:none">
+                <div class="dbg">
+                    <div class="pmain">
+                        <div class="ptit">
+                            <div class="ptname">
+                                时段选择
+                            </div>
+                            <div class="ptclose">
+                                <a href="javascript:;" onClick="closeDiv('ptime')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a>
+                            </div>
+                        </div>
+                        <div class="dcon">
+                            <div class="HourBox" style="display:block;">
+                                <div class="HourBoxMain clearfix">
+                                    <div class="HBMtype">
+                                        <label for="week">
+                                            <input type="radio" id="week" name="hbmtype" value="">整周展示
+                                        </label>
+                                        <label for="workday">
+                                            <input type="radio" name="hbmtype" id="workday" value="">工作日全天展示
+                                        </label>
+                                        <label for="weekend">
+                                            <input type="radio" name="hbmtype" id="weekend" value="">休息日全天展示
+                                        </label>
+                                    </div>
+                                    <div class="HBMzt">
+                                        <span class="ztf"></span>&nbsp;投放时间段<span class="ztt"></span>&nbsp;暂停时间段
+                                    </div>
+                                </div>
+                                <div class="dtli">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="timetab">
+                                        <tr>
+                                            <th>
+                                                &nbsp;
+                                            </th>
+                                            <th>
+                                                日期
+                                            </th>
+                                            <th>
+                                                时间段
+                                            </th>
+                                            <!--<th class="tac">复制到</th>-->
+                                            <th class="tac">
+                                                00:00 - 05:00
+                                            </th>
+                                            <th class="tac">
+                                                06:00 - 11:00
+                                            </th>
+                                            <th class="tac">
+                                                12:00 - 17:00
+                                            </th>
+                                            <th class="tac">
+                                                18:00 - 23:00
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td class="select_week_time">
+                                                <span>0<input id="time_0" type="checkbox"></span><span>1<input id="time_1" type="checkbox"></span><span>2<input id="time_2" type="checkbox"></span><span>3<input id="time_3" type="checkbox"></span><span>4<input id="time_4" type="checkbox"></span><span>5<input id="time_5" type="checkbox"></span>
+                                            </td>
+                                            <td class="select_week_time">
+                                                <span>6<input id="time_6" type="checkbox"></span><span>7<input id="time_7" type="checkbox"></span><span>8<input id="time_8" type="checkbox"></span><span>9<input id="time_9" type="checkbox"></span><span>10<input id="time_10" type="checkbox"></span><span>11<input id="time_11" type="checkbox"></span>
+                                            </td>
+                                            <td class="select_week_time">
+                                                <span>12<input id="time_12" type="checkbox"></span><span>13<input id="time_13" type="checkbox"></span><span>14<input id="time_14" type="checkbox"></span><span>15<input id="time_15" type="checkbox"></span><span>16<input id="time_16" type="checkbox"></span><span>17<input id="time_17" type="checkbox"></span>
+                                            </td>
+                                            <td class="select_week_time">
+                                                <span>18<input id="time_18" type="checkbox"></span><span>19<input id="time_19" type="checkbox"></span><span>20<input id="time_20" type="checkbox"></span><span>21<input id="time_21" type="checkbox"></span><span>22<input id="time_22" type="checkbox"></span><span>23<input id="time_23" type="checkbox"></span>
+                                            </td>
+                                        </tr>
+                                        <tr date="1">
+                                            <td>
+                                                <input name="" class="selectDay" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期一
+                                            </td>
+                                            <td>
+                                                0:00-24:00
+                                            </td>
+                                            <!--
+                                            <td class="tac">
+                                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                                            <a rel="weekDay" href="javascript:void(0)">休息日</a>
+                                            </td>
+                                            -->
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                        <tr date=2>
+                                            <td>
+                                                <input name="" class="selectDay" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期二
+                                            </td>
+                                            <td>
+                                                00:00-24:00
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                        <tr date=3>
+                                            <td>
+                                                <input name="" class="selectDay" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期三
+                                            </td>
+                                            <td>
+                                                0:00-24:00
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                        <tr date=4>
+                                            <td>
+                                                <input name="" class="selectDay" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期四
+                                            </td>
+                                            <td>
+                                                0:00-24:00
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                        <tr date=5>
+                                            <td>
+                                                <input class="selectDay" name="" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期五
+                                            </td>
+                                            <td>
+                                                0:00-24:00
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                        <tr date="6">
+                                            <td>
+                                                <input class="selectDay" name="" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期六
+                                            </td>
+                                            <td>
+                                                0:00-24:00
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                        <tr date="7">
+                                            <td>
+                                                <input class="selectDay" name="" type="checkbox" value="" />
+                                            </td>
+                                            <td>
+                                                星期日
+                                            </td>
+                                            <td>
+                                                0:00-24:00
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_0">0</span>
+                                                <span class="poinTime time_1">1</span>
+                                                <span class="poinTime time_2">2</span>
+                                                <span class="poinTime time_3">3</span>
+                                                <span class="poinTime time_4">4</span>
+                                                <span class="poinTime time_5">5</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_6">6</span>
+                                                <span class="poinTime time_7">7</span>
+                                                <span class="poinTime time_8">8</span>
+                                                <span class="poinTime time_9">9</span>
+                                                <span class="poinTime time_10">10</span>
+                                                <span class="poinTime time_11">11</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_12">12</span>
+                                                <span class="poinTime time_13">13</span>
+                                                <span class="poinTime time_14">14</span>
+                                                <span class="poinTime time_15">15</span>
+                                                <span class="poinTime time_16">16</span>
+                                                <span class="poinTime time_17">17</span>
+                                            </td>
+                                            <td>
+                                                <span class="poinTime time_18">18</span>
+                                                <span class="poinTime time_19">19</span>
+                                                <span class="poinTime time_20">20</span>
+                                                <span class="poinTime time_21">21</span>
+                                                <span class="poinTime time_22">22</span>
+                                                <span class="poinTime time_23">23</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="dpbtn">
+                                    <div class="fr">
+                                        <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" id="checkedDate" value="确定" /></span><span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('ptime')"/></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--遮罩pop end-->
+    </body>
+    <script>
+			$(function(){
+				if($("#start_date").val()=="开始日期"){
+					$("#start_date").val("{date("Y-m-d")}");
+				}
+				if($("#ad_date").val()=="投放日期"){
+					$("#ad_date").val("{date("Y-m-d")}");
+				}
+				$("#ad_date").datepicker({ dateFormat: "yy-mm-dd"}); 
+				
+				$("#start_date").datepicker({ dateFormat: "yy-mm-dd" ,minDate:-1}); 
+				$("#end_date").datepicker({ dateFormat: "yy-mm-dd",minDate:new Date(Date.parse($("#start_date").val())) }); 
+			});
+                							
+			$(document).ready(function(){
+                $("#budget_b").click(function(){
+                        $("#_IDbudget").show();
+                    });
+                $("#budget_a").click(function(){
+                        $("#_IDbudget").hide();
+                    });
+                    if($("#budget_b").prop("checked")){
+                        $("#_IDbudget").show();
+                    };
+            $("#budget").change(function(){
+                $("#budget_b").val($("#budget").val());
+            });
+            $("#week").click(function(){
+                $("span.poinTime").addClass("ptsel");
+            });
+            $("#workday").click(function(){
+                $("span.poinTime").addClass("ptsel");
+                $("tr[date=6] span.poinTime").removeClass("ptsel");
+                $("tr[date=7] span.poinTime").removeClass("ptsel");
+            });
+            $("#weekend").click(function(){
+                $("span.poinTime").removeClass("ptsel");
+                $("tr[date=6] span.poinTime").addClass("ptsel");
+                $("tr[date=7] span.poinTime").addClass("ptsel");
+            });
+            $("#checkedDate").click(function(){
+                var intervals="1:";
+                $("tr[date=1] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                intervals+=";2:";
+                $("tr[date=2] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                intervals+=";3:";
+                $("tr[date=3] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                intervals+=";4:";
+                $("tr[date=4] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                intervals+=";5:";
+                $("tr[date=5] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                intervals+=";6:";
+                $("tr[date=6] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                intervals+=";7:";
+                $("tr[date=7] span.ptsel").each(function(i,item){
+                    intervals+=$(item).html()+",";
+                });
+                $("#intervals").val(intervals);
+                closeDiv('ptime');
+        
+                });
+            if($("#intervals").val()!=""){
+                var intervals=$("#intervals").val().split(";");
+                for(var i in intervals){
+                    var t = intervals[i].split(":");
+                    var d = t[0];
+                    var x = t[1].split(",");
+                    $("tr[date="+d+"] span.poinTime").each(function(i,item){
+                            var html = $(this).html();
+                            if(x.indexOf(html)!=-1){
+                            $(this).addClass("ptsel");
+                            }
+                   });
+                }
+            }
+            $("td.select_week_time span input").click(function(){
+                var i_id=$(this).attr("id");
+                if($(this).prop("checked")){
+                    $("."+i_id).addClass("ptsel");
+                }else{
+                    $("."+i_id).removeClass("ptsel");
+                }
+            });
+            $(".selectDay").click(function(){
+                    if($(this).prop("checked")){
+                        $(this).parents("tr").find("span.poinTime").addClass("ptsel");
+                    }else{
+                        $(this).parents("tr").find("span.poinTime").removeClass("ptsel");
+                    }
+                });
+            $("span.poinTime").click(function(){
+                if($(this).hasClass("ptsel")){
+                $(this).removeClass("ptsel");
+                }else{
+                $(this).addClass("ptsel");
+                }
+            });
+        });
+            
+    </script>
+</html>

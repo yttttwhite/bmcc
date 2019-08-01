@@ -1,0 +1,94 @@
+<?php
+$config = array();
+$config['config']['delete'] = 1;    //0:用户可以删除自己的广告;    1：只有管理员可以删除
+//数据库配置
+//ADP
+$config['db']['1']['dbhost']    = '192.168.6.13';
+$config['db']['1']['dbuser']    = 'bc';
+$config['db']['1']['dbpw']      = 'bc!@#Q4';
+$config['db']['1']['dbcharset'] = 'utf8';
+$config['db']['1']['pconnect']  = '0';
+$config['db']['1']['dbname']    = 'baichuandb';
+$config['db']['1']['tablepre']  = 'adp_';
+//rmc
+$config['db']['2']['dbhost']    = '192.168.6.13';
+$config['db']['2']['dbuser']    = 'bc';
+$config['db']['2']['dbpw']      = 'bc!@#Q4';
+$config['db']['2']['dbcharset'] = 'utf8';
+$config['db']['2']['pconnect']  = '0';
+$config['db']['2']['dbname']    = 'rmc';
+$config['db']['2']['tablepre']  = 'rmc_';
+//137
+$config['db']['3']['dbhost']    = '115.239.138.137:33966';
+$config['db']['3']['dbuser']    = 'root';
+$config['db']['3']['dbpw']      = 'bcdata@2701';
+$config['db']['3']['dbcharset'] = 'utf8';
+$config['db']['3']['pconnect']  = '0';
+$config['db']['3']['dbname']    = 'push_flow_monitor';
+$config['db']['3']['tablepre']  = 'BC_';
+//数据库映射关系
+$config['db']['map']=array(
+                                'user_tag'=>2,
+                                'interest'=>2,
+                                'interest_report'=>2,
+                                'interest_summary'=>2,
+                                'interest_summary_by_date'=>2,
+    
+                                'creative'=>3,
+                                'push'=>3,
+                                'pushed'=>3,
+                                'pushinfo'=>3,
+                                'redirection'=>3,
+                                'host'=>3,
+                                'log'=>3
+                            );
+//功能配置
+$version = array("1"=>"operator", "2"=>"dsp");
+$config['version']['adp']['group_sp'] = 1;    //广告组局点控制功能
+$config['version']['adp']['plan_redirect'] = 1;    //开放背投，跳转广告
+$config['version']['adp']['stuff_text'] = 1;    //开放文本素材
+$config['version']['dc']['manage'] = 1;    //对admin用户放开数据中心管理
+$config['version']['dpc']['manage'] = 1;    //对admin用户放开dpc管理
+$config['version']['dsp']['manage'] = 0;    //DSP管理
+$config['version']['dsp']['media'] = 0;    //DSP媒体管理
+$config['version']['dsp']['people'] = 0;    //人群管理
+$config['version']['stuff']['shenhe'] = 1;    //素材需要审核
+$config['version']['crm']['display'] = 0;
+$config['version']['version'] = $version[1];    //系统版本
+
+$config['role'] = array(
+    10000   =>array('name'=>"系统",       'auth_list'=>'system,admin,ad,dpc,financial,stat,user,media,shenhe,dc'),
+    1000    =>array('name'=>"管理员",      'auth_list'=>'admin,ad,dpc,financial,stat,dc,shenhe'),
+    11      =>array('name'=>"客服",       'auth_list'=>'ad,dpc,financial,stat,dc'),
+    12      =>array('name'=>"客户经理",     'auth_list'=>'stat,dc'),
+    13      =>array('name'=>"广告商",      'auth_list'=>'ad'),
+    14      =>array('name'=>"运维",       'auth_list'=>'it'),
+);
+$config['auth'] = array(
+    'ad'        =>'广告管理',
+    'dpc'       =>'DPC管理',
+    'financial' =>'财务管理',
+    'dc'        =>'数据中心',
+    'stat'      =>'数据统计',
+    'user'      =>'用户管理',
+    'shenhe'    =>'审核',
+    'media'     =>'媒体管理',
+    'audient'   =>'人群管理',
+    'dps'       =>'DSP管理',
+    'system'    =>'系统',
+);
+$config['log'] = false; //系统日志
+$config['logo'] = array(
+    'default' => "/assets_admin/images/logo/logo_dianxin.png"
+);
+$config['copyright'] = array(
+    'default'=>"2015 &copy; 精准广告营销平台"
+);
+$config['theme'] = array(
+    'default'   => "default",
+    'huayang'   => "theme_huayanglianzhong",
+    'huayanglianzhong'   => "theme_huayanglianzhong",
+//  'admin'     => "theme_huayanglianzhong",
+);
+$config['mongo'] = array('domain'=>'zhejiang_telecom');
+return $config;

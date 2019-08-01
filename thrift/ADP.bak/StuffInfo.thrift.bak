@@ -1,0 +1,86 @@
+namespace java com.adp.java
+
+include "Shared.thrift"
+
+struct StuffInfo{
+    1:        i32               stuff_id,        #素材id
+    2:        string            name,            #素材名称
+    3:        i32               uid,             #创建者id
+    4:        i32               adid,            #广告id
+    5:        i32               width,           #素材宽度
+    6:        i32               height,          #素材高度
+    7:        Shared.StuffType  type=Shared.StuffType.AD_IMAGE,            #素材类型：动画，图片，橱窗，文字链
+    8:        string            title,           #素材标题
+    9:        string            desc,            #素材描述
+    10:       string            addr,            #物料地址
+    11:       string            thumb,           #物料缩略图地址
+    12:       string            crop,            #物料剪裁地址
+    13:       string            landing_page,    #landing page 地址
+    14:       Shared.PlanStatus enabled=Shared.PlanStatus.RUNNING,         #物料状态
+    15:       i32               ctime,           #创建时间
+    16:       i32               mtime,           #修改时间
+    17:       i32               size             #素材大小
+    18:       string            media_name,       #媒体名称
+    19: i32 version,
+    20: i32 verified_or_not,
+    21: i32 group_id,
+    22: i32 plan_id,
+    23: string group_name,
+    24: string plan_name,
+    25: string text,
+    26: map<i32, i32> audits,
+    27: i32 landing_rule, # landing_page对应的rule
+    28: map<i32, map<string, string>> exchages_audit, # { 1 => { status: 1, message: waiting }, 2 => { status: refuse, message: picerror } }
+    29: i32 landing_page_reachable,
+    30: string last_operator="Unknown",
+    31: string icon_addr,        #图标地址
+    32: i32 icon_width,          #图标宽度
+    33: i32 icon_height,         #图标高度
+    34: string icon_mime_type,   #图标mime类型
+    35: string mime_type,        #素材mime类型
+    36: i32 duration,            #视频时长
+    37: i32 bitrate,             #视频比特率
+    38: i32 frame_rate,          #视频每秒帧数
+    39: string ftp_addr,	 #亚信接口，ftp地址
+    40: i32 app_type,		 #应用类型： 0为 Android，1为 ios
+    41: string packagename,	 #应用包名称
+    42: string appname,		 #应用名称
+    43: string app_intro_url,	 #当app_type=0时必填,Android应用介绍页面
+    44: string app_size,	 #应用大小
+    45: string app_ver,	 	 #应用版本
+    46: string itunesId,	 #当app_type=1时必填，iOS应用 App Store ID
+    47: string app_id,	  	 #当app_type=0时必填,Android应用在应用商店上架的appid
+    48: i32 ad_action,		 #广告交互类型，1-打开网页 2-下载
+    49: string deeplinkurl,      #应用直达URL
+    50: i32 logo_width,	#logo宽度
+    51:	i32 logo_height,	#logo高度
+    52:	string logo_addr,    #logo地址
+}
+struct StuffResponse {
+    1: i32 totalSize,
+    2: i32 currentSize,
+    3: i32 pageSize,
+    4: i32 pageNumber,
+    5: list<StuffInfo> data
+}
+service StuffInfoService
+{
+    #返回gid下的所有状态为st的广告 uid为空时返回所有广告主的
+    StuffResponse getStuffByStatus(1:list<i32> gid, 2:Shared.AuditStatus st, 3:i32 pageSize, 4:i32 pageNumber); 
+    StuffResponse getStuffByStatusForSp(1:list<i32> gid, 2:Shared.AuditStatus st, 3:i32 pageSize, 4:i32 pageNumber, 5:i32 sp_id); 
+    
+    //添加素材
+    i32 addStuffInfo(1: StuffInfo stuffInfo);
+    
+    //根据素材id删除素材
+    i32 delStuffById(1: i32 stuff_id);
+    
+    //更新素材
+    i32 updateStuffInfo(1: StuffInfo stuff);
+    
+    //根据广告id获取素材信息
+    list<StuffInfo> getStuffsByAdid(1: i32 adid);
+    
+    i32 updateVerifiedStatus(1: i32 stuff_id, 2: i32 verified_status, 3: string operator);
+    i32 updateVerifiedStatusForSp(1: i32 stuff_id, 2:i32 sp_id, 3: i32 verified_status);
+}

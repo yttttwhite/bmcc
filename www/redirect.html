@@ -1,0 +1,37 @@
+<html>
+<head>
+<style>
+body *{
+display:none;
+}
+</style>
+<script src="https://s22.cnzz.com/z_stat.php?id=1000183972&web_id=1000048590" language="JavaScript"></script>
+<script>
+function getQueryParams(qs) {
+	qs = qs.split("+").join(" ");
+
+	var params = {}, tokens,
+		re = /[?&]?([^=]+)=([^&]*)/g;
+
+	while (tokens = re.exec(qs)) {
+		params[decodeURIComponent(tokens[1])]
+			= decodeURIComponent(tokens[2]);
+	}
+
+	return params;
+}
+
+var query = getQueryParams(document.location.search);
+if(query.url){
+	if(query.url.indexOf("https")!==-1){
+	window.location=query.url;
+	}else{
+	window.location="https://"+query.url;
+	}
+}
+</script>
+</head>
+<body>
+</body>
+</html>
+

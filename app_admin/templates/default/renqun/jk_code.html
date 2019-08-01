@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+<div class="main">
+  <div class="side">
+        <div class="leftNav">
+      <ul>
+        <li><a href="/baichuan_advertisement_manage/audient">监控管理</a></li>
+        <li class="nobotbor"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a></li>
+      </ul>
+    </div>
+  </div>
+
+<script type="text/javascript"> 
+function copyUrl2() 
+{ 
+copyToClipboard(document.getElementById("code").value);
+alert("已复制好，可贴粘。"); 
+} 
+function copyToClipboard(txt) {  
+    if(window.clipboardData) {  
+        window.clipboardData.clearData();  
+        window.clipboardData.setData("Text", txt);  
+    } else if(navigator.userAgent.indexOf("Opera") != -1) {  
+        window.location = txt;  
+    } else if (window.netscape) {  
+        try {  
+            netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");  
+        } catch (e) {  
+            alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");  
+        }  
+    var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);  
+    if (!clip)  
+        return;  
+    var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);  
+    if (!trans)  
+        return;  
+    trans.addDataFlavor('text/unicode');  
+    var str = new Object();  
+    var len = new Object();  
+    var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);  
+    var copytext = txt;  
+    str.data = copytext;  
+    trans.setTransferData("text/unicode",str,copytext.length*2);  
+    var clipid = Components.interfaces.nsIClipboard;  
+    if (!clip)  
+        return false;  
+    clip.setData(trans,null,clipid.kGlobalClipboard);  
+    alert("复制成功")  
+    }  
+}  
+</script> 
+  
+  <!--mcon-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a>&nbsp;&gt;&nbsp;<a href="/baichuan_advertisement_manage/audient">监控管理</a>&nbsp;&gt;&nbsp;新增</div>
+    
+    <h1 class="mtit">获取代码</h1>
+    
+    <div class="comForm clear">
+      <div><strong  class="fs14">访问分析代码</strong>（请将代码添加至网站全部页面的&lt;body&gt;标签）</div>
+      <div class="mt10"><textarea class="txar txarCode" name="" cols="" rows="">{$code}</textarea></div>
+      <!--btn-->
+      <div>
+        <span class="sbtnb mt20">
+          <input name="" type="button" class="ibtnb" value="复制代码" onclick="copyUrl2()" id="code" />
+        </span>
+      </div>
+    </div>
+    
+    
+    
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+
+{part "/main.main.footer"}
+
+</body>
+</html>

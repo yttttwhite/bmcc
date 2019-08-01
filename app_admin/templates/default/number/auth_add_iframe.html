@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body class="w-auto">
+        <div class="container-content p-0 mt-20">
+            <div class="panel panel-white" style="margin:0;">
+                <div class="panel-body">
+                    <form method="post" action="{$url['formAction']}">
+                        <div id="panel_stuff" class="tab-pane fade  in  active">
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-150 control-label text-34" for="form-field-1">被授权人：</label>
+									<div class="col-sm-8">
+										<input class="form-control" type="text" name="userName" value="{$user->user_name}" readonly="readonly">
+										<input class="form-control" type="text" name="userId" value="{$user->uid}" style="display:none;" readonly="readonly">
+									</div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-150 control-label text-34" for="form-field-1">选择授权号码库：</label>
+                                    <div class="col-sm-8">
+                                    	<select class="form-control" name="group_id">
+                                    		{foreach($groupList as $group)}
+	                                    		<option value="{$group['id']}">{$group['name']}</option>
+											{/foreach}
+                                    	</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                	<label class="col-sm-2 w-150 control-label text-34" for="form-field-1"></label>
+                                	<div class="col-sm-8">
+                                    	<button type="submit" name="submit" class="btn btn-success btn-squared btn-sm w-100 fr">提交</button>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>

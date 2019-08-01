@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta https-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/material_List.css" />
+    <title>素材管理</title>
+    <style type="text/css">
+        .New {
+            width: 160px;height: 38px;display: inline-block;background: #12c043;line-height: 38px;margin-top: 8px;
+            margin-left: 15px;
+        }
+        .New a {
+            color: #fff;display: inline-block;width: 160px;height: 38px;text-align: center;line-height: 38px;font-size: 13px;font-weight: bold;
+        }
+        .New a:hover {
+            color: #fff;
+        }
+        .top_nav {
+            width: 1040px;height: 38px;border: #dddddd;background: #eeeeee;display: inline-block;margin-left: 10px;margin-top: 8px;text-indent: 1.5em;color: #337ab7;
+            line-height: 45px;cursor: pointer;position: relative;top: 3px;
+        }
+        /*搜索 start*/
+        .search {
+            width: 888px;height: 45px;border: 1px solid #e6e6e6;
+            margin-left: 189px;
+            cursor: pointer;
+            margin-top:10px;
+        }
+        .search_1,.search_2,.search_3 {
+            width: 218px;height: 32px;display: inline-block;line-height: 45px;margin-top: 7.5px;
+            margin-left: 5px;outline: none;border: 1px solid #1387f4;text-indent: 1em;
+            margin-bottom: 10px;
+        }
+        /*搜索 end*/
+        .material {
+            width: 1041px;
+            /*border: 1px solid red;*/
+            margin-left: 190px;margin-top: 10px;
+        }
+        table th,tr,td {
+            text-align: center;text-align: center;
+        }
+    </style>
+    <head>
+        {part "/main.main.header"}
+    </head>
+<body>
+{part "/main.main.nav.ad"}
+<div class="New">
+    <a href="/baichuan_advertisement_manage/material.material.new">+ 新建素材</a>
+</div>
+<div class="top_nav">
+    素材<span style="color: #111;font-size: 12px;">>></span>素材管理列表
+</div>
+<!--搜索 start-->
+<div class="search">
+    <input  class="search_1" type="text"  placeholder="素材名称">
+    <input  class="search_2" type="text"  placeholder="审核状态">
+    <input  class="search_3" type="text"  placeholder="创建者">
+    <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询" style="display: inline-block;margin-right: 15px;">
+    <a href="/baichuan_advertisement_manage/material.material.Audited"><span style="" class="glyphicon glyphicon-share-alt" aria-hidden="true">素材审核列表</span></a>
+</div>
+<!--搜索 end-->
+<div class="material">
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>素材名称</th>
+        <th>创建者</th>
+        <th>素材尺寸</th>
+        <th>审核状态</th>
+        <th>审核人</th>
+        <!--<th>审核管理</th>-->
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>测试素材</td>
+        <td>admin</td>
+        <td>100*100</td>
+        <td>通过</td>
+        <td>admin</td>
+        <!--<td>-->
+            <!--<a href="">通过</a>-->
+            <!--<a href="">拒绝</a>-->
+        <!--</td>-->
+        <td>
+            <a href="">删除</a>
+            <a href="/baichuan_advertisement_manage/material.material.Edit">编辑</a>
+        </td>
+    </tr>
+    <tr>
+        <td>测试素材</td>
+        <td>admin</td>
+        <td>100*100</td>
+        <td>通过</td>
+        <td>admin</td>
+        <!--<td>-->
+            <!--<a href="">通过</a>-->
+            <!--<a href="">拒绝</a>-->
+        <!--</td>-->
+        <td>
+            <a href="">删除</a>
+            <a href="/baichuan_advertisement_manage/material.material.Edit">编辑</a>
+        </td>
+    </tr>
+    <tr>
+        <td>测试素材</td>
+        <td>admin</td>
+        <td>100*100</td>
+        <td>通过</td>
+        <td>admin</td>
+        <!--<td>-->
+            <!--<a href="">通过</a>-->
+            <!--<a href="">拒绝</a>-->
+        <!--</td>-->
+        <td>
+            <a href="">删除</a>
+            <a href="/baichuan_advertisement_manage/material.material.Edit">编辑</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

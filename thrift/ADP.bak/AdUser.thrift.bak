@@ -1,0 +1,60 @@
+namespace java com.adp.java
+
+enum AccountStatus
+{
+    NORMAL=1,
+    FROZEN=2,
+    ALL = -1
+}
+
+struct AdUser
+{
+    1: i32 uid,
+    2: string user_name,
+    3: string passwd,
+    4: string cell_phone,
+    5: i32 role_id,
+    6: string address,
+    7: string tel,
+    8: string user_local,
+    9: double account,
+    10: string zip_code,
+    11: i32 colum1,
+    12: string colum2,
+    13: i32 reg_time,
+    14: string host,
+    15: AccountStatus account_status=AccountStatus.NORMAL,
+    16: i32 up_time,
+    17: i32 creator_id,
+    18: i32 type = 1, # 结算方式 0.admin 1.普通 2.CPM 3.CPC
+    19: double diffrate = 0, # 差价率
+    20: double supportfee = 0, # 技术支持费
+    21: double cpm_charge = 0, # 按CPM结算时每千次点击价格
+    22: double cpc_charge = 0 # 按CPC结算时每次点击价格
+    23: string webunion_org, #网盟组织
+    24: string webunion_text,#网盟展示文本
+    25: i32 webunion_switch, #是否使用网盟标志
+}
+
+service AdUserService
+{
+    //添加广告主
+    i32 addAdUser(1: AdUser adUser);
+    
+    //更新广告主信息
+    i32 updateAdUserInfo(1: AdUser adUser);
+    
+    //根据广告主id删除广告主
+    i32 delAdUserById(1: i32 uid);
+    
+    //根据广告主id获取广告主 信息
+    AdUser getAdUserById(1: i32 uid);
+    
+    //根据广告主id更新广告主状态
+    i32 updateAdUserStatus(1: i32 uid, 2: AccountStatus status);    
+    
+    //获取当前登录用户添加的所有广告主
+    list<AdUser> getAdUsersByCid(1: i32 creator_id, 2: AccountStatus account_status);
+    
+    AdUser getAdUserByName(1: string user_name);
+}

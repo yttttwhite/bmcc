@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+{part "/main.main.header"}
+<style>
+#chartSummary .c3-line-data2 {
+  	stroke-width: 2px;
+}
+</style>
+</head>
+<body>
+	{part "/main.main.nav.ad"}
+	<div class="container-content" style="background: #F6F5F7;">
+		<div class="contianer-left"></div>
+		<div class="content" style="margin: auto;">
+			<div class="table-container">
+					<table class="table table-striped table-hover table-bordered table-responsive">
+						<thead>
+							<tr>
+								<th width="40">ID</th>
+								<th width="80">查询名称</th>
+								<th width="80">类别</th>
+								<th width="80">用户数量</th>
+								<th width="70">当前状态</th>
+								<th width="240">提交时间</th>
+								<th width="90">完成时间</th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach $queryList as $query}
+								<tr>
+									<td>{$query['id']}</td>
+									<td><a href="bigdata.main.queryDetail?qid={$query['id']}">{$query['query_name']}</a></td>
+									<td>{$typeInfo[$query['type']]}</td>
+									<td>{if(strlen($query['count'])>0)}$query['count']{else}-{/if}</td>
+									<td>{$statusInfo[$query['query_status']]}</td>
+									<td>{date('Y-m-d H:i:s',$query['add_time'])}</td>
+									<td>{if(strlen($query['finish_time'])>0)}{date('Y-m-d H:i:s',$query['finish_time'])}{else}处理中{/if}</td>
+								</tr>
+							{/foreach}
+						</tbody>
+						<tfoot>
+						</tfoot>
+					</table>
+				</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+</body>
+</html>

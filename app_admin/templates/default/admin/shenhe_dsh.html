@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+
+<body>
+{part "/main.main.nav.admin"}
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  {part ("/admin.main.nav.stuff")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+      <div class="toolbar-bc fl mb-10">
+        <div class="fl sub-title  sc-title">
+            <a href="javascript: void(0)">广告审核 </a>
+            <i class="fa fa-angle-double-right" ></i>
+            <a href="/baichuan_advertisement_manage/admin.shenhe.stuff??nav=4">广告素材审核</a>
+        </div>
+    </div>
+      <input name="type" id="status" type="hidden" value="{$_GET['type']}">
+    <div class="clear"></div>
+    <!--toolbar start-->
+    {if(user_api::auth("shenhe"))}
+    <div class="toolbar-45">
+       <span class="sbtnb"><a class="ibtnb" >通过</a></span>
+       <span class="sbtng ml10"><a class="ibtng">拒绝</a></span>
+      <div class="clear"></div>
+    </div>
+    {/if}
+    <div style="overflow-x: auto;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab" >
+      <thead>
+      <tr>
+      	{if(user_api::auth("shenhe"))}
+        <th><input class="checkall" type="checkbox"/></th>
+        {/if}
+        <th>素材类型</th>
+        <th>素材</th>
+        <th>广告主</th>
+        <th>广告计划<br>广告组</th>
+        <th>广告名称</th>
+        <th>宽*高</th>
+        <th>审核状态</th>
+		<th>最后修改</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+{foreach $stuffs as $_stuff}
+      <tr stuffid="{$_stuff->stuff_id}", uid="{$_stuff->uid}" >
+      	{if(user_api::auth("shenhe"))}
+        <td><input class="stuff_ids" type="checkbox" value="{$_stuff->stuff_id}" /></td>
+        {/if}
+		<td>{$typeList[$_stuff->type]}</td>
+		<td>
+			{if $_stuff->type==2}
+			<embed src="{$_stuff->addr}" width="{$_stuff->width}" height="{$_stuff->height}" style="max-width:110px;max-height:80px"></embed>
+			{elseif $_stuff->type==1}
+			<a href="{$_stuff->addr}" target="_blank"><img class="addr" style="max-width:110px;max-height:80px" src="{$_stuff->addr}" /></a>
+			{else}
+			<a href="{$ad->stuff->addr}" target="_blank"><img class="addr" style="max-width:110px;max-height:80px" src="{$ad->stuff->addr}" /></a>
+			{/if}
+		</td>
+		<td class="tac">
+			<a href="admin.user.edit.{$_stuff->uid}" target="_blank">
+			{$adSopnsorArray[$_stuff->uid]}
+			</a>
+			<br>
+			<span style="color:#666666;">{$adSopnsorList[$_stuff->uid]->host}</span>
+		</td>
+        <td style="max-width: 120px;word-break: break-all;word-break: break-word;">
+        	<a href="ad.plan.list.{$_stuff->plan_id}" target="_blank"> {$_stuff->plan_name} </a>
+          <hr style="margin: 4px;border-top: 1px solid #333333;">     
+        	<a href="ad.group.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank"> {$_stuff->group_name} </a>
+        </td>
+
+        <td class="textflow" style="max-width: 110px;word-break: break-all;word-break: break-word;" title="{$_stuff->adName}">
+        	<a href="ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank">
+        	{$_stuff->adName}
+        	</a>
+        </td>
+        <td class="tac">{$_stuff->width}*{$_stuff->height}</td>
+        <td>{if $_stuff->verified_or_not==1}待审{elseif $_stuff->verified_or_not==2}通过{elseif $_stuff->verified_or_not==3}未通过{/if}</td>
+		<td>{$_stuff->last_operator}</td>
+      	<td>
+      		<a href="ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}?nav=4" target="_blank">修改</a>
+      		{if(user_api::auth("shenhe"))}
+      			{if ($currentStatus == 1 or $currentStatus == 3) }
+      				<a href="javascript:void(0)" onclick="setStatusById(2, this)">通过</a>
+      			{/if}
+      			{if ($currentStatus == 1 or $currentStatus == 2) }
+      				<a href="javascript:void(0)" onclick="setStatusById(3, this)">拒绝</a>
+      			{/if}
+      		{/if}
+            <a onclick='showWindow("/admin.shenhe.StuffDetail?stuff_id={$_stuff->stuff_id}&type={$currentStatus}")'>
+                查看详情
+            </a>
+      	</td>
+      </tr>
+{/foreach}
+    </tbody>
+    </table>
+    </div>
+		{$pager|html}
+
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+{part "/main.main.footer"}
+<script type="text/javascript">
+
+
+    $(".ibtnb").click(function(){
+      var aList = getChecked();
+      if($.isEmptyObject(aList)) return;
+      ibtnb(aList);
+    });
+    $(".ibtng").click(function(){
+      var aList = getChecked();
+      if($.isEmptyObject(aList)) return;
+      ibtng(aList);
+    });
+
+
+
+    $(".checkall").change(function(){
+      var ck=$(this).prop("checked");
+      $(this).parents("table").find("input:checkbox").prop("checked",ck);
+    });
+    
+    function genSet(type, checke_list){
+        var currentStatus = $("#status").val();
+        $.ajax({
+          type: "POST", url: "/admin.shenhe.stuffSet?type="+type+"&currentStatus="+currentStatus,
+            data: { 'data_list':checke_list },
+            dataType:"json",
+          success: function(msg){ 
+            location.reload();
+          },
+          error: function(){
+            console.log('设置审核状态失败');
+              location.reload();
+          }
+        });
+    }
+
+    var ibtnb = function(aList){
+      layer.confirm('您确认【通过】素材审核？', function(){
+        genSet(2, aList);
+      });
+    } 
+    var ibtng = function(aList){
+      layer.confirm('您确认【拒绝】素材审核？', function(){
+        genSet(3, aList);
+      });
+    }
+
+    function setStatusById(type, obj){
+      var uid = $(obj).parents('tr').attr('uid');
+      var sid = $(obj).parents('tr').attr('stuffid');
+      uid = parseInt(uid);
+      var data_list = {  };
+      data_list[uid] = [];
+      data_list[uid].push(sid);
+      return type==2? ibtnb(data_list): ibtng(data_list);
+   }
+    function getChecked(){
+      var checked = $(".reportab input:checkbox:checked[value]");
+      if(checked.size()<=0){
+        alert("请选择");
+        return [];
+      }else{
+         var data_list = { };
+         var sid, uid, tr_tag;
+         checked.each(function(i,item){
+           tr_tag = $(this).parents('tr');
+           sid = tr_tag.attr('stuffid');
+           uid = tr_tag.attr('uid');
+           if(!data_list.hasOwnProperty(uid)){
+              data_list[uid] = [];
+           }
+           data_list[uid].push(sid);
+         });
+       }
+       return data_list;
+    }
+		$(".addr").mouseover(function(){
+			var d='<img src="'+$(this).attr("src")+'">';
+			var p=($(this).position());
+			$("#addr_pre").html(d).css({ left:p.left,top:p.top+$(this).height()+20}).show();
+		}).mouseout(function(){
+			$("#addr_pre").hide();
+		});
+
+    function showWindow(url){
+        var w = window.open(url,"_blank","toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=550, height=650");
+    }
+
+
+</script>
+</body>
+</html>

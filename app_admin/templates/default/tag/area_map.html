@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <style type="text/css">
+            body, html {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                font-family: "微软雅黑";
+            }
+            
+            #allmap {
+                width: 100%;
+                height: 500px;
+                overflow: hidden;
+            }
+            
+            #result {
+                width: 100%;
+                font-size: 12px;
+            }
+            
+            dl, dt, dd, ul, li {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            
+            p {
+                font-size: 12px;
+            }
+            
+            dt {
+                font-size: 14px;
+                font-family: "微软雅黑";
+                font-weight: bold;
+                border-bottom: 1px dotted #000;
+                padding: 5px 0 5px 5px;
+                margin: 5px 0;
+            }
+            
+            dd {
+                padding: 5px 0 0 5px;
+            }
+            
+            li {
+                line-height: 28px;
+            }
+        </style>
+        <script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/v5/js/jquery.min.js"></script>
+		
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=4BIXIpoEvRQXOqyb1G5XjNgb9unBWL8T"></script>
+        <!--加载鼠标绘制工具-->
+        <script type="text/javascript" src="https://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+        <link rel="stylesheet" href="https://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+        <!--加载检索信息窗口-->
+        <script type="text/javascript" src="https://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+        <link rel="stylesheet" href="https://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+        <title>鼠标绘制工具</title>
+    </head>
+    <body>
+        <div id="allmap" style="overflow:hidden;zoom:1;position:relative;">
+            <div id="map" style="height:100%;-webkit-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out;">
+            </div>
+        </div>
+        <div id="result">
+            <input type="button" value="获取绘制的覆盖物个数" onclick="alert(bmap.overlays.length)"/>
+			<input type="button" value="清除所有覆盖物" onclick="bmap.clearAll()"/>
+			<input type="button" value="打印全部" onclick="bmap.logAll()"/>
+			<div id="panelWrap" style="width:600px; height:480px;"></div>
+        </div>
+		<script type="text/javascript">
+			var bmap = {
+				status: false,
+				map: '',
+	            point: '',
+	            overlays: [],
+	            overlaysCache: [],
+	            myPolygon: '',
+	            myOverlay: [],
+	            drawingManager: '',
+	            styleOptions: {
+	                strokeColor: "red", //边线颜色。
+	                fillColor: "red", //填充颜色。当参数为空时，圆形将没有填充效果。
+	                strokeWeight: 3, //边线的宽度，以像素为单位。
+	                strokeOpacity: 0.8, //边线透明度，取值范围0 - 1。
+	                fillOpacity: 0.3, //填充的透明度，取值范围0 - 1。
+	                strokeStyle: 'solid' //边线的样式，solid或dashed。
+	            },
+				
+				init: function(){
+	                if (this.status) {
+	                    return;
+	                }else{
+						this.status = true;
+		                this.map 	= new BMap.Map('map');
+		                this.point 	= new BMap.Point(116.307852, 40.057031);
+		                var map 	= this.map;
+		                var styleOptions = this.styleOptions;
+		                map.centerAndZoom(this.point, 12);
+		                map.enableScrollWheelZoom();
+						
+						var baiduIpLocationUrl = 'https://api.map.baidu.com/location/ip?ak=4BIXIpoEvRQXOqyb1G5XjNgb9unBWL8T&coor=bd09ll&callback=?';
+						$.get(baiduIpLocationUrl,"",function(response){
+									if(response.content.point){
+										this.point = new BMap.Point(response.content.point.x, response.content.point.y);
+										map.centerAndZoom(this.point, 12);
+									}
+								},'json');
+						
+		                //实例化鼠标绘制工具
+		                this.drawingManager = new BMapLib.DrawingManager(map, {
+		                    isOpen: false, //是否开启绘制模式
+		                    enableDrawingTool: true, //是否显示工具栏
+		                    drawingToolOptions: {
+		                        anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+		                        offset: new BMap.Size(5, 5), //偏离值
+		                        scale: 0.8 //工具栏缩放比例
+		                    },
+		                    circleOptions: styleOptions, //圆的样式
+		                    polylineOptions: styleOptions, //线的样式
+		                    polygonOptions: styleOptions, //多边形的样式
+		                    rectangleOptions: styleOptions //矩形的样式
+		                });
+		                //添加鼠标绘制工具监听事件，用于获取绘制结果
+		                this.drawingManager.addEventListener('overlaycomplete', bmap.overlaycomplete);
+						
+		                /*加载一个已有的多边形*/
+		                if (this.myOverlay) {
+		                    this.loadMyOverlay();
+		                };
+					}
+	            },
+				
+				loadMyOverlay: function(){
+	                var map = this.map;
+	                this.clearAll();
+	                map.centerAndZoom(this.point, 12);
+	                myPolygon = new BMap.Polygon(this.myOverlay, this.styleOptions);
+	                this.myPolygon = myPolygon;
+	                try {
+	                    myPolygon.enableEditing();
+	                } catch (e) {
+						
+	                };
+	                map.addOverlay(myPolygon);
+					bmap.overlays.push(myPolygon);
+	            },
+				
+				clearAll: function(){
+	                var map = this.map;
+	                var overlays = this.overlays;
+	                for (var i = 0; i < overlays.length; i++) {
+						console.log(overlays[i]);
+	                    map.removeOverlay(overlays[i]);
+	                }
+	                this.overlays.length = 0
+	                map.removeOverlay(this.myPolygon);
+	                this.myPolygon = '';
+	            },
+				
+				logAll: function(){
+	                var map = this.map;
+	                var overlays = this.overlays;
+					console.log(overlays);
+	                for (var i = 0; i < overlays.length; i++) {
+						var fillColor = overlays[i].getFillColor();
+						if(fillColor.length>0){
+							if($.isFunction(overlays[i].getCenter)){
+								console.log('circle');
+							}else{
+								console.log('Polygon');
+							}
+						}else{
+							console.log('Line');
+						}
+	                }
+					console.log(map.getCenter());
+	            },
+				
+				showLatLon: function(a){
+	                var len = a.length;
+	                var s = '';
+	                var arr = [];
+	                for (var i = 0; i < len - 1; i++) {
+	                    arr.push([a[i].lng, a[i].lat]);
+	                    s += '<li>' + a[i].lng + ',' + a[i].lat + '<span class="red" title="删除" onclick="bmap.delPoint(' + i + ')">X</span></li>';
+	                }
+	                this.overlaysCache = arr;
+	                $("#panelWrap").html('<ul>' + s + '</ul>');
+	            },
+				
+				delPoint: function(i){
+	                if (this.overlaysCache.length <= 3) {
+	                    alert('不能再删除, 请保留3个以上的点.');
+	                    return;
+	                }
+	                this.overlaysCache.splice(i, 1);
+	                var a = this.overlaysCache;
+	                var newOverlay = [];
+	                for (var i in a) {
+	                    newOverlay.push(new BMap.Point(a[i][0], a[i][1]));
+	                }
+	                this.myOverlay = newOverlay;
+	                this.loadMyOverlay();
+	            },
+				
+				overlaycomplete: function(e){
+					console.log('overlaycomplete');
+	                bmap.overlays.push(e.overlay);
+	                //e.overlay.enableEditing();
+					
+					
+					var removeTheOverlay = function(e,ee,overlay){
+						this.map.removeOverlay(overlay);
+					}
+					
+					var editTheOverlay = function(e,ee,overlay){
+						overlay.enableEditing();
+					}
+					//创建右键菜单
+					var overlayMenu=new BMap.ContextMenu();
+					overlayMenu.addItem(new BMap.MenuItem('编辑',editTheOverlay.bind(e.overlay)));
+					overlayMenu.addItem(new BMap.MenuItem('删除',removeTheOverlay.bind(e.overlay)));
+					e.overlay.addContextMenu(overlayMenu);
+					
+	                e.overlay.addEventListener("dblclick", function(e){
+						e.currentTarget.disableEditing();
+						return;
+	                });
+	            },
+				
+				getOverLay: function(){
+	                var box = this.myPolygon ? this.myPolygon : this.overlays[this.overlays.length - 1];
+	                console.log(box.ia);
+	            },
+				
+	            getCount: function(){
+	                var n = 0;
+	                if (this.myPolygon) {
+	                    n++;
+	                };
+	                if (this.overlays) {
+	                    n = n + this.overlays.length;
+	                };
+	                console.log(n);
+	            }
+			}
+			
+			bmap.myOverlay = [new BMap.Point(116.256515, 39.995242), new BMap.Point(116.502579, 39.951893), new BMap.Point(116.256515, 39.866882)];
+			bmap.init();
+		</script>
+    </body>
+</html>

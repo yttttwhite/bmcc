@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body class="w-auto">
+	<div class="container-content p-0 mt-20">
+		<div class="panel panel-white" style="margin:0;">
+			<div class="panel-body">
+				<form  method="post" action="crm.consumer.addConsumer">
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-4">
+								<span class="input-icon">
+									<input type="text" placeholder="姓名" class="form-control" name="cid" value="{$consumer['id']}" style="display:none;">
+									<input type="text" placeholder="姓名" class="form-control" name="name" value="{$consumer['name']}">
+									<i class="fa fa-user"> </i>
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<span class="input-icon">
+									<input type="text" placeholder="手机" class="form-control" name="mobile" value="{$consumer['mobile']}">
+									<i class="fa fa-mobile-phone"> </i>
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<span class="input-icon">
+									<input type="text" placeholder="电话" class="form-control" name="phone" value="{$consumer['phone']}">
+									<i class="fa fa-phone"> </i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-30">
+						<div class="form-group">
+							<div class="col-sm-4">
+								<span class="input-icon">
+									<input type="text" placeholder="邮箱" class="form-control" name="email" value="{$consumer['email']}">
+									<i class="fa fa-envelope-o"> </i>
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<span class="input-icon">
+									<input type="text" placeholder="省份" class="form-control" name="state" value="{$consumer['state']}">
+									<i class="fa fa-globe"> </i>
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<span class="input-icon">
+									<input type="text" placeholder="城市" class="form-control" name="city" value="{$consumer['city']}">
+									<i class="fa fa-map-marker"> </i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="panel-heading border-light active"
+						style="border-top: 1px solid #EEEEEE; margin-top: 30px;">
+						<div class="panel-title">选择要添加到的分组：</div>
+					</div>
+					<div class="panel-body partition-white">
+						{foreach $groups as $group}
+						<label class="radio-inline groupRadio">
+							<input type="radio" class="square-red" name="groupRadio"
+								value="{$group['id']}">
+							<span>{$group['name']}</span>
+						</label>
+						{/foreach}
+					</div>
+					<div class="table-footer">
+						<button type="submit"
+							class="btn btn-100-30 btn-success btn-squared"
+							style="float: right; margin-right: 20px;">添加</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+		$(document).ready(function() {
+			$('input').iCheck({
+				checkboxClass : 'icheckbox_square-red',
+				radioClass : 'iradio_minimal',
+				increaseArea : '10%'
+			});
+		});
+	</script>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看素材详情[{$stuff['name']}]</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 素材信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">素材名称：{$stuff['name']}</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">素材类型：
+                 <td>{if $stuff['type']==1}
+                     图片
+                     {elseif($stuff['type']==2)}
+                     Flash
+                     {elseif($stuff['type']==3)}
+                     文字
+                     {elseif($stuff['type']==6)}
+                     视频
+                     {else}
+                     其它
+                     {/if}
+                 </td>
+            </span>
+        </div>
+        <div class="dvll">
+            <span class="scll">素材内容：
+                {if $stuff['type']==2}
+                  <embed src="{$stuff['addr']}" width="{$stuff['width']}" height="{$stuff['height']}" style="max-width:180px;max-height:80px"></embed>
+                  {elseif $stuff['type']==1}
+                  <a href="{$stuff['addr']}" target="_blank">
+                      <img class="addr" style="max-width:180px;max-height:80px" src="{$stuff['addr']}" />
+                  </a>
+                  {elseif($stuff['type']==6)}
+                  <video width="320" controls="controls">
+                      <source src="{$stuff['addr']}" type="application/octet-stream" />
+                      <source src="{$stuff['addr']}" type="video/x-ms-asf" />
+                      <source src="{$stuff['addr']}" type="video/x-mplayer2" />
+                      <source src="{$stuff['addr']}" type="video/mp4" />
+                      <source src="{$stuff['addr']}" type="video/ogg" />
+                      <source src="{$stuff['addr']}" type="video/webm" />
+                      <object data="{$stuff['addr']}" width="320">
+                          <embed src="{$stuff['addr']}" width="320"/>
+                      </object>
+                  </video>
+                  {elseif($stuff['type']==10)}
+                  <video width="320" controls="controls">
+                      <source src="{$stuff['addr']}" type="application/octet-stream" />
+                      <source src="{$stuff['addr']}" type="video/x-ms-asf" />
+                      <source src="{$stuff['addr']}" type="video/x-mplayer2" />
+                      <source src="{$stuff['addr']}" type="video/mp4" />
+                      <source src="{$stuff['addr']}" type="video/ogg" />
+                      <source src="{$stuff['addr']}" type="video/webm" />
+                      <object data="{$stuff['addr']}" width="320">
+                          <embed src="{$stuff['addr']}" width="320"/>
+                      </object>
+                  </video>
+                  {else}
+                  <textarea readonly style="width:200px;height:100px" name="text[{$stuff['adid']}]">{$_stuff['text']}</textarea>
+                  {/if}
+            </span>
+        </div>
+        <div class="dvll">
+            <span class="scll">宽*高：{$stuff['width']}*{$stuff['height']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">目的地址：{$stuff['landing_page']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">描述：{$stuff['description']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">创建者：{$adSopnsorArray[$stuff['uid']]}</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">更新时间：{date('Y-m-d H:i:s',$stuff['mtime'])}</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">哇棒审核结果：
+                {foreach $stuff_status as $status}
+                {if $status['identification'] =="WABANG" && $status['stuff_audit_status'] ==1}
+                  待审
+                  {elseif $status['identification'] =="WABANG" && $status['stuff_audit_status'] ==2}通过
+                  {elseif $status['identification'] =="WABANG" && $status['stuff_audit_status'] ==3}未通过
+                  {/if}
+                {/foreach}
+            </span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">灵集审核结果：
+                {foreach $stuff_status as $status}
+                {if $status['identification'] =="LINGJI" && $status['stuff_audit_status'] ==1}
+                  待审
+                  {elseif $status['identification'] =="LINGJI" && $status['stuff_audit_status'] ==2}通过
+                  {elseif $status['identification'] =="LINGJI" && $status['stuff_audit_status'] ==3}未通过
+                  {/if}
+                {/foreach}
+            </span>
+        </div>
+
+    </div>
+
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer" onclick="window.close();" >关闭</div>
+</body>
+</html>

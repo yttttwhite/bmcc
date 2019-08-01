@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+    <!--side-->
+    <div class="side">
+        {part ("/admin.push.left")} 
+    </div>
+    <!--mcon start-->
+    <div class="mcon">
+    	<div class="crumbLink"><a href="admin.complain.list">投诉账号推送记录查询</a></div>
+		<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+			<!--表头-->
+			<div class="panel-heading border-light panel-head-md">
+				<form id="queryFrom" action="{$url['date']}" method="get">
+					<div class="fl" style="position: relative; left: 10px;">
+						<input type="text" name="key" class="form-control input-small"  placeholder="账号" value="{$adkey}"/>
+						<input type="hidden" id="start_date" name="start_date" value="{if(strlen($BDate))}{$BDate}{else}{date('Y-m-d',time()-60*60*24*4)}{/if}">
+						<input type="hidden" id="end_date" name="end_date" value="{if(strlen($EDate))}{$EDate}{else}{date('Y-m-d',time()-60*60*24)}{/if}">
+					</div>
+					<div class="fl" style="position: relative; left: 10px;">
+                            <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+                            <a class="btn btn-squared btn-sm btn-default" onclick="setDate('{date('Y-m-d',time()-86400*4)}','{date('Y-m-d',time())}')">最近3天</a>
+                            <a class="btn btn-squared btn-sm btn-default" onclick="setDate('{date('Y-m-d',time()-86400*8)}','{date('Y-m-d',time()-86400)}')">最近7天</a>
+                    <script>
+                            function setDate(startDate,endData){
+                                $('#start_date').val(startDate);
+                                $('#end_date').val(endData);
+                                $('#queryFrom').submit();
+                            }
+                        </script>
+                    </div>
+					<span style="line-height:28px; position: relative; left: 20px;">共计：{$page['amount']}条</span>
+				</form>
+			</div>
+			<!--表头:结束-->
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+					<thead>
+						<tr style="background-color:#1478dc;font-color:#999999;">
+                            <th class="center">序号</th>
+                            <th class="center">AD账号</th>
+                            <th class="center">URL</th>
+                            <th class="center">目标IP</th>
+                            <th class="center">浏览器类型</th>
+                            <th class="center">Cookie</th>
+                            <th class="center">推送方</th>
+                            <th class="center">日期</th>
+                        </tr>
+					</thead>
+					<tbody>
+                        {foreach($stat as $host=>$amount)}
+                        <tr>
+                            <td style="text-align:left;">{$host+1}</td>
+                            <td style="text-align:left;">{$amount['Complaint_Ad']}</td>
+                            <td style="text-align:left;word-break:break-all;width:30%;">{$amount['Complaint_Url']}</td>
+                            <td style="text-align:left;">{$amount['Complaint_Ip']}</td>
+                            <td style="text-align:left;word-break:break-all;width:30%;">{$amount['Complaint_Ua']}</td>
+                            <td style="text-align:left;word-break:break-all;width:30%;">{$amount['Complaint_Cookie']}</td>
+                            <td style="text-align:left;">{$amount['domain']}</td>
+                            <td style="text-align:left;">{$amount['Complaint_Date']}</td>
+                        </tr>
+                        {/foreach}
+					</tbody>
+				</table>
+				
+	            <div class="text-right">
+	                <ul class="pagination margin-bottom-10">
+                            <li>
+                                <a href="{$page['url']}page=1">上一页</a>
+                            </li>
+                            <li><span>跳转到：
+                            <select id="selPage" style="border:0px;">
+                            	<option value="">请选择</option>
+                            	{for($i = 1; $i<=$page['count']; $i++)}
+	                            <option value="{$page['url']}page={$i}" {if($page['current']==$i)}selected{/if}>{$i}</option>
+	                            {/for}
+                            </select>页</span>
+                            </li>
+                            <li>
+                                <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+                            </li>
+                     </ul>
+	            </div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+jQuery(document).ready(function(){
+	$("#selPage").change(function(){
+		$newurl = $(this).val(); 
+	    if($newurl != "")
+	    {
+	    	window.location.href=$newurl;
+	    }
+	});
+});
+</script>
+{part "/main.main.footer"}
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.audient"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+<div class="main">
+  <div class="side">
+        <div class="leftNav">
+      <ul>
+        <li><a href="/baichuan_advertisement_manage/audient">监控管理</a></li>
+        <li class="nobotbor"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a>&nbsp;&gt;&nbsp;<a href="/baichuan_advertisement_manage/audient">监控管理</a>&nbsp;&gt;&nbsp;新增</div>
+    <form>
+    <div class="chartMenu">
+     <div class="fl"><span class="sbtnb">
+     <input href="/baichuan_advertisement_manage/audient.main.newwebsite" name="" type="button" class="ibtnb" value="新增" onclick="top.location='/baichuan_advertisement_manage/audient.main.newwebsite'"/></span></div>
+     <div class="fr">
+      <span class="cms">
+        <select class="formSel ml5">
+          <option>创建时间</option>
+          <option>昨天</option>
+          <option>前天</option>
+        </select>
+        </span>
+        <span class="cms cmsSearch">
+           <a class="itsearch" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+           <!--<input type="text" class="itxt_1 fc7" value="域名/名称" size="30" />-->
+           <input type="text" class="itxt_1 fc7" value="{$Name}" name='name' size="30"/>
+        </span>
+      </div>
+    </div>
+    </form>
+    
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="listab mt20 fs14">
+        <tr>                 
+        
+          <th class="tac">序号</th>
+          <th>网站域名</th>
+          <th>网站名称</th>
+          <th>创建时间</th>
+          <th>首页代码状态</th>
+          <th>代码状态</th>
+          <th>设置</th>
+          <th>操作</th>
+        </tr><!--
+        <tr>            
+          <td class="tac">1</td>
+          <td>www.nongfu.com</td>
+          <td>农夫山泉</td>
+          <td>2013-08-05</td>
+          <td>未检测到代码</td>
+          <td><a href="#">获取代码</a><a href="#">网站代码检查</a></td>
+          <td><a href="#">自动安装</a></td>
+          <td><a href="#">查看</a><a href="#">删除</a></td>
+        </tr>
+        <tr>            
+          <td class="tac">1</td>
+          <td>www.nongfu.com</td>
+          <td>农夫山泉</td>
+          <td>2013-08-05</td>
+          <td>代码安装正确</td>
+          <td><a href="#">获取代码</a><a href="#">网站代码检查</a></td>
+          <td><a href="#">自动安装</a></td>
+          <td><a href="#">查看</a><a href="#">删除</a></td>
+        </tr>-->
+        {foreach($result as $k=>$v)}
+                        <tr><td>{$v['id']}</td><td>{$v['name']}</td><td>{$v['domain_name']}</td><td>{$v['create_time']}</td><td>{$v['IndexCode_Status']}</td><td>{$v['Code_Status']}</td><td>{$v['Code_op']}</td><td>{$v['Status_op']}</td></tr>
+                        {/foreach}
+      </table>
+    {if($error)}
+                        <div class="tf">{$message}</div>
+                {/if}
+    <!--turnpage start-->
+{$pager}
+    <!--turnpage end-->
+    
+
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+
+{part "/main.main.footer"}
+
+</body>
+</html>

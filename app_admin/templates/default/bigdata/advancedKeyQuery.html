@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+{part "/main.main.header"}
+<style>
+#chartSummary .c3-line-data2 {
+  	stroke-width: 2px;
+}
+</style>
+</head>
+<body>
+		<div class="panel panel-white mtb-0">
+			<div class="panel-body">
+				<div class="queryTab mb-30">
+					<ul>
+						<li {if($queryType == 2)}class="current"{/if}><a href="bigdata.main.AdvancedQuery?queryType=2">关键字查询</a></li>
+						<li {if($queryType == 3)}class="current"{/if}><a href="bigdata.main.AdvancedQuery?queryType=3">URL查询</a></li>
+						<li {if($queryType == 1)}class="current"{/if}><a href="bigdata.main.AdvancedQuery?queryType=1">标签组合查询</a></li>
+					</ul>
+				</div>
+				<form method="post" action="bigdata.main.AdvancedQuery">
+				    <div class="container" style="width: 500px;">
+    					<div class="row">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label>查询名称：</label>
+    							</div>
+    							<div class="w-380 fl">
+    								<span class="input-icon">
+    									<input type="text" class="form-control" name="queryName" placeholder="给这次查询起个名字">
+    									<input type="text" class="form-control" name="queryType" value="{$queryType}" placeholder="查询类型" style="display:none;">
+    								</span>
+    							</div>
+    						</div>
+    					</div>
+    					
+    					<div class="row">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label>{if($queryType == 2)}输入关键字{else}输入网址{/if}：</label>
+    							</div>
+    							<div class="w-380 fl">
+    								<textarea 	placeholder="{if($queryType == 2)}请输入要查询的关键字，每行一个{else}请输入要查询的URL，每行一个{/if}" id="form-field-22" class="form-control" 
+    											name="{if($queryType == 2)}key{else}url{/if}" style="width:100%; height:240px; overflow:scroll; padding: 10px; line-height: 18px;"></textarea>
+    							</div>
+    						</div>
+    					</div>
+    					
+    					<div class="row mt-10">
+    						<div class="form-group">
+    							<div class="w-100 fl" style="line-height:34px;">
+    								<label></label>
+    							</div>
+    							<div class="w-380 fl">
+    								<span class="input-icon">
+    									<button type="submit" class="btn btn-success btn-squared" style="float: right;">提交</button>
+    								</span>
+    							</div>
+    						</div>
+    					</div>
+					</div>
+				</form>
+			</div>
+		</div>
+</body>
+</html>

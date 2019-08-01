@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+<script type="text/javascript">
+ $(document).ready(function(){
+
+   $("#focus .input_txt").each(function(){
+     var thisVal=$(this).val();
+     //判断文本框的值是否为空，有值的情况就隐藏提示语，没有值就显示
+     if(thisVal!=""){
+       $(this).siblings("span").hide();
+      }else{
+       $(this).siblings("span").show();
+      }
+     //聚焦型输入框验证 
+     $(this).focus(function(){
+       $(this).siblings("span").hide();
+      }).blur(function(){
+        var val=$(this).val();
+        if(val!=""){
+         $(this).siblings("span").hide();
+        }else{
+         $(this).siblings("span").show();
+        } 
+      });
+    })
+    $("#keydown .input_txt").each(function(){
+     var thisVal=$(this).val();
+     //判断文本框的值是否为空，有值的情况就隐藏提示语，没有值就显示
+     if(thisVal!=""){
+       $(this).siblings("span").hide();
+      }else{
+       $(this).siblings("span").show();
+      }
+      $(this).keyup(function(){
+       var val=$(this).val();
+       $(this).siblings("span").hide();
+      }).blur(function(){
+        var val=$(this).val();
+        if(val!=""){
+         $(this).siblings("span").hide();
+        }else{
+         $(this).siblings("span").show();
+        }
+       })
+     }) 
+  })
+</script>
+</head>
+
+<body>
+
+  <div class="ltop">
+    <!--top-->
+    <div class="top">
+      <div class="tlogo"><img src="{$loginLogo}" alt="广告推广平台" height="60"/></div>
+    </div>
+  </div>
+
+  <!--login start-->
+  <div class="main_block">
+    <div class="logMain">
+  
+    <div class="logform fr">
+      <h1 class="logtit" style="font-size:14px;">用户登录:{if !empty($error)}<font color="red">{$error}</font>{/if}</h1>
+      <form class="logfr" action="/user.main.login" method="post" id="keydown">
+        <div><label class="loglab">{*<span class="tipstxt">注册邮箱 / 用户名</span>*}<input name="username" type="text" class="input_txt border_radius"  placeholder="注册邮箱 / 用户名"></label></div>
+        <div><label class="loglab">{*<span class="tipstxt">密码</span>*}<input name="password" type="password" class="input_txt border_radius" placeholder="密码"/></label></div>
+        <a class="fr fc7">忘记密码了?</a>
+        <div class="yanzheng" style="display:none;">
+          <label class="loglab fl"><span class="tipstxt">验证码</span><input type="text" class="input_txt border_radius" style="width:100px;" /></label>
+          <p class="yzmpic"><img src="/baichuan_advertisement_manage/assets_admin/img/getimage.jpg" width="100" height="40" /><a class="ml10" href="#" title="重新获取验证码"><img style="margin-top:12px;" align="top" src="/baichuan_advertisement_manage/assets_admin/img/i_refresh.jpg" /></a></p>
+        </div>
+        <div class="clear"></div>
+        
+        <div class="btndiv">
+          <span class="sbtnb"><input name="" type="submit" class="ibtnb" value="登录" /></span>
+          <span class="sbtng ml10"><input name="" type="button" class="ibtng" value="注册" /></span>
+        </div>
+        
+        <div class="mt10 fl"><label for="jzw"  align="absmiddle"><input id="jzw" type="checkbox" value="" style="vertical-align:middle;" /> 记住我</label></div>
+        
+      </form>
+    </div>
+  
+    </div>
+  <div class="clear"></div>
+  </div>
+{part "/main.main.loginfooter"}
+
+</body>
+</html>

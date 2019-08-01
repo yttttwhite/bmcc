@@ -1,0 +1,19 @@
+{if(user_api::auth(["system","admin"],"or"))}
+<div class="mb-10">
+	<a class="btn btn-success btn-squared" style="width:235px;" href="/baichuan_advertisement_manage/admin.user.add?nav=5">创建用户</a>
+</div>
+{/if}
+<div class="accordion" style="margin-top:0;">
+	<h2>账户管理</h2>
+    {if($admin)}
+		<a href="/baichuan_advertisement_manage/admin.user.list?nav=5">
+			<!--<h3 class="bort {if(isset($get['role'])&&$get['role']==$roleId)}active{/if}" >全部账户  </h3>-->
+			<h3 class="bort {if(empty($get['role']))}active{/if}" >全部账户  </h3>
+		</a>
+    {/if}
+	{foreach($roleList as $roleId=>$role)}
+		<a href="/baichuan_advertisement_manage/admin.user.list?role={$roleId}&admin={$admin}&nav=5">
+			<h3 class="bort {if(isset($get['role'])&&$get['role']==$roleId)}active{/if}">{$role['name']}</h3>
+		</a>
+	{/foreach}
+</div>

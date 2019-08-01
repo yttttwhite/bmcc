@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta https-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/material_List.css" />
+    <title>素材管理编辑</title>
+    <style type="text/css">
+        .New {
+            width: 160px;height: 38px;display: inline-block;background: #12c043;line-height: 38px;margin-top: 8px;
+            margin-left: 15px;
+        }
+        .New a {
+            color: #fff;display: inline-block;width: 160px;height: 38px;text-align: center;line-height: 38px;font-size: 13px;font-weight: bold;
+        }
+        .New a:hover {
+            color: #fff;
+        }
+        .top_nav {
+            width: 1040px;height: 38px;border: #dddddd;background: #eeeeee;display: inline-block;margin-left: 10px;margin-top: 8px;text-indent: 1.5em;color: #337ab7;
+            line-height: 45px;cursor: pointer;position: relative;top: 3px;
+        }
+        /*搜索 start*/
+        .search {
+            width: 788px;height: 45px;border: 1px solid #e6e6e6;
+            margin-left: 189px;
+            cursor: pointer;
+            margin-top:10px;
+        }
+        .search_1,.search_2,.search_3 {
+            width: 218px;height: 32px;display: inline-block;line-height: 45px;margin-top: 7.5px;
+            margin-left: 5px;outline: none;border: 1px solid #1387f4;text-indent: 1em;
+            margin-bottom: 10px;
+        }
+        /*搜索 end*/
+        .material {
+            width: 1041px;
+            /*border: 1px solid red;*/
+            margin-left: 190px;margin-top: 10px;
+        }
+        table th,tr,td {
+            text-align: center;text-align: center;
+        }
+
+        /*素材上传  start*/
+        #test {
+            /*border: 1px solid red;*/
+            width: 199px;height: 30px;border-radius: 3px;line-height: 30px;text-indent: 2em;display: inline-block;
+        }
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            margin-left: 10px;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+        .file:hover {
+            background: #AADFFD;
+            border-color: #78C3F3;
+            color: #004974;
+            text-decoration: none;
+        }
+        /*素材上传  end*/
+        .Newform {
+            display: inline-block;width: 650px;
+            /*border: 1px solid red;*/
+            margin-left: 190px;
+            height: 350px;
+        }
+        .Newform input {
+            width: 200px;display: inline-block;height: 30px;
+        }
+        .btn_group {
+            width: 335px;height: 45px;
+            /*border: 1px solid red;*/
+            margin-top: 30px;
+        }
+        .return,.save,.reset {
+            display: inline-block;width: 68px;height: 28px;
+            /*border: 1px solid red;*/
+            margin-right: 35px;line-height: 28px;text-align: center;
+            cursor: pointer;border-radius: 3px;
+        }
+        .return {
+            background:#5bc0de;color:#fff;
+        }
+        .return:hover {
+            background: #337ab7;color:#fff;
+        }
+        .return a {
+            /*background:#5bc0de;*/
+            color:#fff;
+        }
+        .return a:hover {
+            background: #337ab7;color:#fff;
+        }
+        .reset {
+            background: #f63832;color:#fff;
+        }
+        .reset:hover {
+            background: #337ab7;color:#fff;
+        }
+        .save {
+            background: #5cb85c;color:#fff;
+        }
+        .save:hover {
+            background: #337ab7;color: #fff;
+        }
+    </style>
+    <head>
+        {part "/main.main.header"}
+    </head>
+<body>
+{part "/main.main.nav.ad"}
+<div class="New">
+    <a href="javaecript:" style="color: #111;background:#dddddd;">编辑素材</a>
+</div>
+<div class="top_nav">
+    素材<span style="color: #111;font-size: 12px;">>></span>素材编辑
+</div>
+<form class="Newform">
+    &nbsp;&nbsp;&nbsp;&nbsp;素材上传&nbsp;:&nbsp;<input type="text" class="contract_file" name="test" id="test" placeholder="合同文件" style="margin-right: 92px;">
+    <a href="javascript:;" style="position: relative;left: -102px;top: 10px;" class="file">请选择上传素材
+        <input type="file" style="width: 218px;" value="上传合同文件"    name="testFile"  onChange="if(this.value)insertTitle(this.value);">
+    </a><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;素材名称&nbsp;:&nbsp;<input type="text" class="form-control" placeholder="请输入素材名称"><br><br>
+    素材创建者&nbsp;:&nbsp;<input type="text" class="form-control" placeholder="请输入素材名称"><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;素材尺寸&nbsp;:&nbsp;<input type="text" class="form-control" placeholder="请输入素材名称"><br><br><br>
+
+    <div class="btn_group">
+        <span class="return"><a href="/baichuan_advertisement_manage/material.material.List"><span style="" class="glyphicon glyphicon-share-alt" aria-hidden="true">返回</span></a></span>
+        <span class="reset">重置</span>
+        <span class="save" style="width: 75px;"><i class="fa fa-arrow-circle-right"></i>&nbsp;确认修改</span>
+    </div>
+</form>
+
+{part "/main.main.footer"}
+</body>
+</html>
+<script>
+    //    上传素材  js
+    function insertTitle(path){
+        var test1 = path.lastIndexOf("/");  //对路径进行截取
+        var test2 = path.lastIndexOf("\\");  //对路径进行截取
+        var test= Math.max(test1, test2)
+        if(test<0){
+            document.getElementById("test").value = path;
+        }else{
+            document.getElementById("test").value = path.substring(test + 1); //赋值文件名
+        }
+    }
+    //    上传素材  end
+</script>

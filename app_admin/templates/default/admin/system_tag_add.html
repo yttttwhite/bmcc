@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  {part ("/admin.system.left")}
+  </div>
+<div class="mcon">
+    <div class="toolbar-bc fl mb-10">
+        <div class="fl sub-title sc-title">
+            <a href="/baichuan_advertisement_manage/admin.user.list" style="margin-left:10px;">自定义标签</a>
+            <i class="fa fa-angle-double-right" style="margin-left:6px;"></i>
+                <span>编辑标签</span>
+        </div>
+    </div>
+    <div class="clear"></div>
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-white">
+				<div class="panel-heading" style="display:none;">
+					<h4 class="panel-title">创建用户</h4>
+				</div>
+				<div class="panel-body" style="padding-right:100px; padding-top: 0;">
+					<form action="" method="post" role="form" id="form">
+						<div class="row">
+							<div class="col-md-8">
+								<h5><i class="fa fa-pencil-square"></i> 编辑自定义标签</h5>
+								<hr style="margin:5px 0;">
+								<div class="form-group">
+									<label class="control-label">
+										标签名称： <span class="symbol required"></span>
+									</label>
+									<input type="text" class="form-control" name="id" value="{$tag['id']}" style="display:none;">
+									<input type="text" class="form-control" name="name" value="{$tag['name']}">
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										是否启用： <span class="symbol required"></span>
+									</label>
+									<select class="form-control" name="enabled">
+										<option value="">是否启用</option>
+                                        <option value="0" {if(isset($tag['enabled']) && $tag['enabled']==0)}selected="selected"{/if}>禁用</option>
+                                        <option value="1" {if(isset($tag['enabled']) && $tag['enabled']==1)}selected="selected"{/if}>启用</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										更新类型：
+									</label>
+								</div>
+								<div class="row form-group">
+									<div class="col-md-4">
+										<select class="form-control" name="feq_type">
+											<option value="">更新类型</option>
+											<option value="1" {if(isset($tag['feq_type']) && $tag['feq_type']==1)}selected="selected"{/if}>每天更新</option>
+											<option value="2" {if(isset($tag['feq_type']) && $tag['feq_type']==2)}selected="selected"{/if}>间隔更新</option>
+											<option value="3" {if(isset($tag['feq_type']) && $tag['feq_type']==3)}selected="selected"{/if}>只更新一次</option>
+										</select>
+									</div>
+									<div class="col-md-4">
+										<select class="form-control" name="feq_hour">
+											<option value="">小时</option>
+											{for($i=0;$i<24;$i++)}
+											<option value="{$i}" {if(isset($tag['feq_hour']) && $tag['feq_hour']==$i)}selected="selected"{/if}>{$i}</option>
+											{/for}
+										</select>
+									</div>
+									<div class="col-md-4">
+										<select class="form-control" name="feq_minute">
+											<option value="">分钟</option>
+											{for($i=0;$i<60;$i+=30)}
+											<option value="{$i}" {if(isset($tag['feq_minute']) && $tag['feq_minute']==$i)}selected="selected"{/if}>{$i}</option>
+											{/for}
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										SQL脚本：
+									</label>
+									<textarea type="text" class="form-control" rows="10" name="sql_string">{$tag['sql_string']}</textarea>
+								</div>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8">
+								<hr>
+								<button class="btn btn-squared btn-success btn-block btn-100-30 fr" type="submit">
+									提交 <i class="fa fa-arrow-circle-right"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</div>
+</div>
+<script>
+	$(document).ready(function()  {
+		$('.icheck').iCheck( {
+			//checkboxClass : 'icheckbox_minimal-green',
+			checkboxClass : 'icheckbox_square-green',
+			radioClass : 'iradio_minimal',
+			increaseArea : '-10%'
+		} );
+	} );
+</script>
+{part "/main.main.footer"}
+</body>
+</html>

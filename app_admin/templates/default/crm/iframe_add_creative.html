@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {part "/main.main.header"}
+    </head>
+    <body class="w-auto">
+        <div class="container-content p-0 mt-20">
+            <div class="panel panel-white" style="margin:0;">
+                <div class="panel-body">
+                    <form id="formAddAd" method="post" action="{$url['formAction']}">
+                    	<input type="text" class="form-control" name="group_id" value="{$get['group_id']}" style="display:none;">
+                    	<input type="text" class="form-control" name="type" value="{$get['type']}" style="display:none;">
+                        <div id="panel_stuff" class="tab-pane fade  in  active">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-1 w-100 control-label text-34" for="form-field-1">标题</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" placeholder="输入素材标题" id="form-field-1" class="form-control" name="title">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-1 w-100 control-label text-34" for="form-field-1">类型</label>
+                                    <div class="col-sm-4">
+                                    	<select class="form-control" name="adType">
+                                    		<option value="11">短信</option>
+											<!--
+                                    		<option value="12">彩信</option>
+                                    		<option value="13">Email</option>
+                                    		<option value="14">呼叫中心</option>
+											-->
+                                    	</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-1 w-100 control-label text-34" for="form-field-1">内容</label>
+                                    <div class="col-sm-4">
+                                        <textarea id="str" type="text" placeholder="输入素材内容" id="form-field-1" rows="4" class="form-control" name="content"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                	<div class="col-sm-4">
+                                    	<a class="btn btn-success btn-squared btn-sm w-100 fr" onclick="checkWord()">提交</a>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function checkWord(){
+            var str = $("#str").val();
+			if(str.length < 5){
+				alert('短信内容不能小于5个字符');
+			}else if(str.length > 70){
+				alert('短信内容不能超过70');
+			}else{
+				$.ajax({
+	                type: "POST",
+	                url: "/crm.word.check",
+	                data: "str="+str,
+	                dataType: "json",
+	                success: function(data){
+						if(data.count > 0){
+							alert("您输入的内容包含"+data.count+"个敏感词："+data.words);
+						}else{
+							$("#formAddAd").submit();
+						}
+	                }
+	            })
+			}
+        }
+    </script>

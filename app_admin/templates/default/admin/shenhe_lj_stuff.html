@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/contractManagement_list.css" />
+<head>
+{part "/main.main.header"}
+</head>
+
+<body>
+{part "/main.main.nav.admin"}
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  {part ("/admin.main.nav.lj_stuff")}
+  </div>
+
+  <!--mcon start-->
+  <div class="mcon">
+      <div class="toolbar-bc fl mb-10">
+        <div class="fl sub-title  sc-title">
+            <a href="javascript: void(0)">灵集广告审核结果 </a>
+        </div>
+    </div>
+    <div class="clear"></div>
+      <form class="search" style="margin-left:15px;width:90%;">
+          <input name="nav" type="hidden" value="7">
+          <input name="type" id="status" type="hidden" value="{$_GET['type']}">
+          <div class="fl">
+              <select class="search_2" name="status" style="max-width: 130px;">
+                  <option  value="">--审核状态--</option>
+                  <option {if $status==1}selected{/if} value="1">通过</option>
+                  <option {if $status==2}selected{/if} value="2">待审核</option>
+                  <option {if $status==3}selected{/if} value="3">不通过</option>
+              </select>
+          </div>
+          <input name="stuff_name" value="{$_GET['stuff_name']}" class="search_2" type="text"  placeholder="--请输入素材名称--">
+          <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询" style="display: inline-block;">
+          <span style="line-height:28px; position: relative; left: 20px;">共计：{$total}条</span>
+      </form>
+
+    <!--toolbar start-->
+
+      <div class="infoTable" style="height: auto;margin-bottom:100px;" >
+       <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <!--<th><input class="checkall" type="checkbox"/></th>-->
+        <th>ID</th>
+        <th>广告计划名称</th>
+        <th>素材</th>
+        <th>素材名称</th>
+        <th>宽*高</th>
+        <th>审核结果</th>
+        <th>审核结果备注</th>
+      </tr>
+     {foreach $adx_stuff as $stuff}
+       <tr stuffid="{$stuff->stuff_id}", uid="{$stuff->uid}" >
+        <th>{$stuff->adid}</th>
+        <th>{$stuff->plan_name}</th>
+        <th>
+               {if $stuff->type==2}
+               <embed src="{$stuff->addr}" width="{$stuff->width}" height="{$stuff->height}" style="max-width:110px;max-height:80px"></embed>
+               {elseif $stuff->type==1}
+               <a href="{$stuff->addr}" target="_blank"><img class="addr" style="max-width:110px;max-height:80px" src="{$stuff->addr}" /></a>
+               {else}
+               <a href="{$stuff->addr}" target="_blank"><img class="addr" style="max-width:110px;max-height:80px" src="{$stuff->addr}" /></a>
+               {/if}
+         </th>
+        <th>{$stuff->name}</th>
+        <th>{$stuff->width}*{$stuff->height}</th>
+        <th>{$stuff->result}</th>
+        <th>{$stuff->reason}</th>
+      </tr>
+          {/foreach}
+    </table>
+          <div class="turnpage" style="margin-top:0px;">
+              {turnpager $totalPage|html}
+          </div>
+</div>
+
+
+  </div>
+  <!--mcon end-->
+
+</div>
+{part "/main.main.footer"}
+<script>
+
+</script>
+</body>
+</html>

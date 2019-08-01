@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.media.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			媒体列表
+    	</div>
+		<div class="fl">
+		    <div id="zhuantai" class="selMenu smzt ml30">
+		      <span class="smtit">媒体类型</span>
+		      <ul>
+			  {foreach $cats as $k=>$v}
+		        <li><a href="?cat={$k}">{$k}</a></li>
+			  {/foreach}
+		      </ul>
+		    </div>
+		    
+		    <div id="leixing" class="selMenu smlx ml10">
+		      <span class="smtit">尺寸筛选</span>
+		      <ul>
+			  {foreach $size as $k=>$v}
+		        <li><a href="?size={$k}">{$k}</a></li>
+			  {/foreach}
+		      </ul>
+		    </div>
+		    <span class="iSearch ml10">
+		       <a class="isicon" href="javascript:location='?key='+$('#key').val();"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+		       <input id="key" type="text" class="itxt fc7" placeholder="媒体/广告名" value="{$key}" size="30" />
+		    </span>
+		</div>
+		<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media.main.add">新增媒体</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+  
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+      <tr>
+        <th>ID</th>
+        <th>媒体名</th>
+        <th>size</th>
+        <th>域名</th>
+        <th>分类</th>
+        <th>类型</th>
+        <th>位置</th>
+        <th>操作</th>
+      </tr>
+{foreach $medias->items as $_m}
+      <tr>
+        <td>{$_m['id']}</td>
+        <td>{$_m['web_name']}</td>
+        <td>{$_m['size']}</td>
+        <td>{$_m['domain_name']}</td>
+        <td>{$_m['category']}</td>
+        <td>{$_m['type']}</td>
+        <td>{$_m['location']}</td>
+        <td><a href="/baichuan_advertisement_manage/media.main.add.{$_m['id']}">修改</a></td>
+      </tr>
+{/foreach}
+    </table>
+    
+	{$pager}
+	{*
+    <!--turnpage start-->
+    <div class="turnpage">
+      <a href="#"><em>&lt;</em> 上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页 <em>&gt;</em></a>
+    </div>
+	*}
+    <!--turnpage end-->
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

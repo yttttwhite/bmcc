@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广告投放管理平台</title>
+<link type="text/css" rel="stylesheet" href="../css/style.css" />
+<script src="../js/jquery-1.2.6.pack.js" type="text/javascript"></script> 
+<script type="text/javascript" src="../js/pop.js"></script>
+</head>
+
+<body>
+
+<!--top-->
+<div class="top">
+  <div class="tlogo"><img src="../images/logo.png" alt="广告推广平台" /></div>
+  <div class="tr">
+    <div class="weluser">您好,<strong>Retinas</strong>[<a href="#">退出</a>]</div>
+    <div class="trlink">
+      <a href="#"><img class="fl" src="../images/i_email.gif" alt="消息" /><span class="trlmsg">(10)</span></a>
+      <a href="#"><img src="../images/i_help.gif" alt="帮助"  align="absmiddle" /></a>
+    </div>
+  </div>
+</div>
+
+<!--nav-->
+<div class="nav">
+    <div class="navd"><a class="home" href="#" title="首页"></a></div>
+    <div class="navd ggnavd sel">
+      <a class="gg" href="#" title="广告管理"></a>
+      <div class="gg2nav">
+        <a href="#">广告计划</a>
+        <a href="#">广告组</a>
+        <a href="#">素材</a>
+      </div>
+    </div>
+    <div class="navd"><a class="rq" href="#" title="人群管理"></a></div>
+    <div class="navd"><a class="mt" href="#" title="媒体列表"></a></div>
+    <div class="navd"><a class="cw" href="#" title="财务管理"></a></div>
+    <div class="navd"><a class="zh" href="#" title="账户管理"></a></div>
+    <div class="navd"><a class="gj" href="#" title="高级管理"></a></div>
+    <div class="navd"><a class="sh" href="#" title="运营审核"></a></div>
+  </div>
+
+<!--main-->
+<div class="main">
+  <div class="side">
+    <div class="addad"><a href="#"></a></div>
+	<script type="text/javascript">
+    $(document).ready(function(){
+        
+        $(".accordion h3:first").addClass("active");
+        $(".accordion .snav:not(:first)").hide();
+    
+        $(".accordion h3").click(function(){
+            $(this).next(".snav").slideToggle("fast")
+            .siblings(".snav").slideUp("fast");
+            $(this).toggleClass("active");
+            $(this).siblings("h3").removeClass("active");
+        });
+    
+    });
+    </script>
+    
+      <div class="accordion">
+        <h2><a href="#">搜房网全部计划</a></h2>
+        <h3 class="bort">农夫山泉推广</h3>
+        <div class="snav" style="display:block;">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li class="sel"><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+
+        <h3>巧乐兹促销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">华北地区促销</a></li>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>大众汽车推广</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>加多宝品牌营销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+
+        <h3>巧乐兹促销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">华北地区促销</a></li>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>大众汽车推广</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>加多宝品牌营销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+
+      </div>
+  </div>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <h1 class="mtit">设置广告计划</h1>  
+    <!--基本信息-->
+    <div class="comForm clear">
+      <h1>设置广告计划</h1>
+      <dl>
+        <dt>计划名称：</dt>
+        <dd><input type="text" class="itxt" size="30" /></dd>
+        <dd class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>投放类型：</dt>
+        <dd>
+          <label class="irad" for="pp"><input name="tf" id="pp" type="radio" value="" /> 品牌类</label>
+          <label class="irad ml20" for="xg"><input name="tf" id="xg" type="radio" value="" /> 效果类</label>
+        </dd>
+      </dl>
+    </div>
+    
+    <!--计划设置-->
+    <div class="comForm clear">
+      <h1>预算和时间</h1>
+      <dl>
+        <dt>每日预算：</dt>
+        <dd>
+          <label class="iche" for="ys"><input id="ys" type="checkbox" value="" /> 不限预算</label>
+        </dd>
+      </dl>
+      <div class="tipstxt">不限预算时,每日投放量没有上限,设置预算后,当消费达到预算后即不再投放。</div>
+      
+      <dl>
+        <dt>投放周期：</dt>
+        <dd>
+          <input type="text" class="itxt idate fc7" value="开始时间 - 结束时间" size="30" />
+        </dd>
+      </dl>
+      <div class="tipstxt">结束时间为空表示不限结束时间。</div>
+      <dl>
+        <dt>广告投放时间：</dt>
+        <dd>
+          <label class="irad" for="qt"><input name="tfsj" id="qt" type="radio" value="" /> 全天投放</label>
+          <label class="irad ml20" for="fsd" id="btnShow1" onClick="ShowDIV('ptime')"><input name="tfsj" id="fsd" type="radio" value="" /> 分时段投放</label>
+          
+            <!--遮罩pop start-->
+            <div id="BgDiv"></div>
+            <div id="ptime" class="popdiv pop_time" style="display:none">
+              <div class="dbg">
+                <div class="pmain">
+                <div class="ptit">
+                  <div class="ptname">时段选择</div>
+                  <div class="ptclose"><a href="javascript:;" onClick="closeDiv('ptime')"><img src="../images/i_close.png" alt="关闭" /></a></div>
+                </div>
+                <div class="dcon">
+                    <div class="HourBox" style="display:block;">
+                      <div class="HourBoxMain clearfix">
+                        <div class="HBMtype">
+                          <label for="week"><input type="radio" id="week" name="hbmtype" value=""> 整周展示</label>                      
+                          <label for="workday"><input type="radio" name="hbmtype" id="workday" value=""> 工作日全天展示</label>                      
+                          <label for="weekend"><input type="radio" name="hbmtype" id="weekend" value=""> 休息日全天展示</label>                      
+                        </div>
+                        <div class="HBMzt"><span class="ztf"></span>&nbsp;投放时间段<span class="ztt"></span>&nbsp;暂停时间段</div>
+                      </div>
+                      <div class="dtli">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="timetab">
+                        <tr>
+                          <th><input name="" type="checkbox" value="" /></th>
+                          <th>日期</th>
+                          <th>时间段</th>
+                          <th class="tac">复制到</th>
+                          <th class="tac">00:00 - 05:00</th>
+                          <th class="tac">06:00 - 11:00</th>
+                          <th class="tac">12:00 - 17:00</th>
+                          <th class="tac">18:00 - 23:00</th>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期一</td>
+                          <td>0:00-24:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime">4</span>
+                            <span class="poinTime">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期二</td>
+                          <td class="tac">00:00-24:00<br />10:00-12:00<br />11:00-15:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime ptsel">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime ptsel">4</span>
+                            <span class="poinTime ptsel">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime ptsel">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime ptsel">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期三</td>
+                          <td>0:00-24:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime">4</span>
+                            <span class="poinTime">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期四</td>
+                          <td>0:00-24:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime">4</span>
+                            <span class="poinTime">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期五</td>
+                          <td>0:00-24:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime">4</span>
+                            <span class="poinTime">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期六</td>
+                          <td>0:00-24:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime">4</span>
+                            <span class="poinTime">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><input name="" type="checkbox" value="" /></td>
+                          <td>星期日</td>
+                          <td>0:00-24:00</td>
+                          <td class="tac">
+                            <a rel="thisWeek" href="javascript:void(0)">整周</a>
+                            <a rel="workDay" href="javascript:void(0)">工作日</a>
+                            <a rel="weekDay" href="javascript:void(0)">休息日</a>                        
+                          </td>
+                          <td>
+                            <span class="poinTime">0</span>
+                            <span class="poinTime">1</span>
+                            <span class="poinTime">2</span>
+                            <span class="poinTime">3</span>
+                            <span class="poinTime">4</span>
+                            <span class="poinTime">5</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">6</span>
+                            <span class="poinTime">7</span>
+                            <span class="poinTime">8</span>
+                            <span class="poinTime">9</span>
+                            <span class="poinTime">10</span>
+                            <span class="poinTime">11</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">12</span>
+                            <span class="poinTime">13</span>
+                            <span class="poinTime">14</span>
+                            <span class="poinTime">15</span>
+                            <span class="poinTime">16</span>
+                            <span class="poinTime">17</span>
+                          </td>
+                          <td>
+                            <span class="poinTime">18</span>
+                            <span class="poinTime">19</span>
+                            <span class="poinTime">20</span>
+                            <span class="poinTime">21</span>
+                            <span class="poinTime">22</span>
+                            <span class="poinTime">23</span>
+                          </td>
+                        </tr>
+                      </table>
+                      </div>
+                  
+                      <div class="dpbtn">
+                        <div class="fr">
+                          <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('ptime')" /></span>
+                          <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('ptime')" /></span>
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+            <!--遮罩pop end-->
+          
+        </dd>
+      </dl>
+      <dl>
+        <dt>投放频次：</dt>
+        <dd>
+          <label class="irad" for="bz"><input name="tfpc" id="bz" type="radio" value="" /> 标准，以尽量多获取曝光为目标</label>
+          <label class="irad ml20" for="yuns"><input name="tfpc" id="yuns" type="radio" value="" /> 匀速，以尽量覆盖全时段为目标</label>
+        </dd>
+      </dl>
+    </div>
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="button" class="ibtnb" value="保存" onclick="location.href='step_2.html'" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    
+  </div>
+</div>
+
+
+<!--版权-->
+<div class="footer">
+  <div class="ftcon">
+    Copyright © 2013 All rights reserved. 设计广告平台有限公司 版权所有<br /> 
+    京ICP证68976143.3号 京公网安备XKD89756号
+  </div>
+</div>
+
+</body>
+</html>

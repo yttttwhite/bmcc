@@ -1,0 +1,15 @@
+<div class="accordion" style="margin-top:0;">
+	<a href="/baichuan_advertisement_manage/crm.group.NumberList?group_id={$get['group_id']}">
+		<h2>全部号码</h2>
+	</a>
+	{foreach($checkStatus as $statusCode => $statusName)}
+	<a href="/baichuan_advertisement_manage/crm.group.NumberList?group_id={$get['group_id']}&status={$statusCode}">
+		<h3 class="bort {if(isset($get['status']) && $get['status']==$statusCode)}active{/if}">{$statusName}</h3>
+	</a>
+	{/foreach}
+	{foreach($sentStatus as $statusCode => $statusName)}
+	<a href="/baichuan_advertisement_manage/crm.group.NumberList?group_id={$get['group_id']}&sent_status={$statusCode}">
+		<h3 class="bort {if(isset($get['sent_status']) && $get['sent_status']==$statusCode)}active{/if}">{$statusName}</h3>
+	</a>
+	{/foreach}
+</div>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+<script src="/baichuan_advertisement_manage/assets_admin/js/jquery.form.min.js"></script>
+<style>
+span.sbtng, span.sbtng .ibtng{
+float:none;
+}
+</style>
+</head>
+<body>
+{part "/main.main.nav.ad"}
+
+<!--main-->
+<div class="main">
+  <div class="side">
+{part "/ad.plan.listpart.".$plan_id.".".$group_id}
+  </div>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <div class="toolbar-bc fl" style="margin-bottom:15px;">
+		<div class="fl">
+		    <a class="btn btn-squared btn-grey" href="/baichuan_advertisement_manage/ad.stuff.add.{$plan_id}.{$group_id}">其他类型素材</a>
+		    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.group.list.{$plan_id}.{$group_id}">素材列表</a>
+		</div>
+    	<div class="fr">
+			<a class="btn btn-squared btn-blue" href="/baichuan_advertisement_manage/ad.plan.list.{$plan_id}">广告组列表</a>
+		    <a class="btn btn-squared btn-blue" href="/baichuan_advertisement_manage/ad.group.list.{$plan_id}.{$group_id}">素材列表</a>
+		    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.plan.add.{$plan_id}">编辑广告计划</a>
+		    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.group.add.{$plan_id}.{$group_id}">编辑广告组</a>
+		    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.stuff.add.{$plan_id}.{$group_id}">编辑素材</a>
+		</div>
+    </div>
+    
+    <div class="comForm clear" style="margin:0;">
+	<script>
+	$(document).ready(function(){
+			$("form").submit(function(){
+				if(isNaN(parseInt($("input[name=type]:checked").val()))){
+				alert('请选择素材类型');
+				event.preventDefault();
+				}
+			});
+			//$("#view_type128").show();
+			$("input[name=type]").click(function(){
+					var type = parseInt($("input[name=type]:checked").val());
+					
+					$("#view_type_dd").find("label").hide();
+					$("#sucai_chicun").show();
+					$("#landing_page_dl").hide();
+					$("#text_dl").show();
+					
+					switch(type) {
+						case 5:
+						    $("#landing_page_dl").show();
+							$("#sucai_chicun").hide();
+							$("#text_dl").hide();
+							$("#view_type8").show();
+							$("#view_type16").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+							
+						case 6:
+							break;
+							
+						case 7:
+							$(".need-view").show();
+							$("#sucai-input-title").text("iframe地址：");
+							break;
+							
+						case 8:
+							$("#view_type1").show();
+							$("#sucai_chicun").hide();
+							$("#sucai-input-title").text("JS地址：");
+							break;
+							
+						case 9:
+							$(".need-view").show();
+							$("#view_type512").hide();
+							$("#sucai-input-title").text("HTML代码：");
+							break;
+							
+						default: 
+							return;
+					}
+			});
+			$("#view_type_dd").change(function(){
+				var view_type = parseInt($("input[name=view_type]:checked").val());
+				console.log(view_type);
+				switch(view_type) {
+						case 8:
+							$("#landing_rule_div").hide();
+							break;
+							
+						default:
+							$("#landing_rule_div").show();
+							return;
+					}
+			})
+			$("#landing_rule_select").change(function(){
+				var landing_rule = parseInt($("#landing_rule_select").val());
+				switch(landing_rule) {
+						case 15:
+							$("#text_dl").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+							
+						case 18:
+							$("#text_dl").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+						case 19:
+							$("#text_dl").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+						case 21:
+							$("#text_dl").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+						case 22:
+							$("#text_dl").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+							
+						case 23:
+							$("#text_dl").show();
+							$("#sucai-input-title").text("DPC返回内容：");
+							break;
+							
+						default:
+							$("#text_dl").hide();
+							return;
+					}
+			})
+	});
+	</script>
+      
+    <form method="post" action="/ad.stuff.addone.{$plan_id}.{$group_id}" id="text_form"> 
+    <input type="hidden" name="submit_or_not" id="submit_or_not" value="0"/>
+    <!--基本信息-->
+    <div class="">
+		      <h1>素材信息</h1>
+		      <dl>
+		        <dt>素材名称：</dt>
+		        <dd><input name="adname"  type="text" class="itxt" size="30" /></dd>
+		      </dl>
+			  <dl>
+		        <dt>素材类型：</dt>
+		        <dd>
+		        	{if $config['version'] == "operator"}
+					<label class="mr15"><input name="type" value="5" type="radio"/>重定向 </label>
+					{/if}
+					<!--
+		        	<label class="mr15"><input name="type" value="6" type="radio"/>视频广告 </label>
+					-->
+		        	<label class="mr15"><input name="type" value="7" type="radio"/>IFRAME广告 </label>
+					<label class="mr15"><input name="type" value="8" type="radio"/>JS广告 </label>
+		        	<label class="mr15"><input name="type" value="9" type="radio"/>HTML广告 </label>
+		        </dd>
+			   </dl>
+      </dl>
+      <dl id="sucai_chicun">
+      	<div class="row">
+	        <dt>素材尺寸：</dt>
+	        <dd><input name="width" size="5" class="itxt" value="0">*<input name="height" size="5" class="itxt" value="0">
+			</dd>
+		</div>
+      </dl>
+	  <dl id="view_type_dl">
+	  	<div class="row">
+		        <dt>展示类型：</dt>
+		        <dd id="view_type_dd">
+					<label class="mr15 need-view" id='view_type1'><input name="view_type" value="1" id="vtype1" type="radio" />嵌入式</label>
+					<label class="mr15 need-view" id='view_type2'><input name="view_type" value="2" type="radio" />浮窗</label>
+					<label class="mr15 need-view" id='view_type32'><input name="view_type" value="32" type="radio" />通栏</label>
+					<label class="mr15 need-view" id='view_type128'><input name="view_type" value="128" type="radio" />无线浮标</label>
+					<label class="mr15 need-view" id='view_type256'><input name="view_type" value="256" type="radio" />插页</label>
+					<label class="mr15 need-view" id='view_type512'><input name="view_type" value="512" type="radio" />对联</label>
+					{if $config['version'] == "operator"}
+					<label class="mr15" id='view_type4'><input name="view_type" value="4" type="radio" />背投</label>
+					<label class="mr15" id='view_type8'><input name="view_type" value="8" type="radio" />通定向[JS方式]</label>
+					<label class="mr15" id='view_type16'><input name="view_type" value="16" type="radio" />重定向[DPC]</label>
+		        	{/if}
+		        </dd>
+		 </div>
+      </dl>
+      <dl id="landing_page_dl" style="display:none">
+	  	<div id="landing_rule_div" class="row">
+	  		<dt>跳转规则：</td>
+			<dd>
+				<select id="landing_rule_select" name="landing_rule">
+				{foreach $rule as $k=>$v}
+				<option value="{$k}">{$v}</option>
+				{/foreach}
+				</select>
+	        </dd>
+	  	</div>
+	  	<div class="row mt-10">
+	        <dt>目标地址：</dt>
+	        <dd>
+				<input size="60" type="text" class="itxt" name="landing_page"/>
+			</dd>
+		</div>
+      </dl>
+	  <dl id="text_dl">
+	  	<div class="row">
+		        <dt id="sucai-input-title">素材内容：</dt>
+		        <dd style="float:none;">
+					<textarea id="textStuffContent" name="text" style="margin: 0px; width: 540px; height: 120px;"></textarea>
+		        </dd>
+				{if($config['version'] == "operator")}
+				<dd class="" style="color:#666666; margin-left:150px;">
+				注意：</br>
+				① js、iframe在"素材内容"填写网址；</br> 
+				② 200OK在素材内容处填写JS代码，目标地址不为空，可以随意填写URL；</br>
+				③ 重定向在目标地址填写，不含'https://'，素材内容留空。
+				</dd>
+				{/if}
+		</div>
+      </dl>
+	  <dl id="jiankong">
+	  	<div class="row">
+	        <dt>显示监控JS：</dt>
+	        <dd>
+			<textarea name="show_js" style="margin: 0px; width: 540px; height: 50px;"></textarea>
+	        </dd>
+	    </div>
+	  </dl>
+     <dl id="dianji_jiankong">
+         <div class="row">
+	        <dt>点击监控JS：</dt>
+	        <dd>
+			<textarea name="click_js" style="margin: 0px; width: 540px; height: 50px;"></textarea>
+	        </dd>
+	     </div>
+      </dl>
+
+    </div>
+
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd style="width:540px;">
+            <input name="" type="button" onclick="saveAll()" {if(($btn_disable==1)&&(!(user_api::auth("admin"))))} disabled {/if} class="btn btn-squared btn-success fr" value="保存" style="width:120px;"/>
+            <input name="" type="button" onclick="submitAll()" {if(($btn_disable==1)&&(!(user_api::auth("admin"))))} disabled {/if} class="btn btn-squared btn-success fr" value="提交审核" style="width:120px;"/>
+        </dd>
+      </dl>
+    </div>
+    
+  </div>
+  </form>
+</div>
+</div>
+<div class="clear"></div>
+
+{part "/main.main.footer"}
+<script>
+function saveAll(){
+        $("#submit_or_not").val(0);
+        $("#text_form").submit();
+}
+
+function submitAll(){
+    layer.confirm('提交审核后将不可再修改素材，是否继续？', function(){
+        $("#submit_or_not").val(1);
+        $("#text_form").submit();
+    });
+}
+
+</script>
+</body>
+</html>

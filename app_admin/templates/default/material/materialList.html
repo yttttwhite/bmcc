@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {part "/main.main.header"} 
+  <script src="/baichuan_advertisement_manage/assets_admin/js/jquery.form.min.js"></script>
+  <title>素材列表</title>
+  <style type="text/css">
+    table th,tr,td {
+      text-align: center;text-align: center;
+    }
+    .font-po{
+      margin:0 4px;
+    }
+  </style>
+  <link rel="stylesheet" href="/baichuan_advertisement_manage/assets_admin/v5/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
+  <script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+</head> 
+<body>
+{part "/main.main.nav.ad"}
+<div class="main">
+  <div class="side">
+    <div class="mb-10">
+      <a class="btn btn-success btn-squared" style="width:235px;" href="/baichuan_advertisement_manage/ad.stufflibrary.Add?nav=8">创建素材</a>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $(".accordion h3[current=active]").addClass("active");
+      });
+    </script>
+    <div class="accordion" style="margin-top:0;">
+      <h2>素材库</h2>
+      <h3 class="bort" current="active">
+        <a href="/baichuan_advertisement_manage/ad.stufflibrary.List?nav=8"><b>素材列表</b></a>
+      </h3>
+        {if(user_api::auth(["shenhe","shenheContract"],"or"))}
+      <h3 class="bort" >
+        <a href="/baichuan_advertisement_manage/ad.stufflibrary.AuditedList?type=1&nav=8"><b>素材审核</b></a>
+      </h3>
+        {/if}
+    </div>
+  </div>
+  <div class="mcon">
+    <div class="toolbar-bc mb-10">
+      <div class="fl sub-title sc-title">
+         <a href="/baichuan_advertisement_manage/ad.stufflibrary.List?nav=8"> 素材库</a><i class="font-po fa fa-angle-double-right"></i><span>素材列表</span>
+      </div>
+      <div class="clear"></div>
+    </div>
+<!--搜索 start-->
+  <div class="panel panel-white" style="border:1px solid #EEEEEE;">
+    <div class="panel-heading border-light panel-head-md">
+      <form method="get">
+        <div class="fl">
+          <select  name="audit_status" style="max-width: 130px;" class="input-small">
+              <option value="">--审核状态--</option>
+              <option {if $status==1}selected{/if} value="1">待审核</option>
+              <option {if $status==2}selected{/if} value="2">通过</option>
+              <option {if $status==3}selected{/if} value="3">不通过</option>
+          </select>
+        </div>
+        <div class="fl">
+          <input type="text" placeholder="素材名称" value="{$_GET['stuff_name']}" class="form-control ml-10 input-small" name="stuff_name" value="">
+        </div>
+          <input type="hidden" value="{$_GET['nav']}" name="nav">
+        <div class="fl">
+          <input class="btn btn-squared btn-sm btn-success ml-20" type="submit" value="查询" style="display: inline-block;margin-right: 15px;">
+        </div>
+        <span style="line-height:28px; position: relative; left: 20px;">共计：{$total|default:0}条</span>
+      </form>
+    </div>
+
+
+<!--搜索 end-->
+    <div class="panel-body" style="overflow-x: auto;">
+      <table class="reportab" width="100%" border="0" cellspacing="0" cellpadding="0">
+          <thead>
+          <tr>
+              <th>ID</th>
+              <th>素材名称</th>
+              <th>素材内容</th>
+              <th>素材类型</th>
+              <th>素材尺寸</th>
+              <th>本平台审核状态</th>
+              <th>创建者</th>
+              <th>创建时间</th>
+              <!--<th>审核管理</th>-->
+              <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          {foreach $stuff_lib_list as $_stuff}
+          <tr>
+              <td>{$_stuff->stuff_id}</td>
+              <td>{$_stuff->name}</td>
+              <td>
+                  {if $_stuff->type==2}
+                  <embed src="{$_stuff->addr}" width="{$_stuff->width}" height="{$_stuff->height}" style="max-width:180px;max-height:80px"></embed>
+                  {elseif $_stuff->type==1}
+                  <a href="{$_stuff->addr}" target="_blank">
+                      <img class="addr" style="max-width:180px;max-height:80px" src="{$_stuff->addr}" />
+                  </a>
+                  {elseif($_stuff->type==6)}
+                  <video width="320" controls="controls">
+                      <source src="{$_stuff->addr}" type="application/octet-stream" />
+                      <source src="{$_stuff->addr}" type="video/x-ms-asf" />
+                      <source src="{$_stuff->addr}" type="video/x-mplayer2" />
+                      <source src="{$_stuff->addr}" type="video/mp4" />
+                      <source src="{$_stuff->addr}" type="video/ogg" />
+                      <source src="{$_stuff->addr}" type="video/webm" />
+                      <object data="{$_stuff->addr}" width="320">
+                          <embed src="{$_stuff->addr}" width="320"/>
+                      </object>
+                  </video>
+                  {elseif($_stuff->type ==10)}
+                  <video width="320" controls="controls">
+                      <source src="{$_stuff->addr}" type="application/octet-stream" />
+                      <source src="{$_stuff->addr}" type="video/x-ms-asf" />
+                      <source src="{$_stuff->addr}" type="video/x-mplayer2" />
+                      <source src="{$_stuff->addr}" type="video/mp4" />
+                      <source src="{$_stuff->addr}" type="video/ogg" />
+                      <source src="{$_stuff->addr}" type="video/webm" />
+                      <object data="{$_stuff->addr}" width="320">
+                          <embed src="{$_stuff->addr}" width="320"/>
+                      </object>
+                  </video>
+                  {else}
+                  <textarea readonly style="width:200px;height:100px" name="text[{$_stuff->adid}]">{$_stuff->text}</textarea>
+                  {/if}
+              </td>
+
+              <td>{if $_stuff->type==1}
+                    图片
+                  {elseif($_stuff->type==2)}
+                   Flash
+                  {elseif($_stuff->type==3)}
+                    文字
+                  {elseif($_stuff->type==6)}
+                  视频
+                  {else}
+                  其它
+                  {/if}
+              </td>
+              <td>{$_stuff->width}*{$_stuff->height}</td>
+              <td>{if $_stuff->verified_or_not ==1}待审
+                  {elseif $_stuff->verified_or_not ==2}通过
+                  {elseif $_stuff->verified_or_not ==3}未通过
+		  {else} 草稿
+                  {/if}</td>
+              <td>{$adSopnsorArray[$_stuff->uid]}</td>
+              <td>{if empty($_stuff->ctime)}未设置
+                  {else}{date("Y-m-d H:i:s",$_stuff->ctime)}
+                  {/if}
+                  </td>
+              <td>
+                  <a onclick="showWindow({$_stuff->stuff_id})">查看详情</a>
+                  <a href="/baichuan_advertisement_manage/ad.stufflibrary.Add?nav=8&stuff_id={$_stuff->stuff_id}">编辑</a>
+              </td>
+          </tr>
+
+          {/foreach}
+
+          </tbody>
+      </table>
+        <div class="turnpage">
+            {turnpager $totalPage|html}
+        </div>
+
+    </div>
+  </div>  
+  </div>  
+</div>
+{part "/main.main.footer"}
+</body>
+<script>
+  function showWindow(id){
+        var w = window.open("/ad.stufflibrary.GetOne?stuff_id=" + id,"_blank","toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=550, height=650");
+
+    }
+  
+</script>
+</html>

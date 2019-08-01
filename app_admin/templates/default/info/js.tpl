@@ -1,0 +1,41 @@
+BCMain.Info.{$sn}= {
+sn: "{$sn}",
+	data: {
+	 aid: {$ad->adid},
+	 show_js: "{$config->host->ads}/show.js",
+	 click_js: "{$config->host->ads}/click.js",
+	 third_show_js: "{$ad->show_js}",
+	 third_click_js: "{$ad->click_js}",
+	 src: 0,
+	 view_type: {$ad->view_type},
+	 pushid: "311c004d9766e08d67ee8afbb868b06",
+	 h: {$stuff->height},
+	 w: {$stuff->width},
+	 staff: [{
+		 "addr": "{$stuff->addr}",
+		 "adid": {$ad->adid},
+		 "crop": "",
+		 "ctime": 1384832049,
+		 "desc": "",
+		 "enabled": "RUNNING",
+		 "group_id": {$ad->group_id},
+		 "group_name": "",
+		 "height": {$stuff->height},
+		 "width": {$stuff->width},
+		 "landing_page": "{$stuff->landing_page}",
+		 "media_name": "",
+		 "mtime": 1384832049,
+		 "name": "",
+		 "plan_id": {$ad->plan_id},
+		 "plan_name": "",
+		 "stuff_id": {$stuff->stuff_id},
+		 "thumb": "",
+		 "title": "",
+		 "type": "{$stuff->type}",
+		 "text": "{$stuff->text}",
+		 "uid": 1,
+		 "verified_or_not": 0,
+		 "version": 0
+	 }]
+	}
+};

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+	{part "/main.main.nav.ad"}
+	<div class="container-content">
+		<div class="contianer-left">
+			{part "/report.stat.left"}
+		</div>
+		<div class="content">
+			<div class="content-inside">
+				<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+					<div class="panel-heading border-light panel-head-md">
+						<ul class="panel-heading-tabs border-light" style="left:16px; top:5px;">
+	                        <div class="btn-group">
+	                            <button type="button" class="btn btn-sm btn-squared btn-success w-140" data-toggle="dropdown">
+	                            	排序：{$title}
+	                                <span class="caret"></span>
+	                            </button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+	                                    <a href="{$url['type']}">默认</a>
+	                                </li>
+									{foreach($typeArray as $typeId=>$type)}
+	                                <li>
+	                                    <a href="{$url['type']}type={$typeId}">{$type}</a>
+	                                </li>
+									{/foreach}
+	                            </ul>
+	                        </div>
+                        </ul>
+						
+						<form id="queryFrom" action="{$url['date']}" method="get">
+							<input type="text" name="type" class="form-control input-small"  value="{$get['type']}" style="display:none;"/>
+							<div class="input-daterange fl p-0" id="input-daterange" style="width:300px; position: relative; left: 170px;">
+                                <input id="start_date" name="dateStart" type="text" class="itxt idate fc7" 
+										value="{if(isset($get['dateStart']))}{$get['dateStart']}{else}{date('Y-m-d',time()-60*60*24)}{/if}" size="12" />
+								至
+								<input id="end_date" name="dateEnd" type="text" class="itxt idate fc7" 
+										value="{if(isset($get['dateEnd']))}{$get['dateEnd']}{else}{date('Y-m-d',time()-60*60*24)}{/if}" size="12" />
+								<script>
+									$(function(){
+										if($("#start_date").val()=="开始时间"){
+											$("#start_date").val("{date("Y-m-d")}");
+										}
+										if($("#end_date").val()=="结束时间"){
+											$("#end_date").val("{date("Y-m-d")}");
+										}
+										$("#start_date").datepicker({ dateFormat: "yy-mm-dd"}); 
+										$("#end_date").datepicker({ dateFormat: "yy-mm-dd"}); 
+									});
+								</script>
+							</div>
+							<div class="fl" style="position: relative; left: 160px;">
+								<input type="text" name="key" class="form-control input-small"  placeholder="关键字" value="{$get['key']}"/>
+							</div>
+							<div class="fl" style="position: relative; left: 160px;">
+								<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+								<a class="btn btn-squared btn-sm btn-default" onclick="setDate('{date('Y-m-d',time()-86400)}','{date('Y-m-d',time()-86400)}')">昨天</a>
+								<a class="btn btn-squared btn-sm btn-default" onclick="setDate('{date('Y-m-d',time()-86400*8)}','{date('Y-m-d',time()-86400)}')">最近7天</a>
+								<a class="btn btn-squared btn-sm btn-default" href="{$url['this']}export=1" target="_blank">导出</a>
+							</div>
+							<script>
+								function setDate(startDate,endData){
+									$('#start_date').val(startDate);
+									$('#end_date').val(endData);
+									$('#queryFrom').submit();
+								}
+							</script>
+							<span style="line-height:28px; position: relative; left: 180px;">共计：{$page['amount']}条</span>
+						</form>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+							<thead>
+								<tr>
+									<th class="center" width="60px;" onclick="$('.icheck').iCheck('check');" style="cursor:pointer;">全选</th>
+									<th class="center">HOST</th>
+									{foreach $typeArray as $typeCode=>$typeName}
+										<th class="center">
+											<a href="{$url['type']}type={$typeCode}">{$typeName}</a>
+											{if($get['type']==$typeCode)}
+											<i class="fa fa-caret-down text-red"></i>
+											{/if}
+										</th>
+									{/foreach}
+									<th class="center">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								{foreach($stat as $host=>$amount)}
+								<tr>
+									<td class="center">
+										<label>
+											<input type="checkbox" class="flat-grey icheck" name = "consumerIds[]" value="">
+										</label>
+									</td>
+									<td style="text-align:left;">{$host}</td>
+									{foreach $typeArray as $typeCode=>$typeName}
+									<th class="center">{$amount[$typeCode]}</th>
+									{/foreach}
+									<th class="center" style="cursor:pointer;" onclick="layerIframe('流量详情','{$url['detail']}host={$host}',960,480)">按天统计</th>
+								</tr>
+								{/foreach}
+							</tbody>
+						</table>
+						
+                        <div class="text-right">
+                            <ul class="pagination margin-bottom-10">
+                                <li>
+                                    <a href="{$page['url']}page=1">上一页</a>
+                                </li>
+								{for($i = 1; $i<=$page['count']; $i++)}
+                                <li {if($page['current']==$i)}class="active"{/if}>
+                                    <a href="{$page['url']}page={$i}">{$i}</a>
+                                </li>
+								{/for}
+                                <li>
+                                    <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+                                </li>
+                            </ul>
+                        </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+
+	<!-- 弹层 -->
+	
+</body>
+<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-aero',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+		} );
+	</script>
+</html>

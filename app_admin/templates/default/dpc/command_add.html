@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+{part "/main.main.header"}
+    <style type="text/css">
+        span,input.command{
+            display:block;
+			font-size: 14px;
+    		line-height: 24px;
+        }
+        div.command{
+            width:200px;
+            float:left;
+        }
+		.command input{
+			font-size: 14px;
+		    padding: 2px 5px;
+		    margin: 0 0 10px 0;
+		    width: 120px;
+		}
+		.command input[disabled]{
+			color: #666666;
+    		border: none;
+		}
+        h1{
+            font-size:22px;
+            background:#ddd;
+        }
+        h2{
+            font-size:18px;
+        }
+		#parent_command,	.parent_command{
+			float:left; border:1px solid #ccc; width: 100%; padding: 10px 10px;
+			background: #FFFFFF;
+		}
+    </style>
+</head>
+<body>
+{part "/main.main.nav.dpc"}
+<script type="text/javascript">
+    $(document).ready(function(){
+            $("input.command").click(function(){
+                var command_name=$(this).attr('data');
+                    pathname=location.pathname.split(".");
+                    collection=pathname[pathname.length-1];
+                $.ajax({
+                    url:"/dpc.main.template."+collection+"."+command_name,
+                    async:true,
+                    type:"GET",
+                    success:function(data){
+                        $("#parent_command").append(data);
+                    }
+                });
+            });      
+    });
+	
+	function editPushType(){
+		$("#push_type").toggle();
+	}
+</script>
+    <div>
+        <div class="main">
+            <div class="side" >
+                <div> 
+                    <h1 style="font-size: 22px; background: #ddd; border-bottom: 1px solid #CCCCCC; line-height: 34px; font-size: 14px; padding: 0 10px;}"><a href="dpc.main.list">局点DPC设置</a></h1>
+                    <h2 style="font-size: 14px; padding: 0 10px;  background: #EEEEEE; line-height: 32px;"><a href="dpc.main.add">增加局点DPC</a></h2>
+                </div>
+            </div>
+            <div class="mcon">
+                <div>
+                    <div>
+                        <h1 style="line-height: 32px; font-size: 14px; padding: 0 10px;">{$collection}</h1>
+                    </div>
+                    <div id="parent_command">
+                        <div class="command">
+                            <input type="button" disabled class="command" data="area_name" value="地域名">
+                            <input type="button" class="command" data="host_cfg" value="host黑白名单">
+                            <input type="button" class="command" data="url_cfg" value="url黑白名单">
+                            <input type="button" disabled class="command" data="keyword" value="关键词">
+                            <input type="button" disabled class="command" data="keyword_cate" value="关键词分类">
+                            <input type="button" disabled class="command" data="web_union" value="网盟">
+                        </div>
+                        <div class="command"> 
+                            <input type="button" class="command" data="area_push_interval" value="投放时间次数">
+                            <input type="button" disabled class="command" data="redirect" value="重定向">
+                            <input type="button" disabled class="command" data="time_range" value="时间范围">
+                            <input type="button" disabled class="command" data="area_time_range" value="地域时间范围">
+                            <input type="button" value="推送类型" onclick="editPushType()">
+                        </div>
+                        <div class="command">
+                            <span class="command">基础界面不需要操作</span>
+                            <span class="command">cate_name</span>
+                            <span class="command">host_cate</span>
+                            <span class="command">ip_area</span>
+                            <span class="command">url_cate</span>
+                        </div>
+                    </div>
+                </div>
+				
+				<div id="push_type" style="display:none;">
+                    <div>
+                        <h1 style="line-height: 32px; font-size: 14px; padding: 0 10px;">编辑</h1>
+                    </div>
+                    <div class="parent_command">
+                    	推送类型：
+                    	<label><input type="radio" name="push_type" value="0">普通推送</label>
+                    	<label><input type="radio" name="push_type" value="1">强制推送</label>
+                    </div>
+                </div>
+				
+        </div>
+{part "/main.main.footer"}
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+.nav{background: #A90000;}
+.nav .sel, .help_hover a, .help_hover a:visited, .help_hover a:hover, .i-list a:hover, .nav a:hover{background: #C34D4D; color:#FFFFFF;}
+.i-list{background: #FFFFFF; border:1px solid #EEEEEE; border-top:0;}
+.i-list a, .i-list a:visited{border-bottom:1px solid #FFFFFF; color:#333333;}
+.i-list a:hover{background:#EEEEEE;}

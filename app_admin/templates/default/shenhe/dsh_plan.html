@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+
+<body>
+{part "/main.main.nav.admin"}
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  {part ("/admin.main.nav.plan")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+{*
+    <div class="toolbar-45">
+        <div id="adjihua" class="selMenu smzt">
+          <span class="smtit">全部广告主</span>
+          <ul>
+            <li><a href="javascript:;">全部广告主</a></li>
+            <li><a href="javascript:;">新浪</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smzt ml10">
+          <span class="smtit">全部广告计划</span>
+          <ul>
+            <li><a href="javascript:;">全部广告计划</a></li>
+            <li><a href="javascript:;">巧乐兹</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smzt ml10">
+          <span class="smtit">全部广告组</span>
+          <ul>
+            <li><a href="javascript:;">全部广告组</a></li>
+            <li><a href="javascript:;">巧乐兹</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smzt ml10">
+          <span class="smtit">全部素材</span>
+          <ul>
+            <li><a href="javascript:;">全部素材</a></li>
+            <li><a href="javascript:;">巧乐兹</a></li>
+          </ul>
+        </div>
+          <div class="selMenu ml10">
+            <div class="smtbg">
+              <input type="text" class="itxt_1 fl idate" value="2012-05-23" size="15" />
+              <div class="fl">&nbsp;至&nbsp;</div>
+              <input type="text" class="itxt_1 fl idate" value="结束时间" size="15" />
+            </div>
+          </div>
+          <span class="iSearch ml10">
+             <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+             <input type="text" class="itxt fc7" value="" size="30" />
+          </span>
+      <div class="clear"></div>
+    </div>
+	*}
+    <!--toolbar start--> 
+    <div class="toolbar">
+       <span class="sbtnb"><a class="ibtnb" >通过</a></span>
+       <span class="sbtng ml10"><a class="ibtng">拒绝</a></span>
+      <div class="clear"></div>
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+      <tr>
+        <th><input class="checkall" type="checkbox"/></th>
+        <th>广告主</th>
+        <th>广告计划</th>
+        <th>有效期</th>
+        <th>分类名</th>
+        <th>状态</th>
+        <th>审核状态</th>
+        <th>操作</th>
+      </tr>
+{foreach $plans->data as $_plan}
+      <tr>
+        <td><input class="plan_ids" type="checkbox" value="{$_plan->plan_id}" /></td>
+        <td>
+        	<a href="admin.user.edit.{$_plan->bind_id}" target="_blank">
+			{$adSopnsorArray[$_plan->bind_id]}
+			</a>
+        </td>
+        <td>
+        	<a href="ad.plan.list.{$_plan->plan_id}" target="_blank">
+        	{$_plan->plan_name}
+        	</a>
+        </td>
+        <td>{if empty($_plan->start_date)}末设置{else}{date("Y-m-d",$_plan->start_date)}{/if} - {if empty($_plan->end_date)}末设置{else}{date("Y-m-d",$_plan->end_date)}{/if}</td>
+        <td>{$_plan->type_name}</td>
+        <td>{if $_plan->enable==1}正常{elseif $_plan->enable==2}无效{elseif $_plan->enable==3}过期{elseif $_plan->enable==5}冻结{/if}</td>
+        <td>{if $_plan->verified_or_not==1}待审{elseif $_plan->verified_or_not==2}通过{elseif $_plan->verified_or_not==3}未通过{/if}</td>
+      	<td>
+      		{if $currentUserName == admin}
+      			{if ($currentStatus == 1 or $currentStatus == 3) }
+      				<a href="javascript:void(0)" onclick="setStatusById({$_plan->plan_id},2)">通过</a>
+      			{/if}
+      			{if ($currentStatus == 1 or $currentStatus == 2) }
+      				<a href="javascript:void(0)" onclick="setStatusById({$_plan->plan_id},3)">拒绝</a>
+      			{/if}
+      		{/if}
+      	</td>
+      </tr>
+{/foreach}
+    </table>
+    
+		{$pager}
+
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+<script>
+      $(document).ready(function(){
+		$(".ibtnb").click(function(){
+			set(2);
+			});
+		$(".ibtng").click(function(){
+			set(3);
+			});
+		function set(type){
+			var checked = $(".reportab input:checkbox:checked[value]");
+			if(checked.size()<=0){
+				alert("请选择");
+			}else{
+				 var planid=[];
+				 checked.each(function(i,item){
+					 planid.push($(item).val());
+				 })
+				 $.ajax({ 
+					type: "POST", url: "/admin.shenhe.planSet?type="+type, data: { plan_ids:planid }, dataType:"json",
+					success: function(msg){ 
+						location.reload();
+					}
+				});
+			}
+			return false;
+		};
+		$(".checkall").change(function(){
+			var ck=$(this).prop("checked");
+			$(this).parents("table").find("input:checkbox").prop("checked",ck);
+			});
+	});
+    function setStatusById(id,type){
+			$.ajax({ 
+				type: "POST", url: "admin.shenhe.planSet."+id, data: { type:type }, dataType:"json",
+				success: function(msg){ 
+					location.reload();
+				}
+			});
+			return false;
+	};
+</script>
+</body>
+</html>

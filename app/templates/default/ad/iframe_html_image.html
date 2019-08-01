@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8" lang="cn"><![endif]--><!--[if IE 9]><html class="ie9" lang="cn"><![endif]-->
+<!--[if !IE]><!-->
+    <html lang="cn">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <!--[if IE]><meta https-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="keywords" content="">
+		<style>
+			html,body{ width:100%; height:100%; margin:0; overflow:hidden; border:none; }
+		</style>
+    </head>
+    <body>
+		{if(isset($_GET['full'])&&$_GET['full']==1)}
+        	<div style="width: 100%; {$width} {$height} overflow: hidden; position:absolute; left:0;">
+                <a href="#">
+                	<img src="{$ad['addr']}" style="width: 100%;  height:100%;">
+				</a>
+        	</div>
+		{else}
+        	<div style="width: {$ad['width']}px; height: {$ad['height']}px; overflow: hidden; position:absolute; left:0;">
+                <a href="#"">
+                	<img src="{$ad['addr']}" style="width: {$ad['width']}px; height: {$ad['height']}px;">
+				</a>
+        	</div>
+		{/if}
+		<span style="display:none">
+			{$ad['show_js']}
+		</span>
+	</body>
+</html>

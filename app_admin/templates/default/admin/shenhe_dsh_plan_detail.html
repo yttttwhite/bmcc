@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看广告计划详情[{$plan->plan_name}]</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 广告计划信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">广告计划名称：{$plan->plan_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll" style="display: inline;">广告计划类型：【{$plan->type_name}】>>【{$plan->cate_name}】</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">合同类型：{if $plan->contract_type==1}竞价制广告合同{elseif $plan->contract_type==2}合约制广告合同{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">广告主账户：{$aduser->user_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">广告主账户余额：{$aduser->account} 元</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">计费方式：{if $plan->billing_type==2}CPM{elseif $plan->billing_type==4}CPT{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">投放周期：{if empty($plan->start_date)}未设置{else}{date("Y-m-d",$plan->start_date)}{/if} - {if empty($plan->end_date)}未设置{else}{date("Y-m-d",$plan->end_date)}{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">频次控制：{if $plan->frequency_control===-1}不限制
+                {elseif $plan->frequency_control===0}根据IP
+                {elseif $plan->frequency_control===1}根据COOKIE
+                {elseif $plan->frequency_control===2}根据手机号
+                {elseif $plan->frequency_control===3}优先根据手机号，其次IP
+                {elseif $plan->frequency_control===4}根据IMEI
+                {/if}
+            </span>
+        </div>
+        <div class="dvll">
+            <span class="scll">更新时间：{date('Y-m-d H:i:s',$plan->mtime)}</span>
+        </div>
+
+        <div class="dvll" style="display: none;">
+            <span class="scll">审核操作：
+                {if user_api::auth("shenhe") }
+                {if ($currentStatus == 1 or $currentStatus == 3) }
+                <a href="javascript:void(0)" onclick="setStatusById(2, this)">通过</a>
+                {/if}
+                {if ($currentStatus == 1 or $currentStatus == 2) }
+                <a href="javascript:void(0)" onclick="setStatusById(3, this)">拒绝</a>
+                {/if}
+                {/if}
+
+            </span>
+        </div>
+
+    </div>
+
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer" onclick="window.close();" >关闭</div>
+</body>
+</html>

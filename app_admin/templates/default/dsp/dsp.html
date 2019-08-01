@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.dsp"}
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+    {part ("/dsp.main.nav.dsp.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/dsp.main.add">新建DSP</a>
+			<i class="fa fa-angle-double-right"></i>
+			媒体列表
+    	</div>
+		<div class="fl">
+		    <span class="iSearch ml10">
+		       <a class="isicon" href="javascript:location='?key='+$('#key').val();"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+		       <input id="key" type="text" class="itxt fc7" placeholder="域名/名称" value="{$key}" size="30" />
+		    </span>
+		</div>
+		<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media.main.add">新增媒体</a>
+		</div>
+		<div class="clear"></div>
+	</div>
+  
+    <!--toolbar start--> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th>ID</th>
+        <th>DSP名称</th>
+        <th>是否参与Cookie Mapping</th>
+        <th>是否参与竞价</th>
+        <th>最大QPS</th>
+        <th>预存管理</th>
+        <th>操作</th>
+      </tr>
+{foreach $dsps->items as $dsp}
+      <tr>
+        <td>{$dsp['dsp_id']}</td>
+        <td>{$dsp['dsp_name']}</td>
+        <td>{if !empty($dsp['dsp_cms_url'])}<a target="_blank" href="{$dsp['dsp_cms_url']}">参与</a>{else}不参与{/if}</td>
+        <td>{if !empty($dsp['dsp_bid_url'])}<a target="_blank" href="{$dsp['dsp_bid_url']}">参与</a>{else}不参与{/if}</td>
+        <td>{$dsp['dsp_max_qps']}</td>
+        <td><a href="#">充值管理</a> | 实时余额：345元</td>
+        <td><a href="/baichuan_advertisement_manage/dsp.main.add.{$dsp['dsp_id']}">查看</a><a href="/baichuan_advertisement_manage/dsp.main.add.{$dsp['dsp_id']}">修改</a><a href="#">删除</a></td>
+      </tr>
+{/foreach}
+    </table>
+	{$pager}
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+<!--版权-->
+<div class="footer">
+  <div class="ftcon">
+    Copyright © 2013 All rights reserved. 设计广告平台有限公司 版权所有<br /> 
+    京ICP证68976143.3号 京公网安备XKD89756号
+  </div>
+</div>
+
+</body>
+</html>

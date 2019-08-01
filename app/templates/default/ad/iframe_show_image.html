@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8" lang="cn"><![endif]--><!--[if IE 9]><html class="ie9" lang="cn"><![endif]-->
+<!--[if !IE]><!-->
+    <html lang="cn">
+    <!--<![endif]-->
+    <head>
+        <title>{$ad['adname']}</title>
+        <meta charset="utf-8" />
+        <!--[if IE]><meta https-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="keywords" content="">
+		<style>
+			html,body{ width:100%; height:100%; margin:0; overflow:hidden; border:none; }
+		</style>
+    </head>
+    <body>
+		<div style="display:none;">
+			{if($ad['show_js_type']==2)}
+				{$ad['show_js']}
+			{/if}
+		</div>
+
+		{if(isset($_GET['full'])&&$_GET['full']==1)}
+        <div style="width: 100%; {$width} {$height} overflow: hidden; position:absolute; left:0;">
+            <div style="width: 100%; height:100%; overflow: hidden; font-size: 0px;">
+                <a onclick="hankCreateHiddenIframe('{$ad['click_js_iframe']}'); hankCreateHiddenJs('https://s4.cnzz.com/z_stat.php?id=1256574588&web_id=1256574588');" href="{$ad['landing_page']}" target="_blank">
+                	<img src="{$ad['addr']}" style="width: 100%;  height:100%;">
+				</a>
+            </div>
+        </div>
+		{else}
+        <div style="width: {$ad['width']}px; height: {$ad['height']}px; overflow: hidden; position:absolute; left:0;">
+            <div style="width: 100%; overflow: hidden; font-size: 0px;">
+                <a onclick="hankCreateHiddenIframe('{$ad['click_js_iframe']}'); hankCreateHiddenJs('https://s4.cnzz.com/z_stat.php?id=1256574588&web_id=1256574588');" href="{$ad['landing_page']}" target="_blank">
+                	<img src="{$ad['addr']}" style="width: {$ad['width']}px; height: {$ad['height']}px;">
+				</a>
+            </div>
+        </div>
+		{/if}
+		<script>
+			function hankCreateHiddenIframe(src){
+				var iframe = document.createElement("IFRAME");
+			    iframe.frameBorder = "0";
+			    iframe.style.display = "none";
+			    iframe.style.width = "100%";
+			    iframe.setAttribute("src", src);
+			    iframe.style.height = "100%";
+			    iframe.style.boder = "px";
+			    document.body.appendChild(iframe)
+			}
+			function hankCreateHiddenJs(src){
+				var script = document.createElement("script");
+			    script.setAttribute("src", src);
+			    document.body.appendChild(script)
+			}
+		</script>
+	</body>
+</html>

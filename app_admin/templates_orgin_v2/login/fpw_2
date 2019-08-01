@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>金融工场通行证</title>
+<link rel="stylesheet" type="text/css" href="css/globle.css" />
+<link rel="stylesheet" type="text/css" href="css/thickbox.css"/>
+</head>
+
+<body>
+
+  <div class="ltop">
+    <span class="ltr fr">你好，<strong>刘点</strong>！ [<a href="login.html">退出</a>]&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.9888.cn" target="_blank">金融工场首页</a></span>
+    <span class="name"><img src="images/name.gif" alt="金融工场通行证" /></span>
+  </div>
+
+  <!--login start-->
+  <div class="graybg">
+    <div class="main clear">
+    
+      <div class="mside fl"><img src="images/i_fpw.png" /><h1>找回密码</h1></div>
+      
+      <!--LoginForm-->
+        <!--login start-->
+        <div class="mcon">
+        
+        <div class="fpwstep fpwstep2 fl">
+          <div class="step1">输入邮箱账号</div>
+          <div class="step2">发送密码重置邮件</div>
+          <div class="step3">重设密码</div>
+          <div class="step4">成功找回密码</div>
+         </div>
+         <div class="clear"></div>
+        
+        <div class="fpwcon">
+          <p class="lh26 fs14">您的密码重置邮件已发送到<a class="fcr" href="fpw_3.html">lilei_1972@sina.com</a>，请登录邮箱进行密码重置。</p>
+          <h6 class="mt30">没收到邮件？</h6>
+          <p class="mt10 lh26 fs14">
+            1.查看邮箱的垃圾箱或广告箱，邮件可能被误认为垃圾邮件。<br />
+            2.如果超过10分钟仍未收到验证邮件，请点击<a class="fcr" href="#">重新发送验证</a>。<br />
+            3.如果您暂时收不到邮件，您可以通过<a class="fcr" href="#">回答安全问题</a>找回。<br />
+          </p>
+        </div>
+        </div>
+        <!--login end-->
+         
+      </div>
+      
+    </div>
+  
+  </div>
+  </div>
+
+  
+  <div class="cpli">
+    <div class="jrnl"><a href="https://www.jinrongnvlang.com/" target="_blank">金融女郎</a></div>
+    <div class="qcpm"><a href="https://www.paiche365.com/" target="_blank">汽车拍卖</a></div>
+    <div class="zcw"><a href="https://www.zhongchou.cn/" target="_blank">众筹网</a></div>
+    <div class="wdy"><a href="https://www.9888mov.com/" target="_blank">微电影</a></div>
+    <div class="jrbk"><a href="https://ask.9888.cn/baike.html" target="_blank">金融百科</a></div>
+    <div class="jrzx"><a href="https://news.9888.cn/" target="_blank">金融资讯</a></div>
+    <div class="yjr"><a href="https://www.9888.com/" target="_blank">壹金融</a></div>
+  </div>
+  <div class="clear"></div>
+
+  
+  <!--footer-->
+  <div class="footer lh21 clear">版权所有 &copy;2013&nbsp;金融工场&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">关于我们</a></div>
+
+  
+
+</body>
+</html>

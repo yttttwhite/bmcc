@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body class="w-auto">
+	<div class="container-content p-0 mt-20">
+		<div class="panel panel-white mtb-0">
+			<div class="panel-body">
+				<form  method="post" action="/dpc.main.host.{$collection}.save">
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<span class="input-icon">
+									<input type="text" class="form-control" name="collection" value="{$collection}" style="display:none;">
+									{if(isset($referer))}
+									<input type="text" class="form-control" name="referer" value="{$referer}" style="display:none;">
+									{/if}
+									<input type="text" class="form-control" name="url" value="{$urlStr}" style="display:none;">
+									<input type="text" class="form-control" name="saveType" value="edit" style="display:none;">
+									<div class="ml-10">
+										<p>您将修改以下HOST所属分组：</p>
+										{foreach $url as $item}
+										<p>{$item}</p>
+										{/foreach}
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel-heading border-light active"
+						style="border-top: 1px solid #EEEEEE; margin-top: 30px;">
+						<div class="panel-title">选择要添加到的分组：</div>
+					</div>
+					<div class="panel-body partition-white">
+						{foreach $groupList as $group}
+						<label class="radio-inline groupRadio">
+							<input type="radio" class="square-red" name="groupRadio" value="{$group['group_id']}" {if $group['group_id'] == $gid}checked="checked"{/if}>
+							<span style="margin-left:5px;">{$group['group_name']}</span>
+						</label>
+						{/foreach}
+					</div>
+					
+					<div class="table-footer mt-30">
+						<button type="submit"
+							class="btn btn-100-30 btn-success btn-squared"
+							style="float: right;">提交</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+		$(document).ready(function() {
+			$('input').iCheck({
+				checkboxClass : 'iradio_square-red',
+				radioClass : 'iradio_square-red',
+				increaseArea : '10%'
+			});
+		});
+</script>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {part "/main.main.header"}
+        <script src="/baichuan_advertisement_manage/assets_admin/js/jquery.form.min.js">
+        </script>
+        <style>
+            span.sbtng, span.sbtng .ibtng {
+                float: none;
+            }
+        </style>
+		<link rel="stylesheet" href="/baichuan_advertisement_manage/assets_admin/v5/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
+		<script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}<!--main-->
+        <div class="main">
+        <div class="side">
+            {part "/ad.plan.listpart.".$plan_id.".".$group_id}
+        </div>
+        <!--mcon-->
+        <div class="mcon">
+            <div class="toolbar-bc fl" style="margin-bottom:15px;">
+                <div class="fl">
+					<a class="btn btn-squared btn-grey"  href="/baichuan_advertisement_manage/ad.stuff.addExchangeStuff.{$plan_id}.{$group_id}">继续添加</a>
+                    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.group.list.{$plan_id}.{$group_id}">素材列表</a>
+                </div>
+                <div class="fr">
+                    <a class="btn btn-squared btn-blue" href="/baichuan_advertisement_manage/ad.plan.list.{$plan_id}">广告组列表</a>
+                    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.plan.add.{$plan_id}">编辑广告计划</a>
+                    <a class="btn btn-squared btn-default" href="/baichuan_advertisement_manage/ad.group.add.{$plan_id}.{$group_id}">编辑广告组</a>
+                    <a class="btn btn-squared btn-default hide" href="/baichuan_advertisement_manage/ad.stuff.add.{$plan_id}.{$group_id}">编辑素材</a>
+                </div>
+            </div>
+            <div class="comForm clear" style="margin:0;">
+            <div>
+                <h1>素材信息</h1>
+                <div class="" style="width:640px; magin-left:30px; margin-top:30px; border:1px solid #EEEEEE; padding:30px; float: left;">
+					<form id="adForm" class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="/ad.stuff.saveExchangeStuff">
+                        <input type="hidden" name="submit_or_not" id="submit_or_not" value="0"/>
+						<div class="form-group mt-30">
+	                        <label for="ad-type" class="col-sm-2 control-label">素材预览</label>
+                            <div class="col-sm-10">
+                            	{if($stuffInfo->type == 1)}
+                            	<img src="{$stuffInfo->addr}" width="{$adInfo->width}" height="{$adInfo->height}" style="max-width:300px; height:auto;"/>
+                           		{elseif($stuffInfo->type == 2)}
+								<object data="{$stuffInfo->addr}" width="300" height="{$stuffInfo->height*(300/$stuffInfo->width)}">
+                                   <embed src="{$stuffInfo->addr}" width="300" height="{$stuffInfo->height*(300/$stuffInfo->width)}"/>
+                                </object>
+                           		{elseif($stuffInfo->type == 6)}
+                                   <video width="320" controls="controls">
+                                       <source src="{$stuffInfo->addr}" type="video/mp4" />
+									   <source src="{$stuffInfo->addr}" type="video/ogg" />
+									   <source src="{$stuffInfo->addr}" type="video/webm" />
+                                       <object data="{$stuffInfo->addr}" width="320">
+                                           <embed src="{$stuffInfo->addr}" width="320"/>
+                                       </object>
+                                   </video>
+                           		{elseif($stuffInfo->type == 10)}
+                                   <video width="320" controls="controls">
+                                       <source src="{$stuffInfo->addr}" type="video/mp4" />
+									   <source src="{$stuffInfo->addr}" type="video/ogg" />
+									   <source src="{$stuffInfo->addr}" type="video/webm" />
+                                       <object data="{$stuffInfo->addr}" width="320">
+                                           <embed src="{$stuffInfo->addr}" width="320"/>
+                                       </object>
+                                   </video>
+								{/if}
+						    </div>
+	                    </div>
+						<div class="form-group mt-30">
+	                        <label for="ad-type" class="col-sm-2 control-label">素材信息</label>
+                            <div class="col-sm-10">
+                            	<table class="table table-bordered">
+                            		<tr>
+                            			<td>素材ID</td>
+                            			<td>{$stuffInfo->stuff_id}</td>
+                            		</tr>
+                            		<tr>
+                            			<td>分辨率</td>
+                            			<td>{$stuffInfo->width} x {$stuffInfo->height}</td>
+                            		</tr>
+                            		<tr>
+                            			<td>文件大小</td>
+                            			<td>{ceil($stuffInfo->size / 1024)}k</td>
+                            		</tr>
+                            		<tr>
+                            			<td>MIME</td>
+                            			<td>{$stuffInfo->mime_type}</td>
+                            		</tr>
+									{if($stuffInfo->type == 6)}
+                            		<tr>
+                            			<td>时长</td>
+                            			<td>{ceil($stuffInfo->duration)}秒</td>
+                            		</tr>
+                            		<tr>
+                            			<td>帧速率</td>
+                            			<td>{ceil($stuffInfo->frame_rate)}帧/秒</td>
+                            		</tr>
+                            		<tr>
+                            			<td>比特率</td>
+                            			<td>{ceil($stuffInfo->bitrate / 1024)}kbps</td>
+                            		</tr>
+									{/if}
+                            	</table>
+						    </div>
+	                    </div>
+						
+						<div class="form-group mt-30">
+	                        <label for="adType" class="col-sm-2 control-label">广告ID</label>
+	                        <div class="col-sm-10">
+	                        	<input type="text" class="form-control" value="{$adInfo->adid}" readonly="readonly">
+	                        </div>
+	                    </div>
+						<div class="form-group mt-30">
+	                        <label for="adType" class="col-sm-2 control-label">广告类型</label>
+	                        <div class="col-sm-10">
+	                        	{if($group_info->exchanges == 8)}
+	                        	<select id="adType" name="view_type" class="form-control" onchange="changeAdType();" disabled>
+	                        		<option value="0">请选择</option>
+									{foreach($adTypesInfo_inmobi as $adTypeCode => $adTypeInfo)}
+	                        			<option value="{$adTypeCode}" {if( $adInfo->view_type == $adTypeCode )}selected="selected"{/if}>{$adTypeInfo['name']}</option>
+									{/foreach}
+	                        	</select>
+		                        {else}
+		                        	<select id="adType" name="view_type" class="form-control" onchange="changeAdType();" disabled>
+		                        		<option value="0">请选择</option>
+										{foreach($adTypesInfo_normal as $adTypeCode => $adTypeInfo)}
+		                        			<option value="{$adTypeCode}" {if( $adInfo->view_type == $adTypeCode )}selected="selected"{/if}>{$adTypeInfo['name']}</option>
+										{/foreach}
+		                        	</select>
+		                        {/if}
+                                <div id="tip-container" class="alert alert-info mt-10" style="display:none; margin-bottom: 0;">
+                                    <button data-dismiss="alert" class="close">
+                                        ×
+                                    </button>
+                                    <strong>提示：</strong><span id="tip"></span>
+                                </div>
+	                        </div>
+	                    </div>
+						{if( $adInfo->view_type == 1002)}
+						<div class="form-group mt-30 adIconDiv">
+	                        <label for="ad-type" class="col-sm-2 control-label">图标预览</label>
+                            <div class="col-sm-10">
+                            	<img src="{$stuffInfo->icon_addr}" width="{$stuffInfo->icon_width}" height="{$stuffInfo->icon_height}" style="max-width:100px; max-height:100px; min-width:60px; min-height:60px;"/>
+                            </div>
+	                    </div>
+						<div class="form-group mt-30 adIconDiv">
+	                        <label for="ad-type" class="col-sm-2 control-label">图标尺寸</label>
+                            <div class="col-sm-10">
+                            	<select name="icon_width" class="form-control">
+                            		<option value="0">请选择</option>
+                            		{foreach($icon_size as $len)}
+                                    <option value="{$len}" {if($stuffInfo->crop == $len)}selected="selected"{/if}>{$len}x{$len}</option>
+                                    {/foreach}
+                            	</select>
+                            </div>
+	                    </div>
+						{/if}
+						<div class="form-group mt-30">
+	                        <label for="ad-type" class="col-sm-2 control-label">广告尺寸</label>
+                            <div class="col-sm-5">
+                            	<div class="input-group">
+									<span class="input-group-addon">宽</span>
+									<input type="text" class="form-control" name="width" value="{$adInfo->width}">
+								</div>
+                            </div>
+                            <div class="col-sm-5">
+                            	<div class="input-group">
+									<span class="input-group-addon">高</span>
+									<input type="text" class="form-control" name="height" value="{$adInfo->height}">
+								</div>
+                            </div>
+	                    </div>
+						
+						<input type="text" class="hide" name="adid" value="{$adInfo->adid}">
+						<input type="text" class="hide" name="stuff_id" value="{$stuffInfo->stuff_id}">
+						
+						<div class="form-group">
+	                        <label for="ad-title" class="col-sm-2 control-label">名称</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" class="form-control hidden" name="plan_id" value="{$plan_id}">
+	                            <input type="text" class="form-control hidden" name="group_id" value="{$group_id}">
+	                            <input id="adname" type="text" class="form-control" id="adname" name="adname" value="{$adInfo->adname}">
+	                        </div>
+	                    </div>
+						<div class="form-group">
+	                        <label for="ad-title" class="col-sm-2 control-label">标题</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" class="form-control" id="ad-title" name="title" value="{$stuffInfo->title}">
+	                        </div>
+	                    </div>
+						<div class="form-group">
+	                        <label for="ad-title" class="col-sm-2 control-label">描述</label>
+	                        <div class="col-sm-10">
+								<textarea class="form-control" name="desc">{$stuffInfo->desc}</textarea>
+	                        </div>
+	                    </div>
+						<div class="form-group">
+	                        <label for="ad-title" class="col-sm-2 control-label">目标地址</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" class="form-control" id="ad-title" name="landing_page" value="{$stuffInfo->landing_page}">
+	                        </div>
+	                    </div>
+						<div class="form-group">
+	                        <label for="ad-title" class="col-sm-2 control-label">展示监控</label>
+	                        <div class="col-sm-10">
+								<textarea class="form-control" name="show_js">{$adInfo->show_js}</textarea>
+	                        </div>
+	                    </div>
+						<div class="form-group">
+	                        <label for="ad-title" class="col-sm-2 control-label">点击监控</label>
+	                        <div class="col-sm-10">
+								<textarea class="form-control" name="click_js">{$adInfo->click_js}</textarea>
+	                        </div>
+	                    </div>
+						<div class="form-group mt-30">
+	                        <label for="ad-type" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                            	<a class="btn btn-squared btn-default fr" href="/baichuan_advertisement_manage/ad.group.list.{$plan_id}.{$group_id}" style="width:100px; margin-left:10px;">返回列表</a>
+                                <input type="button" onclick="saveAd(0)" class="btn btn-squared btn-blue fr" style="width:100px;" value="保存" {if(($btn_disable==1)&&(!(user_api::auth("admin"))))} disabled {/if}>
+                                <input type="button" onclick="saveAd(1)" class="btn btn-squared btn-blue fr" style="width:100px;margin-right:10px;" value="保存并提交" {if(($btn_disable==1)&&(!(user_api::auth("admin"))))} disabled {/if}>
+                            </div>
+	                    </div>
+					</form>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        <script>
+        	var adTypesInfo = {$adTypesInfoJson};
+            $(document).ready(function(){
+                $('.icheck').iCheck({
+                    checkboxClass: 'icheckbox_minimal-aero',
+                    radioClass: 'iradio_flat-blue',
+                    increaseArea: '-10%'
+                });
+				
+				changeAdType();
+            });
+			function getFileName(){
+				var file = $("#ad-image-file").val();
+				var pos	= file.lastIndexOf("\\");
+                fileName = file.substring(pos + 1);
+				var pos	= fileName.lastIndexOf(".");
+                fileName = fileName.substring(0,pos);
+				$("#adname").val(fileName);
+			}
+			
+			function changeAdType(){
+				var adType = $("#adType").val();
+				if(adType == 1002){
+					$('.adIconDiv').show();
+				}else{
+					$('.adIconDiv').hide();
+				}
+				
+				if( typeof(adTypesInfo[adType]) === "object" && typeof(adTypesInfo[adType].tip) !== "undefined" ){
+					$("#tip").text(adTypesInfo[adType].tip);
+					$("#tip-container").show();
+				}else{
+					$("#tip").text("");
+					$("#tip-container").hide();
+				}
+			}
+			
+			$("input[name='adname']").change(function(){
+				if($("input[name='adname']").val().length < 1 || $("input[name='adname']").val().length > 50){
+					$("input[name='adname']").css("border","1px solid #FF5A5F");
+				}else{
+					$("input[name='adname']").css("border","1px solid #DDDDDD");
+				}
+			});
+			
+			function saveAd(flag=0){
+				var error = 0;
+				var msg = "";
+				if($("input[name='stuff_id']").val().length < 1 || $("input[name='stuff_id']").val() < 1){
+					error++;
+					msg += error+'.素材错误：请检查素材是否正确上传<br>注意：素材文件名不能有特殊字符';
+				}
+				if($("input[name='adname']").val().length < 1){
+					$("input[name='adname']").css("border","1px solid #FF7E82");
+					error++;
+					msg += error+'.请填写广告名称<br>';
+				}
+				if($("input[name='adname']").val().length > 50){
+					$("input[name='adname']").css("border","1px solid #FF7E82");
+					error++;
+					msg += error+'.广告名称不能超过50个字符（25个汉字）<br>';
+				}
+				if($("input[name='landing_page']").val().length < 1){
+					error++;
+					msg += error+'.目标地址不能为空<br>';
+				}
+				if(error == 0){
+                    if(flag==1){
+                        layer.confirm('提交审核后将不可再修改素材，是否继续？', function(){
+                            $("#submit_or_not").val(1);
+			    	        $("#adForm").submit();
+                        }); 
+                    }else{
+			    	    $("#adForm").submit();
+                        }
+				}else{
+					layer.alert(msg);
+					return false;
+				}
+			}
+        </script>
+        {part "/main.main.footer"}
+    </body>
+</html>

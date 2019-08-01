@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body>
+    	{part "/main.main.nav.ad"}
+        <div class="main">
+            <div class="side">
+                {part "/crm.target.left"}
+            </div>
+            <!--mcon start-->
+			
+			<div class="mcon">
+				<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+					<!--表头-->
+					<div class="panel-heading border-light panel-head-md">
+						<form id="queryFrom" action="/crm.number.list" method="get">
+							<div class="fl" style="position: relative; left: 10px;">
+								<input type="text" name="key" class="form-control input-small"  placeholder="关键字" value="{$get['key']}"/>
+							</div>
+							<div class="fl" style="position: relative; left: 10px;">
+								<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+								<a href="/baichuan_advertisement_manage/crm.number.list?group_id={$get['group_id']}" class="btn btn-squared btn-sm btn-default ml-10">全部</a>
+								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('添加','/crm.target.add',800,480);">添加号码</a>
+								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('从文件导入','/crm.target.import',800,480);">文件导入</a>
+							</div>
+						</form>
+						<ul class="panel-heading-tabs border-light" style="display:none;">
+			                <div class="btn-group">
+			                    <button type="button" class="btn btn-sm btn-squared btn-success w-140" data-toggle="dropdown">
+			                    	筛选<span class="caret"></span>
+			                    </button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+			                        </li>
+			                    </ul>
+			                </div>
+			            </ul>
+					</div>
+					<!--表头:结束-->
+					<!--内容-->
+					<div class="panel-body">
+						<!--表身-->
+						<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+							<thead>
+	                			<tr>
+	                				<th>ID</th>
+									<th>账号</th>
+									<th>账号类型</th>
+									<th>系统分组</th>
+							        <th>状态</th>
+									<th>标签</th>
+							        <th>创建时间</th>
+							        <th>操作</th>
+	                			</tr>
+	                		</thead>
+							<tbody>
+								{foreach $list as $item}
+								      <tr>
+								        <td>{$item['id']}</td>
+								        <td>{$item['account']}</td>
+										<td>{$typeList[$item['type']]}</td>
+								        <td>{$groupInfoArray[$item['group_id']]}</td>
+								        <td>{$item['status']}</td>
+								        <td>{$item['tags']}</td>
+								        <td>{date('Y-m-d H:i:s',$item['ctime'])}</td>
+								        <td>
+									        <a href="#" onclick="layerConfirmGet('/crm.target.delete?id={$item['id']}', '确认删除这条数据？');">删除</a>
+										</td>
+								      </tr>
+								{/foreach}
+							</tbody>
+						</table>
+						<!--分页-->
+			            <div class="text-right">
+			                <ul class="pagination margin-bottom-10">
+			                    <li>
+			                        <a href="{$page['url']}page=1">上一页</a>
+			                    </li>
+								{for($i = 1; $i<=$page['count']; $i++)}
+			                    <li {if($page['current']==$i)}class="active"{/if}>
+			                        <a href="{$page['url']}page={$i}">{$i}</a>
+			                    </li>
+								{/for}
+			                    <li>
+			                        <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+			                    </li>
+			                </ul>
+			            </div>
+						
+					</div>
+					<!--结束：内容-->
+				</div>
+			</div>
+			
+			
+		</div>
+	<script>
+		;
+	function deleteNumberGroupById(id){
+	    var msg = "确认删除这条数据？";
+	    var url = "/crm.number.groupDelete?id=" + id;
+	    layerConfirmGet(url, msg);
+	}
+	</script>
+	{part "/main.main.footer"}
+    </body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+{part "/main.main.header"}
+<style>
+#chartSummary .c3-line-data2 {
+  	stroke-width: 2px;
+}
+</style>
+</head>
+<body>
+	{part "/main.main.nav.ad"}
+	<div class="container-content" style="background: #F6F5F7;">
+		<div class="contianer-left"></div>
+		<div class="content" style="margin: auto;">
+			<div id="tagContainerLayer" onclick="closeTagLayer()" style="position:fixed;margin:auto;left:0; right:0; top:0; bottom:0; z-index:90; background:rgba(0,0,0,0.5); display:none;"></div>
+			<div class="tagContainer" id="tagContainer" style="position:fixed; margin:auto; left:0; right:0; top:0; bottom:0; z-index:100; display:none;">
+				<div class="tagContainerLeft">
+					<ul>
+						{foreach $rootTags as $rootTag}
+						{if(in_array($rootTag['pid'],$parentLeafCount))}
+						<li><a name="{$rootTag['tid']}" onclick="getLeafTagsByPid(this.name)">{$rootTag['tname']}</a></li>
+						{/if}
+						{/foreach}
+					</ul>
+				</div>
+				<div class="tagContainerRight">
+					<ul id='leafTags'></ul>
+				</div>
+				<script type="text/javascript">
+					function getLeafTagsByPid(pid){
+						$.ajax({ 
+									type: "GET",
+									url: "bigdata.main.ShowSubTags?pid="+pid,
+									dataType:"json",
+									success: function(data){
+										if(data.msg='true'){
+											$str = '';
+											for(i=0; i<data.length;i++){
+												$str += '<li><a name="'+data[i].tid+'" onclick="selectThisTag(this)">'+data[i].tname+'</a></li>';
+											}
+											document.getElementById('leafTags').innerHTML = $str;
+										}
+									}
+								}
+						)
+					}
+					
+					function selectThisTag(e){
+						document.getElementById('selectedTagName').value = e.innerHTML;
+						document.getElementById('selectedTagId').value = e.name;
+						closeTagLayer();
+					}
+					
+					function closeTagLayer(){
+						document.getElementById('tagContainerLayer').style.display = "none";
+						document.getElementById('tagContainer').style.display = "none";
+					}
+					
+					function openTagLayer(){
+						document.getElementById('tagContainerLayer').style.display = "block";
+						document.getElementById('tagContainer').style.display = "block";
+					}
+				</script>
+			</div>
+			<div class="content-inside">
+				<div class="blank-block operation" style="border-top: 2px solid #008CBA;">
+					<div class="fullwidth fl pt-40">
+						<div class="center-block">
+							<div class="input-group search" style="float: left;">
+								<input type="text" value="" class="form-control" id="selectedTagName" onclick="openTagLayer()">
+								<input type="text" value="" class="form-control" id="selectedTagId" style="display:none;">
+								<span class="btn btn-squared input-group-addon">查询标签</span>
+							</div>
+							<div class="btn-container">
+								<span class="btn btn-squared input-group-addon">高级查询</span>
+							</div>
+						</div>
+					</div>
+					<div class="fullwidth fl pt-10">
+						<div class="center-block"><p>系统库概况：当前系统库共有385个标签，9892356位用户，9079014562人次标签结果。</p></div>
+					</div>
+				</div>
+				
+				{if(isset($c3Srt))}
+				<div class="blank-block chart-block mt-20 fl">
+					<div class="fullwidth fl chart-title">
+						<span>标签库命中概况<em style="margin:0 5px; color:#CC0000;">[单位：万]</em></span>
+					</div>
+					<div class="chart-full-container">
+						<div id="chartSummary"></div>
+					</div>
+				</div>
+				<script type="text/javascript">var chartSummary = c3.generate({$c3Srt});</script>
+				{/if}
+				
+				<div class="blank-block chart-block mt-10 fl">
+					<div class="fullwidth fl chart-title">
+						<span>网民属性分布</span>
+					</div>
+					<div class="chart-quarter-container">
+						<div id="chartGender"></div>
+					</div>
+					<div class="chart-quarter-container">
+						<div id="chartAge"></div>
+					</div>
+					<div class="chart-quarter-container">
+						<div id="chartIncome"></div>
+					</div>
+					<div class="chart-quarter-container">
+						<div id="chartEdu"></div>
+					</div>
+				</div>
+				
+				{if(isset($c3InterestRoot))}
+				<div class="blank-block chart-block mt-20 fl">
+					<div class="fullwidth fl chart-title">
+						<span>标签库命中概况</span>
+					</div>
+					<div class="chart-full-container" style="height:600px;">
+						<div id="chartInterestRoot" style="height:560px;"></div>
+					</div>
+				</div>
+				<script type="text/javascript">var chartInterestRoot = c3.generate({$c3InterestRoot});</script>
+				{/if}
+				
+				<div class="blank-block chart-block mt-20 fl">
+					<div class="fullwidth fl chart-title">
+						<span>标签库命中概况</span>
+					</div>
+					<div class="chart-full-container">
+						<table class="table table-bordered table-hover">
+							<tr>
+								{$i = 0;}
+								{foreach($topTagsReport as $tiem)}
+								{if($i%6 == 0 && $i!=0)}
+								</tr><tr>
+								{/if}
+									<td>
+										<i class="fa fa-stop" style="margin-right:5px; color:#{$chartColor[$i%count($chartColor)]};"></i>
+										<a href="bigdata.tag.{$tiem['tid']}">{$tiem['tname']}</a>
+									</td>
+									<td>{$tiem['count']}</td>
+								{($i++)}
+								{/foreach}
+							</tr>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+</body>
+<script type="text/javascript">
+	var chart1 = c3.generate({
+		bindto: '#chartGender',
+		color: {
+			  pattern: ['#6FADC4','#D95F5F']
+			},
+	    data: {
+	        columns: [
+	            ['男性', 1565423],
+	            ['女性', 8934234],
+	        ],
+	        type : 'pie',
+	        onclick: function (d, i) { console.log("onclick", d, i); },
+	        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+	        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+	    }
+	});
+
+	var chart2 = c3.generate({
+		bindto: '#chartAge',
+		color: {
+			  pattern: ['#D62728','#FF9896','#1F77B4','#FF7F0E','#FFBB78','#98DF8A']
+			},
+	    data: {
+	        columns: [
+	            ['10-19岁', 6],
+	            ['20-29岁', 80],
+	            ['30-39岁', 43],
+	            ['40-49岁', 30],
+	            ['50-59岁', 10],
+	        ],
+	        type : 'donut',
+	        onclick: function (d, i) { console.log("onclick", d, i); },
+	        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+	        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+	    },
+	    donut: {
+	        title: "年龄分布"
+	    }
+	});
+	var chart3 = c3.generate({
+		bindto: '#chartEdu',
+		color: {
+			  pattern: ['#7AB1C6','#2FA22F','#D95F5F','#6ABB6A','#FECE9F','#FEA455','#C5D7EE','#619FC9','#FEB1AF','#DF9898']
+			},
+	    data: {
+	        columns: [
+	            ['本科及以上', 98],
+	            ['大专', 34],
+	            ['高中', 56],
+	            ['初中', 21],
+	            ['小学', 10],
+	        ],
+	        type : 'donut',
+	        onclick: function (d, i) { console.log("onclick", d, i); },
+	        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+	        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+	    },
+	    donut: {
+	        title: "学历分布"
+	    }
+	});
+	var chart4 = c3.generate({
+		bindto: '#chartIncome',
+		color: {
+			  pattern: ['#7AB1C6','#2FA22F','#D95F5F','#6ABB6A','#FECE9F','#FEA455','#C5D7EE','#619FC9','#FEB1AF','#DF9898']
+			},
+	    data: {
+	        columns: [
+	            ['3k以下', 6],
+	            ['3k-5k', 80],
+	            ['5k-8k', 43],
+	            ['8k-12k', 30],
+	            ['12k-18k', 10],
+	            ['18k以上', 10],
+	        ],
+	        type : 'donut',
+	        onclick: function (d, i) { console.log("onclick", d, i); },
+	        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+	        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+	    },
+	    donut: {
+	        title: "收入分布"
+	    }
+	});
+</script>
+</html>

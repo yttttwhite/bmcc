@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看合同详情[{$contract['contract_name']}]</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 合同信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">合同类型：{if $contract['contract_type'] =='1'}竞价制广告合同{elseif $contract['contract_type'] =='2'}合约制广告合同{else}未知{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">合同名称：{$contract['contract_name']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">合同序号：{$contract['contract_num']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户经理所属分公司：{$contract['company_name']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户经理姓名：{$contract['manager_name']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户经理联系电话：{$contract['manager_phone_number']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户公司名称：{$contract['contact_company_name']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户名称：{$contract['contact_person']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户联系电话：{$contract['contact_person_phone_number']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">客户CA：{$contract['contact_ca']}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">折扣率：{$contract['discount_rate']}%</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">合同折扣前金额：{$contract['total_budget']} 元</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">花费金额：{$contract['used_budget']} 元</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">剩余金额：{$contract['access_budget']} 元</span>
+        </div>
+
+    </div>
+
+    <div style="width:800px">
+        <h3>• 广告单价信息</h3>
+        <hr class="hrll">
+        {foreach $ContractContent as $Content}
+        <div class="dvll">
+            <span class="scll">广告单价：{$Content['price']} 元</span>
+            <span class="scll">购买量：{$Content['buy_amount']}</span>
+            <span class="scll">单位：{if $Content['unit'] ==2}CPM{else}CPT{/if}</span>
+            <span class="scll">剩余量：{$Content['access_budget']}</span>
+        </div>
+
+        {/foreach}
+    </div>
+
+    <div style="width:800px">
+        <h3>• 审核情况</h3>
+        <hr class="hrll">
+
+        <div class="dvll">
+            <span class="scll">审核状态：{if $contract['verify_status']==1}待审核{elseif $contract['verify_status']==2}审核通过{elseif $contract['verify_status']==3}退回修改{/if}</span>
+        </div>
+        <!--审核通过的显示-->
+        {if $contract['verify_status']==2}
+        <div class="dvll">
+            <span class="scll">审核人姓名：{$audit_person_info->user_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">审核人电话：{$audit_person_info->cell_phone}</span>
+        </div>
+        {/if}
+
+    </div>
+
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer" onclick="window.close();" >关闭</div>
+</body>
+</html>

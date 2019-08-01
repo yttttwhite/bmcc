@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.dsp"}
+
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  
+    {part ("/dsp.main.nav.dsp.add")}
+{*
+	<div class="leftNav">
+      <ul>
+        <li><a href="#">广告审核</a></li>
+        <li><a href="#">DSP素材审核</a></li>
+        <li><a href="#">DSP管理</a></li>
+        <li class="nobotbor sel"><a href="#">流量控制</a></li>
+      </ul>
+    </div>
+*}
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/dsp">DSP管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			{if !empty($dsp)}修改{else}新建{/if}
+    	</div>
+	</div>
+    <!--基本信息-->
+	<form action="/dsp.main.add.{$dsp['dsp_id']}" method="post">
+    <div class="comForm">
+      <dl>
+        <dt>DSP名称：</dt>
+        <dd><input type="text" class="itxt" name="dsp_name" value="{$dsp['dsp_name']}" size="30" /></dd>
+{*<dd class="tips_correct"></dd>*}
+      </dl>
+      <dl>
+        <dt>token：</dt>
+        <dd><input type="text" class="itxt" name="dsp_token" value="{$dsp['dsp_token']}" readonly size="50" /></dd>
+      </dl>
+      <dl>
+        <dt>cookie mapping url：</dt>
+        <dd><input type="text" class="itxt" size="80" name="dsp_cms_url" value="{$dsp['dsp_cms_url']}"/></dd>
+      </dl>
+      <dl>
+        <dt>bid url：</dt>
+        <dd><input type="text" class="itxt" size="80" name="dsp_bid_url" value="{$dsp['dsp_bid_url']}"/></dd>
+      </dl>
+      <dl>
+        <dt>win notice url：</dt>
+        <dd><input type="text" class="itxt" size="80" name="dsp_notice_url" value="{$dsp['dsp_notice_url']}"/></dd>
+      </dl>
+      <dl>
+        <dt>最大QPS：</dt>
+        <dd><input type="text" class="itxt" size="8" name="dsp_max_qps" value="{$dsp['dsp_max_qps']}"/>0(不启用) -1(不限制) >0(设置)</dd>
+      </dl>
+      <dl>
+        <dt>状态：</dt>
+        <dd><select name="status">
+		<option {if $dsp['status']==0}selected {/if}value="0">正常</option>
+		<option {if $dsp['status']==1}selected {/if}value="1">暂停</option>
+		<option {if $dsp['status']==2}selected {/if}value="2">停止</option>
+		</select></dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="dsp_comment">{$dsp['dsp_comment']}</textarea></dd>
+      </dl>
+      </div>
+
+    <div class="comForm clear">
+
+      <h1>机构联系人</h1>
+      <dl>
+        <dt>姓名：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_name" value="{$dsp['contact_name']}"/></dd>
+        <dd class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>邮箱：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_email" value="{$dsp['contact_email']}"/></dd>
+      </dl>
+      <dl>
+        <dt>电话：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_mobile" value="{$dsp['contact_mobile']}"/></dd>
+      </dl>
+      <dl>
+        <dt>地址：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_address" value="{$dsp['contact_address']}"/></dd>
+      </dl>
+      <dl>
+        <dt>邮编：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_zipcode" value="{$dsp['contact_zipcode']}"/></dd>
+      </dl>
+      <dl>
+        <dt>公司：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_company" value="{$dsp['contact_company']}"/></dd>
+      </dl>
+      <dl>
+        <dt>公司官网：</dt>
+        <dd><input type="text" class="itxt" size="30" name="contact_website" value="{$dsp['contact_website']}"/></dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" name="contact_comment" rows="5">{$dsp['contact_comment']}</textarea></dd>
+      </dl>
+    </div>
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    
+	</form>
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+<!--版权-->
+<div class="footer">
+  <div class="ftcon">
+    Copyright © 2013 All rights reserved. 设计广告平台有限公司 版权所有<br /> 
+    京ICP证68976143.3号 京公网安备XKD89756号
+  </div>
+</div>
+
+</body>
+</html>

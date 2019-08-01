@@ -1,0 +1,16 @@
+<div class="accordion" style="margin-top:0;">
+	<a href="/baichuan_advertisement_manage/crm.shenhe.list?complete=1">
+		<h2>全部状态</h2>
+	</a>
+	{foreach($shenheStatus as $statusCode => $statusName)}
+	<a href="/baichuan_advertisement_manage/crm.shenhe.list?complete=1&status={$statusCode}">
+		<h3 class="bort">{$statusName}</h3>
+	</a>
+	{/foreach}
+	<a href="/baichuan_advertisement_manage/crm.shenhe.list?complete=1&status=2&send_status=0">
+		<h3 class="bort">已审核待发送</h3>
+	</a>
+	<a href="/baichuan_advertisement_manage/crm.shenhe.list?complete=1&status=2&send_status=2">
+		<h3 class="bort">已发送</h3>
+	</a>
+</div>

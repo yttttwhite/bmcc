@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+    <!--side-->
+    <div class="side">
+        {part ("/admin.caiwu.left")} 
+    </div>
+    <!--mcon start-->
+    <div class="mcon">
+        <div class="toolbar-bc fl mb-10">
+            <div class="fl sub-title sc-title">
+                <a href="/baichuan_advertisement_manage/admin.caiwu.list?nav=5&menu=1" >高级管理</a>
+                <i class="fa fa-angle-double-right" ></i>
+                <a href="/baichuan_advertisement_manage/admin.caiwu.stream?nav=5&menu=2" >财务管理</a>
+                <i class="fa fa-angle-double-right" ></i>
+                财务流水
+            </div>
+        </div>
+        <div class="clear"></div>
+		<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+			<!--表头-->
+			<div class="panel-heading border-light panel-head-md">
+				<form id="queryFrom" action="{$url['date']}" method="get">
+                    <input name="menu" type="hidden" value="2">
+                    <input name="nav" type="hidden" value="5">
+                    <div class="fl" >
+                        <span>筛选条件：</span>
+                        <select class="ml-10 input-small" name="select_type">
+                          <option {if $get['select_type']=="target_name"}selected{/if} value="target_name">账户名称</option>
+                          <option {if $get['select_type']=="business_id"}selected{/if} value="business_id">业务单号</option>
+                          <option {if $get['select_type']=="contract_id"}selected{/if} value="contract_id">合同编号</option>
+                          <option {if $get['select_type']=="operator_name"}selected{/if} value="operator_name">操作账户</option>
+                        </select>
+                    </div>
+                    <div class="fl" >
+                        <input type="text" id="keywords" name="key" class="form-control input-small"  placeholder="关键字" value="{$get['key']}"/>
+                    </div>
+                    <div class="fl">
+                        <select class="ml-10 input-small" name="source" id="source">
+                            <option value="0">--来源--</option>
+                            <option {if $get['source']==1}selected{/if} value="1">人工</option>
+                            <option {if $get['source']==2}selected{/if} value="2">自动</option>
+                        </select>
+                    </div>
+                    <div class="fl">
+                        <select class="ml-10 input-small" name="operate_code" id="operate_code">
+                            <option value="0">--类型--</option>
+                            <option {if $get['operate_code']==1}selected{/if} value="1">充值</option>
+                            <option {if $get['operate_code']==2}selected{/if} value="2">补差</option>
+                            <option {if $get['operate_code']==3}selected{/if} value="3">冲正</option>
+                            <option {if $get['operate_code']==4}selected{/if} value="4">合同充值</option>
+                        </select>
+                    </div>
+					<div class="fl" style="position: relative; left: 10px;">
+						<!--<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">-->
+						<input class="btn btn-squared btn-sm btn-success ml-10" onclick="searchStream();" value="查询">
+					</div>
+					<span style="line-height:28px; position: relative; left: 20px;">共计：{$total}条</span>
+				</form>
+				<ul class="panel-heading-tabs border-light" style="display:none;">
+	                <div class="btn-group">
+	                    <button type="button" class="btn btn-sm btn-squared btn-success w-140" data-toggle="dropdown">
+	                    	筛选<span class="caret"></span>
+	                    </button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </ul>
+			</div>
+			<!--表头:结束-->
+			<div class="panel-body" style="overflow-x: auto;">
+				<table class="reportab" id="sample-table-2">
+					<thead>
+						<tr>
+							<th>ID</th>
+					        <th>业务单号</th>
+							<th>合同编号</th>
+							<th>合同图片</th>
+					        <th>账户名称</th>
+							<th>来源</th>
+					        <th>类型</th>
+					        <th>历史余额</th>
+					        <th>入账金额</th>
+					        <th>出账金额</th>
+                            <th>流水余额</th>
+                            <th>创建时间</th>
+                            <th>操作账户</th>
+                            <th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach $data as $_data}
+						      <tr>
+						        <td>{$_data[id]}</td>
+						        <td>{$_data[business_id]}</td>
+						        <td>{$_data[contract_id]}</td>
+                                <td>{if(empty($_data[contract_file]))}无{else}有{/if}</td>
+								<td>{$_data[target_name]}</td>
+                                <td>
+                                    {if($_data[source]==1)}人工{else}自动{/if}
+                                </td>
+						        <td>{if($_data[operate_code]==1)}充值{elseif($_data[operate_code]==2)}补差{elseif($_data[operate_code]==3)}减额{elseif($_data[operate_code]==4)}合同充值{else}未知{/if}</td>
+                                <td><span><strong class="ye">￥{number_format($_data[history_money],2)}</strong></span></td>
+						        <td>
+                                    <span><strong class="ye">￥{number_format($_data[in_money],2)}</strong></span>
+								</td>
+                                <td>
+                                    <span><strong class="ye">￥{number_format($_data[out_money],2)}</strong></span>
+                                </td>
+                                <td>
+                                    <span><strong class="ye">￥{number_format($_data[flow_money],2)}</strong></span>
+                                </td>
+                                <td>{date('Y-m-d H:i:s',$_data[op_time])}</td>
+                                <td>{$_data[operator_name]}</td>
+                                <!--<td><a href="/baichuan_advertisement_manage/admin.caiwu.detail?uid={$_data[target_uid]}" target="_blank">查看</a></td>-->
+                                <td><span class="btn btn-xs btn-squared btn-info"  onclick='showWindow("/admin.caiwu.detail?uid={$_data[target_uid]}")'>查看</span></td>
+						      </tr>
+						{/foreach}
+					</tbody>
+				</table>
+                <div class="turnpage">
+                {turnpager $totalPage|html}
+                </div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function deleteUserByUid(uid){
+    var msg = "确认禁用该用户？";
+    var url = "/admin.user.delete?uid=" + uid;
+    layerConfirmGet(url, msg);
+}
+function refreshUserByUid(uid){
+    var msg = "确认启用该用户？";
+    var url = "/admin.user.refresh?uid=" + uid;
+    layerConfirmGet(url, msg);
+}
+function showWindow(url){
+    var w = window.open(url,"_blank","toolbar=yes, location=no, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=550, height=650");
+    // setTimeout(function(){ w.close();},1000*3);
+}
+
+function searchStream(){
+    var keywords = $.trim($("#keywords").val());
+    var source = $("#source").val();
+    var operate_code = $("#operate_code").val();
+    if(keywords.length >0 || source >0 || operate_code >0){
+        $("#queryFrom").submit();
+    }else {
+        layer.msg("请输入搜索关键字或选择查询条件");
+        return false;
+    }
+
+
+
+}
+
+</script>
+{part "/main.main.footer"}
+</body>
+</html>

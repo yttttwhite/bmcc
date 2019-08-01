@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<!--main-->
+<div class="main">
+  <div class="side">
+	{part ("/media.main.nav.website.list")} 
+  </div>
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			网站管理
+    	</div>
+    	<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media.website.add">新建网站</a>
+		</div>
+	</div>
+  
+    <!--toolbar start--> 
+    <div class="">
+     <div class="fr">
+{*
+        <div id="zhuantai" class="selMenu smw_1 ml30">
+          <span class="smtit">媒体类型</span>
+          <ul>
+            <li><a href="javascript:;">所有媒体</a></li>
+            <li><a href="javascript:;">综合</a></li>
+          </ul>
+        </div>
+        <span class="iSearch ml10">
+           <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+           <input type="text" class="itxt fc7" value="媒体名称" size="30" />
+        </span>
+      </div><div class="clear"></div>
+*}
+    </div>
+  
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+      <tr>
+        <th class="tac">ID</th>
+        <th>网站名称</th>
+        <th class="tac">广告位</th>
+        <th>操作</th>
+      </tr>
+{foreach $websites->items as $item}
+      <tr>
+        <td class="tac">{$item['website_id']}</td>
+        <td><a href="#">{$item['website_name']}</a></td>
+        <td class="tac">{$item['slot_ct']}</td>
+        <td><a href="/baichuan_advertisement_manage/media.website.add.{$item['website_id']}">修改</a>{*<a href="#">删除</a>*}</td>
+      </tr>
+{/foreach}
+    </table>
+    
+    
+    
+	{$pager}
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

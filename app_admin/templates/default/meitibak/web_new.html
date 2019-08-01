@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.website.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+{*
+  <script>
+  $(document).ready(function(){
+		  $("#media_select").keyup(function(){
+			  var k = $(this).val();
+			  $("#media option").hide();
+			  $("#media option:contains('"+k+"')").show();
+		  });
+  });
+  </script>
+	  *}
+	  
+	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+    		<a href="/baichuan_advertisement_manage/media.website">网站管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			{if !empty($website)}修改{else}新建{/if}
+    	</div>
+    	<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media.website">网站列表</a>
+		</div>
+	</div>
+	<form action="/media.website.add{if !empty($website['website_id'])}.{$website['website_id']}{/if}" method="post" >
+    <!--基本信息-->
+    <div class="comForm" style="border:1px solid #EEEEEE; border-top:none;">
+      <h1>新建网站</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt><em class="fcr fs12">*</em> 网站名称：</dt>
+        <dd><input type="text" class="itxt" size="30" name="website_name" value="{$website['website_name']}"/></dd>
+      </dl>
+      <dl>
+        <dt><em class="fcr fs12">*</em> 首页URL：</dt>
+        <dd><input type="text" class="itxt" size="30" name="website_url" value="{$website['website_url']}"/></dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="description">{$website['description']}</textarea></dd>
+      </dl>
+	  
+	  <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

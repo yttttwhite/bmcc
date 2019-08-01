@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body>
+    	{part "/main.main.nav.ad"}
+        <div class="main">
+        	<div class="side">
+                {part "/crm.group.numberLeft"}
+            </div>
+			<div class="mcon">
+				<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+					<!--内容-->
+					<p style="padding:10px; 20px">
+						{if(isset($stat['sent']))}
+							已经发送：{$stat['sent']}
+						{/if}
+						{if(isset($stat['wait']))}
+							等待发送：{$stat['wait']}
+						{/if}
+					</p>
+					<div class="panel-body">
+						<!--表身-->
+						<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>号码库</th>
+									{if(user_api::auth("admin"))}
+							        <th>号码</th>
+									{/if}
+							        <th>审核状态</th>
+							        <th>发送状态</th>
+								</tr>
+							</thead>
+							<tbody>
+								{foreach $list as $item}
+								      <tr>
+								        <td>{$item['id']}</td>
+								        <td>{$item['number_group_name']}</td>
+										{if(user_api::auth("admin"))}
+								        <td>{$item['number']}</td>
+										{/if}
+								        <td {if($item['status'] == 2)}style="color:#C40000;"{elseif($item['status'] == 1)}style="color:#5CB85C;"{/if}>
+								        	{if(isset($checkStatus[$item['status']]))}
+												{$checkStatus[$item['status']]}
+											{else}
+												等待审核
+											{/if}
+										</td>
+								        <td>
+								        	{if(isset($sentStatus[$item['sms_sendstatus']]))}
+												{$sentStatus[$item['sms_sendstatus']]}
+											{else}
+												等待发送
+											{/if}
+										</td>
+								      </tr>
+								{/foreach}
+							</tbody>
+						</table>
+						<!--分页-->
+			            <div class="text-right">
+			                <ul class="pagination margin-bottom-10">
+			                    <li>
+			                        <a href="{$page['url']}page=1">上一页</a>
+			                    </li>
+								{for($i = 1; $i<=$page['count']; $i++)}
+			                    <li {if($page['current']==$i)}class="active"{/if}>
+			                        <a href="{$page['url']}page={$i}">{$i}</a>
+			                    </li>
+								{/for}
+			                    <li>
+			                        <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+			                    </li>
+			                </ul>
+			            </div>
+						
+					</div>
+					<!--结束：内容-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		;
+	function deleteNumberById(id){
+	    var msg = "确认删除这条数据？";
+	    var url = "/crm.number.delete?id=" + id;
+	    layerConfirmGet(url, msg);
+	}
+	</script>
+	{part "/main.main.footer"}
+    </body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  	{part ("/media.main.nav.position.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media?nav=2">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			<a href="/baichuan_advertisement_manage/media.position?nav=2">广告位置</a>
+			<i class="fa fa-angle-double-right"></i>
+			创建位置
+    	</div>
+	</div>
+  
+	<form id="formData" action="/media.position.add{if !empty($position->id)}.{$position->id}?nav=2{/if}" method="post">
+  
+    <!--基本信息-->
+    <div class="comForm" style="border:1px solid #EEEEEE; border-top:none;">
+      <h1>基础信息</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>所属媒体：</dt>
+        <dd>
+			<select id="media_id" {if !empty($media_id)} disabled='disabled' {/if} name="media_id" style="min-width: 250px;" required>
+				{foreach $medias as $w}
+
+                {if empty($position->media_id)}
+                <option value="{$w->id}" {if($media_id == $w->id)} selected {/if}>{$w->media_name}</option>
+                {else}
+                <option value="{$w->id}" {if($position->media_id == $w->id)} selected {/if}>{$w->media_name}</option>
+                {/if}
+
+				{/foreach}
+			</select>
+      <span class="fcr">*</span>
+		</dd>
+      </dl>
+      
+      <dl>
+        <dt>所属频道：</dt>
+        <dd>
+            <select id="channel_id" {if !empty($channel_id)} disabled='disabled' {/if} name="channel_id" style="min-width: 250px;" required></select>
+           <span class="fcr">*</span>
+        </dd>
+      </dl>
+      
+      <dl>
+        <dt>位置名称：</dt>
+        <dd><input type="text" class="itxt" size="30" name="position_name" value="{$position->position_name}" required /><span class="fcr">*</span></dd>
+      </dl>
+      <dl>
+        <dt>位置标识：</dt>
+        <dd><input type="text" class="itxt" size="30" name="position_identification" value="{$position->position_identification}"/></dd>
+      </dl>
+      <dl>
+        <!--<dt>位置标签：</dt>-->
+        <dt>广告位类型：</dt>
+        <dd>
+          <select id="channel_tag" name="tag_identification" style="min-width: 150px;" value="{$position->tag_identification}" required>
+          </select>
+          <span class="fcr">*</span>
+        </dd>
+      </dl>
+
+      <h1>素材信息</h1>
+      <dl>
+        <dt>展现形式：</dt>
+        <dd>
+          <label class="irad" for="qg">			<input name="first_screen" {if $position->first_screen==1} checked {/if} value="1" id="qg" type="radio"/> 首屏</label>
+          <label class="irad ml20" for="xztf">	<input name="first_screen" {if $position->first_screen==0} checked {/if} value="0" id="xztf" type="radio"/> 非首屏</label>
+        </dd>
+      </dl>
+      
+      <dl>
+        <dt>支持素材：</dt>
+        <dd>
+            <select id="selYear" name="stuff_type" style="min-width: 250px;">
+	              <option value="pic" {if($position->stuff_type == "pic")} selected {/if}>图片</option>
+	              <option value="video" {if($position->stuff_type == "video")} selected {/if}>视频</option>
+	              <option value="pictxt" {if($position->stuff_type == "pictxt")} selected {/if}>图文</option>
+                  <option value="txt" {if($position->stuff_type == "txt")} selected {/if}>文字</option>
+                  <option value="others" {if($position->stuff_type == "others")} selected {/if}>其他</option>
+            </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>尺寸宽高：</dt>
+        <dd>
+            <input type="text" class="itxt" size="10" name="width" value="{$position->width}" placeholder="0"/>&nbsp;&nbsp;&nbsp;宽  *
+            <input type="text" class="itxt" size="10" name="height" value="{$position->height}" placeholder="0"/>&nbsp;&nbsp;&nbsp;高  <span style="font-size:10px;color:grey;margin-left:30px;">注：单位为像素（px）</span>
+        </dd>
+      </dl>
+
+      <h1>刊例价格</h1>
+      <dl>
+        <dt><span style="color:red;">按天单价：</span></dt>
+        <dd>
+        <input type="number" class="itxt" min="0" name="cpt" value="{$position->cpt}" size="10" placeholder="0.00"/>元/CPT
+        </dd>
+        <span style="font-size:10px;color:grey;margin-left:165px;">注：按天刊例价</span>
+      </dl>
+      <dl>
+        <dt><span style="color:orange;">展示单价：</span></dt>
+        <dd>
+        <input type="number" class="itxt" min="0" name="cpm" value="{$position->cpm}" size="10" placeholder="0.00"/>元/CPM
+        </dd>
+        <span style="font-size:10px;color:grey;margin-left:167px;">注：展示刊例价</span>
+      </dl>
+      <dl>
+        <dt><span style="color:orange;">点击单价：</span></dt>
+        <dd>
+        <input type="number" class="itxt" min="0" name="cpc" value="{$position->cpc}" size="10" placeholder="0.00"/>元/CPC
+        </dd>
+        <span style="font-size:10px;color:grey;margin-left:167px;">注：点击刊例价</span>
+      </dl>
+
+      <h1> 其他信息</h1>
+      <dl>
+        <dt>位置状态：</dt>
+        <dd>
+            <label><input type="radio" name="status" value="1" {if( !isset($position) or isset($position->status) && $position->status== 1)} checked {/if}>启用</label>
+            <label><input type="radio" name="status" value="0" {if(isset($position->status) && $position->status== 0)} checked {/if}>停用</label>
+        </dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="position_comment" placeholder="（焦点图左下方84PX为标题框，不建议安排广告素材内容）广告语在14个字以内（字符数28个），图片下方不要求空余">{$position->position_comment}</textarea></dd>
+      </dl>
+	  
+	  <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" id="save" type="button" class="ibtnb" value="保存"  />
+            <!--<input name="" type="submit" class="ibtnb" value="保存"  />-->
+          </span>
+        </dd>
+      </dl>
+      <!--<input id="hidden_channel_id" type="hidden" value="{$position->channel_id}"/>-->
+      <input id="hidden_channel_id" type="hidden" value="{$channel_id}"/>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+</div>
+{part "/main.main.footer"}
+<script>
+$(function(){
+  $("form").validate({ errorClass:"fcr"});
+  var channel_tag_el = $('#channel_tag');
+  $.get('/media.position.GetTagIdent?nav=2', null , function(data){
+    var tag_val = '{$position->tag_identification|default:''}';
+    channel_tag_el.append($("<option value=0 selected>请选择广告为类型</option>"));
+    for (var i = data.length - 1; i >= 0; i--) {
+      channel_tag_el.append(['<option value="',data[i]['tag_ident'],'" ', 
+          /*tag_val==data[i]['tag_ident']?'selected ':'',*/
+          'data-cpm="',data[i]['cpm_price'],'" data-cpt="',data[i]['cpt_price'],
+          '" data-cpc="',data[i]['cpc_price'], '" >',data[i]['tag_name'],'</option>'].join(''));
+    }
+  } ,'json');
+
+    $("#media_id").click(function(){
+        var media_id = $(this).val();
+        var hidden_channel_id = $("#hidden_channel_id").val();
+        $.ajax({
+            cache: true,
+            type: "GET",
+            url:"/media.position.GetWebsites."+media_id,
+            async: false,
+            error: function(request) {
+                alert("获取频道出错");
+            },
+            success: function(data) {
+                $("#channel_id option").remove();
+                var obj = eval(data);
+                var length = obj.length;
+                for(var i = 0 ;i < length ;i++ ){
+                    if(obj[i].channel_id == hidden_channel_id){
+                        $("#channel_id").append($("<option  selected ></option>").text(obj[i].channel_name).attr('value', obj[i].channel_id));
+                    }else{
+                        $("#channel_id").append($("<option  ></option>").text(obj[i].channel_name).attr('value', obj[i].channel_id));
+                    }
+
+                }
+            }
+        });
+    });
+
+  $("#media_id").trigger("click");
+})
+
+$("#save").click(function(){
+    $("#media_id").removeAttr("disabled");
+    $("#channel_id").removeAttr("disabled");
+    $("#formData").submit();
+});
+
+$('#channel_tag').on("change",function(){
+	var $cpt=$("input[name=cpt]"),$cpm=$("input[name=cpm]"),$cpc=$("input[name=cpc]");
+	if($(this).val() && $(this).val().trim().length>0 && $(this).val()!="0"){
+		var $option=$(this).find("option[value="+$(this).val()+"]");
+		$cpt.val($option.attr("data-cpt")).prop("readonly",true);
+		$cpm.val($option.attr("data-cpm")).prop("readonly",true);
+		$cpc.val($option.attr("data-cpc")).prop("readonly",true);
+	}
+	else{
+		$cpt.val("0.00").prop("readonly",false);
+		$cpm.val("0.00").prop("readonly",false);
+		$cpc.val("0.00").prop("readonly",false);
+	}
+});
+
+</script>
+
+</body>
+</html>

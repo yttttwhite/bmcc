@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+	<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{part "/main.main.header"}
+	</head>
+	<body>
+		{part "/main.main.nav.ad"}
+		<div class="container-content">
+			<div class="contianer-left">
+				{part "/crm.consumer.groups"}
+				<div class="left-btn-group">
+					<a class="btn btn-default  btn-240-34 btn-squared" href="bcdata-tag.html" target="_blank">分析所选分组</a>
+					<a class="btn btn-default  btn-240-34 btn-squared">给所选分组发邮件</a>
+					<a class="btn btn-default  btn-240-34 btn-squared">给所选分组发短信</a>
+					<a class="btn btn-primary bg-blue btn-240-34 btn-squared mt-10" id="addGroup">+新建分组</a>
+					<a class="btn btn-danger btn-240-34 btn-squared">删除所选分组</a>
+				</div>
+			</div>
+				<div class="content">
+					<div class="content-inside">
+						<div class="toolbar-right-top bg-blue">
+							<ul class="ul-x">
+								<li><a id="addConsumer">新建联系人</a></li>
+								<li><a>批量导入</a></li>
+								{*<li><a>移动到分组</a></li>*}
+								<li><a id="copyConsumerToGroup">复制到分组</a></li>
+								<li><a id="deleteSelectedConsumers">删除所选</a></li>
+							</ul>
+						</div>
+						<div class="table-container">
+							<form id="consumerListForm" name="consumerList" method="post" action="">
+								<table class="table table-striped table-hover" id="sample-table-2">
+									<thead>
+										<tr>
+											<th class="center" style="width: 70px;">
+											<a id="consumerIds" onclick="checkAll(this,'.icheck');" name="checked-no" class="a-checkbox"></a>
+											</th>
+											<th>姓名</th>
+											<th class="hidden-xs">手机</th>
+											<th class="hidden-xs">Email</th>
+											<th class="hidden-xs">备注</th>
+											<th class="hidden-xs">用户标签</th>
+											<th class="hidden-xs" style="text-align: center;">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+									{foreach $consumers as $consumer}
+										<tr>
+											<td class="center">
+												<div class="checkbox-table">
+													<label>
+														<input type="checkbox" class="flat-grey icheck" name = "consumerIds[]" value="{$consumer['id']}">
+													</label>
+												</div>
+											</td>
+											<td><a href="crm.consumer.detail.{$consumer['id']}" target="_blank">{$consumer['name']}</a></td>
+											<td class="hidden-xs">{$consumer['mobile']}</td>
+											<td class="hidden-xs"><a href="#" rel="nofollow" target="_blank">{$consumer['email']}</a></td>
+											<td class="hidden-xs">已电话联系</td>
+											<td class="hidden-xs">年轻	汽车	旅游	户外 [更多…]</td>
+											<td class="center">
+											<div class="visible-md visible-lg hidden-sm hidden-xs">
+												<a href="crm.consumer.detail.{$consumer['id']}" class="btn btn-default btn-squared btn-xs" data-placement="top" data-original-title="Detail">详情</a>
+												<a href="#" class="btn btn-default btn-squared btn-xs" data-placement="top" data-original-title="Record">记录</a>
+												<a href="#" class="btn btn-default btn-squared btn-xs" data-placement="top" data-original-title="Delete" onClick="deleteConsumerByCid({$consumer['id']})">删除</a>
+												<a href="#" class="btn btn-default btn-squared btn-xs" data-placement="top" data-original-title="Delete" onClick="editConsumerByCid({$consumer['id']})">编辑</a>
+											</div>
+											</td>
+										</tr>
+									{/foreach}
+									</tbody>
+								</table>
+							</form>
+							<div class="table-footer">
+								<div class="page">
+									<ul class="pagination pagination-blue margin-bottom-10">
+										<li class="{if $pageInfo['current']==1}disabled{/if}">
+											<a href="{$pageInfo['url']}{$pageInfo['current']-1}"><i class="fa fa-chevron-left"></i></a>
+										</li>
+										{for($i=1; $i<=$pageInfo['count']; $i++)}
+											<li class="{if $pageInfo['current']==$i}active{/if}">
+												<a href="{$pageInfo['url'].$i}"> {$i} </a>
+											</li>
+										{/for}
+										<li class="{if $pageInfo['current']==$pageInfo['count']}disabled{/if}">
+											<a href="{$pageInfo['url']}{$pageInfo['current']+1}"><i class="fa fa-chevron-right"></i></a>
+										</li>
+									</ul>
+								</div>
+								<div class="btn-container">
+									<a class="btn btn-squared btn-light-grey btn-x-30" style="font-size: 12px;">全选</a>
+									<a class="btn btn-squared btn-light-purple btn-100-30" href="bcdata-tag.html" target="_blank">批量分析用户</a>
+									<a class="btn btn-squared btn-info btn-100-30">批量发送邮件</a>
+									<a class="btn btn-squared btn-success btn-100-30">批量发送短信</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="footer"></div>
+		
+		<div id="addGroupLayer" style="width:400px; height:200px; display:none;">
+			<div class="form-container form-addGroup">
+				<form class="form-inline" action="crm.consumer.addGroup" method="post" id="addGroupFrom">
+				<div class="input-group w-230">
+					<input type="text" name="groupName" class="form-control form-sm" placeholder="输入组名">
+				</div>
+				<input id="addGroupSubmit" type="submit" value="确认添加" class="btn btn-success btn-squared">
+				</form>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-green',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-40%'
+			} );
+			
+			
+			$('#addGroup').on('click', function() {
+				layerDivById('addGroupLayer');
+			} );
+			
+			$('#addConsumer').on('click', function() {
+				var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer';
+				var layerIndex = layerIframe("添加客户信息",url,800,430);
+			} );
+			
+			$('#copyConsumerToGroup').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.addConsumerToGroup");
+				$("#consumerListForm").submit();
+			} );
+			
+			$('#deleteSelectedConsumers').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.operation.delete");
+				$("#consumerListForm").submit();
+			} );
+		} );
+		
+		function deleteConsumerByCid(cid){
+			var msg = "确认删除这条数据？";
+			var url = "crm.consumer.operation.delete."+cid;
+			layerConfirmGet(url,msg);
+		}
+		
+		function editConsumerByCid(cid){
+			var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer.'+cid;
+			var layerIndex = layerIframe("编辑客户信息",url,800,430);
+		}
+	</script>
+</html>

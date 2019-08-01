@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+<title>即将刷新</title>
+<script type="text/javascript">
+	var i = {$second};
+	var intervalid;
+	intervalid = setInterval("fun()", 1000);
+	function fun() {
+		if (i == 0) {
+			top.location.reload();
+			clearInterval(intervalid);
+		}
+		document.getElementById("mes").innerHTML = i;
+		i--;
+	}
+</script>
+</head>
+<body>
+	<div class="redirect-container">
+		<div id="error">
+			<p>{$msg}</p>
+			<p>将在<span id="mes">{$second}</span>秒钟后刷新.</p>
+			<p><a href="#" class="btn btn-info fr btn-squared btn-sm" onclick="top.location.reload();">立即刷新</a></p>
+		</div>
+	</div>
+</body>
+</html>

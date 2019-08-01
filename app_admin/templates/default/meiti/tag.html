@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.tag.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="toolbar-bc fl" style="margin-bottom:13px;">
+        <div class="fl sub-title sc-title">
+            <a href="/baichuan_advertisement_manage/media?nav=2">媒体管理</a>
+            <i class="fa fa-angle-double-right"></i>
+            广告位分类
+        </div>
+      <form method="get">
+          <input name="nav" type="hidden" value="2">
+      <div class="fl" >
+        <div class="selMenu" style="margin-right:10px">
+            <span class="iSearch">
+                   <input id="name" name="name" type="text" class="itxt fc7" placeholder="广告位分类名称" value="{$_GET['name']}" size="30" />
+                </span>
+          </div>
+        </div>
+      <div class="fr">
+        <input type="submit" class="btn btn-squared btn-success" value="搜索">
+      </div>
+      </form>
+    </div>
+
+    <div class="clear"></div>
+
+    <div>
+    <!--toolbar start--> 
+    <!--<table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">-->
+        <!--<div class="infoTable" style="width: 100%;height: 650px;" >-->
+        <!--<div class="panel-body" style="overflow-x: auto;" >-->
+        <div style="overflow-x: auto;" >
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+            <!--<table class="table table-striped table-bordered table-hover">-->
+      <tr>
+        <th>ID</th>
+        <th style="width: 280px;">广告位分类名称</th>
+        <th>按天单价<br>(元/CPT)</th>
+        <th>展示单价<br>(元/CPM)</th>
+        <th>点击单价<br>(元/CPC)</th>
+        <th>使用广告位</th>
+        <th>创建/更新时间</th>
+        <th style="width: 70px;">操作账户</th>
+        <th style="width: 60px;">操作</th>
+      </tr>
+{foreach $tagList as $item}
+      <tr>
+        <td class="tac">{$item['id']}</td>
+        <td>{$item['tag_name']}</td>
+        <td>{number_format($item['cpt_price'],2)}</td>
+        <td>{number_format($item['cpm_price'],2)}</td>
+        <td>{number_format($item['cpc_price'],2)}</td>
+        <td>{$item['using_nums']}</td>
+        <td>创:{strftime('%F %X',$item['ctime'])} <br> 更:{strftime('%F %X',$item['utime'])} </td>
+        <td>{$item['user_name']}</td>
+        <td><a href="/baichuan_advertisement_manage/media.tag.add.{$item['id']}?nav=2">编辑</a></td>
+      </tr>
+{/foreach}
+    </table>
+            <div class="turnpage">
+                {turnpager $totalPage|html}
+            </div>
+    </div>
+    
+
+
+
+  </div>
+  <!--mcon end-->
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

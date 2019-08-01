@@ -1,0 +1,12 @@
+<html>
+    <head>
+    </head>
+    <body style='margin:0;'>
+        <span style='display:none'>{$stuff['show_js']}</span>
+		{if(isset($_GET['iframe']))}
+        <iframe src="{$stuff['text']}" width="{$stuff['width']}" height="{$stuff['height']}" style="border:none;"></iframe>
+		{else}
+		<p>iFrame类型素材，为避免重复计数，未请求素材地址。</p><p>如需显示，请点击：<a href="/baichuan_advertisement_manage/stat.show?aid={$stuff['adid']}&iframe=1">显示</a></p>
+		{/if}
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+<div class="main">
+  <div class="side">
+  
+        <div class="leftNav">
+      <ul>
+        <li><a href="/baichuan_advertisement_manage/audient">监控管理</a></li>
+        <li class="nobotbor"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a></li>
+      </ul>
+    </div>
+
+  </div>  <!--mcon-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a>&nbsp;&gt;&nbsp;<a href="/baichuan_advertisement_manage/audient">监控管理</a>&nbsp;&gt;&nbsp;新增</div>
+    
+    <h1 class="mtit">创建人群分析</h1>
+    <form method="POST"><label>{if($error)}参数错误{/if}</label>
+    <div class="comForm clear">
+      <dl>
+        <dt>监控网站：</dt>
+        <dd>
+          <select class="formSel ml5" name="web_site_name">
+            {foreach($websitename as $k=>$v)} <option>{$v['name']}</option> {/foreach}
+          </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>人群名称：</dt>
+        <dd><input type="text" class="itxt" size="30" value="人群名称" name="name"/></dd>
+      </dl>
+      <dl>
+        <dt>有效时间：</dt>
+        <dd><input type="text" class="itxt idate fc7" value="" size="30" name="valid_time"/></dd>
+      </dl>
+    </div>
+    
+    <div class="comForm clear">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <select class="formSel" name="category">
+            <option value="包含">包含</option> <option value="排除">排除</option> 
+          </select>&nbsp;&nbsp;以下网址：
+      </dl>
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+        <input type="hidden" class="itxt" size="30" name="tac" /></dd>
+        <input type="text" class="itxt" size="30" name="tac2" /></dd>
+      </dl>
+    </div>
+    
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="创建" />
+          </span>
+          <span class="sbtng ml15">
+            <input name="" type="button" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+
+{part "/main.main.footer"}
+
+</body>
+</html>

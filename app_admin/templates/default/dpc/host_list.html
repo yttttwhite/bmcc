@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+	{part "/main.main.nav.ad"}
+	<div class="container-content">
+		<div class="contianer-left">
+			{part "/dpc.manage.left"}
+			{part "/dpc.main.HostLeft.".$collection}
+		</div>
+		<div class="content">
+			<div class="content-inside">
+				<div class="toolbar-right-top bg-blue">
+					<ul class="ul-x" style="color: #FFFFFF;">
+						<li>所属分组：{$groupInfo['group_name']}</li>
+						<li>投放频次：{$groupInfo['max_push_times']}</li>
+						<li><a onclick="addHost()">添加</a></li>
+						<li><a href="dpc.main.host.{$collection}">返回</a></li>
+					</ul>
+				</div>
+				<div class="table-container" style="border:none;">
+					<form method="post"	action="dpc.main.host.{$collection}.edit">
+						<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+							<thead>
+								<tr>
+									<th style="width: 60px;"><a onclick="icheckSelectAll(this,'.icheck-url');" id="ickeckUrlSelectAll">全选</a></th>
+									<th>网址</th>
+									<th>分组ID</th>
+									<th>分组名称</th>
+									<th>添加人</th>
+									<th>添加时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							{foreach $hostList as $host}
+								<tr>
+									<td><input type="checkbox" class="flat-grey icheck icheck-url" name = "url[]" value="{$host['url']}"></td>
+									<td>{$host['url']}</td>
+									<td>{$host['group_id']}</td>
+									<td>{$groupList[$host['group_id']]['group_name']}</td>
+									<td>{$host['user']}</td>
+									<td>{date('Y-m-d H:i:s', $host['uptime'])}</td>
+									<td>
+										<a onclick="deleteHost('{urlencode($host['url'])}')">删除</a>
+										<a onclick="editHost('{urlencode($host['url'])}')">编辑</a>
+									</td>
+								</tr>
+							{/foreach}
+							</tbody>
+						</table>
+						<div class="table-footer" style="border: 1px solid #DDDDDD;  border-top: none;">
+							<div class="page-div fl">
+							{for($i=1;$i<$page['amount']+1;$i++)}
+							<a href="dpc.main.host.{$collection}?gid={$groupInfo['group_id']}&page={$i}" class="a-page {if($page['current'] == $i)}currentPage{/if}">{$i}</a>
+							{/for}
+							</div>
+							<div class="btn-container">
+								<input class="btn btn-squared btn-default btn-x-30" type="submit" value="批量修改">
+								<a class="btn btn-squared btn-success btn-x-30" onclick="addHost()">添加</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+</body>
+<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-green',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+		} );
+		
+		//增加Host
+		function addHost(){
+			var url = 'dpc.main.host.{$collection}.add?gid='+{$groupInfo['group_id']};
+			var layerIndex = layerIframe("添加HOST",url,800,600);
+		}
+		
+		//编辑HostGroup
+		function editHost(url){
+			var url = 'dpc.main.host.{$collection}.edit?url='+url;
+			var layerIndex = layerIframe("编辑HOST",url,800,600);
+		}
+		
+		//删除HostGroup
+		function deleteHost(url){
+			var msg = "确认删除这条数据？";
+			var url = "dpc.main.host.{$collection}.delete?url="+url;
+			layerConfirmGet(url,msg);
+		}
+	</script>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<div class="main">
+  <div class="side">
+{part ("/ad.plan.listpart.".$plan_id.".".$group_id)} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="toolbar-bc fl">
+    	<div class="fl sub-title">
+			<a href="/baichuan_advertisement_manage/ad.plan.list.{$plan->plan_id}" title="{$plan->plan_name}">{$plan->plan_name|wordbraek:10}</a>
+			<i class="fa fa-angle-double-right"></i>
+			广告组列表
+		</div>
+       <script>
+   $(document).ready(function(){
+   // $(".idate").datepicker({ dateFormat: "yy-mm-dd" ,maxDate:1}); 
+    var sd = $("#startdate").datepicker({ dateFormat: "yy-mm-dd"})
+    var ed = $("#enddate").datepicker({ dateFormat: "yy-mm-dd"})
+    if("{$start|default:0}") ed.datepicker( "option", "minDate", "{$start}" );
+    if("{$end|default:0}") sd.datepicker( "option", "maxDate", "{$end}" );
+   });
+     </script>
+
+        <div class="selMenu ml10">
+            <div class="smtbg">
+                <input type="text" class="itxt_1 fl idate" id="startdate" value="{$start|default:'开始时间'}" size="15" />
+                <input type="text" class="itxt_1 fl idate" id="enddate" value="{$end|default:'结束时间'}" size="15" />
+            </div>
+        </div>
+        <div class="tbGroup ml10">
+            <style>
+                .tbgBtn {
+                    cursor: pointer;
+                }
+            </style>
+            <span id="r_menu" class="tbgBtn"><a id="r_today" class="tbgba">今天</a><a id="r_yesterday" class="tbgba">昨天</a><a id="r_week" class="tbgba">本周</a><a id="r_lastweek" class="tbgba">上周</a><a id="r_month" class="tbgba">本月</a><a id="r_lastmoth" class="tbgba nobr">上月</a></span>
+        </div>
+		<div class="clear"></div>
+	</div>
+    <div class="chartCon mt10">
+{*
+      <div class="chartData">
+        <div class="cdli">时间段：<strong>2013-05-14</strong> 至 <strong>2013-06-12</strong></div>
+        <div class="cdli">每日预算：<strong>不限预算</strong></div>
+      </div>
+	  *}
+      <div class="chartShow" style="height:400px" id="chartShow">{*<img src="/baichuan_advertisement_manage/assets_admin/img/tmp_chart.gif" />*}</div>
+    </div>
+	<script>
+  var paras={ };
+  paras.start="{$start}";
+  paras.end="{$end}";
+  paras.pid="{$plan_id}";
+	//$(document).ready(function(){
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d');}"){
+			$("#r_today").addClass('sel');
+		}
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d',time()-3600*24);}"){
+			$("#r_yesterday").addClass('sel');
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-1 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('+0 week Sunday'));}"){
+			$("#r_week").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-2 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('-1 week Sunday'));}"){
+			$("#r_lastweek").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}" && paras.end=="{date('Y-m-d',time());}"){
+			$("#r_month").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}" && paras.end=="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}"){
+			$("#r_lastmoth").addClass("sel");
+		}
+
+	//});
+  function setV(){
+	  $("#startdate").val(paras.start);
+	  $("#enddate").val(paras.end);
+	  location="/ad.plan.list.{$plan_id}?start="+paras.start+"&end="+paras.end;
+  }
+	$("#r_menu a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+	$("#startdate").change(function(){
+			paras.start=$(this).val();
+			setV();
+		//	report("#chartShow",paras);
+	});
+	$("#enddate").change(function(){
+			paras.end=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#r_today").click(function(){
+		paras.start="{date('Y-m-d');}";
+		paras.end="{date('Y-m-d');}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_week").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-1 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('+0 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastweek").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-2 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('-1 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_month").click(function(){
+		paras.start="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}";
+		paras.end="{date('Y-m-d',time());}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastmoth").click(function(){
+		paras.start="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}";
+		paras.end="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}";
+		setV();
+		//report("#chartShow",paras);
+	});
+  //report("#chartShow",paras);
+	report_echarts("chartShow",paras);
+	</script>
+    <!--toolbar-bc start--> 
+    <div class="toolbar-bc mt10">
+      <div class="fl">
+      	<a class="btn btn-squared btn-blue" style="background:#157EE7;" href="/baichuan_advertisement_manage/ad.plan.add.{$plan_id}.{$group_id}">编辑广告计划</a>
+		<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/ad.group.add.{$plan_id}">新增广告组</a>
+		{if $currentUserName == admin}
+			{if($plan->verified_or_not==2 or $plan->verified_or_not==1)}
+				<a class="btn btn-squared btn-red" href="#" onclick="setPlanStatusById({$plan_id},3);">拒绝</a>
+			{/if}
+			{if($plan->verified_or_not==3 or $plan->verified_or_not==1)}
+				<a class="btn btn-squared btn-success" href="#" onclick="setPlanStatusById({$plan_id},2);">通过</a>
+			{/if}
+		{/if}
+      </div>
+      <div id="zhuantai" class="selMenu smzt ml20">
+        <span class="smtit">
+			{if $status==1}已启动
+			{elseif $status==2}已暂停
+			{elseif $status==3}非投放时间
+			{elseif $status==4}删除
+      {elseif $status==5}冻结
+			{elseif $status==6}没预算
+			{else}所有状态{/if}</span>
+        <ul id="status">
+          <li><a status="0">所有状态</a></li>
+          <li><a status="1">已启动</a></li>
+          <li><a status="2">已暂停</a></li>
+          <li><a status="3">非投放时间</a></li>
+          <!-- 
+          <li><a status="4">已删除</a></li>
+           -->
+          <li><a status="5">冻结</a></li>
+          <li><a status="6">没预算</a></li>
+        </ul>
+      </div>
+	  <script>
+	var paras2={ };
+	paras2.start="{$start}";
+	paras2.end="{$end}";
+	paras2.status="{$status}";
+	function reload(){
+		location="/ad.plan.list.{$plan_id}?start="+paras2.start+"&end="+paras2.end+"&status="+paras2.status;;
+	}
+	$("#status a").click(function(){
+			paras2.status=$(this).attr("status");
+			reload();
+	});
+	  $("#startdate2").change(function(){
+			  paras2.start=$(this).val();
+			  reload();
+	});
+	  $("#enddate2").change(function(){
+			  paras2.end=$(this).val();
+			  reload();
+	});
+	  </script>
+      
+{*
+      <div id="leixing" class="selMenu smlx ml10">
+        <span class="smtit">所有类型</span>
+        <ul>
+          <li><a href="javascript:;">所有类型</a></li>
+          <li><a href="javascript:;">品牌广告</a></li>
+          <li><a href="javascript:;">效果广告</a></li>
+        </ul>
+      </div>
+	  *}
+      
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+{*<a class="tbgiba" href="#" title="启动"><i class="iplay"></i></a>
+          <a class="tbgiba nobr" href="#" title="暂停"><i class="ipause"></i></a>
+		  *}
+          <a type="start" class="status-change tbgiba"  title="启动"><i class="fa fa-play"></i></a>
+          <a type="stop" class="status-change tbgiba nobr"  title="暂停"><i class="fa fa-pause"></i></a>
+          <a type="del" class="status-change tbgiba nobr" title="删除"><i class="fa fa-trash-o"></i></a>
+        </span>
+      </div>
+      <script>
+      $(document).ready(function(){
+		$(".status-change").click(function(){
+			var checked = $(".reportab input:checkbox:checked[value]");
+			var type=$(this).attr("type");
+			if(checked.size()<=0){
+				alert("请选择");
+			}else{
+				 var planid=[];
+				 checked.each(function(i,item){
+					 planid.push($(item).val());
+				 })
+				 $.ajax({ 
+					type: "POST", url: "/ad.group.status."+type, data: { group_ids:planid }, dataType:"json",
+					success: function(msg){ 
+						location.reload();
+					}
+				});
+			}
+			return false;
+		});
+	});
+      </script>
+      
+{*
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgiba" href="#" title="锁定"><i class="ilock"></i></a>
+          <a class="tbgiba" href="#" title="设置"><i class="iset"></i></a>
+          <a class="tbgiba" href="#" title="复制"><i class="icopy"></i></a>
+          <a class="tbgiba nobr" href="#" title="删除"><i class="idel"></i></a>
+        </span>
+      </div>
+      *}
+	  <div class="selMenu fr">
+			{if($plan->verified_or_not==2)}
+				<div class="btn btn-squared ml10" style="background:#EEEEEE;">已通过审核</div>
+			{elseif($plan->verified_or_not==3)}
+				<div class="btn btn-squared btn-red ml10">已被驳回</div>
+			{else}
+				<div class="btn btn-squared ml10" style="background:#EEEEEE;">待审核</div>
+			{/if}
+		</div>
+      <div class="clear"></div>
+    </div>
+    <!--toolbar-bc end--> 
+    
+    <table id="report_dat" width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt10">
+      <tr>
+        <th class="tac"><input class="checkall"  type="checkbox" /></th>
+        <th>广告组</th>
+        <th>状态</th>
+        <th>出价</th>
+        <th class="tac">展现数</th>      
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总花费</th>
+        <th class="tac">设置</th>
+      </tr>
+{foreach $groups_2 as $_group}
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="{$_group->group_id}" /></td>
+        <td style="max-width: 200px;word-break: break-all;word-break: break-word;"><a href="/baichuan_advertisement_manage/ad.group.list.{$plan->plan_id}.{$_group->group_id}" title="{$_group->name}">{$_group->name}</a></td>
+        <td>{if $_group->enabled==1}正常{elseif $_group->enabled==2}暂停{elseif $_group->enabled==3}非投放时间{elseif $_group->enabled==4}已删除{elseif $_group->enabled==5}冻结{elseif $_group->enabled==6}没预算{/if}</td>
+        <td>{number_format($_group->setting_price,2)}元</td>
+        <td class="tac">{number_format($_group->report->show,1,".",",")}</td>
+        <td class="tac">{$_group->report->click}</td>
+        <td class="tac">{if(!empty($_group->report->show))}{round($_group->report->click*100/$_group->report->show,3)}%{/if}</td>
+        <td class="tac">{number_format($_group->report->cost,2,".",",")}元</td>
+        <td class="tac"><a href="/baichuan_advertisement_manage/ad.group.add.{$plan->plan_id}.{$_group->group_id}">设置</a>{*<a href="#">导出</a>*}</td>
+      </tr>
+{/foreach}
+    </table>
+    
+    <!--turnpage start-->
+{*
+    <div class="turnpage">
+      <a href="#"><em>&lt;&lt;</em>上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页<em>&gt;&gt;</em></a>
+    </div>
+	*}
+    <!--turnpage end-->
+    
+{*
+    <div class="toolbar-bc mt30">
+      <span class="sbtng fl"><a class="ibtng" href="#">查看已归档的广告计划</a></span>
+      <div class="tbGroup ml30">
+        <span class="tbgBtn"><a class="tbgiba nobor" href="#" title="启动"><i class="iplay"></i></a></span>
+      </div><div class="clear"></div>
+    </div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告组</th>
+        <th>状态</th>
+        <th>定向方式</th>
+        <th>媒体选择</th>
+        <th class="tac">出价</th>
+        <th class="tac">展现数</th>      
+        <th class="tac">胜出率</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总花费</th>
+        <th class="tac">点击价格</th>
+        <th class="tac">报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>农夫山泉推广</td>
+        <td>暂停</td>
+        <td>&nbsp;</td>
+        <td class="tac">65</td>
+        <td class="tac">27%</td>
+        <td class="tac">185</td>
+        <td class="tac">75%</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac">98</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">查看</a><a href="#">导出</a></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>合计</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+      </tr>
+    </table>
+    
+    *}
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+<script type="text/javascript">
+function setPlanStatusById(id,type){
+	$.ajax({ 
+		type: "POST", url: "admin.shenhe.planSet."+id, data: { type:type }, dataType:"json",
+		success: function(msg){ 
+			location.reload();
+		}
+	});
+	return false;
+};
+</script>
+</body>
+</html>

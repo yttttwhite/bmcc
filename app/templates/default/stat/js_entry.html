@@ -1,0 +1,531 @@
+(function(j, b){
+    var J = j.document, k = [], y = [], w = {}, E = {}, o = "async" in J.createElement("script") || "MozAppearance" in J.documentElement.style || j.opera, t, f, u = j[b] = (j[b] ||
+    function(){
+        u.ready.apply(null, arguments)
+    }), H = 1, A = 2, D = 3, l = 4;
+    u.unique = Math.random();
+    u.Info = {};
+    u.LogFlag = false;
+    u._js = "{{{$config->host->js}}}";
+    u._log = "{{{$config->host->log}}}";
+    u._redirect = "{{{$config->host->redirect}}}";
+    u._ads = "{{{$config->host->ads}}}";
+    u._cms = "{{{$config->host->cms}}}";
+    u._third_req = "{{{$config->set->third_req}}}";
+    u._log_flag = "{{{$config->set->log}}}";
+    if (o) {
+        u.load = function(){
+            var K = arguments, L = K[K.length - 1], e = {};
+            if (!a(L)) {
+                L = null
+            }
+            h(K, function(N, M){
+                if (N !== L) {
+                    N = I(N);
+                    e[N.name] = N;
+                    n(N, L && M === K.length - 2 ? function(){
+                        if (C(e)) {
+                            x(L)
+                        }
+                    }
+ : null)
+                }
+            });
+            return u
+        }
+    }
+    else {
+        u.load = function(){
+            var e = arguments, L = [].slice.call(e, 1), K = L[0];
+            if (!t) {
+                y.push(function(){
+                    u.load.apply(null, e)
+                });
+                return u
+            }
+            if (!!K) {
+                h(L, function(M){
+                    if (!a(M)) {
+                        z(I(M))
+                    }
+                });
+                n(I(e[0]), a(K) ? K : function(){
+                    u.load.apply(null, L)
+                })
+            }
+            else {
+                n(I(e[0]))
+            }
+            return u
+        }
+    }
+    u.isOverIFrame = false;
+    u.js = u.load;
+    u.ready = function(K, M){
+        if (K === J) {
+            if (f) {
+                x(M)
+            }
+            else {
+                k.push(M)
+            }
+            return u
+        }
+        if (a(K)) {
+            M = K;
+            K = "ALL"
+        }
+        if (typeof K !== "string" || !a(M)) {
+            return u
+        }
+        var L = E[K];
+        if (L && L.state === l || K === "ALL" && C() && f) {
+            x(M);
+            return u
+        }
+        var e = w[K];
+        if (!e) {
+            e = w[K] = [M]
+        }
+        else {
+            e.push(M)
+        }
+        return u
+    };
+    u.ready(J, function(){
+        if (C()) {
+            h(w.ALL, function(e){
+                x(e)
+            })
+        }
+        if (u.feature) {
+            u.feature("domloaded", true)
+        }
+    });
+    function g(){
+    }
+    function h(e, M){
+        if (!e) {
+            return
+        }
+        if (typeof e === "object") {
+            e = [].slice.call(e)
+        }
+        for (var L = 0, K = e.length; L < K; L++) {
+            M.call(e, e[L], L)
+        }
+    }
+    function m(e, K){
+        var L = Object.prototype.toString.call(K).slice(8, -1);
+        return K !== undefined && K !== null && L === e
+    }
+    function a(e){
+        return m("Function", e)
+    }
+    function s(e){
+        return m("Array", e)
+    }
+    function B(L){
+        var e = L.split("/"), K = e[e.length - 1], M = K.indexOf("?");
+        return M !== -1 ? K.substring(0, M) : K
+    }
+    function x(e){
+        e = e || g;
+        if (e._done) {
+            return
+        }
+        e();
+        e._done = 1
+    }
+    function I(M){
+        var K = {};
+        if (typeof M === "object") {
+            for (var e in M) {
+                if (!!M[e]) {
+                    K = {
+                        name: e,
+                        url: M[e]
+                    }
+                }
+            }
+        }
+        else {
+            K = {
+                name: B(M),
+                url: M
+            }
+        }
+        var L = E[K.name];
+        if (L && L.url === K.url) {
+            return L
+        }
+        E[K.name] = K;
+        return K
+    }
+    function C(e){
+        e = e || E;
+        for (var K in e) {
+            if (e.hasOwnProperty(K) && e[K].state !== l) {
+                return false
+            }
+        }
+        return true
+    }
+    function G(e){
+        e.state = A;
+        h(e.onpreload, function(K){
+            K.call()
+        })
+    }
+    function z(e, K){
+        if (e.state === undefined) {
+            e.state = H;
+            e.onpreload = [];
+            c({
+                url: e.url,
+                type: "cache"
+            }, function(){
+                G(e)
+            })
+        }
+    }
+    function n(e, K){
+        K = K || g;
+        if (e.state === l) {
+            K();
+            return
+        }
+        if (e.state === D) {
+            u.ready(e.name, K);
+            return
+        }
+        if (e.state === H) {
+            e.onpreload.push(function(){
+                n(e, K)
+            });
+            return
+        }
+        e.state = D;
+        c(e, function(){
+            e.state = l;
+            K();
+            h(w[e.name], function(L){
+                x(L)
+            });
+            if (f && C()) {
+                h(w.ALL, function(L){
+                    x(L)
+                })
+            }
+        })
+    }
+    function c(L, O){
+        O = O || g;
+        var M;
+        if (/\.css[^\.]*$/.test(L.url)) {
+            M = J.createElement("link");
+            M.type = "text/" + (L.type || "css");
+            M.rel = "stylesheet";
+            M.href = L.url
+        }
+        else {
+            M = J.createElement("script");
+            M.type = "text/" + (L.type || "javascript");
+            M.src = L.url
+        }
+        M.onload = M.onreadystatechange = N;
+        M.onerror = e;
+        M.async = false;
+        M.defer = false;
+        function e(P){
+            P = P || j.event;
+            M.onload = M.onreadystatechange = M.onerror = null;
+            O()
+        }
+        function N(P){
+            P = P || j.event;
+            if (P.type === "load" || (/loaded|complete/.test(M.readyState) && (!J.documentMode || J.documentMode < 9))) {
+                M.onload = M.onreadystatechange = M.onerror = null;
+                O()
+            }
+        }
+        var K = J.head || J.getElementsByTagName("head")[0];
+        K.insertBefore(M, K.lastChild)
+    }
+    function p(){
+        if (!J.body) {
+            j.clearTimeout(u.readyTimeout);
+            u.readyTimeout = j.setTimeout(p, 50);
+            return
+        }
+        if (!f) {
+            f = true;
+            h(k, function(e){
+                x(e)
+            })
+        }
+    }
+    function q(){
+        if (J.addEventListener) {
+            J.removeEventListener("DOMContentLoaded", q, false);
+            p()
+        }
+        else {
+            if (J.readyState === "complete") {
+                J.detachEvent("onreadystatechange", q);
+                p()
+            }
+        }
+    }
+    if (J.readyState === "complete") {
+        p()
+    }
+    else {
+        if (J.addEventListener) {
+            J.addEventListener("DOMContentLoaded", q, false);
+            j.addEventListener("load", p, false)
+        }
+        else {
+            J.attachEvent("onreadystatechange", q);
+            j.attachEvent("onload", p);
+            var v = false;
+            try {
+                v = j.frameElement == null && J.documentElement
+            } 
+            catch (F) {
+            }
+            if (v && v.doScroll) {
+                (function d(){
+                    if (!f) {
+                        try {
+                            v.doScroll("left")
+                        } 
+                        catch (e) {
+                            j.clearTimeout(u.readyTimeout);
+                            u.readyTimeout = j.setTimeout(d, 50);
+                            return
+                        }
+                        p()
+                    }
+                })()
+            }
+        }
+    }
+    setTimeout(function(){
+        t = true;
+        h(y, function(e){
+            e()
+        })
+    }, 300);
+    if (!window.console) {
+        window.console = {
+            debug: function(){
+            }
+        }
+    }
+    u.debug = function(L){
+        return;
+        var N = "";
+        if (typeof L === "string") {
+            N = "msg=" + L
+        }
+        else {
+            if (typeof L === "object") {
+                for (var K in L) {
+                    N += K + "=" + escape(L[K]) + "&"
+                }
+            }
+            else {
+                N = L
+            }
+        }
+        var M = "https://" + u._log + "/stat.log.test?" + N + "&unique=" + u.unique + "&rand=" + Math.random();
+        var e = new Image(1, 1);
+        e.src = M;
+        e.onload = function(){
+            return
+        }
+    };
+    u.getAd = function(e){
+        return e
+    };
+    u.set = function(K){
+        for (var e in K) {
+            document.cookie = e + "=" + K[e] + "; path=/; domain=" + u.root()
+        }
+    };
+    u.root = function(){
+        var M = "";
+        var K = new Array("com", "net", "org", "gov", "edu");
+        var L = document.domain.split(".");
+        var N = L.length - 1;
+        var e = false;
+        if (L[N] == "cn") {
+            for (i = 0; i < K.length; i++) {
+                if (L[N - 1] == K[i]) {
+                    e = true;
+                    break
+                }
+            }
+            if (e == true) {
+                M = L[N - 2] + "." + L[N - 1] + "." + L[N]
+            }
+            else {
+                M = L[N - 1] + "." + L[N]
+            }
+        }
+        else {
+            M = L[N - 1] + "." + L[N]
+        }
+        return M
+    };
+    u.log_stat = function(){
+        if (u.LogFlag == false) {
+            u.LogFlag = true;
+            screenWidth = 0, screenHeight = 0, r = 0, logUrl = "";
+            screenWidth = window.screen.width;
+            screenHeight = window.screen.height;
+            _screen = screenWidth + "x" + screenHeight;
+            sid = (typeof mim_stat_id != "undefined") ? mim_stat_id : 0;
+            r = Math.round(Math.random() * 2147483647);
+            logUrl = "https://" + u._log + "/stat.log?" + r;
+            logUrl += "&sid=" + sid + "&screen=" + _screen + "&referer=" + escape(document.referrer) + "&url=" + escape(document.location.href);
+            u.js(logUrl, function(){
+            })
+        }
+    };
+    u.cookie = {
+        getItem: function(e){
+            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(e).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null
+        },
+        setItem: function(M, P, L, K, e, N){
+            if (!M || /^(?:expires|max\-age|path|domain|secure)$/i.test(M)) {
+                return false
+            }
+            var O = "";
+            if (L) {
+                switch (L.constructor) {
+                    case Number:
+                        O = L === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + L;
+                        break;
+                    case String:
+                        O = "; expires=" + L;
+                        break;
+                    case Date:
+                        O = "; expires=" + L.toUTCString();
+                        break
+                }
+            }
+            document.cookie = encodeURIComponent(M) + "=" + encodeURIComponent(P) + O + (e ? "; domain=" + e : "") + (K ? "; path=" + K : "") + (N ? "; secure" : "");
+            return true
+        },
+        removeItem: function(L, K, e){
+            if (!L || !this.hasItem(L)) {
+                return false
+            }
+            document.cookie = encodeURIComponent(L) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (e ? "; domain=" + e : "") + (K ? "; path=" + K : "");
+            return true
+        },
+        hasItem: function(e){
+            return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(e).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie)
+        },
+        keys: function(){
+            var e = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+            for (var K = 0; K < e.length; K++) {
+                e[K] = decodeURIComponent(e[K])
+            }
+            return e
+        }
+    };
+    u.log = function(){
+        if (u.cookie.getItem("mim_sid") != null) {
+            u.log_stat();
+            return
+        }
+        var K = (typeof mim_cms_url != "undefined") ? mim_cms_url : "https://" + u._cms + "/cms_tanx";
+        K += "?rand=" + Math.random();
+        var e = new Image(1, 1);
+        e.onload = function(){
+            u.log_stat();
+            var M = (typeof mim_cms_url != "undefined") ? mim_cms_url : "https://" + u._cms + "/cms_baidu";
+            M += "?rand=" + Math.random();
+            var Q = new Image(1, 1);
+            Q.src = M;
+            var O = ["fututa", "jiemeng88", "zuojiaju", "aibang", "zhongjiu.cn", "cntv.cn", "yoyo-hd", "111yao"];
+            for (var N in O) {
+                if (location.host.indexOf(O[N]) !== -1) {
+                    return
+                }
+            }
+            var M = (typeof mim_cms_url != "undefined") ? mim_cms_url : "https://" + u._cms + "/cms_dratio";
+            M += "?rand=" + Math.random();
+            var P = new Image(1, 1);
+            P.src = M
+        };
+        e.src = K;
+        var L = (typeof mim_monitor != "undefined") ? mim_monitor : false;
+        if (L) {
+            this.ready(function(){
+                u.monitor()
+            })
+        }
+    };
+    u.monitor = function(){
+        var Q = "";
+        var O = document.getElementsByTagName("iframe");
+        if (O.length > 0) {
+            for (var L = 0; L < O.length; L++) {
+                O[L].onmouseover = function(){
+                    u.isOverIFrame = true
+                };
+                O[L].onmouseout = function(){
+                    u.isOverIFrame = false;
+                    var R = v ? v : window;
+                    if (R) {
+                        setTimeout(R.focus, 0)
+                    }
+                };
+                var K = v ? v : window;
+                var Q = O[L].getAttribute("id");
+                var P = O[L].getAttribute("src");
+                var e = O[L].getAttribute("width");
+                var M = O[L].getAttribute("height");
+                if (typeof window.attachEvent !== "undefined") {
+                    K.attachEvent("onblur", function(){
+                        N(Q, P, e, M)
+                    })
+                }
+                else {
+                    if (typeof window.addEventListener !== "undefined") {
+                        K.addEventListener("blur", function(){
+                            N(Q, P, e, M)
+                        }, false)
+                    }
+                }
+            }
+        }
+        function N(W, V, R, U){
+            if (u.isOverIFrame) {
+                u.isOverIFrame = false;
+                screenWidth = 0, screenHeight = 0, r = 0, logUrl = "";
+                screenWidth = window.screen.width;
+                screenHeight = window.screen.height;
+                _screen = screenWidth + "x" + screenHeight;
+                sid = (typeof mim_stat_id != "undefined") ? mim_stat_id : 0;
+                r = Math.round(Math.random() * 2147483647);
+                logUrl = "https://" + u._log + "/stat.monitor?" + r;
+                logUrl += "&sid=" + sid + "&screen=" + _screen + "&referer=" + escape(document.referrer) + "&url=" + escape(document.location.href) + "&id=" + W + "&src=" + escape(V) + "&width=" + R + "&height=" + U;
+                var S = new Image(1, 1);
+                S.src = logUrl;
+                S.onload = function(){
+                    return
+                }
+            }
+            var T = v ? v : window;
+            if (T) {
+                setTimeout(T.focus(), 0)
+            }
+        }
+    }
+})(window, "BCStat");
+BCStat.log();

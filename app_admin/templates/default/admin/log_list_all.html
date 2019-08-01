@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+
+<body>
+{part "/main.main.nav.ad"}
+<!--main-->
+<div class="main" >
+{*
+	<nav class="side">
+		<div class="contianer-left">
+			{part "/admin.user.left"}
+		</div>
+	</nav>
+*}
+	<div class="mcon" style="margin-left: 0;">
+        <div class="toolbar-bc fl mb-10">
+            <div class="fl sub-title sc-title">
+                <a href="/baichuan_advertisement_manage/admin.user.list?nav=5">高级管理</a>
+                <i class="fa fa-angle-double-right" ></i>
+                系统日志
+            </div>
+        </div>
+        <div class="clear"></div>
+		<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+			<div class="panel-heading border-light panel-head-md">
+				<form id="queryFrom" action="{$url['date']}" method="get">
+					<input type="text" name="type" class="form-control input-small"  value="{$GET['type']}" style="display:none;"/>
+					<input type="hidden" name="nav" class="form-control input-small"  value="5"/>
+					<div class="input-daterange fl p-0" id="input-daterange" style="width:300px;">
+                        <input id="start_date" name="dateStart" type="text" class="itxt idate fc7" value="{if(isset($GET['dateStart']))}{$GET['dateStart']}{else}{date('Y-m-d',time())}{/if}" size="12" />
+						至
+						<input id="end_date" name="dateEnd" type="text" class="itxt idate fc7" value="{if(isset($GET['dateEnd']))}{$GET['dateEnd']}{else}{date('Y-m-d',time())}{/if}" size="12" />
+						<script>
+							$(function(){
+								if($("#start_date").val()=="开始时间"){
+									$("#start_date").val("{date("Y-m-d")}");
+								}
+								if($("#end_date").val()=="结束时间"){
+									$("#end_date").val("{date("Y-m-d")}");
+								}
+								$("#start_date").datepicker({ dateFormat: "yy-mm-dd",maxDate:1}); 
+								$("#end_date").datepicker({ dateFormat: "yy-mm-dd",maxDate:1}); 
+							});
+
+							function endBeforeStart(){
+								var startDate = Date.parse($("input[name='dateStart']").val());
+								var endDate = Date.parse($("input[name='dateEnd']").val());
+								if(endDate < startDate){
+									layer.alert('注意：结束时间早于开始时间');
+									$("input[name='dateStart']").val($("input[name='dateEnd']").val());
+								}
+							}
+							$("input[name='dateStart']").change(function(){ endBeforeStart(); });
+							$("input[name='dateEnd']").change(function(){ endBeforeStart(); });
+
+						</script>
+					</div>
+					<div class="fl" >
+						<input type="text" name="key" class="form-control input-small"  placeholder="用户名" value="{$GET['key']}"/>
+					</div>
+					<div class="fl" >
+						<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+						<a class="btn btn-squared btn-sm btn-default" onclick="setDate('{date('Y-m-d',time()-86400)}','{date('Y-m-d',time()-86400)}')">昨天</a>
+						<a class="btn btn-squared btn-sm btn-default" onclick="setDate('{date('Y-m-d',time()-86400*8)}','{date('Y-m-d',time()-86400)}')">最近7天</a>
+						<a class="btn btn-squared btn-sm btn-default" href="{$url['this']}export=1" download target="_blank">导出</a>
+					</div>
+					<script>
+						function setDate(startDate,endData){
+							$('#start_date').val(startDate);
+							$('#end_date').val(endData);
+							$('#queryFrom').submit();
+						}
+					</script>
+					<span style="line-height:28px; ">共计：{$page['amount']}条</span>
+				</form>
+			</div>
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+					<thead>
+						<tr style="background-color:#1478dc;font-color:#999999;">
+							<th class="center" width="60px;" onclick="$('.icheck').iCheck('check');" style="cursor:pointer;">全选</th>
+							<th class="center">用户名</th>
+							<th class="center">操作名</th>
+							<!-- <th class="center">操作</th> -->
+							<!-- <th class="center">详情</th> -->
+							<th class="center">IP</th>
+							<th class="center">时间</th>
+							<th class="center" width="60px;">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach($stat as $host=>$amount)}
+						<tr class=" {if !strlen($amount['operation_name'])}hide{/if}">
+							<td class="center">
+								<label>
+									<input type="checkbox" class="flat-grey icheck" name = "consumerIds[]" value="">
+								</label>
+							</td>
+							<td style="text-align:left;">{$amount['uname']}</td>
+							<td style="text-align:left;">{$amount['operation_name']}</td>
+							<!-- <td style="text-align:left;">{$amount['operation']}</td> -->
+							<!-- <td style="text-align:left;word-break: break-all;"></td> -->
+							<td style="text-align:left;">{$amount['ip']}</td>
+							<td style="text-align:left;">{$amount['time_stamp']}</td>
+							<th class="center" style="cursor:pointer;" onclick="layerIframe('log详情','{$url['detail']}id={$amount['id']}',800,420)">详情</th>
+						</tr>
+						{/foreach}
+					</tbody>
+				</table>
+				
+                <div class="turnpage">
+                {turnpager $page['count']|html}
+                </div>
+				
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 弹层 -->
+{part "/main.main.footer"}	
+</body>
+<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-aero',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+		} );
+	</script>
+</html>

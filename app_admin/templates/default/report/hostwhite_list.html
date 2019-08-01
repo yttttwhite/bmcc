@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+	{part "/main.main.nav.ad"}
+	<div class="container-content">
+		<div class="contianer-left">
+			{part "/report.stat.left"}
+		</div>
+		<div class="content">
+			<div class="content-inside">
+				<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+					<div class="panel-heading border-light panel-head-md">						
+						<form id="queryFrom" action="{$url['date']}" method="get">
+							<div class="fl" style="position: relative; left: 10px;">
+                              	  查询时间：<input id="pushDate" name="pushDate" type="text" class="itxt idate fc7"
+                                   value="{if(strlen($pushDate)>0)}{$pushDate}{else}{date('Y-m-d',time()-24*3600)}{/if}" size="12" />
+								域名白名单：<input type="text" name="key" class="input-small"  placeholder="关键字" value="{$adkey}"/>
+								<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+							</div>
+							<script>
+                                $(function(){
+                                    if($("#pushDate").val()=="查询日期"){
+                                        $("#pushDate").val("{date("Y-m-d")}");
+                                    }
+                                    $("#pushDate").datepicker({ dateFormat: "yy-mm-dd"});
+                                });
+                            </script>
+							<span style="line-height:28px; position: relative; left: 30px;">共计：{$page['amount']}条</span>
+						</form>
+					</div>
+					<div class="panel-body">
+						<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+							<thead>
+								<tr style="background-color:#1478dc;font-color:#999999;">
+		                            <th class="center">日期</th>
+		                            <th class="center">域名白名单</th>
+		                            <th class="center">日投放量</th>
+		                            <th class="center">广告投放量</th>
+		                        </tr>
+							</thead>
+							<tbody>
+		                        {foreach($stat as $host=>$amount)}
+		                        <tr>
+		                            <td style="text-align:left;">{$amount['PushDate']}</td>
+		                            <td style="text-align:left;">{$amount['HostWhite']}</td>
+		                            <td style="text-align:left;">{$amount['Toppv']}</td>
+		                            <td style="text-align:left;width:60%;">{substr($amount['Adpv'],0,(strlen($amount['Adpv'])-1))}</td>
+		                        </tr>
+		                        {/foreach}
+							</tbody>
+						</table>
+						
+                        <div class="text-right">
+                            <ul class="pagination margin-bottom-10">
+                                <li>
+                                    <a href="{$page['url']}page=1">上一页</a>
+                                </li>
+								{for($i = 1; $i<=$page['count']; $i++)}
+                                <li {if($page['current']==$i)}class="active"{/if}>
+                                    <a href="{$page['url']}page={$i}">{$i}</a>
+                                </li>
+								{/for}
+                                <li>
+                                    <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+                                </li>
+                            </ul>
+                        </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+
+	<!-- 弹层 -->
+	
+</body>
+<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-aero',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+		} );
+	</script>
+</html>

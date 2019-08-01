@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/bootstrap-select.js"></script>
+<link href="/baichuan_advertisement_manage/assets_admin/css/bootstrap-select.css" rel="stylesheet">
+</head>
+<body>
+{part "/main.main.nav.media"}
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.media.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+    		<i class="fa fa-angle-double-right"></i>
+    		<a href="/baichuan_advertisement_manage/media.main">媒体来源</a>
+			<i class="fa fa-angle-double-right"></i>
+			{if !empty($media_id)}修改媒体{else}创建媒体{/if}
+    	</div>
+	</div>
+	
+	<form id="formData" action="/media.main.add{if !empty($media_id)}.{$media_id}{/if}" method="post">
+    <!--基本信息-->
+    <div class="comForm" style="overflow: unset;">
+<!-- 媒体信息-->    
+      <h1>媒体信息</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>媒体名称：</dt>
+        <dd><input type="text" class="itxt" name="media_name" size="50" value="{$media->media_name}" required="required" /></dd>
+        <dd style="color:red;"><b>&nbsp;&nbsp;*</b></dd>
+      </dl>
+      <dl>
+        <dt>媒体标识：</dt>
+        <dd><input type="text" class="itxt" name="identification" size="50" value="{$media->identification}"/></dd>
+      </dl>
+      <dl>
+        <dt>媒体类型：</dt>
+        <dd>
+            <select name="media_type">
+                <option value="website"{if($media->media_type=="website")} selected {/if}>网站</option>
+                <option value="app"{if($media->media_type=="app")} selected {/if}>APP</option>
+                <option value="adx"{if($media->media_type=="adx")} selected {/if}>ADX</option>
+                <option value="inside"{if($media->media_type=="inside")} selected {/if}>内部</option>
+                <option value="others"{if($media->media_type=="others")} selected {/if}>其他</option>
+            </select>
+        </dd>
+          <dd style="color:red;"><b>&nbsp;&nbsp;*</b></dd>
+      </dl>
+        <div style="height:40px;">
+            <dt>可被使用的用户：</dt>
+            <dd>
+                <input name="available_uid" type="hidden" value="{$media->available_uid}"/>
+                <select {$readonly} data-live-search="true" multiple class="selectpicker bla bla bli bs-select-hidden" title="请选择">
+                    {foreach $all_users as $k=>$_u}
+                    <option value="{$_u['uid']}">{$_u['user_name']}</option>
+                    {/foreach}
+                </select>
+            </dd>
+        </div>
+
+      <dl  id="platdl2">
+        <dt>行业类型：</dt>
+        <dd>
+            <select id="cate" {$readonly} style="width:250px;">
+                <option value="0">请选择</option>
+                {foreach $plan_types as $k=>$_t}
+                <option value="{$k}">{$k}</option>
+                {/foreach}
+            </select>
+            <select {$readonly} id="sub_cate" name="career_type" data="{$media->career_type}" style="width:250px;"> 
+            </select>
+        </dd>
+          <dd style="color:red;"><b>&nbsp;&nbsp;*</b></dd>
+      </dl>
+      <dl>
+        <dt>引流地址：</dt>
+        <dd><input type="text" class="itxt" size="50" name="reference_addr" {if(isset($media->reference_addr))} value={$media->reference_addr} {/if}/></dd>
+      </dl>
+      <dl>
+        <dt>媒体状态：</dt>
+        <dd>
+            <label><input type="radio" name="media_status" value="1" {if(isset($media->media_status)&&$media->media_status==1)} checked {/if} {if(!isset($media->media_status))} checked {/if}>启用</label>
+            <label><input type="radio" name="media_status" value="0" {if(isset($media->media_status)&&$media->media_status==0)} checked {/if}>停用</label>
+        </dd>
+      </dl>
+       
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea name="comment" cols="50" rows="5">{$media->comment}</textarea></dd>
+      </dl>
+      <!-- 媒体验证 -->
+        <h2>媒体验证</h2>
+        <dl>
+            <dt>媒体账号：</dt>
+            <dd><input class="itxt" type="text" size="50" name="media_account" {if(isset($media->media_account))} value={$media->media_account} {/if}/></dd>
+        </dl>
+        <dl>
+	        <dt>媒体公钥：</dt>
+	        <dd><textarea name="public_key" cols="50" rows="5">{$media->public_key}</textarea></dd>
+      </dl>
+      <dl>
+	        <dt>媒体私钥：</dt>
+	        <dd><textarea name="private_key" cols="50" rows="5">{$media->private_key}</textarea></dd>
+      </dl>
+      <!-- 联系方式 -->
+      <h2>联系方式</h2>
+      <dl>
+        <dt>名称：</dt>
+        <dd><input type="text" class="itxt" value="{$media->contact_name}" name="contact_name" size="50" /></dd>
+      </dl>
+      <dl>
+        <dt>电话：</dt>
+        <dd><input type="text" class="itxt" value="{$media->contact_mobile}" name="contact_mobile" size="50" /></dd>
+      </dl>
+      <dl>
+        <dt>邮箱：</dt>
+        <dd><input type="text" class="itxt" value="{$media->contact_email}" name="contact_email" size="50" /></dd>
+      </dl>
+      <dl>
+        <dt>地址：</dt>
+        <dd><input type="text" class="itxt" value="{$media->contact_address}" name="contact_address" size="50" /></dd>
+      </dl>
+        <input type="hidden" class="itxt" value="000000" name="contact_zipcode"/>
+      <dl>
+        <dt>公司网址：</dt>
+        <dd><input type="text" class="itxt" value="{$media->contact_website}" name="contact_website" size="50" /></dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="contact_comment" >{$media->contact_comment}</textarea></dd>
+      </dl>
+    </div>
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" id="saveData" type="button" class="ibtnb" value="保存"  />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+<script>
+$(function(){
+  var user = $("input[name='available_uid']").val()
+  if(user && user.length > 0){
+    $('.selectpicker').selectpicker('val',user.split(','));
+  }
+  else 
+  $('.selectpicker').selectpicker();
+	var types=$.parseJSON($.base64.atob('{base64_encode(SJson::encode($plan_types))}')) ;
+	$("#cate").change(function(){
+        var t=types[($(this).val())];
+        $("#sub_cate").html();
+        var h="";
+        for(var i in t){
+            {if(!empty($media->career_type))}
+                if(t[i].type_id == {$media->career_type}){
+                    h+="<option selected='selected' value='"+t[i].type_id+"'>"+t[i].type_name+"</option>";
+                }else{
+                    h+="<option value='"+t[i].type_id+"'>"+t[i].type_name+"</option>";
+                }
+            {else}
+                h+="<option value='"+t[i].type_id+"'>"+t[i].type_name+"</option>";
+            {/if}
+        }
+        $("#sub_cate").html(h);
+    });
+	
+	var type_id=($("#sub_cate").attr("data"));
+	for(var i in types){
+		 for(var j in types[i]){
+		  if(type_id == types[i][j].type_id ){
+		    $("#cate").val(i).trigger("change");
+		  }
+		 }
+		}
+})
+
+$("#saveData").click(function(){
+    var cate = $("#cate").val()
+    if(cate ==0){
+        layer.msg("请选择行业类型");
+        return false;
+    }
+    var user = $(".selectpicker").val();
+    if(user && user.length > 0){
+      $("input[name='available_uid']").val(user.join(","))
+    }
+    $("#formData").submit();
+});
+</script>
+</body>
+</html>

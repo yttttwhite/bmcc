@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body class="w-auto">
+        <div class="container-content p-0 mt-20">
+            <div class="panel panel-white" style="margin:0;">
+                <div class="panel-body">
+                    <form method="post" action="{$url['formAction']}">
+                        <div id="panel_stuff" class="tab-pane fade  in  active">
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-100 control-label text-34" for="form-field-1">添加敏感词</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="text" placeholder="每行一个" id="form-field-1" rows="12" class="form-control" name="wordStr"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                	<label class="col-sm-2 w-100 control-label text-34" for="form-field-1"></label>
+                                	<div class="col-sm-9">
+                                    	<button type="submit" name="submit" class="btn btn-success btn-squared btn-sm w-100 fr">提交</button>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>

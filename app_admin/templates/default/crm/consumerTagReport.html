@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+	<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{part "/main.main.header"}
+	</head>
+	<body>
+		{part "/main.main.nav.ad"}
+		<div class="container-content">
+			<div class="contianer-left">
+				{part "/crm.consumer.groups"}
+				<div class="left-btn-group">
+					<a class="btn btn-default  btn-240-34 btn-squared" href="bcdata-tag.html" target="_blank">分析所选分组</a>
+					<a class="btn btn-default  btn-240-34 btn-squared">给所选分组发邮件</a>
+					<a class="btn btn-default  btn-240-34 btn-squared">给所选分组发短信</a>
+					<a class="btn btn-primary bg-blue btn-240-34 btn-squared mt-10" id="addGroup">+新建分组</a>
+					<a class="btn btn-danger btn-240-34 btn-squared">删除所选分组</a>
+				</div>
+			</div>
+				<div class="content">
+					<div class="content-inside" style="width:100%; float: left;">
+						<div class="toolbar-right-top bg-blue">
+							<ul class="ul-x" style="color:#FFFFFF;">
+								<li>{$tag[1]['tname']}</li>
+							</ul>
+						</div>
+						<div class="table-container" style="float: left; width:100%;">
+							<form id="consumerListForm" name="consumerList" method="post" action="">
+								<table class="table table-striped table-hover" id="sample-table-2">
+									<thead>
+										<tr>
+											<th>标签</th>
+											<th>权重占比</th>
+										</tr>
+									</thead>
+									<tbody>
+									{foreach $baseReport as $tagReport}
+										<tr>
+											<td class="col-sm-3">
+												<a href="crm.main.Tag.{$tagReport['tid']}" target="_blank">
+													{$tagReport['tname']}
+												</a>
+											</td>
+											<td class="col-sm-3">{$tagReport['weight']}</td>
+										</tr>
+									{/foreach}
+									</tbody>
+								</table>
+							</form>
+						</div>
+					</div>
+				
+					<div class="content-inside" style="width:100%; float: left;">
+						<div class="toolbar-right-top bg-blue">
+							<ul class="ul-x" style="color:#FFFFFF;">
+								<li>{$tag[2]['tname']}</li>
+							</ul>
+						</div>
+						<div class="table-container" style="float: left; width:50%;">
+							<form id="consumerListForm" name="consumerList" method="post" action="">
+								<table class="table table-striped table-hover" id="sample-table-2">
+									<thead>
+										<tr>
+											<th>标签</th>
+											<th>出现次数</th>
+										</tr>
+									</thead>
+									<tbody>
+									{foreach $tagReportSum as $tagReport}
+										<tr>
+											<td class="col-sm-3">
+												<a href="crm.main.Tag.{$tagReport['tid']}" target="_blank">
+													{$tagReport['tname']}
+												</a>
+											</td>
+											<td class="col-sm-3">{$tagReport['weight']}</td>
+										</tr>
+									{/foreach}
+									</tbody>
+								</table>
+							</form>
+						</div>
+						
+						<div class="table-container" style="float: left; width:50%;">
+							<form id="consumerListForm" name="consumerList" method="post" action="">
+								<table class="table table-striped table-hover" id="sample-table-2">
+									<thead>
+										<tr>
+											<th>标签</th>
+											<th>权重占比</th>
+										</tr>
+									</thead>
+									<tbody>
+									{foreach $tagReportCount as $tagReport}
+										<tr>
+											<td class="col-sm-3">
+												<a href="crm.main.Tag.{$tagReport['tid']}" target="_blank">
+													{$tagReport['tname']}
+												</a>
+											</td>
+											<td class="col-sm-3">{$tagReport['count']}</td>
+										</tr>
+									{/foreach}
+									</tbody>
+								</table>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="footer"></div>
+		
+		<div id="addGroupLayer" style="width:400px; height:200px; display:none;">
+			<div class="form-container form-addGroup">
+				<form class="form-inline" action="crm.consumer.addGroup" method="post" id="addGroupFrom">
+				<div class="input-group w-230">
+					<input type="text" name="groupName" class="form-control form-sm" placeholder="输入组名">
+				</div>
+				<input id="addGroupSubmit" type="submit" value="确认添加" class="btn btn-success btn-squared">
+				</form>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-green',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+			
+			
+			$('#addGroup').on('click', function() {
+				layerDivById('addGroupLayer');
+			} );
+			
+			$('#addConsumer').on('click', function() {
+				var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer';
+				var layerIndex = layerIframe(url,800,430);
+			} );
+			
+			$('#copyConsumerToGroup').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.addConsumerToGroup");
+				$("#consumerListForm").submit();
+			} );
+			
+			$('#deleteSelectedConsumers').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.operation.delete");
+				$("#consumerListForm").submit();
+			} );
+		} );
+		
+		function deleteConsumerByCid(cid){
+			var msg = "确认删除这条数据？";
+			var url = "crm.consumer.operation.delete."+cid;
+			layerConfirmGet(url,msg);
+		}
+		
+		function editConsumerByCid(cid){
+			var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer.'+cid;
+			var layerIndex = layerIframe(url,800,430);
+		}
+	</script>
+</html>

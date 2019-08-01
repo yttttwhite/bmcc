@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ZH-CN">
+<head>
+    <title>外呼内容管理新建</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta https-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="https://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/baichuan_advertisement_manage/assets_admin/outbound_list.css" />
+    <style type="text/css">
+        * {
+            margin: 0px;padding: 0px;
+        }
+        .Newform {
+            width: 700px;height: 415px;
+            /*border: 1px solid red;*/
+            margin-top: 10px;margin-left: 215px;margin-bottom: 130px;
+        }
+        .Newform input {
+            display: inline-block;width: 238px;height: 32px;
+        }
+        .return,.reset,.save {
+            display: inline-block;width: 60px;height: 28px;
+            text-align: center;line-height: 28px;color: #fff;
+            border-radius: 3px;transition: all 1s;cursor: pointer;margin-right: 30px;
+        }
+        .return {
+         background: #5bc0de;
+        }
+        .return:hover {
+            background: #567db7;
+        }
+        .reset {
+          background: #f63832;
+        }
+        .reset:hover {
+            background: #e6e8e8;
+        }
+        .save {
+          background: #5cb85c;
+        }
+        .save:hover {
+            background: #567db7;
+        }
+    </style>
+    <head>
+        {part "/main.main.header"}
+    </head>
+<body>
+{part "/main.main.nav.ad"}
+
+<!--左侧审核导航  s-->
+<div class="left_nav">
+    <ul>
+        <li class="left_nav_1">外呼管理</li>
+       <!-- <li class="left_nav_2">&lt;!&ndash;<span style="position: absolute;left: -15px;top: 10px;" class="glyphicon glyphicon-star" aria-hidden="true">&ndash;&gt;</span>外呼计划审核</li>
+        <li class="left_nav_3"><span style="color: #1182d1;" > ▪ </span>待审核</li>
+        <li class="left_nav_4"><a href="javascript:;"><span style="color: #1182d1;" > ▪ </span>已通过</a></li>
+        <li class="left_nav_5"><a href="javascript:;"><span style="color: #1182d1;" > ▪ </span>未通过</a></li>-->
+    </ul>
+</div>
+<!--左侧审核导航  e-->
+
+<!--上部导航  s-->
+<div class="top_nav">外呼 <span style="color: #3e2834;">>></span> 新建话术
+    <span class="WordCreation_btn">
+        <a href="/baichuan_advertisement_manage/admin.outbound.content">
+            <span style="position: absolute;left: -13px;top:2px;" class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>返回管理列表
+        </a>
+        </span>
+    </span>
+</div>
+<!--上部导航  e-->
+
+<!--外呼管理列表  s-->
+<div class="Newform"><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话术名称 : <input  type="text" class="form-control" placeholder="请输入话术名称"><br><br>
+    外呼主叫号码 : <input type="text" class="form-control" placeholder="请输入主叫号码"><br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话术类容 : <textarea rows='10' cols='30' placeholder="请输入话术内容"></textarea><br><br>
+    <br><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="return"><a style="color: #fff;" href="/baichuan_advertisement_manage/admin.contract.list"><span style="" class="glyphicon glyphicon-share-alt" aria-hidden="true">返回</span></a></span>
+    <span class="reset">重置</span>
+    <span class="save" style="width: 75px;"><i class="fa fa-arrow-circle-right"></i>&nbsp;确认修改</span>
+
+</div>
+<!--外呼管理列表  e-->
+
+
+{part "/main.main.footer"}
+</body>
+</html>
+<script>
+    $(function(){
+        $(".left_nav_2").click(function () {
+            $(".left_nav_3").stop().toggle();
+            $(".left_nav_4").stop().toggle();
+            $(".left_nav_5").stop().toggle();
+
+        });
+    });
+</script>

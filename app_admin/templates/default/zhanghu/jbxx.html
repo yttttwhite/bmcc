@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.account"}
+
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  
+    <div class="leftNav">
+      <ul>
+        <li class="nobotbor sel"><a href="/baichuan_advertisement_manage/account">基本信息</a></li>
+      </ul>
+    </div>
+
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+    <div class="toolbar mt20">
+       <span class="sbtng"><a class="ibtng" href="/baichuan_advertisement_manage/account.main.update">修改信息</a></span>
+       <span class="sbtng ml10"><a class="ibtng" href="/baichuan_advertisement_manage/account.main.updatePWD">修改密码</a></span>
+     </div>
+     
+    <!--基本信息-->
+    <div class="comForm">
+      <h1 class="mtit">{$user->user_name}</h1>
+      <dl>
+        <dt>公司网址：</dt>
+        <dd>{$user->host}</dd>
+      </dl>
+      <dl>
+        <dt>手机：</dt>
+        <dd>{$user->cell_phone}</dd>
+      </dl>
+	  <dl>
+        <dt>邮箱：</dt>
+        <dd>{$email}</dd>
+      </dl>
+      <dl>
+        <dt>公司地址：</dt>
+        <dd>{$user->address}</dd>
+      </dl>
+      <dl>
+        <dt>公司邮编：</dt>
+        <dd>{$user->zip_code}</dd>
+      </dl>
+    </div>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

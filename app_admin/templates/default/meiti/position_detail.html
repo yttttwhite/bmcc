@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看广告位置详情[{$position->position_name}]</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 广告位置信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll" style="width: auto;">广告位置名称：{$position->position_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">广告位置标识：{$position->position_identification}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">所属媒体：{$media->media_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">所属频道：{$channel->channel_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">广告位类型：{$position->tag_identification}</span>
+        </div>
+        <div class="dvll">
+            <div class="scll">广告位置信息：
+                 <span>【形式：{if $position->first_screen==1}首屏{else}非首屏{/if}】</span><br/>
+                 <span style="margin-left: 117px;">【素材：{$stuff_types[$position->stuff_type]}】</span><br/>
+                 <span style="margin-left: 117px;">【尺寸：{$position->width}*{$position->height}】</span></div>
+        </div>
+        <div class="dvll">
+            <span class="scll">引用地址：{$media->reference_addr}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">展示单价：{$position->cpm}&nbsp;(元/CPM)</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">点击单价：{$position->cpc}&nbsp;(元/CPC)</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">CPT单价：{$position->cpt}&nbsp;(元/CPT)</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">广告位置状态：{if $position->status==1}启用{else}停用{/if}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">创建时间：{date("Y-m-d H:i:s",$position->create_time)}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">更新时间：{date("Y-m-d H:i:s",$position->alter_time)}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">操作账户：{$user->user_name}</span>
+        </div>
+
+    </div>
+
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer" onclick="window.close();" >关闭</div>
+</body>
+</html>

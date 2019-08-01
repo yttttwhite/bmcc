@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.caiwu"}
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  
+    <div class="leftNav">
+      <ul>
+        <li class="nobotbor sel"><a href="#">充值信息</a></li>
+      </ul>
+    </div>
+
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+    <div class="toolbar mt20">
+       <span class="sbtnb"><a class="ibtnb" href="#">账户充值</a></span>
+       <span class="sbtng ml10"><a class="ibtng" href="#">导出Excel</a></span>
+        <div class="selMenu ml30">
+          <div class="smtbg">
+            <input type="text" class="itxt_1 fl idate" value="2012-05-23" size="15" />
+            <input type="text" class="itxt_1 fl idate" value="结束时间" size="15" />
+          </div>
+        </div>
+      <div class="clear"></div>
+    </div>
+    <div class="dataInfo">
+      <div class="dili">本期花费：<strong class="hf">0</strong>元</div>
+      <div class="dili">本期充值：<strong class="cz">0</strong>元</div>
+      <div class="dili">账户余额：<strong class="ye">{$user_info->account}</strong>元</div>
+    </div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th>时间</th>
+        <th class="tar">花费总额</th>
+        <th class="tar">账户余额</th>
+        <th width="50%">操作类型</th>
+      </tr>
+      <!--
+      <tr>
+        <td>2013-09-12</td>
+        <td class="tar hf">4500</td>
+        <td class="tar ye">4500</td>
+        <td>扣款</td>
+      </tr>
+      <tr>
+        <td>2013-10-12</td>
+        <td class="tar hf">345</td>
+        <td class="tar ye">8790</td>
+        <td>充值</td>
+      </tr>
+      -->
+    </table>
+    
+    <!--turnpage start-->
+    <div class="turnpage">
+      <a href="#"><em>&lt;</em> 上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页 <em>&gt;</em></a>
+    </div>
+    <!--turnpage end-->
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

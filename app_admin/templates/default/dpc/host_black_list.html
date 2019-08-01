@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<div class="container-content">
+    <div class="contianer-left">
+        {part "/dpc.manage.left"}
+    </div>
+    <div class="content">
+        <div class="content-inside">
+
+            <div class="panel panel-white" style="border:1px solid #EEEEEE;">
+                <div class="panel-heading border-light panel-head-md">
+                    <ul class="panel-heading-tabs border-light" style="left:16px; top:5px;">
+                        <button type="button" class="btn btn-sm btn-squared btn-success" data-toggle="dropdown">
+                            {$title}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="dpc.host.hostlist?mongo={$get['mongo']}&type=1">HOST黑名单</a>
+                            </li>
+                            <li>
+                                <a href="dpc.host.hostlist?mongo={$get['mongo']}&type=2">HOST白名单</a>
+                            </li>
+                        </ul>
+                    </ul>
+                    <form id="queryFrom" action="{$url['search']}" method="get">
+                        <input type="text" name="type" class="form-control input-small"  value="{$get['type']}" style="display:none;"/>
+                        <input type="text" name="mongo" class="form-control input-small"  value="{$get['mongo']}" style="display:none;"/>
+                        <div class="fl" style="position: relative; left: 140px;">
+                            <input type="text" id="hostkey" name="key" class="form-control input-small"  placeholder="关键字" value="{$get['key']}"/>
+                        </div>
+                        <div class="fl" style="position: relative; left: 140px;">
+                            <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+                        </div>
+                    </form>
+                    <a	class="btn btn-sm btn-squared btn-default"  style="left: 160px; position: relative;" href="{$url['search']}">清除关键字</a>
+                    <a	class="btn btn-sm btn-squared btn-default"  style="left: 170px; position: relative;"
+                          onclick="layerIframe('添加HOST黑/白名单','/dpc.host.HostaddIframe?mongo={$get['mongo']}',800,480);">添加</a>
+                    <a href="/baichuan_advertisement_manage/dpc.host.hostlist?export=1&mongo={$get['mongo']}"	class="btn btn-sm btn-squared btn-default"  style="left: 170px; position: relative;">导出</a>
+                </div>
+                <div class="panel-body">
+                    <form id="consumerListForm" name="consumerList" method="post"
+                          action="">
+                        <table class="table table-striped table-hover table-bordered" id="sample-table-2">
+                            <thead>
+                            <tr>
+                                <th class="center" width="60px;" onclick="$('.icheck').iCheck('check');" style="cursor:pointer;">全选</th>
+                                <th class="center">HOST</th>
+                                <th class="center">添加时间</th>
+                                <th class="center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach($list as $item)}
+                            <tr>
+                                <td class="center">
+                                    <label>
+                                        <input type="checkbox" class="flat-grey icheck" name = "consumerIds[]" value="{$item['_id']}">
+                                    </label>
+                                </td>
+                                <td style="text-align:left;">{$item['keyword']}</td>
+                                <td>{date("Y-m-d H:i:s",$item['uptime'])}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-squared btn-default" onclick="layerIframe('编辑HOST{$host['type']}','/dpc.host.HostEditIframe?mongo={$get['mongo']}&id={$item['_id']}',800,480);">编辑</a>
+                                    <a class="btn btn-sm btn-squared btn-default" onclick="deleteHost('/dpc.host.HostDel?mongo={$get['mongo']}&id={$item['_id']}')">删除</a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    </form>
+
+                    <div class="text-right">
+                        <ul class="pagination margin-bottom-10">
+                            <li>
+                                <a href="{$page['url']}page=1">上一页</a>
+                            </li>
+                            {for($i = 1; $i<=$page['count']; $i++)}
+                            <li {if($page['current']==$i)}class="active"{/if}>
+                            <a href="{$page['url']}page={$i}">{$i}</a>
+                            </li>
+                            {/for}
+                            <li>
+                                <a href="{$page['url']}page={$page['count']}">下一页</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer"></div>
+
+<!-- 弹层 -->
+
+</body>
+<script>
+    $(document).ready(function()  {
+        $('.icheck').iCheck( {
+            checkboxClass : 'icheckbox_minimal-aero',
+            radioClass : 'iradio_minimal',
+            increaseArea : '-10%'
+        } );
+        $("#hostkey").blur(function(){
+            if($(this).val()=='关键字')
+            {
+                $(this).val("");
+                //$(this).css("color","#000");
+            }
+            $(this).val("");
+        });
+    } );
+
+    //删除HostGroup
+    function deleteHost(url){
+        var msg = "确认删除这条数据？";
+        var url = url;
+        layerConfirmGet(url,msg);
+    }
+</script>
+</html>

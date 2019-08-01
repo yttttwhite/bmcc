@@ -1,0 +1,67 @@
+<div class="panel panel-white" style="border:1px solid #EEEEEE; border-bottom:0;">
+    <div class="panel-heading border-light panel-head-md">
+		<span class="panel-title">选择报表</span>
+    </div>
+	<div class="panel-body no-padding partition-light-grey">
+		
+		<div id="accordion" class="panel-group accordion accordion-white no-margin">
+			<div class="panel no-radius"  style="border-bottom:1px solid #DDDDDD;">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle padding-15">
+							<i class="icon-arrow"></i>
+							Host统计
+						</a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse in" id="collapseOne">
+					<div class="panel-body no-padding partition-light-grey">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td class="center"></td>
+									<td><a href="{$url['type']}">全部</a></td>
+									<td><i class="fa fa-caret-down text-red"></i></td>
+								</tr>
+								{foreach($typeArray as $typeId=>$type)}
+								<tr>
+									<td class="center">{$typeId}</td>
+									<td><a href="{$url['type']}type={$typeId}">{$type}</a></td>
+									<td><i class="fa fa-caret-down text-red"></i></td>
+								</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle padding-15">
+							<i class="icon-arrow"></i>
+							其他报表
+						</a>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse in" id="collapseTwo">
+					<div class="panel-body no-padding partition-light-grey">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td class="center">1</td>
+									<td><a href="/baichuan_advertisement_manage/report.ad.list">查询可投js广告</a></td>
+									<td><i class="fa fa-caret-down text-red"></i></td>
+								</tr>
+								<tr>
+									<td class="center">2</td>
+									<td><a href="/baichuan_advertisement_manage/report.hostwhite.list">域名白名单报表</a></td>
+									<td><i class="fa fa-caret-down text-red"></i></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>			
+			</div>
+		</div>
+		
+	</div>
+</div>

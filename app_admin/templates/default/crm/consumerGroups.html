@@ -1,0 +1,19 @@
+<div class="left-nav-title bg-blue">
+	<i class="fa fa-home fa-2x"></i>
+	<a href="crm.consumer.list">全部客户</a>
+</div>
+<div class="left-nav">
+<form id="consumerGroupForm" name="consumerGroup" method="post" action="">
+	<ul>
+		{foreach $groups as $group}
+		<li>
+			<label>
+				<input type="checkbox" class="flat-blue foocheck" name = "groupIds[]" value="{$group['id']}">
+				<a href="crm.consumer.group.{$group['id']}">{$group['name']}</a>
+			</label>
+			<span>[ {$group['count']} ]</span>
+		</li>
+		{/foreach}
+	</ul>
+</form>
+</div>

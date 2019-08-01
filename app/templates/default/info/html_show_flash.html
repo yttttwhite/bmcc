@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <style>
+            div, a { margin: 0; padding: 0; }
+            a#ad_supplier { display: none; position: absolute; bottom: 0; right: 0; height: 18px; padding:0 5px; overflow: hidden; background: rgba(0,0,0,0.8);
+                color:#FFFFFF; font-size:10px; font-family:"华文细黑", Microsoft Yahei; text-decoration:none; text-align:center; line-height: 18px; outline: 0;
+            }
+            a#ad_supplier em{ display:none; font-style:normal; }
+            a#ad_supplier:hover{ padding:0 10px; background: rgba(0,0,0,0.5); }
+            a#ad_supplier:hover em{ display:inline; }
+            a#ad_supplier:hover span{ display:none; }
+            .flash_link{ position:absolute;top:0;left:0;bottom:0;right:0;display:block;width:100%;height:expression(this.parentNode.scrollHeight);filter:alpha(opacity=0);opacity:0;background:#FFF; }
+        </style>
+    </head>
+    <body style="margin:0px;padding:0px" marginwidth="0" marginheight="0">
+        <div style="position:relative; width:{$ad['width']}px; height:{$ad['height']}px;">
+            <a class="flash_link" href="/baichuan_advertisement_manage/click.html?aid={$ad['adid']}&spid=sohu&pushid=0&src=0&action=redirect&click_delay={$ad['click_delay']}" target="_blank"></a>
+            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="100%" height="100%" align="middle">
+                <param name="allowScriptAccess" value="always">
+                <param name="quality" value="high">
+                <param name="wmode" value="opaque">
+                <param name="movie" value="{$ad['addr']}" >
+                <embed wmode="opaque" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer" align="middle" src="{$ad['addr']}" width="100%" height="100%">
+            </object>
+            <a id="ad_supplier" href="#" target="_blank">
+                <em>DSP广告</em><span>DSP</span>
+            </a>
+        </div>
+        <span style="display:none">
+        	<script src="/show.js?aid={$ad['adid']}&spid=sohu&pushid=0&src=0" language="JavaScript"></script>
+			{$ad['show_js']}
+		</span>
+    </body>
+</html>

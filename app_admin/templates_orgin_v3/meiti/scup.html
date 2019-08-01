@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广告投放管理平台</title>
+<link type="text/css" rel="stylesheet" href="../css/style.css" />
+<script src="../js/jquery-1.2.6.pack.js" type="text/javascript"></script> 
+<script type="text/javascript" src="../js/pop.js"></script>
+<script type="text/javascript" src="../js/formSel.js"></script>
+<!-- nav -->
+<link href="../css/nav.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/nav/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="../js/nav/new.js"></script>
+</head>
+
+<body>
+
+<!--top-->
+<div class="top">
+  <div class="tlogo"><img src="../images/logo.png" alt="广告推广平台" /></div>
+  <div class="tr">
+    <div class="weluser">您好,<strong>Retinas</strong>[<a href="#">退出</a>]</div>
+    <div class="trlink">
+      <a href="#"><img class="fl" src="../images/i_email.gif" alt="消息" /><span class="trlmsg">(10)</span></a>
+      <a href="#"><img src="../images/i_help.gif" alt="帮助"  align="absmiddle" /></a>
+    </div>
+  </div>
+</div>
+
+  <!--nav-->
+  <div class="nav">
+    <div class="navd"><a href="#" title="首页">首页</a></div>
+    <div class="navd sidelist">
+      <h3><em class="harrow"></em><a class="ndl" href="#" title="广告管理">广告管理</a></h3>
+      <div class="i-list">
+        <a href="#">广告计划</a>
+        <a href="#">广告组</a>
+        <a href="#">素材</a>
+      </div>
+    </div>
+    <div class="navd"><a href="#" title="数据中心">数据中心</a></div>
+    <div class="navd"><a href="#" title="人群管理">人群管理</a></div>
+    <div class="navd sel"><a href="#" title="媒体管理">媒体管理</a></div>
+    <div class="navd"><a href="#" title="财务管理">财务管理</a></div>
+    <div class="navd"><a href="#" title="账户管理">账户管理</a></div>
+    <div class="navd"><a href="#" title="高级管理">高级管理</a></div>
+    <div class="navd"><a href="#" title="运营审核">运营审核</a></div>
+  </div>
+
+<!--main-->
+<div class="main">
+  <div class="side">
+    <div class="leftNav">
+      <ul>
+        <li class="sel"><a href="#">媒体</a></li>
+        <li><a href="#">网站</a></li>
+        <li><a href="#">广告位</a></li>
+
+      </ul>
+    </div>
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <div class="crumbLink"><a href="#">媒体管理</a>&nbsp;&gt;&nbsp;广告位</div>
+    
+    <!--基本信息-->
+    <div class="comForm">
+      <h1>上传素材</h1>
+      <dl>
+        <dt><em class="fcr fs12">*</em> 广告主：</dt>
+        <dd><input type="text" class="itxt" size="30" /></dd>
+        <dd class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt><em class="fcr fs12">*</em> 素材：</dt>
+        <dd>
+          <div class="clear">
+            <input class="fl mt10" name="tf" id="pp" type="radio" value="" />
+            <span class="sbtng fl ml10"><input name="" type="button" class="ibtng" value="本地上传" /></span>
+          </div>
+          <div class=" mt20 clear">
+            <input class="fl mt10" name="tf" id="xg" type="radio" value="" />
+            <input class="itxt fl ml10" type="text" size="30" />
+            <span class="sbtng fl ml10"><input name="" type="button" class="ibtng" value="解析URL" /></span>
+          </div>
+        </dd>
+      </dl>
+    </div>
+    
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="listab mt20 fs14">
+        <tr>          
+          <th>素材预览</th>
+          <th>名称</th>
+          <th>类型</th>
+          <th>尺寸</th>
+          <th class="tac">关联广告位</th>
+          <th class="tac">LandingPage</th>
+          <th>第三方监控</th>
+        </tr>
+        <tr>            
+          <td><img src="../images/tmp_ad.jpg" /></td>
+          <td>食品</td>
+          <td>食品</td>
+          <td>350</td>
+          <td class="tac">
+          <a onClick="ShowDIV('plinksc')" href="#">变更</a>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="plinksc" class="popdiv pop_linksc" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">关联广告位</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('plinksc')"><img src="../images/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+              
+                  <div class="toolbar">
+                    <div id="zhuantai" class="selMenu smw_1">
+                      <span class="smtit">媒体类型</span>
+                      <ul>
+                        <li><a href="javascript:;">所有类型</a></li>
+                        <li><a href="javascript:;">综合</a></li>
+                      </ul>
+                    </div>
+                    <div id="zhuantai" class="selMenu smw_1 ml10">
+                      <span class="smtit">尺寸</span>
+                      <ul>
+                        <li><a href="javascript:;">所有媒体</a></li>
+                        <li><a href="javascript:;">新浪</a></li>
+                      </ul>
+                    </div>
+                    <div class="fl ml10">
+                      <span class="iSearch">
+                         <a class="isicon" href="#"><img src="../images/i_search.gif" alt="搜索" /></a>
+                         <input type="text" class="itxt fc7" value="媒体/广告位" size="30" />
+                      </span>
+                    </div>
+                    <div class="clear"></div>
+                  </div> 
+                  
+                  <div class="mt20 clear">
+                  <table class="listab" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">媒体类型</th>
+                      <th scope="col">媒体名称</th>
+                      <th scope="col">广告位名称</th>
+                      <th scope="col">尺寸</th>
+                    </tr>
+                    <tr>
+                      <td><input name="" type="checkbox" value="" /></td>
+                      <td>大众汽车</td>
+                      <td>汽车320</td>
+                      <td>汽车</td>
+                      <td>320*150</td>
+                    </tr>
+                  </table>
+                  <!--turnpage start-->
+                  <div class="turnpage">
+                    <a href="#"><em>&lt;</em> 上一页</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <span>...</span>
+                    <a href="#">65</a>
+                    <a href="#">下一页 <em>&gt;</em></a>
+                  </div>
+                  <!--turnpage end-->
+                  </div>
+                                   
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('plinksc')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('plinksc')" /></span>
+                    </div>
+                  </div>
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          </td>
+          <td class="tac"><a href="#">地址</a></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+   
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="button" class="ibtnb" value="提交"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="button" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+<!--版权-->
+<div class="footer">
+  <div class="ftcon">
+    Copyright © 2013 All rights reserved. 设计广告平台有限公司 版权所有<br /> 
+    京ICP证68976143.3号 京公网安备XKD89756号
+  </div>
+</div>
+
+</body>
+</html>

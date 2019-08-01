@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.media.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media?nav=2">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			媒体来源
+    	</div>
+    <form method="get">
+        <input name="nav" type="hidden" value="2">
+		<div class="fl" >
+      <div class="selMenu" style="margin-right:10px">
+          <span class="iSearch">
+                 <input id="media_name" name="media_name" type="text" class="itxt fc7" placeholder="媒体名称" value="{$_GET['media_name']}" size="30" />
+              </span>
+        </div>
+        <div class="selMenu smzt ml-10" >
+          <span class="iSearch">
+            <select name="type" class="itxt fc7 ml-10" style="height: 34px;">
+              <option value="">媒体类型</option>
+              {foreach  array("website"=>"网站","app"=>"APP","adx"=>"ADX","inside"=>"内部","others"=>"其他") as $_index1=>$_type}
+                <option value="{$_index1}" {if $_GET['type']==$_index1}selected{/if}>{$_type}</option>
+              {/foreach}
+            </select>
+          </span>
+        </div>
+		</div>
+		<div class="fr">
+			<input type="submit" class="btn btn-squared btn-success" value="搜索">
+		</div>
+    </form>
+	</div>
+  <div class="clear"></div>
+  <div style="overflow: auto;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab">
+      <tr>
+        <th>ID</th>
+        <th>媒体名称</th>
+        <th>媒体标识</th>
+        <th>媒体类型</th>
+        <th>行业类型</th>
+        <th>引流地址</th>
+        <th>媒体状态</th>
+        <th>创建/更新时间</th>
+        <th>操作账户</th>
+        <th>操作</th>
+      </tr>
+{foreach $medias as $_m}
+      <tr>
+        <td>{$_m->id}</td>
+        <td>{$_m->media_name}</td>
+        <td>{$_m->identification}</td>
+        <td>{$web_types[$_m->media_type]}</td>
+        <td>大类：{$types[$_m->career_type]->cate_name}<br/>小类：{$types[$_m->career_type]->type_name}</td>
+        <td>{$_m->reference_addr}</td>
+        <td>{$m_status[$_m->media_status]}</td>
+        <td>
+            创:{date("Y-m-d H:i:s",$_m->create_time)}<br/>更:{date("Y-m-d H:i:s",$_m->alter_time)}
+        </td>
+        <td>{$id2name[$_m->creator_id]}</td>
+        <td>
+            <a href="/baichuan_advertisement_manage/media.main.add.{$_m->id}?nav=2">编辑  查看</a><br/>
+            <a href="/baichuan_advertisement_manage/media.channel.add?media_id={$_m->id}&nav=2">创建频道</a><br/>
+            <a href="/baichuan_advertisement_manage/media.channel.entry.{$_m->id}?nav=2">查看频道</a>
+        </td>
+      </tr>
+{/foreach}
+    </table>
+    </div>
+    <div class="turnpage">
+    {turnpager $totalPage|html}
+    </div>
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

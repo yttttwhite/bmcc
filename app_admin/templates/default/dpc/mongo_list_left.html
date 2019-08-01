@@ -1,0 +1,16 @@
+<div class="left-nav-title bg-green-2">
+	<a href="/baichuan_advertisement_manage/dpc.main.host" text-align:left;">全部分组</a>
+</div>
+<div class="left-nav">
+<form id="consumerGroupForm" name="consumerGroup" method="post" action="">
+	<ul>
+	{foreach $collection_names as $name}
+		<li>
+			<label>
+				<a href="dpc.main.host.{$name}">{$name}</a>
+			</label>
+		</li>
+	</ul>
+	{/foreach}
+</form>
+</div>

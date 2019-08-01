@@ -1,0 +1,4 @@
+﻿SlightPHP Authors (https://www.slightphp.com):
+
+Hetal (hetao@hetao.name)
+Panpan (panzhiqi@gmail.com)

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+    <!--side-->
+    <div class="side">
+        {part ("/admin.push.left")} 
+    </div>
+    <!--mcon start-->
+    <div class="mcon">
+    	<div class="crumbLink"><a href="admin.complain.miitlist">工信部投诉用户预警</a></div>
+		<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+			<!--表头-->
+			<div class="panel-heading border-light panel-head-md">
+				<form id="queryFrom" action="{$url['date']}" method="get">
+					<div class="fl" style="position: relative; left: 10px;">
+						投诉账号：<input type="text" name="key" class="input-small"  placeholder="账号" value="{$adkey}"/>
+						开始日期：<input id="BDate" name="BDate" type="text" class="itxt idate fc7"
+                                   value="{if(strlen($BDate))}{$BDate}{else}{date('Y-m-d',time())}{/if}" size="12" />
+                                                                                    结束日期：<input id="EDate" name="EDate" type="text" class="itxt idate fc7"
+                                   value="{if(strlen($EDate))}{$EDate}{else}{date('Y-m-d',time())}{/if}" size="12" />
+                            <script>
+                                $(function(){
+                                    if($("#BDate").val()=="查询日期"){
+                                        $("#BDate").val("{date("Y-m-d")}");
+                                    }
+                                    $("#BDate").datepicker({ dateFormat: "yy-mm-dd"});
+                                    if($("#EDate").val()=="查询日期"){
+                                        $("#EDate").val("{date("Y-m-d")}");
+                                    }
+                                    $("#EDate").datepicker({ dateFormat: "yy-mm-dd"});
+                                });
+                            </script>
+					</div>
+					<div class="fl" style="position: relative; left: 10px;">
+                            <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">                                                                     
+                    </div>
+					<span style="line-height:28px; position: relative; left: 20px;">共计：{$page['amount']}条</span>
+				</form>
+			</div>
+			<!--表头:结束-->
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+					<thead>
+						<tr style="background-color:#1478dc;font-color:#999999;">
+                            <th class="center">投诉日期</th>
+                            <th class="center">用户账号</th>
+                        </tr>
+					</thead>
+					<tbody>
+                        {foreach($stat as $host=>$amount)}
+                        <tr>
+                            <td style="text-align:left;width:40%;">{$amount['Complaint_Date']}</td>
+                            <td style="text-align:left;">{$amount['Complaint_Ad']}</td>
+                        </tr>
+                        {/foreach}
+					</tbody>
+				</table>
+				
+	            <div class="text-right">
+	                <ul class="pagination margin-bottom-10">
+                            <li>
+                                <a href="{$page['url']}page=1">上一页</a>
+                            </li>
+                            {for($i = 1; $i<=$page['count']; $i++)}
+                            <li {if($page['current']==$i)}class="active"{/if}>
+                            <a href="{$page['url']}page={$i}">{$i}</a>
+                            </li>
+                            {/for}
+                            <li>
+                                <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+                            </li>
+                     </ul>
+	            </div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

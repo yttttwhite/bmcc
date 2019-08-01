@@ -1,0 +1,510 @@
+<?php
+class ad_plan extends STpl{
+    public function __construct($inPath){
+        if(!user_api::auth("ad")){
+	        $this->success("没有权限",'/user',3);
+	        exit();
+	    }
+	    if(user_api::auth("adReadonly")){
+	        $readonly = " disabled='disabled'  readonly='readonly' ";
+	        $this->assign("readonly",$readonly);
+	    }else{
+	        $readonly = "";
+	        $this->assign("readonly",$readonly);
+	    }
+	    
+        $uid = user_api::id();
+        $this->assign("uid",$uid);
+        $config = SConfig::getConfigArray(ROOT_CONFIG."/config.php" , 'version');
+        $this->assign("config",$config);
+    }
+    public function pageEntry($inPath){
+        $api = new ad_api;
+        $info = user_api::info();
+        $role_id = $info->role_id;
+        if(!empty($_REQUEST['start'])){
+            $start=date("Y-m-d",strtotime($_REQUEST['start']));
+        }else{
+            $start=date("Y-m-d",mktime(0,0,0,date('m'),1,date('Y')));//time()-30*24*3600);
+        }
+        if(!empty($_REQUEST['end'])){
+            $end=date("Y-m-d",strtotime($_REQUEST['end']));
+        }else{
+            $end=date("Y-m-d",time());
+        }
+        
+        $status=1;
+        if(user_api::auth("admin")){
+            $statusArray = array(0,1,2,3,4,5,6);
+        }else{
+            $statusArray = array(0,1,2,3,5,6);
+        }
+        
+        if(isset($_REQUEST['status']) && in_array($_REQUEST['status'],$statusArray) ){
+            $status=$_REQUEST['status'];
+        }
+        
+        
+        $userId = user_api::id();
+        if(isset($_REQUEST['uid']) && user_api::auth('admin')){
+            $userId = $_REQUEST['uid'];
+        }
+
+        $plans = array();
+        if($role_id == "1000"){//运营商，展示所有的广告计划
+            $userId = 1;
+        }
+        $plansTemp = $api->listPlansReport($start,$end,$status,$userId);
+        if($status == 0){
+            foreach ($plansTemp as $planTemp){
+                if($planTemp->enable != 4 || user_api::auth("admin")){
+                    $plans[] = $planTemp;
+                }
+            };
+        }else{
+            $plans = $plansTemp;
+        }
+        
+        if(isset($_GET['start'])){
+            $startTime = date("Ymd",strtotime($_GET['start']));
+        }else{
+            $startTime = 0;
+        }
+        if(isset($_GET['end'])){
+            $endTime = date("Ymd",strtotime($_GET['end']));
+        }else{
+            $endTime = 99991231;
+        }
+        
+        foreach ($plans as $index => $plan){
+            $planStartTime = date("Ymd",strtotime($plan->start_date));
+            $planEndTime = date("Ymd",strtotime($plan->end_date));
+            if($planEndTime < 20000101){
+                if( $endTime < $planStartTime ){
+                    unset($plans[$index]);
+                }
+            }else{
+                if( ($endTime < $planStartTime) || ($startTime > $planEndTime) ){
+                    unset($plans[$index]);
+                }
+            }
+        }
+        $this->assign("currentUserName",user_api::name());
+        $this->assign("plans2",$plans);
+        $this->assign("start",$start);
+        $this->assign("status",$status);
+        $this->assign("end",$end);
+        $this->assign("userId",$userId);
+        $this->assign("id",$_GET['uid']);
+        /*
+        foreach($plans as $plan){
+            //$b = $a->GroupReportByPlanId($plan->plan_id,"20130801","20130901",array("22060000"));
+            //print_R($b);
+        }
+        */
+        return $this->render("v2/ad/adPlan.html");
+    }
+    public function pageAdd($inPath){
+        $releaseType = array();
+        $releaseType[10] = array(
+            "name"          =>  "最高",
+            "priority"      =>  "2",
+        );
+        $releaseType[20] = array(
+            "name"          =>  "高",
+            "priority"      =>  "3",
+        );
+        $releaseType[30] = array(
+            "name"          =>  "中",
+            "priority"      =>  "3",
+        );
+        $releaseType[40] = array(
+            "name"          =>  "低",
+            "priority"      =>  "3",
+        );
+        $releaseType[100] = array(
+            "name"          =>  "最低",
+            "priority"      =>  "5",
+        );
+        $this->assign('releaseType',$releaseType);
+        
+        $a = new thrift_adplan_main;
+        if(!empty($_POST)){
+            $dateFlag = true;
+            if(!empty($inPath[3])){
+                $b=$a->getAdPlanByPid($inPath[3]);
+                $adPlanUid = $b->uid;
+                if($b->uid!=user_api::id() && !user_api::auth('admin')){
+                    die("NOT ALLOWED!");
+                }
+                if($b->start_date == strtotime($_POST['start_date'])){
+                    $dateFlag = false;
+                }
+            }else{
+                $b=new AdPlan;
+            }
+            foreach($b as $k=>$v){
+                if(isset($_POST[$k])){
+                    $b->$k=$_POST[$k];
+                }
+            }
+            if($b->platform == 1){
+                $b->billing_type = 2;//TA隐藏结算类型选项，默认CPM
+            }
+            if(isset($_POST['frequency_control'])&&($_POST['frequency_control']>=0)){
+                if(isset($_POST['control_method'])&&($_POST['control_method']==1)){
+                    $b->time_interval=$_POST['time_interval_day'];
+                    $b->day_num=1;
+                    $b->show_num=$_POST['show_num_day'];
+                }else if(isset($_POST['control_method'])&&($_POST['control_method']==2)){
+                    $b->time_interval=$_POST['time_interval_week']*3600;
+                    $b->day_num=7;
+                    $b->show_num=$_POST['show_num_week'];
+                }else if(isset($_POST['control_method'])&&($_POST['control_method']==3)){
+                    $b->time_interval=$_POST['time_interval_month']*86400;
+                    $b->day_num=30;
+                    $b->show_num=$_POST['show_num_month'];
+                }
+            }else{
+                $b->time_interval=$_POST['time_interval_day'];
+                $b->day_num=1;
+                $b->show_num=$_POST['show_num_day'];
+            }
+            if(isset($releaseType[$b->release_type])){
+                $b->priority = $releaseType[$b->release_type]['priority'];
+            }else{
+                $b->priority = 3;
+            }
+            if( isset($_POST['budget_total']) &&  $_POST['budget_total']>0 ){
+                if($b->billing_type == 1){
+                    $b->total_cpc = $_POST['budget_total'];
+                    $b->total_cpm = -1;
+                }else{
+                    $b->total_cpm = $_POST['budget_total'];
+                    $b->total_cpc = -1;
+                }
+            }else{
+                $b->total_cpm = -1;
+                $b->total_cpc = -1;
+            }
+            
+        	if (isset($adPlanUid)) {
+				$b->uid = $adPlanUid;
+			}else{
+				$b->uid = user_api::id();
+			}
+			$b->verified_or_not = 1;
+            if(strtotime($b->start_date)){
+                $b->start_date=strtotime($_REQUEST['start_date']);
+            }else{
+                $b->start_date=0;
+            }
+            $time = time();
+            $current_day_time = $time - ($time % 86400) -(8 * 3600);
+            if($dateFlag===true && strtotime($_REQUEST['start_date']) < $current_day_time){
+                $error['date'] = "选择开始时间不能早于今天";
+            } 
+
+            if(strtotime($b->end_date)){
+                $b->end_date=strtotime($_REQUEST['end_date']);
+            }else{
+                $b->end_date=0;
+            }
+            if($b->start_date>0 && $b->end_date>0 && $b->end_date<$b->start_date){
+                $error['date']="结束时间不能小于开始时间";
+            }
+            if(empty($_REQUEST['plan_name'])){
+                $error['plan_name']="计划名不能为空";
+            }
+            $operator = user_api::name();
+            if(empty($error)){
+                if(!empty($b->plan_id)){
+                    $plan_id = $b->plan_id;
+                    $b->mtime=time();
+                    $a->updateAdPlan($b);
+                    if(!user_api::auth("admin")){
+                        if(isset($_POST['submit_or_not']) && $_POST['submit_or_not'] == 1){
+                            $a->updateVerifiedStatus($b->plan_id, 1, $operator);
+                        }else{
+                            $a->updateVerifiedStatus($b->plan_id, 0, $operator);
+                        }
+                    }else{
+                        $a->updateVerifiedStatus($b->plan_id, 2, $operator);
+                    }
+                    header("location:/ad.plan.list.$plan_id");
+                }else{
+                    $b->ctime=$b->mtime=time();
+                    $plan_id = $a->addAdPlan($b);    
+                    if(empty($plan_id)){
+                        $error['msg']="建立失败";
+                    }else{
+                        if(!user_api::auth("admin")){
+                            if(isset($_POST['submit_or_not']) && $_POST['submit_or_not'] == 1){
+                                $a->updateVerifiedStatus($plan_id, 1, $operator);
+                            }else{
+                                $a->updateVerifiedStatus($b->plan_id, 0, $operator);
+                            }
+                        }else{
+                            $a->updateVerifiedStatus($plan_id, 2, $operator);
+                        }
+                        header("location:/ad.group.add.$plan_id");
+                    }
+                }
+            }else{
+                $this->assign("error",$error);
+            }
+            if (! empty($b->start_date)) {
+                $b->start_date = date("Y-m-d", $b->start_date);
+            }
+            if (! empty($b->end_date)) {
+                $b->end_date = date("Y-m-d", $b->end_date);
+            }
+            $this->assign("plan",$b);
+            $this->assign("plan_id",$plan_id);
+            $status = $b->verified_or_not;
+        }elseif(!empty($inPath[3])){
+            $plan_id=$inPath[3];
+            $plan=$a->getAdPlanByPid($plan_id);
+            if($plan->uid!=user_api::id() && !user_api::auth("admin") && !user_api::auth("adReadonly")){
+                die("NOT ALLOWED!");
+            }
+            
+            if(isset($plan->billing_type) && $plan->billing_type == 1){
+                $plan->budget_total = $plan->total_cpc;
+            }else{
+                $plan->budget_total = $plan->total_cpm;
+            }
+            
+            if(!empty($plan->start_date)) $plan->start_date=date("Y-m-d",$plan->start_date);;
+            if(!empty($plan->end_date))$plan->end_date=date("Y-m-d",$plan->end_date);
+            $plan->intervals = trim($plan->intervals,";");
+            $this->assign("plan_id",$plan_id);
+            $this->assign("plan",$plan);
+            $status = $plan->verified_or_not;
+        }elseif(!empty($_GET['loaded_id'])){
+            $plan=$a->getAdPlanByPid($_GET['loaded_id']);
+            if($plan->uid!=user_api::id()){
+                die("NOT ALLOWED!");
+            }
+            
+            if(isset($plan->billing_type) && $plan->billing_type == 1){
+                $plan->budget_total = $plan->total_cpc;
+            }else{
+                $plan->budget_total = $plan->total_cpm;
+            }
+            
+            if(!empty($plan->start_date)) $plan->start_date=date("Y-m-d",$plan->start_date);;
+            if(!empty($plan->end_date))$plan->end_date=date("Y-m-d",$plan->end_date);;
+            unset($plan->plan_id);
+            $this->assign("loaded_id",$_GET['loaded_id']);
+            $this->assign("plan",$plan);
+            $status = $plan->verified_or_not;
+        }
+        //获取广告计划类型
+        if(empty($status)){
+            $status = 1;
+        }
+        $types_tmp=$a->getAllAdPlanTypes();
+        $types=array();
+        foreach($types_tmp as $_t){
+            $_n = $_t->cate_name;
+            if(!isset($types[$_n])){
+                $types[$_n]=array();
+            }
+            $types[$_n][]=$_t;
+        }
+        $this->assign("plan_types",$types);
+        
+        /**
+          * 获取广告计划
+         */
+
+        $api = new ad_api;
+        $plans = $api->listPlans();
+        if(empty($_POST['platform'])){
+            $this->assign("default_platform",true);
+        }else{
+            $this->assign("default_platform",false);
+        }
+        $this->assign("plans", $plans);
+        $this->assign("status",$status);
+        $this->assign("backgroup",$_GET['back']);
+        $this->assign("backstaff",$_GET['backstaff']);
+        return $this->render("v2/ad/step_1.html");
+    }
+    public function pageStatus($inPath){
+        if(!empty($_POST['plan_ids']) || !empty($_GET['plan_id'])){
+            $p = new thrift_adplan_main;
+            $a = new thrift_status_main;
+            if($inPath[3]=="start"){
+                foreach($_POST['plan_ids'] as $plan_id){
+                    $plan = $p->getAdPlanByPid($plan_id);
+                    if($plan->uid==user_api::id() ||  user_api::auth("admin")){
+                        $result = $a->updateAdPlanStatus($plan_id,PlanStatus::RUNNING);
+                        //echo $plan_id.":".$result."#";
+                    }
+                }
+                return true;
+            }elseif($inPath[3]=="stop"){
+                if(count($_POST['plan_ids'])>0){
+                    foreach($_POST['plan_ids'] as $plan_id){
+                        $plan = $p->getAdPlanByPid($plan_id);
+                        if($plan->uid==user_api::id() ||  user_api::auth("admin")){
+                            $result = $a->updateAdPlanStatus($plan_id,PlanStatus::STOPPED);
+                            //echo $plan_id.":".$result."#";
+                        }
+                    }
+                    return true;
+                }
+            }elseif($inPath[3]=="del"){
+                if($config['delete']==1 && !user_api::auth('admin')){
+                    return false;
+                }elseif($plan->uid == user_api::id() ||  user_api::auth("admin")){
+                    foreach($_POST['plan_ids'] as $plan_id){
+                        $plan = $p->getAdPlanByPid($plan_id);
+                        $config = SConfig::getConfigArray(ROOT_CONFIG."/config.php" , 'config');
+                        $a->updateAdPlanStatus($plan_id,PlanStatus::DELETED);
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+    }
+    public function pageSet($inPath){
+        return $this->render("v2/ad/adPlan_set.html");
+    }
+    /**显示广告组**/
+    public function pageList($inPath){
+        if(!empty($inPath[3])){
+            $plan_id = $inPath[3];
+            $p = new thrift_adplan_main;
+            $plan = $p->getAdPlanByPid($plan_id);
+            $this->assign("user_id",$plan->uid);
+            if($plan->uid!=user_api::id() && !user_api::auth("admin") && !user_api::auth("adReadonly")){
+                die("NO PLAN");
+            }
+            if(!empty($_REQUEST['start'])){
+                $start=date("Y-m-d",strtotime($_REQUEST['start']));
+            }else{
+                $start=date("Y-m-d",mktime(0,0,0,date('m'),1,date('Y')));//time()-30*24*3600);
+            }
+            if(!empty($_REQUEST['end'])){
+                $end=date("Y-m-d",strtotime($_REQUEST['end']));
+            }else{
+                $end=date("Y-m-d",time());
+            }
+            $status=1;
+            
+            if(!user_api::auth("admin")){
+                $statusArray = array(0,1,2,3,4,5,6);
+            }else{
+                $statusArray = array(0,1,2,3,5,6);
+            }
+            
+            if(isset($_REQUEST['status']) && in_array($_REQUEST['status'],$statusArray) ){
+                $status=$_REQUEST['status'];
+            }
+            $this->assign("start",$start);
+            $this->assign("end",$end);
+            $groupsTemp = ad_api::listGroupsReport($plan_id,$start,$end,$status);
+            
+            //不显示已删除的，即status=4的
+            $groups = array();
+            if($status == 0){
+                foreach ($groupsTemp as $groupTemp){
+                    if($groupTemp->enabled != 4 || user_api::auth("admin")){
+                        $groups[] = $groupTemp;
+                    }
+                }
+            }else{
+                $groups = $groupsTemp;
+            }
+
+            //{{{
+            //上面的接口没有返回全部的数据，比如bid_price
+            //$b = new thrift_adgroup_main;
+            //foreach($groups as $k=>&$group){
+            //    $group=$b->findAdGroupById($group->group_id);
+            //}
+            //}}}
+            $a = new thrift_adplan_main;
+            $plan = $a->getAdPlanByPid($plan_id);
+            $this->assign("groups_2",$groups);
+            $this->assign("plan",$plan);
+            $this->assign("status",$status);
+            $this->assign("plan_id",$plan_id);
+            $this->assign("currentUserName",user_api::name());
+            return $this->render("v2/ad/adGroup.html");
+        }
+    }
+    public function pageListPart($inPath){
+        $planThrift = new thrift_adplan_main;
+        $userThrift = new thrift_aduser_main;
+        $my = user_api::info();
+        
+		if(!empty($inPath[3])){
+			$plan_id = $inPath[3];
+			$this->assign("plan_id",$plan_id);
+			
+			$groups = ad_api::listGroups($plan_id,$status=1);
+			$this->assign("groups",$groups);
+		}
+		if(!empty($inPath[4])){
+			$group_id= $inPath[4];
+			$this->assign("group_id",$group_id);
+		}
+		if(isset($_GET['uid'])){
+			$user_id = $_GET['uid'];
+			$this->assign("user_id",$user_id);
+		}
+		
+		$info = user_api::info();
+		if (user_api::auth("admin") || user_api::auth("adReadonly") || $info->role_id == "1000") {
+		    if(isset($_GET['status']) && $_GET['status']==="all"){
+		        $status = AccountStatus::ALL;
+		    }else{
+		        $status = AccountStatus::NORMAL;
+		    }
+		    $users = $userThrift->getAdUsersByCid(-1,$status);
+		    $plans = $planThrift->getAdPlanByUserid(-1,1,-1,0);
+		    
+		    $userPlans = array();
+		    if(is_array($plans->data) && count($plans->data)>0){
+		        foreach ($plans->data as $plan){
+		            if(isset($plan->uid) && $plan->uid >0){
+		                $userPlans[$plan->uid][] = $plan;
+		            }
+		        }
+		    }
+		    $this->assign('my',$my);
+		    $this->assign('users',$users);
+		    $this->assign('userPlans',$userPlans);
+		    return $this->render("v2/ad/adPlanListPart.tpl");
+		}else{
+		    if(isset($_GET['status']) && $_GET['status']==="all"){
+		        $status = AccountStatus::ALL;
+		    }else{
+		        $status = AccountStatus::NORMAL;
+		    }
+		    $user = $userThrift->getAdUserById($my->uid);
+            $users[] = $user;
+            $userPlans = array();
+            $plans = ad_api::listPlans(0,$my->uid);
+            if(is_array($plans) && count($plans)>0){
+                foreach ($plans as $plan){
+                    if(isset($plan->uid) && $plan->uid >0){
+                        $userPlans[$plan->uid][] = $plan;
+                    }
+				}            
+			}
+		    $this->assign('my',$my);
+		    $this->assign('users',$users);
+		    $this->assign('userPlans',$userPlans);
+		    return $this->render("v2/ad/adPlanListPart.tpl");
+		}
+	}
+}

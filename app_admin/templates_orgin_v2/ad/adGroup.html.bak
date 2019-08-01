@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav"}
+<div class="main">
+  <div class="side">
+{part ("/ad.plan.listpart.".$plan_id.".".$group_id)} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="#">农夫山泉推广</a>&nbsp;&gt;&nbsp;广告组列表</div>
+    
+    <div class="toolbar mt20">
+      <span class="sbtnb"><a class="ibtnb" href="#">设置广告计划</a></span>
+      <div class="selMenu ml30">
+        <div class="smtbg">
+          <input type="text" class="itxt_1 fl idate" value="2012-05-23" size="15" />
+          <input type="text" class="itxt_1 fl idate" value="结束时间" size="15" />
+        </div>
+      </div>
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgba" href="#">今天</a>
+          <a class="tbgba sel" href="#">昨天</a>
+          <a class="tbgba" href="#">本周</a>
+          <a class="tbgba" href="#">上周</a>
+          <a class="tbgba" href="#">本月</a>
+          <a class="tbgba nobr" href="#">上月</a>
+        </span>
+      </div><div class="clear"></div>
+    </div>
+    
+    
+    <div class="chartCon mt20">
+      <div class="chartData">
+        <div class="cdli">时间段：<strong>2013-05-14</strong> 至 <strong>2013-06-12</strong></div>
+        <div class="cdli">每日预算：<strong>不限预算</strong></div>
+      </div>
+      <div class="chartShow"><img src="../images/tmp_chart.gif" /></div>
+    </div>
+    
+    <!--toolbar start--> 
+    <div class="toolbar mt30">
+      <span class="sbtnb"><a class="ibtnb" href="#">新增广告组</a></span>
+      
+      <div id="zhuantai" class="selMenu smzt ml30">
+        <span class="smtit">所有状态</span>
+        <ul>
+          <li><a href="javascript:;">所有状态</a></li>
+          <li><a href="javascript:;">已启动</a></li>
+          <li><a href="javascript:;">已暂停</a></li>
+          <li><a href="javascript:;">已删除</a></li>
+          <li><a href="javascript:;">已锁定</a></li>
+          <li><a href="javascript:;">已暂停</a></li>
+        </ul>
+      </div>
+      
+      <div id="leixing" class="selMenu smlx ml10">
+        <span class="smtit">所有类型</span>
+        <ul>
+          <li><a href="javascript:;">所有类型</a></li>
+          <li><a href="javascript:;">品牌广告</a></li>
+          <li><a href="javascript:;">效果广告</a></li>
+        </ul>
+      </div>
+      
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgiba" href="#" title="启动"><i class="iplay"></i></a>
+          <a class="tbgiba nobr" href="#" title="暂停"><i class="ipause"></i></a>
+        </span>
+      </div>
+      
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgiba" href="#" title="锁定"><i class="ilock"></i></a>
+          <a class="tbgiba" href="#" title="设置"><i class="iset"></i></a>
+          <a class="tbgiba" href="#" title="复制"><i class="icopy"></i></a>
+          <a class="tbgiba nobr" href="#" title="删除"><i class="idel"></i></a>
+        </span>
+      </div><div class="clear"></div>
+    </div>
+    <!--toolbar end--> 
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告组</th>
+        <th>状态</th>
+        <th>定向方式</th>
+        <th>媒体选择</th>
+        <th class="tac">出价</th>
+        <th class="tac">展现数</th>      
+        <th class="tac">胜出率</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总花费</th>
+        <th class="tac">点击价格</th>
+        <th class="tac">报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>农夫山泉推广</td>
+        <td>暂停</td>
+        <td>&nbsp;</td>
+        <td class="tac">65</td>
+        <td class="tac">27%</td>
+        <td class="tac">185</td>
+        <td class="tac">75%</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac">98</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">查看</a><a href="#">导出</a></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>合计</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+      </tr>
+    </table>
+    
+    <!--turnpage start-->
+    <div class="turnpage">
+      <a href="#"><em>&lt;&lt;</em>上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页<em>&gt;&gt;</em></a>
+    </div>
+    <!--turnpage end-->
+    
+    <div class="toolbar mt30">
+      <span class="sbtng fl"><a class="ibtng" href="#">查看已归档的广告计划</a></span>
+      <div class="tbGroup ml30">
+        <span class="tbgBtn"><a class="tbgiba nobor" href="#" title="启动"><i class="iplay"></i></a></span>
+      </div><div class="clear"></div>
+    </div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告组</th>
+        <th>状态</th>
+        <th>定向方式</th>
+        <th>媒体选择</th>
+        <th class="tac">出价</th>
+        <th class="tac">展现数</th>      
+        <th class="tac">胜出率</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总花费</th>
+        <th class="tac">点击价格</th>
+        <th class="tac">报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>农夫山泉推广</td>
+        <td>暂停</td>
+        <td>&nbsp;</td>
+        <td class="tac">65</td>
+        <td class="tac">27%</td>
+        <td class="tac">185</td>
+        <td class="tac">75%</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac">98</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">查看</a><a href="#">导出</a></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>合计</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+        <td class="tac">&nbsp;</td>
+      </tr>
+    </table>
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+<!--版权-->
+<div class="footer">
+  <div class="ftcon">
+    Copyright © 2013 All rights reserved. 设计广告平台有限公司 版权所有<br /> 
+    京ICP证68976143.3号 京公网安备XKD89756号
+  </div>
+</div>
+
+</body>
+</html>

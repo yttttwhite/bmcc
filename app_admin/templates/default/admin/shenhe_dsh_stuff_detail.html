@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看广告素材详情[{$stuff->adname}]</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 广告素材信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">广告素材名称：{$stuff->adname}</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">广告素材类型：{$stuff->type}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">所属广告计划名称：{$stuff->plan_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">所属广告组名称：{$stuff->group_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">所属广告主：{$stuff->user_name}</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">宽*高：{$stuff->width}*{$stuff->height}</span>
+        </div>
+
+        <div class="dvll">
+            <span class="scll">更新时间：{date('Y-m-d H:i:s',$stuff->mtime)}</span>
+        </div>
+
+        <div class="dvll" style="display: none;">
+            <span class="scll">审核操作：
+                {if user_api::auth("shenhe") }
+                {if ($currentStatus == 1 or $currentStatus == 3) }
+                <a href="javascript:void(0)" onclick="setStatusById(2, this)">通过</a>
+                {/if}
+                {if ($currentStatus == 1 or $currentStatus == 2) }
+                <a href="javascript:void(0)" onclick="setStatusById(3, this)">拒绝</a>
+                {/if}
+                {/if}
+
+            </span>
+        </div>
+
+    </div>
+
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer" onclick="window.close();" >关闭</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body class="w-auto">
+        <div class="container-content p-0 mt-20">
+            <div class="panel panel-white" style="margin:0;">
+                <div class="panel-body">
+                    <form method="post" action="{$url['formAction']}" enctype="multipart/form-data">
+                        <div id="panel_stuff" class="tab-pane fade  in  active">
+                        	<div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-100 control-label text-34" for="form-field-1">分组</label>
+                                    <div class="col-sm-9">
+                                    	<select class="form-control" name="group_id">
+                                    		{foreach($groupList as $group)}
+												<option value="{$group['id']}">{$group['name']}</option>
+											{/foreach}
+                                    	</select>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-100 control-label text-34" for="form-field-1">标识类型</label>
+                                    <div class="col-sm-9">
+                                    	<select class="form-control" name="type">
+                                    		{foreach($typeList as $typeID => $typeName)}
+												<option value="{$typeID}">{$typeName}</option>
+											{/foreach}
+                                    	</select>
+                                    </div>
+                                </div>
+							</div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-100 control-label text-34" for="form-field-1">用户标识</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" name="accountFile" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                	<label class="col-sm-2 w-100 control-label text-34" for="form-field-1"></label>
+                                	<div class="col-sm-9">
+                                    	<button type="submit" name="submit" class="btn btn-success btn-squared btn-sm w-100 fr">提交</button>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>

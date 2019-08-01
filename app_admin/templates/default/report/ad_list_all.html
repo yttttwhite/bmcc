@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+    <!--side-->
+    <div class="side">
+          {part "/report.stat.left"}
+    </div>
+    <!--mcon start-->
+    <div class="mcon">
+    	<div class="crumbLink"><a href="report.ad.list">查询可投js广告</a></div>
+		<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+			<!--表头-->
+			<div class="panel-heading border-light panel-head-md">
+				<form id="queryFrom" action="{$url['date']}" method="get">
+					<div class="fl" style="position: relative; left: 10px;">
+						广告ID：<input type="text" name="adid" class="input-small"  placeholder="广告ID" value="{$adid}"/>
+						广告名称：<input type="text" name="adname" class="input-small"  placeholder="广告名称" value="{$adname}"/>
+					</div>
+					<div class="fl" style="position: relative; left: 10px;">
+                            <input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+                    </div>
+					<span style="line-height:28px; position: relative; left: 20px;">共计：{$page['amount']}条</span>
+				</form>
+			</div>
+			<!--表头:结束-->
+			<div class="panel-body">
+				<table class="table table-striped table-hover table-bordered" id="tbadlist">
+					<thead>
+						<tr style="background-color:#1478dc;font-color:#999999;">
+                            <th class="center" >广告ID</th>
+                            <th class="center" style="width:30%;">广告名称</th>
+                            <th class="center">广告组</th>
+                            <th class="center">详细信息</th>
+                            <th class="center">实时走势</th>
+                        </tr>
+					</thead>
+					<tbody>
+                        {foreach($stat as $host=>$amount)}
+                        <tr>
+                            <td style="text-align:left;"><label>{$amount['adid']}</label><span style="display:none;">广告名称：{$amount['adname']}<br />
+	           	 投放类型：{$amount['strreleasetype']}<br>
+	           	 每日预算：{$amount['strbudgettotal']}<br>
+	           	 投放周期：{$amount['startdate']}至{$amount['enddate']}<br>
+	           	 投放时间：{$amount['strallday']}<br>
+	           	 频次控制：{$amount['strfrequency']}<br>
+	           	 投放频次：{$amount['strsmooth']}<br >
+	           	 地区选择： {$amount['strarealabel']}<br />
+	           	 投放设置：{$amount['strmobile']}<br />
+	           	 用户类型定向：{$amount['strusertype']}<br />
+	           	 素材内容：{$amount['strstuff']}<br />
+	           	 素材类型： {$amount['strstufftype']}&nbsp;&nbsp;&nbsp;&nbsp; {$amount['width']}*{$amount['height']}</span></td>
+                            <td style="text-align:left;">{$amount['plan_name']}</td>
+                            <td style="text-align:left;">{$amount['group_name']}</td>
+                            <td style="text-align:left"><a class="btn btn-sm btn-squared btn-default" style="left: 0px; position: relative;"
+							onclick="layerIframe('广告计划内容','/report.ad.detail?adid={$amount['adid']}&planid={$amount['plan_id']}',800,460);">广告内容</a></td>
+                            <td style="text-align:left;"><a class="btn btn-sm btn-squared btn-default"  style="left: 0px; position: relative;"
+							onclick="layerIframe('可投js广告实时走势图 (广告id:{$amount['adid']})','https://115.239.138.137:8000/chart',800,480);">实时走势图</a></td>
+                        </tr>
+                        {/foreach}
+					</tbody>
+				</table>
+				
+	            <div class="text-right">
+	                <ul class="pagination margin-bottom-10">
+                            <li>
+                                <a href="{$page['url']}page=1">上一页</a>
+                            </li>
+                            {for($i = 1; $i<=$page['count']; $i++)}
+                            <li {if($page['current']==$i)}class="active"{/if}>
+                            <a href="{$page['url']}page={$i}">{$i}</a>
+                            </li>
+                            {/for}
+                            <li>
+                                <a href="{$page['url']}page={$page['current']+1}">下一页</a>
+                            </li>
+                     </ul>
+	            </div>
+	            
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+		  $("#tbadlist td label").hover(function(){
+		  //$(this).css("background-color","red");
+		  var strhtml = $(this).parent().find('span').html();
+		  layer.tips(strhtml, this, { 
+			    tips: [4, '#3595CC'],
+				style: ['margin-left:15px;width:400px;background-color:#fff; color:#000;', '#ccc'],  
+				maxWidth:400,
+				//closeBtn:[0, true]  
+			}); 
+		},function(){
+		  //$("#divdetai").hide();
+			layer.closeAll('tips'); 
+	 });
+
+}); 
+</script>
+{part "/main.main.footer"}
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<!--main-->
+<div class="main">
+  <div class="side">
+{part "/ad.plan.listpart"}
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="chartMenu">
+      <span class="cms">
+        <select class="formSel">
+          <option>全部投放类型</option>
+          <option>品牌广告</option>
+          <option>效果广告</option>
+        </select>
+        <select class="formSel ml5">
+          <option>全部广告计划</option>
+          <option>巧乐兹</option>
+          <option>可口可乐</option>
+        </select>
+        <input type="text" class="itxt_1 idate ml5 fc7" value="开始时间 - 结束时间" size="30" />
+      </span>
+      <span class="cms timeDWM  ml5 ablk">
+        <a href="#">今天</a>
+        <a class="sel" href="#">昨天</a>
+        <a href="#">本周</a>
+        <a href="#">上周</a>
+        <a href="#">本月</a>
+        <a href="#">上月</a>
+      </span>
+    </div>
+    <div class="chartCon">
+      <div class="chartData">
+        <div class="cdli">时间段：<strong>2013-05-14</strong> 至 <strong>2013-06-12</strong></div>
+        <div class="cdli">展示次数：<strong>980</strong>次</div>
+        <div class="cdli">点击次数：<strong>789</strong>次</div>
+        <div class="cdli">点击率：<strong>32.5%</strong></div>
+        <div class="cdli">费用：<strong>685</strong>元</span></div>
+      </div>
+      <div class="chartShow" id="chartShow">
+      
+      <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_chart.gif" />
+      
+      </div>
+      <script>
+      $(function () {
+		      $('#chartShow').highcharts({
+chart: {
+type: 'line'
+},
+title: {
+text: '统计报表'
+},
+subtitle: {
+text: 'Source: 来源'
+},
+xAxis: {
+categories: ['6月1日', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+},
+yAxis: {
+title: {
+text: '显示次数'
+}
+},
+tooltip: {
+enabled: false,
+formatter: function() {
+	return '<b>'+ this.series.name +'</b><br/>'+
+		this.x +': '+ this.y +'°C';
+}
+},
+plotOptions: {
+line: {
+dataLabels: {
+enabled: true
+	    },
+enableMouseTracking: false
+      }
+	     },
+series: [{
+name: '展示次数',
+      data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+	}, {
+name: '点击次数',
+      data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+	}]
+});
+});
+</script>
+
+
+    </div>
+    
+    <div class="reportMenu mt30">
+
+      <span class="fl timeDWM  ml5 ablk">
+        <a href="#">全部状态</a>
+        <a class="sel" href="#">投放状态</a>
+        <a href="#">非投放状态</a>
+      </span>
+      
+      <span class="fl timeDWM ml15 ablk">
+        <a href="#">全部日期</a>
+        <a class="sel" href="#">日</a>
+        <a href="#">月</a>
+      </span>
+      
+      
+      
+      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="设置" onclick="location.href='step_2.html'" /></span>
+      <span class="sbtng ml10"><input name="" type="button" class="ibtng" value="复制" onclick="location.href='step_2.html'" /></span>
+      <span class="sbtng ml10"><input name="" type="button" class="ibtng" value="启用" onclick="location.href='step_2.html'" /></span>
+      <span class="sbtng ml10"><input name="" type="button" class="ibtng" value="暂停" onclick="location.href='step_2.html'" /></span>
+      <span class="sbtng ml10"><input name="" type="button" class="ibtng" value="删除" onclick="location.href='step_2.html'" /></span>
+    </div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告计划</th>
+        <th>状态</th>
+        <th>有效期</th>
+        <th class="tac">日预算</th>
+        <th class="tac">展现数</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总费用</th>
+        <th class="tac">平均点击成本</th>
+        <th class="tac">报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>农夫山泉推广</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>巧乐兹促销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>大众汽车推广</td>
+        <td>启用</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>加多宝品牌营销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+    </table>
+    
+    <!--turnpage start-->
+    <div class="turnpage">
+      <a href="#"><em>&lt;&lt;</em>上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页<em>&gt;&gt;</em></a>
+    </div>
+    <!--turnpage end-->
+    
+    <div class="mt30">
+      <span class="sbtng"><input name="" type="button" class="ibtng" value="查看已归档的广告计划" onclick="location.href='step_2.html'" /></span>
+      <span class="sbtng ml10"><input name="" type="button" class="ibtng" value="启用" onclick="location.href='step_2.html'" /></span>
+    </div>
+    <div class="clear"></div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告计划</th>
+        <th>状态</th>
+        <th>有效期</th>
+        <th class="tac">日预算</th>
+        <th class="tac">展现数</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总费用</th>
+        <th class="tac">平均点击成本</th>
+        <th class="tac">报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>农夫山泉推广</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>巧乐兹促销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>大众汽车推广</td>
+        <td>启用</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>加多宝品牌营销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+    </table>
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+
+<!--main-->
+<div class="main">
+  <div class="side">
+{part "/ad.plan.listpart"}
+  </div>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <h1 class="mtit">设置广告组</h1>  
+    
+    <!--基本信息-->
+    <div class="comForm clear">
+      <h1>基本信息</h1>
+      <dl>
+        <dt>广告组名称：</dt>
+        <dd><input type="text" class="itxt" size="30" /></dd>
+        <dd class="tips_error">输入错误</dd>
+      </dl>
+      <div class="tipstxt">建议您根据媒体、人群或活动内容来命名，以便于调整投放和报表查看。</div>
+      
+    </div>
+    
+    <!--定向设置-->
+    <div class="comForm clear">
+      <h1>定向设置</h1>
+      <h2>地域定向</h2>
+      <dl>
+        <dt>地区选择：</dt>
+        <dd>
+          <label class="irad" for="qg"><input name="dxdq" id="qg" type="radio" value="" /> 全国</label>
+          <label class="irad ml20" for="xztf"><input name="dxdq" id="xztf" type="radio" value="" onClick="ShowDIV('preg')" /> 选择投放地区</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="preg" class="popdiv pop_region" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">选择投放地区</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('preg')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                <div class="region">
+                  <div class="regArea">
+                    <label class="regatit" for="hb"><input name="region" id="hb" type="checkbox" value="" /> 华北</label>
+                    <label class="regas" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 北京市</label>
+                    <label class="regas" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 天津市</label>
+                    <label class="regas" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 河北省</label>
+                    <label class="regas" for="sx"><input name="region" id="sx" type="checkbox" value="" /> 山西省</label>
+                    <label class="regas_1" for="nm"><input name="region" id="nm" type="checkbox" value="" /> 内蒙古自治区</label>
+                  </div>
+                  <div class="regArea">
+                    <label class="regatit" for="db"><input name="region" id="db" type="checkbox" value="" /> 东北</label>
+                    <label class="regas" for="ln"><input name="region" id="ln" type="checkbox" value="" /> 辽宁省</label>
+                    <label class="regas" for="jl"><input name="region" id="jl" type="checkbox" value="" /> 吉林省</label>
+                    <label class="regas" for="hlj"><input name="region" id="hlj" type="checkbox" value="" /> 黑龙江省</label>
+                  </div>
+                  <div class="regArea">
+                    <label class="regatit" for="hd"><input name="region" id="hd" type="checkbox" value="" /> 华东</label>
+                    <label class="regas" for="sh"><input name="region" id="sh" type="checkbox" value="" /> 上海市</label>
+                    <label class="regas" for="js"><input name="region" id="js" type="checkbox" value="" /> 江苏省</label>
+                    <label class="regas" for="zj"><input name="region" id="zj" type="checkbox" value="" /> 浙江省</label>
+                    <label class="regas" for="ah"><input name="region" id="ah" type="checkbox" value="" /> 安徽省</label>
+                    <label class="regas" for="fj"><input name="region" id="fj" type="checkbox" value="" /> 福建省</label>
+                    <label class="regas" for="jx"><input name="region" id="jx" type="checkbox" value="" /> 江西省</label>
+                    <label class="regas" for="sd"><input name="region" id="sd" type="checkbox" value="" /> 山东省</label>
+                  </div>
+                  <div class="regArea">
+                    <label class="regatit" for="hb"><input name="region" id="hb" type="checkbox" value="" /> 中南</label>
+                    <label class="regas" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 河南省</label>
+                    <label class="regas" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 湖北省</label>
+                    <label class="regas" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 湖南省</label>
+                    <label class="regas" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 广东省</label>
+                    <label class="regas" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 海南省</label>
+                    <label class="regas_1" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 广西壮族自治区</label>
+                  </div>
+                  <div class="regArea">
+                    <label class="regatit" for="hb"><input name="region" id="hb" type="checkbox" value="" /> 西南</label>
+                    <label class="regas" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 重庆市</label>
+                    <label class="regas" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 四川省</label>
+                    <label class="regas" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 贵州省</label>
+                    <label class="regas" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 云南省</label>
+                    <label class="regas_1" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 西藏自治区</label>
+                  </div>
+                  <div class="regArea">
+                    <label class="regatit" for="hb"><input name="region" id="hb" type="checkbox" value="" /> 西北</label>
+                    <label class="regas" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 陕西省</label>
+                    <label class="regas" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 甘肃省</label>
+                    <label class="regas" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 青海省</label>
+                    <label class="regas_1" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 宁夏回族自治区</label>
+                    <label class="regas_1" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 新疆维吾尔自治区</label>
+                  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input name="" type="button" class="ibtng" value="全选"  /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="反选" /></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('preg')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('preg')" /></span>
+                    </div>
+                  </div>
+                  
+                </div>              
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          
+          <label class="irad ml20" for="xzcs"><input name="dxdq" id="xzcs" type="radio" value="" onClick="ShowDIV('potcity')" /> 选择一二线城市投放</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="potcity" class="popdiv pop_otcity" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">选择一二线城市投放</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('potcity')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                <div class="otcity">
+                  <div class="otcli">
+                    <label class="otcltit" for="hb"><input name="region" id="hb" type="checkbox" value="" /> 一线城市</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 北京市</label>
+                    <label class="otclc" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 上海</label>
+                    <label class="otclc" for="sx"><input name="region" id="sx" type="checkbox" value="" /> 广州</label>
+                    <label class="otclc" for="nm"><input name="region" id="nm" type="checkbox" value="" /> 深圳</label>
+                  </div>
+                  
+                  <div class="otcli">
+                    <label class="otcltit" for="db"><input name="region" id="db" type="checkbox" value="" /> 二线城市</label>
+                    <label class="otclc" for="ln"><input name="region" id="ln" type="checkbox" value="" /> 哈尔滨</label>
+                    <label class="otclc" for="jl"><input name="region" id="jl" type="checkbox" value="" /> 沈阳</label>
+                    <label class="otclc" for="hlj"><input name="region" id="hlj" type="checkbox" value="" /> 大连</label>
+                    <label class="otclc" for="sh"><input name="region" id="sh" type="checkbox" value="" /> 合肥</label>
+                    <label class="otclc" for="js"><input name="region" id="js" type="checkbox" value="" /> 武汉</label>
+                    <label class="otclc" for="zj"><input name="region" id="zj" type="checkbox" value="" /> 长沙</label>
+                    <label class="otclc" for="ah"><input name="region" id="ah" type="checkbox" value="" /> 南京</label>
+                    <label class="otclc" for="fj"><input name="region" id="fj" type="checkbox" value="" /> 南昌</label>
+                    <label class="otclc" for="jx"><input name="region" id="jx" type="checkbox" value="" /> 成都</label>
+                    <label class="otclc" for="sd"><input name="region" id="sd" type="checkbox" value="" /> 宁波</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 杭州</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 重庆</label>
+                    <label class="otclc" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 石家庄</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 郑州</label>
+                    <label class="otclc" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 西安</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 青岛</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 济南</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 太原</label>
+                    <label class="otclc" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 天津</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 厦门</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 福州</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 佛山</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 南宁</label>
+                    <label class="otclc" for="heb"><input name="region" id="heb" type="checkbox" value="" /> 贵阳</label>
+                    <label class="otclc" for="bj"><input name="region" id="bj" type="checkbox" value="" /> 海口</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 昆明</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 兰州</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 呼和浩特</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 银川</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 西宁</label>
+                    <label class="otclc" for="tj"><input name="region" id="tj" type="checkbox" value="" /> 乌鲁木齐</label>
+                  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input name="" type="button" class="ibtng" value="全选"  /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="反选" /></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('potcity')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('potcity')" /></span>
+                    </div>
+                  </div>
+                  
+                </div>              
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+       
+        </dd>
+      </dl>
+      <dl>
+        <dt>排除地区：</dt>
+        <dd><input type="text" class="itxt" size="30" /></dd>
+      </dl>
+      <h2>人群定向</h2>
+      <dl>
+        <dt>人群选择：</dt>
+        <dd>
+          <label class="rqxz" for="mrf"><input name="rqxz" id="mrf" type="checkbox" value="" /> 美容_非托管</label>
+          <label class="rqxz" for="mr"><input name="rqxz" id="mr" type="checkbox" value="" /> 美容_托管</label>
+          <label class="rqxz" for="jpf"><input name="rqxz" id="jpf" type="checkbox" value="" /> 机票_非托管</label>
+          <label class="rqxz" for="jp"><input name="rqxz" id="jp" type="checkbox" value="" /> 机票_托管</label><br />
+          <label class="rqxz" for="myf"><input name="rqxz" id="myf" type="checkbox" value="" /> 母婴_非托管</label>
+          <label class="rqxz" for="my"><input name="rqxz" id="my" type="checkbox" value="" /> 母婴_托管</label>
+          <label class="rqxz" for="nshf"><input name="rqxz" id="nshf" type="checkbox" value="" /> 男士护肤人群</label>
+          <label class="rqxz" for="man"><input name="rqxz" id="man" type="checkbox" value="" /> 低水平码农</label><br />
+          <label class="rqxz" for="zman"><input name="rqxz" id="zman" type="checkbox" value="" /> 中等水平码农</label>
+          <label class="rqxz" for="gman"><input name="rqxz" id="gman" type="checkbox" value="" /> 高水平码农</label>
+          <label class="rqxz" for="jcx"><input name="rqxz" id="jcx" type="checkbox" value="" /> 技术初学者</label>
+          <label class="rqxz" for="csdn"><input name="rqxz" id="csdn" type="checkbox" value="" /> 最近几天访问过CSDN的人</label>
+          <div class="dpbtn">
+            <div class="fl">
+              <span class="sbtng"><input name="" type="button" class="ibtng" value="全选"  /></span>
+              <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="反选" /></span>
+            </div>
+          </div>
+        </dd>
+      </dl>
+    </div>
+    
+    
+    <!--用户在哪里看到我的广告-->
+    <div class="comForm clear">
+      <h1>用户在哪里看到我的广告</h1>
+      <dl>
+        <dt>选择媒体：</dt>
+        <dd>
+          <label class="irad" for="mtym"><input name="xzmt" id="mtym" type="radio" value="" onClick="ShowDIV('pdomain')" /> 媒体定向</label>
+          
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="pdomain" class="popdiv pop_domain" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">域名定向</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pdomain')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+              
+                  <div class="clear">
+                    <div class="fl">
+                      <span class="sbtng"><input name="" type="button" class="ibtng" value="选择域名"  /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="排除域名" /></span>
+                    </div>
+                    <div class="fr">
+                      <label class="fl">导入域名：<input type="text" class="itxt" size="20" /></label>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="选择" /></span>
+                    </div>
+                  </div>
+                  
+                  <div class="pdomcon">手动输入域名</div>
+                  
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pdomain')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pdomain')" /></span>
+                    </div>
+                  </div>
+                  
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          
+          <label class="irad ml20" for="mtzd"><input name="xzmt" id="mtzd" type="radio" value="" onClick="ShowDIV('pmedia')" /> 指定媒体</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="pmedia" class="popdiv pop_media" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">指定媒体</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pmedia')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+              
+                  <div class="pmediali">
+                    <label class="xzmedia" for="google"><input name="xzmedia" id="google" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="sian"><input name="xzmedia" id="sian" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="yahoo"><input name="xzmedia" id="yahoo" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="taobao"><input name="xzmedia" id="taobao" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="taobao"><input name="xzmedia" id="taobao" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pmedia')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pmedia')" /></span>
+                    </div>
+                  </div>
+                  
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          
+          <label class="irad ml20" for="mtwy"><input name="xzmt" id="mtwy" type="radio" value="" onClick="ShowDIV('pwebtype')" /> 网页类型</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="pwebtype" class="popdiv pop_webtype" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">指定媒体</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pwebtype')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                <!--left start-->
+                <div class="dwtleft">
+                  <div class="dwtltit">请选择网页主题</div>
+                  <div class="dwtlcon">
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_hide.gif" alt="隐藏" /></a></span>
+                        <span class="name fwb"><a href="#">艺术与娱乐</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                      <dd class="dwtlcld">
+                        <div class="dwtlcldname"><a class="aname" href="#">爱奇艺</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                        <div class="dwtlcldname"><a class="aname" href="#">优酷网</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                        <div class="dwtlcldname"><a class="aname" href="#">新浪娱乐中心</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                        <div class="dwtlcldname"><a class="aname" href="#">腾讯视频</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                      </dd>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">汽车车辆</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                      <dd class="dwtlcld" style="display:none;">
+                        <div class="dwtlcldname"><a href="#">搜狐汽车</a></div>
+                        <div class="dwtlcldname"><a href="#">易车网</a></div>
+                      </dd>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                  </div>
+                </div>
+                <!--left end-->
+                
+                <!--right start-->
+                <div class="dwtright">
+                  <div class="dwtrtit"><div class="fr fwn fs12"><a href="#">全部清空</a></div>已选择网页主题</div>
+                  <div class="dwtrcon">
+                    <table class="listab fs12" width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <th scope="col"><input name="" type="checkbox" value="" /></th>
+                        <th scope="col">主题</th>
+                        <th scope="col">出价(&yen;)</th>
+                        <th class="tac" scope="col">删除</th>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                    </table>
+                    <div class="a12 tac mt20"><a href="#">&lt;&lt;上一页</a><a class="ml30" href="#">下一页&gt;&gt;</a></div>
+                  </div>
+                </div>
+                <!--right end-->
+                
+                <div class="dpbtn">
+                  <div class="fr">
+                    <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pwebtype')" /></span>
+                    <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pwebtype')" /></span>
+                  </div>
+                </div>
+                  
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          
+          
+        </dd>
+      </dl>
+      <h2>高级设置</h2>
+      <dl>
+        <dt>频次控制策略：</dt>
+        <dd>
+          <label class="irad" for="pckzwp"><input name="pckz" id="pckzwp" type="radio" value="" /> 无频次控制</label>
+          <label class="irad ml20" for="pckzsg"><input name="pckz" id="pckzsg" type="radio" value="" /> 手工频次控制
+            <select>
+              <option>每个素材</option>
+              <option>每个推广组</option>
+            </select>
+            <select>
+              <option>每小时</option>
+              <option>每天</option>
+            </select>
+            对每个用户，展现
+            <input type="text" class="itxt" size="5" />次
+          </label>
+        </dd>
+      </dl>
+    </div>
+    
+    <!--出价-->
+    <div class="comForm clear">
+      <h1>出价</h1>
+      <dl>
+        <dt>您的出价(&yen;)：</dt>
+        <dd>
+          <input type="text" class="itxt" size="5" />元
+          <label class="irad ml20" for="xbn"><input name="xbxz" id="xbn" type="radio" value="" /> CPC</label>
+          <label class="irad ml20" for="xbnv"><input name="xbxz" id="xbnv" type="radio" value="" /> CPM</label>
+        </dd>
+      </dl>
+      <div class="tipstxt">建议您出价5元。</div>
+    </div>
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="button" class="ibtnb" value="保存" onclick="location.href='step_3.html'" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    
+  </div>
+</div>
+
+{part "/main.main.footer"}
+
+</body>
+</html>

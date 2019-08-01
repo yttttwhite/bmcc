@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+
+<body>
+{part "/main.main.nav.admin"}
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  {part ("/admin.main.nav.stuff")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+{*
+    <div class="toolbar">
+        <div id="adjihua" class="selMenu smzt">
+          <span class="smtit">全部广告主</span>
+          <ul>
+            <li><a href="javascript:;">全部广告主</a></li>
+            <li><a href="javascript:;">新浪</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smzt ml10">
+          <span class="smtit">全部广告计划</span>
+          <ul>
+            <li><a href="javascript:;">全部广告计划</a></li>
+            <li><a href="javascript:;">巧乐兹</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smzt ml10">
+          <span class="smtit">全部广告组</span>
+          <ul>
+            <li><a href="javascript:;">全部广告组</a></li>
+            <li><a href="javascript:;">巧乐兹</a></li>
+          </ul>
+        </div>
+        <div id="zhuantai" class="selMenu smzt ml10">
+          <span class="smtit">全部素材</span>
+          <ul>
+            <li><a href="javascript:;">全部素材</a></li>
+            <li><a href="javascript:;">巧乐兹</a></li>
+          </ul>
+        </div>
+          <div class="selMenu ml10">
+            <div class="smtbg">
+              <input type="text" class="itxt_1 fl idate" value="2012-05-23" size="15" />
+              <div class="fl">&nbsp;至&nbsp;</div>
+              <input type="text" class="itxt_1 fl idate" value="结束时间" size="15" />
+            </div>
+          </div>
+          <span class="iSearch ml10">
+             <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索" /></a>
+             <input type="text" class="itxt fc7" value="" size="30" />
+          </span>
+      <div class="clear"></div>
+    </div>
+	*}
+	  <div style="position:absolute;top:33px;left:33px" id="addr_pre"></div>
+    <!--toolbar start-->
+    {if $currentUserName == admin}
+    <div class="toolbar">
+       <span class="sbtnb"><a class="ibtnb" >通过</a></span>
+       <span class="sbtng ml10"><a class="ibtng">拒绝</a></span>
+      <div class="clear"></div>
+    </div>
+    {/if}
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+      	{if $currentUserName == admin}
+        <th><input class="checkall" type="checkbox"/></th>
+        {/if}
+        <th>素材</th>
+        <th>广告主</th>
+        <th>广告计划</th>
+        <th>广告组</th>
+        <th>广告名称</th>
+        <th>宽*高</th>
+        <th>审核状态</th>
+        <th>操作</th>
+      </tr>
+{foreach $stuffs as $_stuff}
+      <tr>
+      	{if $currentUserName == admin}
+        <td><input class="stuff_ids" type="checkbox" value="{$_stuff->stuff_id}" /></td>
+        {/if}
+		<td>
+			{if $_stuff->type==2}
+			<embed src="{$_stuff->addr}" width="{$_stuff->width}" height="{$_stuff->height}" style="max-width:180px;max-height:80px"></embed>
+			{elseif $_stuff->type==1}
+			<a href="{$_stuff->addr}" target="_blank"><img class="addr" style="max-width:180px;max-height:80px" src="{$_stuff->addr}" /></a>
+			{else}
+			<a href="{$ad->stuff->addr}" target="_blank"><img class="addr" style="max-width:180px;max-height:80px" src="{$ad->stuff->addr}" /></a>
+			{/if}
+		</td>
+		<td class="tac">
+			<a href="admin.user.edit.{$_stuff->uid}" target="_blank">
+			{$adSopnsorArray[$_stuff->uid]}
+			</a>
+		</td>
+        <td>
+        	<a href="ad.plan.list.{$_stuff->plan_id}" target="_blank">
+        	{$_stuff->plan_name}
+        	</a>
+        </td>
+        <td>
+        	<a href="ad.group.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank">
+        	{$_stuff->group_name}
+        	</a>
+        </td>
+        <td>
+        	<a href="ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank">
+        	{$_stuff->adName}
+        	</a>
+        </td>
+        <td class="tac">{$_stuff->width}*{$_stuff->height}</td>
+        <td>{if $_stuff->verified_or_not==1}待审{elseif $_stuff->verified_or_not==2}通过{elseif $_stuff->verified_or_not==3}未通过{/if}</td>
+      	<td>
+      		<a href="ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank">修改</a>
+      		{if $currentUserName == admin}
+      			{if ($currentStatus == 1 or $currentStatus == 3) }
+      				<a href="javascript:void(0)" onclick="setStatusById({$_stuff->stuff_id},2)">通过</a>
+      			{/if}
+      			{if ($currentStatus == 1 or $currentStatus == 2) }
+      				<a href="javascript:void(0)" onclick="setStatusById({$_stuff->stuff_id},3)">拒绝</a>
+      			{/if}
+      		{/if}
+      	</td>
+      </tr>
+{/foreach}
+    </table>
+    
+		{$pager}
+
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+{part "/main.main.footer"}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".ibtnb").click(function(){
+			set(2);
+			});
+		$(".ibtng").click(function(){
+			set(3);
+			});
+		function set(type){
+			var checked = $(".reportab input:checkbox:checked[value]");
+			if(checked.size()<=0){
+				alert("请选择");
+			}else{
+				 var planid=[];
+				 checked.each(function(i,item){
+					 planid.push($(item).val());
+				 })
+				 $.ajax({ 
+					type: "POST", url: "/admin.shenhe.stuffSet?type="+type, data: { stuff_ids:planid }, dataType:"json",
+					success: function(msg){ 
+						location.reload();
+					}
+				});
+			}
+			return false;
+		};
+		$(".checkall").change(function(){
+			var ck=$(this).prop("checked");
+			$(this).parents("table").find("input:checkbox").prop("checked",ck);
+			});
+		$(".addr").mouseover(function(){
+			var d='<img src="'+$(this).attr("src")+'">';
+			var p=($(this).position());
+			$("#addr_pre").html(d).css({ left:p.left,top:p.top+$(this).height()+20}).show();
+		}).mouseout(function(){
+			$("#addr_pre").hide();
+		});
+	});
+
+	function setStatusById(id,type){
+			$.ajax({ 
+				type: "POST", url: "admin.shenhe.stuffSet."+id, data: { type:type }, dataType:"json",
+				success: function(msg){ 
+					location.reload();
+				}
+			});
+			return false;
+	};
+</script>
+</body>
+</html>

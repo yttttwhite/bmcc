@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  	{part "/crm.plan.left"}
+  </div>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <div class="step"><div class="step2"></div></div>
+    <form method="post" action="/crm.group.save.{$plan_id}.{$group->group_id|default:0}"> 
+
+    <input type="hidden" name="plan_id" value="{$plan_id}" />
+    <input type="hidden" name="group_id" value="{$group->group_id|default:0}" />
+    
+    <!--基本信息-->
+    <div class="comForm clear">
+      <h1>基本信息</h1>
+      <dl>
+        <dt>广告组名称：</dt>
+        <dd><input name="name" value="{$group->name}" type="text" class="itxt" size="30" /></dd>
+        <!--<dd class="tips_error">输入错误</dd>-->
+      </dl>
+      <div class="tipstxt">建议您根据媒体、人群或活动内容来命名，以便于调整投放和报表查看。</div>
+    </div>
+	<!--号码库-->
+    <div class="comForm clear">
+      <h1>营销对象</h1>
+      <dl>
+        <dt>选择号码库：</dt>
+        <dd>
+        	{foreach($authList as $authInfo)}
+			<label class="number-group-selected">
+        		<input class="flat-grey icheck" type="checkbox" value="{$authInfo['gid']}" name="number_group_id[]">{$authInfo['gname']}
+			</label>
+			{/foreach}
+		</dd>
+      </dl>
+    </div>
+	<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-green',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+		} );
+	</script>
+    
+    <script>
+    $(document).ready(function(){
+            $(".regArea >.regas > input").click(function(){
+                if($(this).prop("checked")){
+                    $(this).parent().find("li>input").prop("checked",true);
+                }else{
+                    $(this).parent().find("li>input").prop("checked",false);
+                }
+            });
+            $(".regas").mouseover(function(){ $(this).find("ul").show(); }).mouseleave(function(){ $(this).find("ul").hide(); });
+            $(".regas >ul input").click(function(){ 
+                var checked=false;
+                $(this).parents("label").find("li>input").each(function(i,item){
+                    if($(item).prop("checked")){ checked=true;; }
+                });
+                $(this).parents("label").find(">input").prop("checked",checked);
+            });
+
+            //区域
+            $(".regatit").click(function(){
+                $(this).parent().find(".regas input").prop("checked",$(this).find("input").prop("checked"));
+            });
+            $("#area_all").click(function(){
+                $(this).parents(".region").find("input").prop("checked",true);
+            });
+            $("#area_all_no").click(function(){
+                $(this).parents(".region").find("input").each(function(i,item){
+                    $(item).prop("checked",!$(item).prop("checked"));
+                    });
+            });
+            $("#area_ok").click(function(){
+                var id_s="";
+                var id_n="";
+                $(this).parents(".region").find(".regas >input:checked").each(function(i,item){
+                    console.log($(item).val());
+                    id_s+=$(item).val()+":";
+                    id_n+=$(item).attr("data")+":";
+                    $(item).parent().find("ul input:checked").each(function(i,item){
+                    id_s+=$(item).val()+",";
+                    id_n+=$(item).attr("data")+",";
+                    });
+                    id_s+=";";
+                    id_n+=";";
+
+                });
+                $("#area_value").val(id_s);
+                $("#area_label").val(id_n);
+                closeDiv('preg');
+            });
+
+            //1,2线
+            $(".otcltit").click(function(){
+                $(this).parent().find("input").prop("checked",$(this).find("input").prop("checked"));
+            });
+            $(".otclc").mouseover(function(){ $(this).find("ul").show(); }).mouseleave(function(){ $(this).find("ul").hide(); });
+            $(".otclc > input").click(function(){
+                if($(this).prop("checked")){
+                    $(this).parent().find("li>input").prop("checked",true);
+                }else{
+                    $(this).parent().find("li>input").prop("checked",false);
+                }
+            });
+            $(".otclc >ul input").click(function(){ 
+                var checked=false;
+                $(this).parents("label").find("li>input").each(function(i,item){
+                    if($(item).prop("checked")){ checked=true;; }
+                });
+                $(this).parents("label").find(">input").prop("checked",checked);
+            });
+            $("#crowds_all").click(function(){
+                $(this).parents(".pmain").find("input").prop("checked",true);
+            });
+            $("#crowds_all_no").click(function(){
+                $(this).parents(".pmain").find("input").each(function(i,item){
+                    $(item).prop("checked",!$(item).prop("checked"));
+                    });
+            });
+            $("#city_all").click(function(){
+                $(this).parents(".otcity").find("input").prop("checked",true);
+            });
+            $("#city_all_no").click(function(){
+                $(this).parents(".otcity").find("input").each(function(i,item){
+                    $(item).prop("checked",!$(item).prop("checked"));
+                    });
+            });
+            $("#city_ok").click(function(){
+                var id_s="";
+                var id_n="";
+                $(this).parents(".otcity").find("input:checked[value]").each(function(i,item){
+                    console.log($(item).val());
+                    id_s+=$(item).val()+",";
+                    id_n+=$(item).attr("data")+",";
+
+                });
+                $("#area_value").val(id_s);
+                $("#area_label").val(id_n);
+                closeDiv('potcity');
+            });
+            $("#qg").click(function(){
+                $("#area_value").val("");
+                $("#area_label").val("");
+            });
+
+            //设置预设数据
+            var ids = $("#area_value").val().split(/[:,;]/);
+            if(ids){
+                var i_1=0;
+                var i_2=0;
+                $(".regas input").each(function(i,item){
+                        if(ids.indexOf($(item).val())!==-1){
+                        $(item).prop("checked",true);
+                        i_1++;
+                        }
+                });
+                $(".otcity input").each(function(i,item){
+                        if(ids.indexOf($(item).val())!==-1){
+                        i_2++;
+                        $(item).prop("checked",true);
+                        }
+                });
+                if(i_1>0 && i_1>=i_2) $("#xztf").prop("checked",true);
+                if(i_2>0 && i_2>i_1)$("#xzcs").prop("checked",true);
+            }
+
+    });
+    </script>
+    <!--定向设置-->
+    <div class="comForm clear">
+      <h1>定向设置</h1>
+      <h2>地域定向</h2>
+      <dl>
+        <dt>地区选择：</dt>
+        <dd>
+        <input type="hidden" id="area_value" name="area_value" value="{$group->area_value}" />
+        <input type="hidden" id="area_label" name="area_label" value="{$group->area_label}" />
+          <label class="irad" for="qg"><input name="area_label_tmp" id="qg" type="radio" {if $group->area_label==0}checked{/if} value="0" /> 全国</label>
+          <label class="irad ml20" for="xztf"><input name="area_label_tmp" id="xztf" type="radio" value="" onClick="ShowDIV('preg')" /> 选择投放地区</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="preg" class="popdiv pop_region" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">选择投放地区</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('preg')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                <div class="region">
+{foreach $area_region as $k=>$_area}
+                  <div class="regArea">
+                    <label class="regatit" for="area_{$k}"><input id="area_{$k}" type="checkbox" value="" /> {$k}</label>
+{foreach $_area as $__area}
+
+                    <label class="regas" for="area_{$__area['id']}" style="position:relative">
+                        <input id="area_{$__area['id']}" data="{$__area['area_name']}" type="checkbox" value="{$__area['id']}" /> {$__area['area_name']}
+{if !empty($__area['childs'])}
+                        <ul style="display: none;padding: 5px;position:absolute;top: 30px;left:0px;z-index:999;background-color: #ccc;width: 155px;max-height: 200px;overflow: auto;">
+                        {foreach $__area['childs'] as $city}
+                    	<label class="regas" for="area_{$city['id']}" style="position:relative">
+                            <li><input id="area_{$city['id']}" data="{$city['area_name']}" type="checkbox" value="{$city['id']}"> {$city['area_name']}</li>
+			</label>
+                        {/foreach}
+                        </ul>
+{/if}
+                    </label>
+{/foreach}
+                  </div>
+{/foreach}
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input type="button" class="ibtng" id="area_all" value="全选"  /></span>
+                      <span class="sbtng ml15"><input type="button" class="ibtng" id="area_all_no" value="反选" /></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" id="area_ok" value="确定"/></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('preg')" /></span>
+                    </div>
+                  </div>
+                  
+                </div>              
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          
+          <label class="irad ml20" for="xzcs"><input name="area_label_tmp" id="xzcs" type="radio" value="" onClick="ShowDIV('potcity')" /> 选择一二线城市投放</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="potcity" class="popdiv pop_otcity" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">选择一二线城市投放</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('potcity')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                <div class="otcity">
+                  <div class="otcli">
+                    <label class="otcltit" for="hb"><input type="checkbox" /> 一线城市</label>
+{foreach $area_level[1] as $__area}
+                    <label class="otclc" for="city_{$__area['id']}" style="position:relative">
+                        <input id="city_{$__area['id']}" data="{$__area['area_name']}" type="checkbox" value="{$__area['id']}" /> {$__area['area_name']}
+{if !empty($__area['childs'])}
+                        <ul style="display: none;padding: 5px;position:absolute;top: 30px;left:0px;z-index:999;background-color: #ccc;width: 155px;max-height: 200px;overflow: auto;">
+                        {foreach $__area['childs'] as $city}
+                            <li><input id="city_{$city['id']}" data="{$city['area_name']}" type="checkbox" value="{$city['id']}"> {$city['area_name']}</li>
+                        {/foreach}
+                        </ul>
+{/if}
+                    </label>
+{/foreach}
+                  </div>
+                  
+                  <div class="otcli">
+                    <label class="otcltit" for="db"><input id="db" type="checkbox"/> 二线城市</label>
+{foreach $area_level[2] as $_area}
+                    <label class="otclc" for="city_{$_area['id']}"><input id="city_{$_area['id']}" type="checkbox" data="{$_area['area_name']}" value="{$_area['id']}" /> {$_area['area_name']}</label>
+{/foreach}
+                  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input type="button" id="city_all" class="ibtng" value="全选"  /></span>
+                      <span class="sbtng ml15"><input id="city_all_no" type="button" class="ibtng" value="反选" /></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input type="button" class="ibtnb" id="city_ok" value="确定" /></span>
+                      <span class="sbtng ml15"><input type="button" class="ibtng" value="取消" onClick="closeDiv('potcity')" /></span>
+                    </div>
+                  </div>
+                  
+                </div>              
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+       
+        </dd>
+      </dl>
+      <!-- 人群定向 -->
+      <h2>人群定向</h2>
+      <dl>
+        <dt>人群选择：</dt>
+        <dd>
+          <input name="media_value" id="media_value" type="hidden" value=""/>
+          <input name="media_label" id="media_label" type="hidden" value=""/>
+          <label class="irad" for="rqmt"><input name="rqxz" id="rqmt" type="radio" value="" onclick="ShowDIV('renqunmt')"> 按标准人群</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="renqunmt" class="popdiv pop_renqun" style="display: none;">
+            <div class="dbg">
+              <div class="pmain">
+               <div class="ptit">
+                <div class="ptname">选择人群</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onclick="closeDiv('renqunmt')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭"></a></div>
+               </div>
+               <div class="dcon">
+                  <!--toolbar start--> 
+                  <div class="toolbar-bc">
+                  <!--
+                    <div id="adjihua" class="selMenu smzt mr15">
+                        <span class="smtit">媒体类型</span>
+                        <ul>
+                          <li><a href="javascript:;">标准人群</a></li>
+                        </ul>
+                    </div>
+                      -->
+                    <span class="iSearch">
+                      <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索"></a>
+                      <input type="text" class="search itxt fc7" onkeydown="if (event.keyCode==13) { }" onblur="if(this.value=='')value='人群名称';" onfocus="if(this.value=='人群名称')value='';" value="人群名称" size="30">
+                    </span>
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <div class="rqli accordion">
+                    {foreach $crowds_default as $_c}
+                    <div class="rqltit active"><input class="crowd_title" name="rqxz" id="mrf{$_c['data']['id']}" type="checkbox" value="" align="absmiddle"> {$_c['data']['name']}</div>
+                    <div class="rqlcon" style="display:block;">
+                     {if !empty($_c['child'])}
+                      {foreach $_c['child'] as $_d}
+                      <label class="rqxz" for="mrf{$_d['id']}"><input name="rqxz" id="mrf{$_d['id']}" type="checkbox" value=""> {$_d['name']}</label>
+                      {/foreach}
+                     {/if}
+                    </div>
+                    {/foreach}
+                  </div>
+                
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input name="" type="button" class="ibtng" value="全选"></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="反选"></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onclick="closeDiv('renqunmt')"></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onclick="closeDiv('renqunmt')"></span>
+                    </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+        
+          <label class="irad ml20" for="rqdy"><input name="rqxz" {if $groups->colum1 != 1} checked {/if} id="rqdy" type="radio" value="" onclick="ShowDIV('renqundy')"> 按定义人群</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="renqundy" class="popdiv pop_renqun" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">按定义人群</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onclick="closeDiv('renqundy')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭"></a></div>
+              </div>
+              <div class="dcon">
+                  <!--toolbar start--> 
+                  <div class="toolbar-bc">
+                      <span class="iSearch">
+                         <a class="isicon" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_search.gif" alt="搜索"></a>
+                         <input type="text" class="search itxt fc7" onkeydown="if (event.keyCode==13) { }" onblur="if(this.value=='')value='人群名称';" onfocus="if(this.value=='人群名称')value='';" value="人群名称" size="30">
+                      </span>
+                    <div class="clear"></div>
+                  </div>
+                  <div class="rqli accordion">
+                  	{if($user_tags !== 0)}
+                    {foreach $user_tags->items as $_c}
+                    <div class="rqltit">
+			 			<input class="crowd_title" name="usertag[]" value="{$_c['id']}" type="checkbox" {if in_array($_c['id'], $group->usertags)} checked {/if}align="absmiddle" />{$_c['name']}
+					    </div>
+                    {/foreach}
+					{/if}
+                  </div>
+              {*
+                  <div class="rqli accordion">
+                    <div class="rqltit active"><input name="rqxz"  class="crowd_title" {if !empty($groups->policys)} checked {/if} id="crowds_all_2" type="checkbox" value="" align="absmiddle">自定义人群</div>
+                    <div class="rqlcon" style="display: none;">
+                        {$i=1}
+                        {foreach($crowds->items as $crow)}
+                          <label class="rqxz" for="mrf{$i}"><input name="crow[]" id="mrf{$i++}" type="checkbox" 
+                          {if(!empty($group->policys))}
+                            {foreach $group->policys as $policy}
+                              {if $policy->herd_id==$crow['id']}checked{/if}
+                            {/foreach}
+                          {/if}
+                          value="{$crow['id']}"/>&nbsp;{$crow['name']}</label>
+                        {/foreach}
+
+                    </div>
+                                      
+                 </div>
+                *}
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input id="crowds_all" type="button" class="ibtng" value="全选"></span>
+                      <span class="sbtng ml15"><input id="crowds_all_no" type="button" class="ibtng" value="反选"></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onclick="closeDiv('renqundy')"></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onclick="closeDiv('renqundy')"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </dd>
+      </dl>
+        <script>
+            $(".search").keyup(function(){
+              var v=$(this).val();
+              $(this).parents(".dcon").find("label.rqxz").hide();
+              $(this).parents(".dcon").find("label.rqxz:contains('"+v+"')").show();;
+            });
+        </script>
+          <!--遮罩pop end-->
+{if $config['version'] == "operator"}
+        <dl>
+          <dt>用户类型定向：</dt>
+          <dd>
+          <label class="irad"      for="is_usertype_0">
+          	<input id="is_usertype_0" name="usertype" {if empty($group->usertype)}checked{/if} type="radio" value="0"/>
+			不限
+		  </label>
+          <label class="irad m240" for="is_usertype_1">
+          	<input id="is_usertype_1" name="usertype" {if $group->usertype==1}checked{/if} type="radio" value="1"/>
+			仅投iPhone用户
+		  </label>
+          <label class="irad m120" for="is_usertype_2">
+          	<input id="is_usertype_2" name="usertype" {if $group->usertype==2}checked{/if} type="radio" value="2"/>
+			仅投Android用户
+		  </label>
+          </dd>
+        </dl>
+{/if}
+        <!-- 用户标签 -->
+     {*
+       <dl>
+          <dt>用户标签定向：</dt>
+          <dd>
+          <!--label class="irad" for="is_usertype_0"><a id="is_usertag" name="usertag" onclick="ShowDIV('usertag')" >按ADSL用户标签</a></label-->
+          <label class="irad" for="is_usertype_0"><span class="sbtng"><input type="button" onClick="ShowDIV('usertag')" class="ibtng" value="按用户标签"/></span></label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="usertag" class="popdiv pop_renqun" style="display: none;">
+            <div class="dbg">
+              <div class="pmain">
+               <div class="ptit">
+                <div class="ptname">选择用户标签</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onclick="closeDiv('usertag')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭"></a></div>
+               </div>
+               <div class="dcon">
+                  <div class="rqli accordion">
+                    {foreach $user_tags->items as $_c}
+                    <div class="rqltit">
+ 			<input class="crowd_title" name="usertag[]" value="{$_c['id']}" type="checkbox" {if in_array($_c['id'], $group->usertags)} checked {/if}align="absmiddle" />{$_c['name']}
+		    </div>
+                    {/foreach}
+                  </div>
+                  <div class="dpbtn">
+                    <div class="fl">
+                      <span class="sbtng"><input name="" type="button" class="ibtng" value="全选"></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="反选"></span>
+                    </div>
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onclick="closeDiv('usertag')"></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onclick="closeDiv('usertag')"></span>
+                    </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          </dd>
+        </dl>
+*}
+        <!-- 用户标签 end -->
+
+
+          <!--遮罩pop end-->
+		  
+		  <dl>
+        <dd>
+          <dt>网民定向：</dt>
+          <label class="irad" for="mtym">
+          	<span class="sbtng"><input name="xzmt" id="mtym" type="button"  onClick="ShowDIV('pdomain')" class="ibtng" value="选择网民关注的网站"/></span>
+		  </label>
+          
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="pdomain" class="popdiv pop_domain" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">选择网民关注的网站</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pdomain')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                  <div class="clear">
+                    <div class="fl">
+                      <span class="sbtng">        <input id="domain_set_1" type="button" class="ibtng" value="定向域名"  /></span>
+                      <span class="sbtng ml15">    <input id="domain_set_2" type="button" class="ibtng" value="排除域名" /></span>
+                    </div>
+                  </div>
+                  <script>
+                  $("#domain_set_1").click(function(){
+                      $("#domain_pannel_1").show();
+                      $("#domain_pannel_2").hide();
+                  });
+                  $("#domain_set_2").click(function(){
+                      $("#domain_pannel_1").hide();
+                      $("#domain_pannel_2").show();
+                  });
+                  </script>
+                  
+                  <div id="domain_pannel_1" class="pdomcon">手动输入定向域名(每行一个)，比如:<br />
+                  www.163.com (仅包含首页) <br />
+                  www.163.com/* (包含所有) <br />
+                  <textarea style="margin: 2px; padding: 5px; height: 125px; width: 725px;" name="_include_host" style="width:100%;height:100%">{if !empty($group->_include_host)}{implode("\n",$group->_include_host)}{/if}</textarea></div>
+                  <div id="domain_pannel_2" class="pdomcon" style="display:none">手动输入排除域名(每行一个)，比如:<br />
+                  www.163.com (仅包含首页) <br />
+                  www.163.com/* (包含所有) <br />
+                  <textarea style="margin: 2px; padding: 5px; height: 125px; width: 725px;" name="_exclude_host" style="width:100%;height:100%">{if !empty($group->_exclude_host)}{implode("\n",$group->_exclude_host)}{/if}</textarea></div>
+                  
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pdomain')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pdomain')" /></span>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <!--遮罩pop end-->
+{*
+          
+          <label class="irad ml20" for="mtzd"><input name="xzmt" id="mtzd" type="radio" value="" onClick="ShowDIV('pmedia')" /> 指定媒体</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="pmedia" class="popdiv pop_media" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">指定媒体</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pmedia')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+              
+                  <div class="pmediali">
+                    <label class="xzmedia" for="google"><input name="xzmedia" id="google" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="sian"><input name="xzmedia" id="sian" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="yahoo"><input name="xzmedia" id="yahoo" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="taobao"><input name="xzmedia" id="taobao" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                    <label class="xzmedia" for="taobao"><input name="xzmedia" id="taobao" type="checkbox" value="" /> <img src="/baichuan_advertisement_manage/assets_admin/img/tmp_media.jpg" /></label>
+                  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pmedia')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pmedia')" /></span>
+                    </div>
+                  </div>
+                  
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          
+          *}
+{*<label class="irad ml20" for="mtwy"><input name="xzmt" id="mtwy" type="radio" value="" onClick="ShowDIV('pwebtype')" /> 网页类型</label>
+          <!--遮罩pop start-->
+          <div id="BgDiv"></div>
+          <div id="pwebtype" class="popdiv pop_webtype" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">指定媒体</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pwebtype')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                <!--left start-->
+                <div class="dwtleft">
+                  <div class="dwtltit">请选择网页主题</div>
+                  <div class="dwtlcon">
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_hide.gif" alt="隐藏" /></a></span>
+                        <span class="name fwb"><a href="#">艺术与娱乐</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                      <dd class="dwtlcld">
+                        <div class="dwtlcldname"><a class="aname" href="#">爱奇艺</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                        <div class="dwtlcldname"><a class="aname" href="#">优酷网</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                        <div class="dwtlcldname"><a class="aname" href="#">新浪娱乐中心</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                        <div class="dwtlcldname"><a class="aname" href="#">腾讯视频</a><a class="aadd" href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_adds.gif" alt="添加" /></a></div>
+                      </dd>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">汽车车辆</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                      <dd class="dwtlcld" style="display:none;">
+                        <div class="dwtlcldname"><a href="#">搜狐汽车</a></div>
+                        <div class="dwtlcldname"><a href="#">易车网</a></div>
+                      </dd>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                    <dl class="dwtlcli ablk">
+                      <dt class="dwtlcltit">
+                        <span class="show_hide"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_show.gif" alt="显示" /></a></span>
+                        <span class="name"><a href="#">服饰美容</a></span>
+                        <span class="add"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_add.gif" alt="添加" /></a></span>
+                      </dt>
+                    </dl>
+                  </div>
+                </div>
+                <!--left end-->
+                
+                <!--right start-->
+                <div class="dwtright">
+                  <div class="dwtrtit"><div class="fr fwn fs12"><a href="#">全部清空</a></div>已选择网页主题</div>
+                  <div class="dwtrcon">
+                    <table class="listab fs12" width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <th scope="col"><input name="" type="checkbox" value="" /></th>
+                        <th scope="col">主题</th>
+                        <th scope="col">出价(&yen;)</th>
+                        <th class="tac" scope="col">删除</th>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                      <tr>
+                        <td><input name="" type="checkbox" value="" /></td>
+                        <td>饮食</td>
+                        <td><input class="itxt_s" name="" type="text" size="5" /><a class="ml10" href="#">全部</a><a href="#">当页</a></td>
+                        <td class="tac"><a href="#"><img src="/baichuan_advertisement_manage/assets_admin/img/i_delete.gif" alt="删除" /></a></td>
+                      </tr>
+                    </table>
+                    <div class="a12 tac mt20"><a href="#">&lt;&lt;上一页</a><a class="ml30" href="#">下一页&gt;&gt;</a></div>
+                  </div>
+                </div>
+                <!--right end-->
+                
+                <div class="dpbtn">
+                  <div class="fr">
+                    <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pwebtype')" /></span>
+                    <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pwebtype')" /></span>
+                  </div>
+                </div>
+                  
+
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--遮罩pop end-->
+          *}
+          
+          
+        </dd>
+      </dl>
+		  
+{if $config['version'] == "operator"}
+      <dl>
+          <dt>用户黑白名单：</dt>
+          <dd>
+          <label class="irad" for="ip_balck"><span class="sbtng"><input name="xzmt" id="ip_black" type="button"  onClick="ShowDIV('pip')" class="ibtng" value="短信黑白名单"/></span></label>
+          
+          <!--遮罩pop start-->
+          <!--div id="BgDiv"></div-->
+          <div id="pip" class="popdiv pop_domain" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">短信黑白名单</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('pip')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                  <div class="clear">
+                    <div class="fl">
+                      <span class="sbtng">        <input id="ip_set_1" type="button" class="ibtng" value="白名单"  /></span>
+                      <span class="sbtng ml15">    <input id="ip_set_2" type="button" class="ibtng" value="黑名单" /></span>
+                    </div>
+                  </div>
+                  <script>
+                  $("#ip_set_1").click(function(){
+                      $("#ip_pannel_1").show();
+                      $("#ip_pannel_2").hide();
+                  });
+                  $("#ip_set_2").click(function(){
+                      $("#ip_pannel_1").hide();
+                      $("#ip_pannel_2").show();
+                  });
+                  </script>
+                  
+                  <div id="ip_pannel_1" class="pdomcon">手动输入白名单(每行一个)
+                  	<textarea style="margin: 2px; padding: 5px; height: 125px; width: 725px;" name="_include_ip" style="width:100%;height:100%">{if !empty($group->include_ip)}{implode("\n",$group->include_ip)}{/if}</textarea>
+				  </div>
+                  <div id="ip_pannel_2" class="pdomcon" style="display:none">手动输入黑名单(每行一个)
+	                  <textarea style="margin: 2px; padding: 5px; height: 125px; width: 725px;" name="_exclude_ip" style="width:100%;height:100%">{if !empty($group->exclude_ip)}{implode("\n",$group->exclude_ip)}{/if}</textarea>
+				  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('pip')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('pip')" /></span>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <!--遮罩pop end-->
+
+          <!--遮罩pop start-->
+          <!--<dt>ADSL黑白名单：</dt> -->
+          <label class="irad" for="adsl_black"><span class="sbtng"><input name="xzmt" id="adsl_black" type="button"  onClick="ShowDIV('padsl')" class="ibtng" value="Email黑白名单"/></span></label>
+          
+          <!--遮罩pop start-->
+          <!--div id="BgDiv"></div-->
+          <div id="padsl" class="popdiv pop_domain" style="display:none">
+            <div class="dbg">
+              <div class="pmain">
+              <div class="ptit">
+                <div class="ptname">Email黑白名单</div>
+                <div class="ptclose"><a href="javascript:;" id="btnClose" onClick="closeDiv('padsl')"><img src="/baichuan_advertisement_manage/assets_admin/img/i_close.png" alt="关闭" /></a></div>
+              </div>
+              <div class="dcon">
+                  <div class="clear">
+                    <div class="fl">
+                      <span class="sbtng">        <input id="adsl_set_1" type="button" class="ibtng" value="白名单"  /></span>
+                      <span class="sbtng ml15">   <input id="adsl_set_2" type="button" class="ibtng" value="黑名单" /></span>
+                    </div>
+                  </div>
+                  <script>
+                  $("#adsl_set_1").click(function(){
+                      $("#adsl_pannel_1").show();
+                      $("#adsl_pannel_2").hide();
+                  });
+                  $("#adsl_set_2").click(function(){
+                      $("#adsl_pannel_1").hide();
+                      $("#adsl_pannel_2").show();
+                  });
+                  </script>
+                  
+                  <div id="adsl_pannel_1" class="pdomcon">手动输入白名单(每行一个)。<br />
+                  <textarea style="margin: 2px; padding: 5px; height: 125px; width: 725px;" name="_include_adsl" style="width:100%;height:100%">{if !empty($group->include_adsl)}{implode("\n",$group->include_adsl)}{/if}</textarea></div>
+                  <div id="adsl_pannel_2" class="pdomcon" style="display:none">手动输入黑名单。<br />
+                  	<textarea style="margin: 2px; padding: 5px; height: 125px; width: 725px;" name="_exclude_adsl" style="width:100%;height:100%">{if !empty($group->exclude_adsl)}{implode("\n",$group->exclude_adsl)}{/if}</textarea>
+				  </div>
+                  
+                  <div class="dpbtn">
+                    <div class="fr">
+                      <span class="sbtnb ml30"><input name="" type="button" class="ibtnb" value="确定" onClick="closeDiv('padsl')" /></span>
+                      <span class="sbtng ml15"><input name="" type="button" class="ibtng" value="取消" onClick="closeDiv('padsl')" /></span>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+         </dd>
+        </dl>
+{/if}
+          <!--遮罩pop end-->
+      <script type="text/javascript">
+      //$(document).ready(function(){
+          
+          $(".accordion .rqltit:first").addClass("active");
+          $(".accordion .rqlcon:not(:first)").hide();
+      
+          $(".accordion .rqltit input").click(function(){
+          });
+          $(".accordion .rqltit").click(function(e){
+                  var element = e.target.nodeName.toLowerCase();
+                  if(element=="input"){
+                      $(e.target).parents(".rqltit").siblings('.rqlcon').find("input").prop("checked",$(e.target).prop("checked"));
+                  }else{
+                      $(this).next(".rqlcon").slideToggle("fast").siblings(".rqlcon").slideUp("fast");
+                      $(this).toggleClass("active");
+                      $(this).siblings(".rqltit").removeClass("active");
+                  }
+          });
+      
+      //});
+      </script>
+{*
+      <dl>
+        <dt>人群选择：</dt>
+        <dd>
+            <label for="rqmt"><input id="rqmt" name="rqmt" type="radio" />按标准人群</label>
+            <input name="media_value" id="media_value" type="hidden" value=""/>
+            <input name="media_label" id="media_label" type="hidden" value=""/>
+            <!--人群定向新版 -->
+            <div id="pdomain_3" class="popdiv pop_domain" style="display:none">
+                {include "v2/ad/cate_host.tpl"}
+            </div>
+        </dd>
+        <dd>
+        
+        </dd>
+        <dd>
+        <label for="rqdy"><input id="rqdy" name="rqmt" {if $groups->colum1 != 1} checked {/if} type="radio" />按定义人群</label>
+        <script type="text/javascript">
+            $("#rqmt").click(function(){
+                $("#pdomain_3").show();
+                $("#zdyrq").hide();
+            });
+            $("#rqdy").click(function(){
+                $("#zdyrq").show();
+                $("#pdomain_3").hide();
+            });
+        </script>
+        <div id="zdyrq" style="display:none">
+        {$i=1}
+        {foreach($crowds->items as $crow)}
+        {if $i%4==1 && $i>4}<br />{/if}
+        <label class="rqxz" for="mrf{$i}"><input name="crow[]" id="mrf{$i++}" type="checkbox" 
+        {if(!empty($group->policys))}
+        {foreach $group->policys as $policy}
+        {if $policy->herd_id==$crow['id']}checked{/if}
+        {/foreach}
+        {/if}
+        value="{$crow['id']}"/>&nbsp;{$crow['name']}</label>
+        {/foreach}
+        </div> 
+        </dd>
+      </dl>
+
+*}
+
+      <h2>关键词定向</h2>
+      <dl>
+        <dt>{*输入关键词<br/>逗号分开*}</dt>
+
+        <dd>
+            <textarea class="itxt" style='margin: 0px; width: 566px; height: 74px;' name="keyword_list">{$group->keyword_list}</textarea>
+        </dd>
+      </dl>
+    </div>
+    
+    
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+{if !empty($group_id)}
+            <input name="" type="submit" class="ibtnb" value="保存"/>
+{else}
+            <input name="" type="submit" class="ibtnb" value="保存并继续"/>
+{/if}
+          </span>
+{if empty($group_id)}
+          <span class="slink ml30"><a href="/baichuan_advertisement_manage/ad.plan.add.{$plan_id}">&lt;&lt; 返回上一步</a></span>
+{/if}
+        </dd>
+      </dl>
+    </div>
+    
+    </form>
+  </div>
+</div>
+
+{part "/main.main.footer"}
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<!--main-->
+<style>
+.selMenu ul{
+	z-index:999;
+}
+</style>
+<div class="main">
+  <div class="side">
+{part "/ad.plan.listpart"}
+  </div>
+  <!--mcon start-->
+  <div class="mcon">
+
+    <!--toolbar-bc start-->
+    <div class="toolbar-bc fl">
+      <div id="leixing" class="selMenu smjh">
+        <span class="smtit">所有广告计划</span>
+        <ul>
+{foreach $plans2 as $_plan}
+          <li><a href="/baichuan_advertisement_manage/ad.plan.list.{$_plan->plan_id}">{$_plan->plan_name}</a></li>
+{/foreach}
+        </ul>
+      </div>
+     <script>
+	 $(document).ready(function(){
+    var sd = $("#startdate").add("#startdate2").datepicker({ dateFormat: "yy-mm-dd"})
+    var ed = $("#enddate").add("#enddate2").datepicker({ dateFormat: "yy-mm-dd"})
+    if("{$start|default:0}") ed.datepicker( "option", "minDate", "{$start}" );
+    if("{$end|default:0}") sd.datepicker( "option", "maxDate", "{$end}" );
+	 });
+     </script>
+      <div class="selMenu ml10">
+        <div class="smtbg bg-eee">
+          <input type="text" class="itxt_1 fl idate" id="startdate" value="{$start|default:'开始时间'}" size="15" />
+          <input type="text" class="itxt_1 fl idate" id="enddate" value="{$end|default:'结束时间'}" size="15" />
+        </div>
+      </div>
+
+      <div class="tbGroup ml10">
+	  <style>
+	  .tbgBtn{
+		cursor:pointer;
+	  }</style>
+        <span id="r_menu" class="tbgBtn">
+          <a id="r_today" class="tbgba">今天</a>
+          <a id="r_yesterday" class="tbgba">昨天</a>
+          <a id="r_week" class="tbgba">本周</a>
+          <a id="r_lastweek" class="tbgba">上周</a>
+          <a id="r_month" class="tbgba">本月</a>
+          <a id="r_lastmoth" class="tbgba nobr">上月</a>
+        </span>
+      </div>
+
+      <div class="selMenu ml10">
+        <div class="smtbg bg-eee">
+        趋势指标：
+          <label for="mrf">					<input name="rqxz" readonly checked id="mrf" type="checkbox" value="" /> 展示量</label>
+          <label class="ml10"  for="mr">	<input name="rqxz" readonly checked id="mr" type="checkbox" value="" /> 点击量</label>
+          <label class="ml10"  for="jpf">	<input name="rqxz" readonly checked id="jpf" type="checkbox" value="" /> 花费</label>
+        </div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+    <!--toolbar-bc end-->
+
+    <div class="chartCon" style="margin-top:12px;">
+      <div class="chartShow" style="height:400px" id="chartShow">{*<img src="/baichuan_advertisement_manage/assets_admin/img/tmp_chart.gif" />*}</div>
+    </div>
+
+	<script>
+	var paras={ };
+	paras.start="{$start}";
+	paras.end="{$end}";
+    paras.id = "{$id}";
+	//$(document).ready(function(){
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d');}"){
+			$("#r_today").addClass('sel');
+		}
+		if(paras.start==paras.end && paras.end=="{date('Y-m-d',time()-3600*24);}"){
+			$("#r_yesterday").addClass('sel');
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-1 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('+0 week Sunday'));}"){
+			$("#r_week").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',strtotime('-2 week Monday'))}" && paras.end=="{date('Y-m-d',strtotime('-1 week Sunday'));}"){
+			$("#r_lastweek").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}" && paras.end=="{date('Y-m-d',time());}"){
+			$("#r_month").addClass("sel");
+		}
+		if(paras.start=="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}" && paras.end=="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}"){
+			$("#r_lastmoth").addClass("sel");
+		}
+
+	//});
+  function setV(){
+	  $("#startdate").val(paras.start);
+	  $("#enddate").val(paras.end);
+	  location="/ad.plan?start="+paras.start+"&end="+paras.end+"&uid="+paras.id;
+  }
+	$("#r_menu a").click(function(){
+			$(this).parent().find("A").removeClass("sel");
+			$(this).addClass("sel");
+	});
+	$("#startdate").change(function(){
+			paras.start=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#enddate").change(function(){
+			paras.end=$(this).val();
+			setV();
+			//report("#chartShow",paras);
+	});
+	$("#r_today").click(function(){
+		paras.start="{date('Y-m-d');}";
+		paras.end="{date('Y-m-d');}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_yesterday").click(function(){
+		paras.start="{date('Y-m-d',time()-3600*24);}";
+		paras.end="{date('Y-m-d',time()-3600*24);}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_week").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-1 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('+0 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastweek").click(function(){
+		paras.start="{date('Y-m-d',strtotime('-2 week Monday'))}";
+		paras.end="{date('Y-m-d',strtotime('-1 week Sunday'));}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_month").click(function(){
+		paras.start="{date('Y-m-d',mktime(0,0,0,date('m'),1,date('Y')))}";
+		paras.end="{date('Y-m-d',time());}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	$("#r_lastmoth").click(function(){
+		paras.start="{date('Y-m-d',mktime(0, 0 , 0,date('m')-1,1,date('Y')))}";
+		paras.end="{date('Y-m-d',mktime(23,59,59,date('m') ,0,date('Y')))}";
+		setV();
+		//report("#chartShow",paras);
+	});
+	//report("#chartShow",paras);
+	report_echarts("chartShow",paras);
+	</script>
+
+
+    <!--toolbar-bc start-->
+    <div class="toolbar-bc">
+
+      <div id="zhuantai" class="selMenu smzt">
+        <span class="smtit">
+			{if $status==1}已启动
+			{elseif $status==2}已暂停
+			{elseif $status==3}非投放时间
+			{elseif $status==4}已删除
+            {elseif $status==5}冻结
+			{elseif $status==6}没预算
+			{elseif $status==7}已停止
+			{else}所有状态{/if}</span>
+        <ul id="status">
+          <li><a status="0">所有状态</a></li>
+          <li><a status="1">已启动</a></li>
+          <li><a status="2">已暂停</a></li>
+		  <li><a status="3">非投放时间</a></li>
+		  <li><a status="4">已删除</a></li>
+          <li><a status="5">冻结</a></li>
+		  <li><a status="6">没预算</a></li>
+		  <li><a status="7">已停止</a></li>
+        </ul>
+      </div>
+
+      <div class="selMenu ml30">
+        <div class="smtbg">
+          <input type="text" class="itxt_1 fl idate" id="startdate2" value="{$start|default:'开始时间'}" size="15" />
+          <input type="text" class="itxt_1 fl idate" id="enddate2" value="{$end|default:'结束时间'}" size="15" />
+        </div>
+      </div>
+	  <script>
+	var paras2={ };
+	paras2.start="{$start}";
+	paras2.end="{$end}";
+	paras2.status="{$status}";
+	paras2.uid="{$userId}";
+	function reload(){
+		location="/ad.plan?start="+paras2.start+"&end="+paras2.end+"&status="+paras2.status+"&uid="+paras2.uid;
+	}
+	$("#status a").click(function(){
+			paras2.status=$(this).attr("status");
+			reload();
+	});
+	  $("#startdate2").change(function(){
+			  paras2.start=$(this).val();
+			  reload();
+	});
+	  $("#enddate2").change(function(){
+			  paras2.end=$(this).val();
+			  reload();
+	});
+	  </script>
+
+      <div class="tbGroup ml30">
+        <span class="tbgBtn">
+          <a type="start" class="status-change tbgiba"  title="启动"><i class="fa fa-play"></i></a>
+          <a type="stop" class="status-change tbgiba nobr"  title="暂停"><i class="fa fa-pause"></i></a>
+          <a type="del" class="status-change tbgiba nobr" title="删除"><i class="fa fa-trash-o"></i></a>
+          <a type="terminated" class="status-change tbgiba nobr" title="停止"><i class="glyphicon glyphicon-remove"></i></a>
+        </span>
+		</div>
+      <div style="float:right" class="tbGroup ml30">
+        <span >
+		<a href="#"  style="padding-left:10px;padding-right:10px;height: 33px; line-height: 33px; font-size: 12px;" class="nobr" onclick="tableToExcel('report_dat','数据报表');return false;">导出</a>
+        </span>
+      </div>
+      <script>
+      $(document).ready(function(){
+		$(".status-change").click(function(){
+			var checked = $(".reportab input:checkbox:checked[value]");
+			var type=$(this).attr("type");
+			if(checked.size()<=0){
+				layer.msg('请选择广告计划');
+			}else{
+			  var msg="确认执行此操作？";
+			  if(type=="terminated"){
+			    msg="点击停止按钮后该广告计划将终止投放,"+msg;
+			  }
+			  var planid=[],isAllstop = false,isAllStart=false;
+			  checked.each(function(i,item){
+          if(type === "terminated" && $(item).attr("data-type") === "7"){
+            isAllstop = true;
+            return false;
+          }
+          else if (type === "start" && $(item).attr("data-type") === "7"){
+            isAllStart = true;
+            return false;
+          }
+          planid.push($(item).val());
+        })
+        if(isAllstop){
+          layer.msg("已停止的广告计划不能重复提交");
+          return;
+        }
+        if(isAllStart){
+          layer.msg("已停止的广告计划无法启动");
+          return;
+        }
+				var index = layer.confirm(msg, function(){
+					$.ajax({
+						type: "POST",
+						url: "/ad.plan.status."+type,
+						data: { plan_ids:planid },
+						dataType:"json",
+						success: function(msg){
+							location.reload();
+						},
+						error:function(msg){
+							alert('更新失败：请检查是否有权限。');
+						}
+					});
+				});
+			}
+			return false;
+		});
+	});
+      </script>
+      <div class="clear"></div>
+    </div>
+    <!--toolbar-bc end-->
+
+    <table id="report_dat" width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" class="checkall" id="checkedAll" type="checkbox"/></th>
+        <th>广告计划</th>
+        {if $currentUserName == 'admin'}
+        <th>创建者</th>
+        <th>广告主</th>
+        {/if}
+        <th>总预算</th>
+		<th>日预算</th>
+        <th>状态</th>
+		<th>审核</th>
+        <th>类型</th>
+        <th>有效期</th>
+        <th class="tac">展现数</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <!-- <th class="tac"> 差额</th> -->
+        <th class="tac">总费用</th>
+        <th class="tac">设置</th>
+      </tr>
+{foreach $plans2 as $_plan}
+	{if(isset($_plan->billing_type) && $_plan->billing_type == 1)}
+		{$_plan->budget_total = $_plan->total_cpc;}
+	{else}
+		{$_plan->budget_total = $_plan->total_cpm;}
+	{/if}
+      <tr>
+        <td class="tac"><input name="plan_id[]" type="checkbox" value="{$_plan->plan_id}" data-type="{$_plan->enable}"/></td>
+        <!--<td style="max-width: 170px;overflow:hidden;word-wrap:break-word;word-break:break-all;white-space:normal;"><a href="/baichuan_advertisement_manage/ad.plan.list.{$_plan->plan_id}" title="{$_plan->plan_name}">{$_plan->plan_name}</a></td>-->
+        <td style="max-width: 135px;overflow:hidden;word-wrap:break-word;word-break:break-all;white-space:normal;"><a href="/baichuan_advertisement_manage/ad.plan.list.{$_plan->plan_id}" title="{$_plan->plan_name}">{$_plan->plan_name}</a></td>
+        {if $currentUserName == 'admin'}
+        <td style="max-width: 70px;overflow:hidden;word-wrap:break-word;word-break:break-all;white-space:normal;"><span>{$_plan->creator_name}</span></td>
+        <td style="max-width: 80px;overflow:hidden;word-wrap:break-word;word-break:break-all;white-space:normal;"><a href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$_plan->uid}">{$_plan->user_name}</a></td>
+        {/if}
+        <td>{if $_plan->budget_total==-1}不限{else}{$_plan->budget_total}{/if}</td>
+        <td>{if $_plan->budget==-1}不限{else}{$_plan->budget}{/if}</td>
+        <td>{if $_plan->enable==1}已启动
+          {elseif $_plan->enable==2}已暂停
+          {elseif $_plan->enable==3}非投放时间
+          {elseif $_plan->enable==4}已删除
+          {elseif $_plan->enable==5}冻结
+          {elseif $_plan->enable==6}预算不足
+          {elseif $_plan->enable==7}已停止
+          {/if}</td>
+		<td>{if $_plan->verified_or_not==1}待审{elseif $_plan->verified_or_not==2}通过{elseif $_plan->verified_or_not==3}未通过{else}未提交{/if}</td>
+        <td>{if $_plan->billing_type==1}CPC{else}CPM{/if}</td>
+        <td>{$_plan->start_date|default:'未设置'} - {$_plan->end_date|default:"未设置"}</td>
+        <td class="tac">{number_format($_plan->report->show,1,".",",")}</td>
+        <td class="tac">{$_plan->report->click}</td>
+        <td class="tac">{if(!empty($_plan->report->show))}{round($_plan->report->click*100/$_plan->report->show,3)}%{/if}</td>
+        <!--td class="tac">{$_plan->report->push}</td-->
+        <!-- <td class="tac">{number_format($_plan->report->cost-$_plan->report->click * $_plan->cpc，2,".",",")}元</td>  -->
+        <td class="tac">{number_format($_plan->report->cost,2,".",",")}元</td>
+        <td class="tac"><a href="/baichuan_advertisement_manage/ad.plan.add.{$_plan->plan_id}">设置</a></td>
+      </tr>
+{/foreach}
+    </table>
+
+    <div class="cp-table-footer">
+      <div style="color:black">每页显示</div>
+      <select id="pageSel" class="pageSel">
+        <option value="5"  {if($pageSel=="5")} selected {/if}>5</option>
+        <option value="10" {if($pageSel=="10")} selected {/if}>10</option>
+        <option value="20" {if($pageSel=="20")} selected {/if}  {if(!isset($pageSel))} selected {/if}>20</option>
+        <option value="50" {if($pageSel=="50")} selected {/if}>50</option>
+        <option value="100" {if($pageSel=="100")} selected {/if}>100</option>
+      </select>
+      <div class="cp-page-select">
+        <ul class="cp-page-ul">
+          {if($pageNum<4)}
+          <li><a {if($pageNum==1)}style="background:white;color:black" {/if} {if(!isset($pageNum))}style="background:white;color:black" {/if} {if($maxPage<1)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=1&pageSel={$pageSel}&key={$key}">1</a></li>
+          <li><a {if($pageNum==2)}style="background:white;color:black" {/if} {if($maxPage<2)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=2&pageSel={$pageSel}&key={$key}">2</a></li>
+          <li><a {if($pageNum==3)}style="background:white;color:black" {/if} {if($maxPage<3)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=3&pageSel={$pageSel}&key={$key}">3</a></li>
+          <li><a {if($pageNum==4)}style="background:white;color:black" {/if} {if($maxPage<4)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=4&pageSel={$pageSel}&key={$key}">4</a></li>
+          <li><a {if($pageNum==5)}style="background:white;color:black" {/if} {if($maxPage<5)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=5&pageSel={$pageSel}&key={$key}">5</a></li>
+          <li><a {if($maxPage<6)}style="display:none;"{/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">&raquo;</a></li>
+          {else}
+          <li><a  href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-1}&pageSel={$pageSel}&key={$key}">&laquo;</a></li>
+          <li><a  href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-2}&pageSel={$pageSel}&key={$key}">{$pageNum-2}</a></li>
+          <li><a  href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-1}&pageSel={$pageSel}&key={$key}">{$pageNum-1}</a></li>
+          <li><a style="background:white;color:black"  {if($maxPage<$pageNum)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum}&pageSel={$pageSel}&key={$key}">{$pageNum}</a></li>
+          <li><a {if($maxPage<$pageNum+1)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">{$pageNum+1}</a></li>
+          <li><a {if($maxPage<$pageNum+2)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+2}&pageSel={$pageSel}&key={$key}">{$pageNum+2}</a></li>
+          <li><a {if($maxPage<$pageNum+1)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">&raquo;</a></li>
+          {/if}
+        </ul>
+      </div>
+    </div>
+
+    <!--turnpage start-->
+{*
+    <div class="turnpage">
+      <a href="#"><em>&lt;&lt;</em>上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页<em>&gt;&gt;</em></a>
+    </div>
+	*}
+    <!--turnpage end-->
+{*
+    <div class="toolbar-bc">
+      <span class="sbtng fl"><a class="ibtng" href="#">查看已归档的广告计划</a></span>
+      <div class="tbGroup ml30">
+        <span class="tbgBtn"><a class="tbgiba nobor" href="#" title="启动"><i class="iplay"></i></a></span>
+      </div><div class="clear"></div>
+    </div>
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告计划</th>
+        <th>状态</th>
+        <th>有效期</th>
+        <th class="tac">日预算</th>
+        <th class="tac">展现数</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总费用</th>
+        <th class="tac">平均点击成本</th>
+        <th class="tac">报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>农夫山泉推广</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>巧乐兹促销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>大众汽车推广</td>
+        <td>启用</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>加多宝品牌营销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td class="tac"><a href="#">下载</a></td>
+      </tr>
+    </table>
+   *}
+
+  </div>
+  <!--mcon end-->
+
+</div>
+
+
+
+{part "/main.main.footer"}
+<script type="text/javascript">
+// 控制report_dat的Theader在鼠标滚动时，固定在页面顶部
+//	   $(document).ready(function(){
+//			 var first  = $('#report_dat tr').eq(0);
+//			 //theaderfixed后宽度改变了，需要通过其他tr的td负值给theader里的th
+//			 var second = $('#report_dat tr').eq(1);
+//				//  table宽度
+//			 var w = $('#report_dat').width();
+//
+//		 	$(window).scroll( function() {
+//		 		if($(document).scrollTop() > 600){
+//					//  theader定位在top时th的宽度
+//					 var changeWidth = second.children();
+//					 changeWidth.each(function(i,v){
+//						 //获取第一个theader里面的th
+//					// console.log(first.children().eq(i));
+//							first.children().eq(i).width( v.offsetWidth);
+//							// console.log(v.offsetWidth)
+//						})
+//				first.css("position","fixed").css("top",0).css("width",w);
+//		 		}else{
+//					first.eq(0).css("position","static");
+//				}
+//		 	});
+//		 });
+
+//分页
+$(function(){
+  $("#pageSel").change(function(){
+    var pageSel = $(this).children('option:selected').val();
+    location="/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=1&pageSel="+pageSel+"&key={$key}";
+  });
+});
+</script>
+</body>
+</html>

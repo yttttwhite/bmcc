@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        {part "/main.main.header"}
+    </head>
+    <body class="w-auto">
+        <div class="container-content p-0 mt-20">
+            <div class="panel panel-white" style="margin:0;">
+                <div class="panel-body">
+                    <form method="post" action="{$url['formAction']}">
+                    	<input type="text" name="plan_id" value="{$get['plan_id']}" readonly="readonly" style="display:none;">
+                        <div id="panel_stuff" class="tab-pane fade  in  active">
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-100 control-label text-34" for="form-field-1">设置状态</label>
+                                    <div class="col-sm-9">
+                                    	<select class="form-control" name="status">
+                                    		{foreach($staus as $statusCode => $statusName)}
+                                    		<option value="{$statusCode}">{$statusName}</option>
+											{/foreach}
+                                    	</select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                    <label class="col-sm-2 w-100 control-label text-34" for="form-field-1">备注</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="text" placeholder="选填" id="form-field-1" rows="10" class="form-control" name="remark"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-10">
+                                <div class="form-group">
+                                	<label class="col-sm-2 w-100 control-label text-34" for="form-field-1"></label>
+                                	<div class="col-sm-9">
+                                    	<button type="submit" name="submit" class="btn btn-success btn-squared btn-sm w-100 fr">提交</button>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>

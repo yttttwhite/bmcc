@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+    <!--side-->
+    <div class="side">
+        {part ("/admin.system.left")} 
+    </div>
+    <!--mcon start-->
+    <div class="mcon">
+    	<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+			<thead>
+				<tr>
+					<th>ID</th>
+			        <th>类型</th>
+					<th>标签名称</th>
+			        <th>覆盖人数</th>
+			        <th>更细频率</th>
+			        <th>SQL语句</th>
+			        <th>状态</th>
+			        <th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach $tags as $tag}
+				      <tr>
+				        <td>{$tag['id']}</td>
+				        <td>{$tagType[$tag['type']]}</td>
+				        <td>{$tag['name']}</td>
+				        <td>{$tag['coverage']}</td>
+				        <td>{$tag['feq']}</td>
+				        <td>{$tag['sql_string']}</td>
+				        <td>{if($tag['enabled']==1)}启用{else}停用{/if}</td>
+				        <td>
+				        	<a href="/baichuan_advertisement_manage/tag.area.edit?id={$tag['id']}">管理</a>
+				        </td>
+				      </tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</div>
+</div>
+<script>
+;
+function deleteUserByUid(uid){
+    var msg = "确认禁用该用户？";
+    var url = "/admin.user.delete?uid=" + uid;
+    layerConfirmGet(url, msg);
+}
+</script>
+{part "/main.main.footer"}
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {part "/main.main.header"}
+</head>
+<body class="w-auto">
+<div class="container-content p-0 mt-20">
+    <div class="panel panel-white mtb-0">
+        <div class="panel-body">
+            {if(is_array($addResult['success']))}
+            <h4 class="mb-30">以下内容添加成功：</h4>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>已添加内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach ($addResult['success'] as $item)}
+                <tr>
+                    <td>{$item}</td>
+                </tr>
+                {/foreach;}
+                </tbody>
+            </table>
+            {/if}
+
+            {if(is_array($addResult['exist']))}
+            <h4 class="mb-30">以下内容在较早之前已经存在：</h4>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>已存在内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach ($addResult['exist'] as $item)}
+                <tr>
+                    <td>{$item}</td>
+                </tr>
+                {/foreach;}
+                </tbody>
+            </table>
+            {/if}
+            {if(isset($referer) && $referer !== 0)}
+            <a class="btn btn-squared btn-success btn-x-30 fr ml-30" href="{$referer}">返回</a>
+            {/if}
+            <a class="btn btn-squared btn-danger btn-x-30 fr" onclick="top.location.reload();">刷新页面</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

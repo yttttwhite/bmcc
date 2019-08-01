@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+<style>
+input.itxt{
+}
+</style>
+</head>
+<body>
+{part "/main.main.nav.admin"}
+
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  {part ("/admin.main.nav.user.add")} 
+
+
+  </div>
+  
+
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/account">账户管理</a>&nbsp;&gt;&nbsp;修改信息</div>
+    <!--<h1 class="mtit">修改信息</h1>-->
+{if !empty($error)}<h1 class="mtit">{$error}</h1>{/if}
+    <!--基本信息-->
+	<form action="/admin.user.edit.{$user->uid}" method="post">
+	<input type="hidden" name="uid" value="{$user->uid}" />
+    <div class="comForm">
+      <dl>
+        <dt>账号名称：</dt>
+        <dd><input type="text" class="itxt" size="30" name="user_name" value="{$user->user_name}"/></dd>
+      </dl>
+      <dl>
+        <dt>账户密码：</dt>
+        <dd><input type="password" class="itxt" size="30" name="passwd" value=""/></dd>
+      </dl>
+      <dl>
+        <dt>账户类型：</dt>
+        <dd>
+			{foreach $roles as $id=>$_name}
+			<label for="role{$id}" style="padding-right:20px">
+				<input id="role{$id}" name="roles[]" type="checkbox" {if $user->role&$id}checked{/if} size="30" name="roles" value="{$id}"/>{$_name}</label>
+			{/foreach}
+		</dd>
+      </dl>
+      <dl>
+        <dt>公司网址：</dt>
+        <dd><input type="text" class="itxt" size="30" name="host" value="{$user->host}"/></dd>
+      </dl>
+	  
+	  
+	  <dl>
+        <dt>结算类型：</dt>
+        <dd>
+		<select name="type">
+			<option value="0" {if $user->type==0}selected{/if} >实际花费结算</option>
+			<option value="1" {if $user->type==1}selected{/if} >差价结算方式</option>
+			<option value="2" {if $user->type==2}selected{/if} >固定CPM方式</option>
+			<option value="3" {if $user->type==3}selected{/if} >固定CPC方式</option>
+			</select></dd>
+      </dl>
+	  <dl>
+        <dt>差价率：</dt>
+        <dd><input type="text" class="itxt" size="30" name="diffrate" value="{$user->diffrate}"/></dd>
+      </dl>
+	  <dl>
+        <dt>技术支持费：</dt>
+        <dd><input type="text" class="itxt" size="30" name="supportfee" value="{$user->supportfee}"/></dd>
+      </dl>
+	  <dl>
+        <dt>CPM结算价格：</dt>
+        <dd><input type="text" class="itxt" size="30" name="cpm_charge" value="{$user->cpm_charge}"/></dd>
+      </dl>
+	  <dl>
+        <dt>CPC结算价格：</dt>
+        <dd><input type="text" class="itxt" size="30" name="cpc_charge" value="{$user->cpc_charge}"/></dd>
+      </dl>
+	  
+	  
+	  
+      <dl>
+        <dt>手机：</dt>
+        <dd><input type="text" class="itxt" name="cell_phone" value="{$user->cell_phone}" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>公司地址：</dt>
+        <dd><input type="text" class="itxt" name="address" value="{$user->address}" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>公司邮编：</dt>
+        <dd><input type="text" class="itxt" name="zip_code" value="{$user->zip_code}" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>状态：</dt>
+        <dd>
+			<select name="account_status">
+			<option value="1" {if $user->account_status==1}selected{/if} >正常</option>
+			<option value="2" {if $user->account_status==2}selected{/if}>禁用</option>
+			</select>
+		</dd>
+      </dl>
+    </div>
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb"><input name="" type="submit" class="ibtnb" value="保存"  /></span>
+          <span class="sbtng ml10"><input name="" type="reset" class="ibtng" value="取消"  /></span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+
+
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+  
+    <div class="leftNav">
+      <ul>
+        <li class="nobotbor sel"><a href="/baichuan_advertisement_manage/account">基本信息</a></li>
+      </ul>
+    </div>
+
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="/baichuan_advertisement_manage/account">账户管理</a>&nbsp;&gt;&nbsp;修改信息</div>
+    <h1 class="mtit">修改信息</h1>
+{if !empty($error)}
+<h1 class="mtit"><font color="red">{$error}</font></h1>
+{/if}
+    <!--基本信息-->
+	<form action="/account.main.update" method="post">
+    <div class="comForm">
+      <dl>
+        <dt>账号：</dt>
+        <dd>{$user->user_name}</dd>
+      </dl>
+      <dl>
+        <dt>联系人：</dt>
+        <dd><input type="text" class="itxt" size="30" name="host" value="{$user->host}"/></dd>
+      </dl>
+      <dl>
+        <dt>手机：</dt>
+        <dd><input type="text" class="itxt" size="30" name="cell_phone" value="{$user->cell_phone}"/></dd>
+      </dl>
+	  <dl>
+        <dt>邮箱：</dt>
+        <dd><input type="text" class="itxt" size="30" name="email" value="{$email}"/></dd>
+      </dl>
+      <dl>
+        <dt>公司地址：</dt>
+        <dd><input type="text" class="itxt" size="30" name="address" value="{$user->address}"/></dd>
+      </dl>
+    </div>
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb"><input name="" type="submit" class="ibtnb" value="保存"  /></span>
+          <span class="sbtng ml10"><input name="" type="reset" class="ibtng" value="取消"  /></span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+{part "/main.main.footer"}
+
+</body>
+</html>

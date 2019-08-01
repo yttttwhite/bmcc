@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.slot.list")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <div class="crumbLink"><a href="#">广告位&gt;流量控制</a>&nbsp;&nbsp;</div>
+	  <form action="/media.slot.adnetwork.{$slot['slot_id']}" method="post">
+{*
+    <h1 class="mtit">流量控制</h1>
+    <!--基本信息-->
+    <div class="comForm">
+      <dl>
+        <dt>媒体：</dt>
+        <dd>
+            <select id="selYear">
+              <option>新浪</option>
+            </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>媒体：</dt>
+        <dd>
+            <select id="selYear">
+              <option>新浪</option>
+            </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>网站：</dt>
+        <dd>
+            <select id="selYear">
+              <option>新浪</option>
+            </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>广告位：</dt>
+        <dd>
+            <select id="selYear">
+              <option>新浪</option>
+            </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>广告类型：</dt>
+        <dd>
+            <select id="selYear">
+              <option>.JPG</option>
+            </select>
+        </dd>
+      </dl>
+      <dl>
+        <dt>自运营：</dt>
+        <dd>
+            <select id="selYear">
+              <option>优先</option>
+              <option>托管</option>
+            </select>
+        </dd>
+      </dl>
+      </div>
+
+*}
+    <div class="comForm clear">
+
+      <h1>流量控制-{$slot['slot_name']}</h1>
+      <dl>
+        <dt>投放优先级：</dt>
+        <dd>
+            <select name="priority">
+              <option {if $slot['priority']==1}selected{/if} value="1">自媒体(self meida)</option>
+              <option {if $slot['priority']==2}selected{/if} value="2">网盟(ad network)</option>
+              <option {if $slot['priority']==3}selected{/if} value="3">托管(adexchange)</option>
+            </select>
+        <p class="mt10">优先级比例：<input type="text" name="priority_ratio" value="{$slot['priority_ratio']}" class="itxt" size="12" />
+        <span class="fc7 fs12 ml5">不超过100%</span></p>
+        </dd>
+      </dl>
+{*
+      <dl>
+        <dt>RTB：</dt>
+        <dd><input type="text" class="itxt" size="30" /></dd>
+      </dl>
+*}
+      <dl>
+        <dt>网盟设置：</dt>
+        <dd>
+        <p class="mt10">
+			<b>淘宝设置</b>：
+			<div>
+			投放比例　 : <input type="text" name="network_ratio[1]" class="itxt" size="3" value="{$adnetwork_tanx['network_ratio']}"/>% <br/>
+			广告位代码 : 
+			<textarea style="width:500px;height:50px" name="network_code[1]">{$adnetwork_tanx['network_code']}</textarea>
+			</div>
+        </p>
+        <p class="mt10">
+			<b>Google设置</b>：
+			<div>
+			投放比例　 : <input type="text" class="itxt" name="network_ratio[2]" value="{$adnetwork_google['network_ratio']}" size="3" />% <br/>
+			广告位代码 : 
+			<textarea style="width:500px;height:50px" name="network_code[2]">{$adnetwork_google['network_code']}</textarea>
+			</div>
+        </p>
+        <p class="mt10">
+			<b>Baidu设置</b>：
+			<div>
+			投放比例　 : <input type="text" class="itxt" name="network_ratio[3]" size="3" value="{$adnetwork_baidu['network_ratio']}"/>% <br/>
+			广告位代码 : 
+			<textarea style="width:500px;height:50px" name="network_code[3]">{$adnetwork_baidu['network_code']}</textarea>
+			</div>
+        </p>
+        </dd>
+      </dl>
+    </div>
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

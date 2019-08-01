@@ -1,0 +1,18 @@
+<div>
+<div class="left-nav-title bg-green">
+	<a href="dpc.main.host.{$collection}">全部分组</a>
+</div>
+<div class="left-nav">
+<form id="consumerGroupForm" name="consumerGroup" method="post" action="">
+	<ul>
+	{foreach $groupList as $group}
+		<li>
+			<label>
+				<a href="dpc.main.host.{$collection}?gid={$group['group_id']}">{$group['group_name']}</a>
+			</label>
+		</li>
+	</ul>
+	{/foreach}
+</form>
+</div>
+</div>

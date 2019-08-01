@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>查看账户详情[{$user->user_name}]</title>
+<style>
+    .scll{
+    display:inline-block;
+    width:320px;
+    font-family:STXihei;
+    font-size:16px;
+    margin-left:20px;
+}
+    .hrll{
+    border-top:2px solid gray; 
+    margin-bottom:10px;
+}
+    .dvll{
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+</style>
+</head>
+<body>
+    <div style="width:800px">
+        <h3>• 账户信息</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">账户类型：{$roleList[$user->role_id][name]}</span><span class="scll">当前余额：<strong class="ye">￥{$user->account}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">所属账户：{$creator}</span><span class="scll">累计展示：{$show} CPM</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">用户来源：
+                {if($user->source==1)}默认
+                 {elseif ($user->source==2)}精准营销平台
+                 {elseif ($user->source==3)}直真
+                 {elseif ($user->source==4)}外部DSP
+                 {else}未知
+                 {/if}
+            </span>
+        </div>
+        <div class="dvll">
+            <span class="scll">账户名称：{$user->user_name}</span><span class="scll">累计存款：<strong class="ye">￥{$historyCharge}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">账户状态：{if($user->account_status==1)}正常{elseif($user->account_status==2)}<span style="color:#CC0000;">禁用</span>{/if}</span><span class="scll">累计花费：<strong class="cz">￥{$cost}</strong></span>
+        </div>
+        <div class="dvll">
+            <span class="scll">更新时间：{date('Y-m-d H:i:s',$user->up_time)}</span><span class="scll">创建时间：{date('Y-m-d H:i:s',$user->reg_time)}</span>
+        </div>
+        <div class="dvll">
+            {if ($lastlogin >0)}
+             <span class="scll">最后登录：{date('Y-m-d H:i:s',$lastlogin)}
+            {else}
+            <span class="scll">最后登录：未登录
+            {/if}
+
+        </div>
+    </div>
+    <div style="width:800px">
+        <h3>• 投放概况</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">广告计划：{$planStat['cnt']}个</span><span class="scll">广告总数：{$adStat['cnt']}个</span>
+        </div>
+        <!--<div class="dvll">
+            <span class="scll">未提交计划：{$planStat[0]}个</span><span class="scll">未提交广告：{$adStat[0]}个</span>
+        </div>-->
+        <div class="dvll">
+            <span class="scll">待审计划：{$planStat[1]}个</span><span class="scll">待审广告：{$adStat[1]}个</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">通过计划：{$planStat[2]}个</span><span class="scll">通过广告：{$adStat[2]}个</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">拒绝计划：{$planStat[3]}个</span><span class="scll">拒绝广告：{$adStat[3]}个</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">运行计划：{$planStat['run']}个</span><span class="scll">运行广告：{$adStat['run']}个</span>
+        </div>
+    </div>
+    <div style="width:800px">
+        <h3>• 基本资料</h3>
+        <hr class="hrll">
+        <div class="dvll">
+            <span class="scll">联系人公司名称：{$user->company_name}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">联系人名称：{$user->host}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">联系电话：{$user->cell_phone}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">联系地址：{$user->address}</span>
+        </div>
+        <div class="dvll">
+            <span class="scll">其他备注：{$user->colum2}</span>
+        </div>
+    </div>
+    <div style="width:200px;height:38px;line-height:38px;background-color:green;color:white;margin:20px 150px 0px 150px; text-align:center;cursor:pointer" onclick="window.close();" >关闭</div>
+</body>
+</html>

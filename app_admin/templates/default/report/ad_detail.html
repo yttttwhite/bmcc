@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {part "/main.main.header"}
+    </head>
+    <body class="w-auto">
+        <div class="container-content p-0 mt-20" style="margin:0;padding-bottom:10px;valign:middle;">
+            <div class="panel panel-white" style="margin:0;">
+                <div class="panel-body" style="margin:0;">
+                	<div class="form-group" style="margin:0;">
+                                <table class="table table-striped table-hover table-bordered">
+                                  <tr style="text-align:left;">
+							        <td><label style="font-weight:bold;">广告：</label>{$plan->adname}(ID：{$plan->adid})</td>
+							        <td><label style="font-weight:bold;">广告组：</label>{$plan->group_name}(ID：{$plan->group_id})</td>
+							        <td><label style="font-weight:bold;">广告计划：</label>{$plan->plan_name}(ID：{$plan->plan_id})</td>
+							      </tr>
+							      <tr style="text-align:left;">
+							      	<td><label style="font-weight:bold;">用户名：</label>{$plan->user_name}</td>
+							      	<td><label style="font-weight:bold;">账户状态：</label>{$plan->struserstatus}</td>
+							        <td><label style="font-weight:bold;">账户金额：</label>{$plan->account}</td>
+							      </tr>
+							      <tr style="text-align:left;">
+							      	<td><label style="font-weight:bold;">广告计划状态：</label>{$plan->strenable}</td>
+							        <td><label style="font-weight:bold;">广告计划审核状态：</label>{$plan->isverified}</td>
+							        <td><label style="font-weight:bold;">广告类型：</label>{$plan->stradtype}</td>
+							      </tr>
+							      <tr style="text-align:left;">
+							        <td><label style="font-weight:bold;">广告素材类型：</label>{$plan->strstufftype}</td>
+							        <td><label style="font-weight:bold;">广告素材审核状态：</label>{$plan->stuffisverified}</td>
+							        <td><label style="font-weight:bold;">广告组状态：</label>{$plan->strgroupenable}</td>
+							      </tr>
+							      <tr style="text-align:left;">
+							      	<td><label style="font-weight:bold;">投放周期：</label>{$plan->startdate}至{$plan->enddate}</td>
+							      	<td><label style="font-weight:bold;">投放时间：</label>{$plan->strallday}<br/>{$plan->strintervals}</td>
+							      	<td><label style="font-weight:bold;">投放频次：</label>{$plan->strsmooth}</td>
+							      </tr>
+							      <tr style="text-align:left;">
+							        <td><label style="font-weight:bold;">频次控制：</label>{$plan->strfrequency}</td>
+							        <td><label style="font-weight:bold;">选出广告量：</label>{$plan->selnum}</td>
+							        <td><label style="font-weight:bold;">推送量：</label>{$plan->pushnum}</td>
+							      </tr>
+							      <tr style="text-align:left;">
+							        <td style="margin-top:0px;vertical-align:top"><label style="font-weight:bold;">定向域名：</label><br />{$plan->includehost}</td>
+							        <td style="margin-top:0px;vertical-align:top"><label style="font-weight:bold;">排除域名：</label><br />{$plan->excludehost}</td>
+							        <td><label style="font-weight:bold;">&nbsp;</td>
+							      </tr>
+							      </table>
+					</div>
+					
+          		</div>
+          	</div>  
+        </div>
+    </body>
+</html>

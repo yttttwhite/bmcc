@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.channel.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+{*
+  <script>
+  $(document).ready(function(){
+		  $("#media_select").keyup(function(){
+			  var k = $(this).val();
+			  $("#media option").hide();
+			  $("#media option:contains('"+k+"')").show();
+		  });
+  });
+
+  </script>
+	  *}
+	  
+	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media?nav=2">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+    		<a href="/baichuan_advertisement_manage/media.channel?nav=2">频道专题</a>
+			<i class="fa fa-angle-double-right"></i>
+			{if !empty($channel->channel_id)}修改{else}新建{/if}频道
+    	</div>
+	</div>
+	<form id="formData" action="/media.channel.add{if !empty($channel->channel_id)}.{$channel->channel_id}?nav=2{/if}" method="post" >
+    <!--基本信息-->
+    <div class="comForm" style="border:1px solid #EEEEEE; border-top:none;">
+      <h1>频道信息</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>所属媒体：</dt>
+        <dd>
+            <select id="media_data" {if !empty($media_id)} disabled='disabled' {/if} name="media_id" style="min-width: 250px;" required="required">
+            {foreach($medias as $m)}
+               {if empty($channel->media_id)}
+                <option value="{$m->id}" {if($media_id == $m->id)} selected {/if}>{$m->media_name}</option>
+              {else}
+                <option value="{$m->id}" {if($channel->media_id == $m->id)} selected {/if}>{$m->media_name}</option>
+               {/if}
+            {/foreach}
+            </select>
+
+        </dd>
+        <dd style="color:red;"><b>&nbsp;&nbsp;*</b></dd>
+      </dl>
+
+      <dl>
+        <dt>频道名称：</dt>
+        <dd><input type="text" class="itxt" size="30" name="channel_name" value="{$channel->channel_name}" required="required" /></dd>
+        <dd style="color:red;"><b>&nbsp;&nbsp;*</b></dd>
+      </dl>
+      
+      <dl>
+        <dt>频道标识：</dt>
+        <dd><input type="text" class="itxt" size="30" name="channel_identification" value="{$channel->channel_identification}"/></dd>
+      </dl>
+      <dl>
+        <dt>媒体状态：</dt>
+        <dd>
+            <label><input type="radio" name="channel_status" value="1" {if(isset($channel->channel_status)&&$channel->channel_status==1)} checked {/if}>启用</label>
+            <label><input type="radio" name="channel_status" value="0" {if(isset($channel->channel_status)&&$channel->channel_status==0)} checked {/if}>停用</label>
+        </dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="channel_comment">{$channel->channel_comment}</textarea></dd>
+      </dl>
+	  
+	  <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <!--<input name="" type="submit" class="ibtnb" value="保存"  />-->
+            <input name="" id="save" type="button" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+
+<script>
+
+    $("#save").click(function(){
+//          $("#media_data").find("option:selected").removeAttr("disabled");
+        $("#media_data").removeAttr("disabled");
+        $("#formData").submit();
+    });
+
+</script>
+</body>
+</html>

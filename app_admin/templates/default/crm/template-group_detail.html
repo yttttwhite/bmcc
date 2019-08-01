@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {part "/main.main.header"}
+    </head>
+    <body>
+        {part "/main.main.nav.ad"}<!--main-->
+        <div class="main">
+            <div class="side">
+                {part "/ad.plan.listpart"}
+            </div>
+            <!--mcon start-->
+            <div class="mcon">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs tab-padding tab-space-3 tab-gray" id="myTab4">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#panel_plan">广告计划</a>
+                                </li>
+								<li>
+                                    <a data-toggle="tab" href="#panel_group">广告组</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#panel_stuff">广告素材</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="panel_plan" class="tab-pane fade in active">
+                                </div>
+                                <div id="panel_group" class="tab-pane fade">
+                                </div>
+                                <div id="panel_stuff" class="tab-pane fade">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--mcon end-->
+        </div>
+        {part "/main.main.footer"}
+    </body>
+</html>

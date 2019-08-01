@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{part "/main.main.header"}
+	<!--地图：开始-->
+		<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=4BIXIpoEvRQXOqyb1G5XjNgb9unBWL8T"></script>
+	    <!--加载鼠标绘制工具-->
+	    <script type="text/javascript" src="https://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+	    <link rel="stylesheet" href="https://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+	    <!--加载检索信息窗口-->
+	    <script type="text/javascript" src="https://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+	    <link rel="stylesheet" href="https://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css" />
+	<!--地图：结束-->
+</head>
+<body>
+	{part "/main.main.nav.admin"}
+	<div class="main">
+		<div class="side">
+			{part ("/tag.area.left")}
+		</div>
+		<div id="mcon" class="mcon" style="margin-bottom:0;">
+			<div class="row area-tag-editor">
+				<form action="/ad.preview.entry.1021" method="get" target="_blank">
+					<div class="col-xs-12 form-group">
+						<label class="col-xs-2 control-label" for="area_tag_name" style="width:80px; line-height:30px; padding:0;">商圈名称：</label>
+						<div class="col-sm-5 col-xs-3">
+							<input style="display:none;" id="area_tag_id" type="text" name="id" value="{$areaTag['id']}" placeholder="默认">
+							<input class="form-control input-sm" id="area_tag_name" type="text" name="name" value="{$areaTag['name']}" placeholder="请填写商圈名称">
+						</div>
+						
+						<label class="col-xs-2 control-label" for="area_tag_name" style="width:80px; line-height:30px; padding:0; text-align:right;">有效时间：</label>
+						<div class="col-sm-3 col-xs-1">
+							<select class="form-control input-sm" name="area_valid_time" id="area_valid_time">
+								{for($i=1;$i<24;$i++)}
+								<option value="{$i}" {if($areaTag['area_valid_time'] == $i)}selected="selected"{/if}>{$i}小时</option>
+								{/for}
+								<option value="24" {if($areaTag['area_valid_time'] == 24)}selected="selected"{/if}>1天</option>
+								<option value="72" {if($areaTag['area_valid_time'] == 72)}selected="selected"{/if}>3天</option>
+								<option value="168" {if($areaTag['area_valid_time'] == 168)}selected="selected"{/if}>7天</option>
+							</select>
+						</div>
+						
+						<div class="col-xs-1">
+							<span class="btn btn-sm btn-squared btn-success" onclick="bmap.saveTag()">保存</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="map-search-bar">
+				<input class="form-control input-sm" type="text" id="baidu_map_search" name="baidu_map_search" style="width:240px; float:left; border: 1px solid #AAAAAA;"/>
+				<span class="btn btn-sm btn-squared btn-success" onclick="bmap.search()" style="float:left;">搜索</span>
+				<span class="btn btn-sm btn-squared btn-primary ml-10" id="enterFullScreen" onclick="enterFullScreen()" style="float:left;">全屏</span>
+				<span class="btn btn-sm btn-squared btn-primary ml-10" id="exitFullScreen" onclick="exitFullScreen()" style="float:left; display:none;">退出全屏</span>
+			</div>
+			<div id="map" style="width:100%; height:800px;">
+			</div>
+		</div>
+	</div>
+	{part "/main.main.footer"}
+	<!--地图：开始-->
+		<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/tag_area_map.js"></script>
+		<script>
+			var mapHeight = window.screen.height - 300;
+			$("#map").css("height",mapHeight+"px");			
+			bmap.myOverlay = [new BMap.Point(116.256515, 39.995242), new BMap.Point(116.502579, 39.951893), new BMap.Point(116.256515, 39.866882)];
+			bmap.init('map');
+			{if( isset($areaTag['area_center']) && strlen($areaTag['area_center'])>0 )}
+				bmap.mySetCenter({$areaTag['area_center']});
+			{else}
+				bmap.mySetCenterByCity(bmap);
+			{/if}
+			
+			{if( isset($areaTag['area_info']) && strlen($areaTag['area_info'])>0 )}
+				bmap.loadData({$areaTag['area_info']});
+			{/if}
+			
+			function enterFullScreen(){
+				$("#mcon").attr("class", "mcon map-full-screen");
+				$("#enterFullScreen").hide();	
+				$("#exitFullScreen").show();
+			}
+			function exitFullScreen(){
+				$("#mcon").attr("class", "mcon map-full-screen-exited");
+				$("#enterFullScreen").show();	
+				$("#exitFullScreen").hide();	
+			}
+			
+			$(document).keydown(function(event){
+				switch(event.keyCode) {
+					case 27:
+					    exitFullScreen();
+						break;
+					case 13:
+					    bmap.search();
+						break;
+					default: 
+						"";
+				}
+	        });
+		</script>
+	<!--地图：结束-->
+</body>
+</html>

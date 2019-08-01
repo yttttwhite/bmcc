@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.top_nav {
+    width: 1038px;height: 31px;background: #eeeeee;
+    border:1px solid  #dddddd;
+    margin-left: 198px;
+    cursor: pointer;
+    margin-top:16px;
+    color: #337ab7;
+    line-height: 31px;
+    text-indent: 2em;
+}
+.left_nav {
+    width: 175px;height: 175px;
+    position: absolute;top: 125px;left: 15px;
+    /*border: 1px solid red;*/
+    text-indent: 2em;
+}
+.left_nav ul li {
+    width: 175px;height: 35px;
+    /*border: 1px solid green;*/
+    line-height: 35px;cursor: pointer;
+    position: relative;margin-bottom: 1px;
+}
+.left_nav_1 {
+    background: #dddddd;font-size: 13px;
+    font-weight: bold;color: #111;
+}
+.left_nav_2 {
+    background: #666666;
+    color: #fff;
+}
+.left_nav_3 {
+    background: #dddddd;
+    font-size: 12px;
+    font-weight: bold;
+    color: #111;
+}
+.left_nav_4,.left_nav_5 {
+font-size: 11px;color: #5685bb;
+    background: #eff6fd;
+}
+.left_nav_3,.left_nav_4,.left_nav_5 {
+    display: none;
+}
+.WordCreation_btn {
+    display: inline-block;
+    width: 120px;
+    height: 20px;
+    /*border: 1px solid red;*/
+    margin-top: 5px;
+    line-height: 20px;
+    color: #fff;background: #33cc66;
+    border-radius: 5px;
+    position: relative;left: 625px;
+    transition: all 1s;
+}
+.WordCreation_btn a {
+    color: #fff;
+}
+.WordCreation_btn a:hover {
+    color: #fff;
+}
+.WordCreation_btn:hover {
+    background: #18f260;
+    color: #fff;
+}
+.infoList {
+    width: 1035px;
+    margin-left: 198px;
+    /*border: 1px solid  red;*/
+    /*height: 200px;*/
+    margin-top: 10px;
+}
+.infoList table th,tr,td {
+    text-align: center;
+}
+a.btn_edit,a.btn_del,a.btn_audit {
+    display: inline-block;
+    height: 25px;line-height: 25px;padding: 0 3px;
+    color: #fff;
+    background: #33cc66;transition: all 1s;
+    /*width: ;*/
+}
+a.btn_edit:hover,a.btn_del:hover,a.btn_audit:hover {
+  color: #fff;background: #18F260;
+}

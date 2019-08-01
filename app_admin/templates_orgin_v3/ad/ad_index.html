@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广告投放管理平台</title>
+<link type="text/css" rel="stylesheet" href="../css/style.css" />
+<script src="../js/jquery-1.2.6.pack.js" type="text/javascript"></script> 
+<script type="text/javascript" src="../js/pop.js"></script>
+<script type="text/javascript" src="../js/formSel.js"></script>
+
+<!-- nav -->
+<link href="../css/nav.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/nav/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="../js/nav/new.js"></script>
+</head>
+
+<body>
+
+  <!--top-->
+  <div class="top">
+    <div class="tlogo"><img src="../images/logo.png" alt="广告推广平台" /></div>
+    <div class="tr">
+      <div class="weluser">您好,<strong>Retinas</strong>[<a href="#">退出</a>]</div>
+      <div class="trlink">
+        <a href="#"><img class="fl" src="../images/i_email.gif" alt="消息" /><span class="trlmsg">(10)</span></a>
+        <a href="#"><img src="../images/i_help.gif" alt="帮助"  align="absmiddle" /></a>
+      </div>
+    </div>
+  </div>
+
+  <!--nav-->
+  <div class="nav">
+    <div class="navd"><a href="#" title="首页">首页</a></div>
+    <div class="navd sidelist sel">
+      <h3><em class="harrow"></em><a class="ndl" href="#" title="广告管理">广告管理</a></h3>
+      <div class="i-list">
+        <a href="#">广告计划</a>
+        <a href="#">广告组</a>
+        <a href="#">素材</a>
+      </div>
+    </div>
+    <div class="navd"><a href="#" title="数据中心">数据中心</a></div>
+    <div class="navd"><a href="#" title="人群管理">人群管理</a></div>
+    <div class="navd"><a href="#" title="媒体列表">媒体列表</a></div>
+    <div class="navd"><a href="#" title="财务管理">财务管理</a></div>
+    <div class="navd"><a href="#" title="账户管理">账户管理</a></div>
+    <div class="navd"><a href="#" title="高级管理">高级管理</a></div>
+    <div class="navd"><a href="#" title="运营审核">运营审核</a></div>
+  </div>
+
+<!--main-->
+<div class="main">
+  <div class="side">
+    <div class="addad"><a href="#"></a></div>
+    
+    <div class="adInfo">
+      <h1 class="aitit">广告主数据总览</h1>
+      <div class="aicon">
+         <p>今日花费：<strong class="hf">980</strong> 元</p>
+         <p>账户余额：<strong class="ye">3,890</strong> 元</p>
+         <p>预计消费天数：<strong>10</strong> 天</p>
+         <p>推广广告计划个数：<strong>12</strong> 个</p>
+      </div>
+    </div>
+    
+    
+    
+	<script type="text/javascript">
+    $(document).ready(function(){
+        
+        $(".accordion h3:first").addClass("active");
+        $(".accordion .snav:not(:first)").hide();
+    
+        $(".accordion h3").click(function(){
+            $(this).next(".snav").slideToggle("fast")
+            .siblings(".snav").slideUp("fast");
+            $(this).toggleClass("active");
+            $(this).siblings("h3").removeClass("active");
+        });
+    
+    });
+    </script>
+    
+      <div class="accordion">
+        <h2><a href="#">搜房网全部计划</a></h2>
+        <h3 class="bort">农夫山泉推广</h3>
+        <div class="snav" style="display:block;">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li class="sel"><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+
+        <h3>巧乐兹促销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">华北地区促销</a></li>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>大众汽车推广</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>加多宝品牌营销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+
+        <h3>巧乐兹促销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">华北地区促销</a></li>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>大众汽车推广</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+        
+        <h3>加多宝品牌营销</h3>
+        <div class="snav">
+          <ul>
+            <li><a href="#">电商网站推广</a></li>
+            <li><a href="#">门户网站品牌推广</a></li>
+            <li><a href="#">华北地区促销</a></li>
+            <li class="borb"><a href="#">北京商业赞助</a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  
+    <!--toolbar start--> 
+    <div class="toolbar">
+      <span class="sbtnb"><a class="ibtnb" href="#">新增广告组</a></span>
+      
+      <div id="zhuantai" class="selMenu smzt ml30">
+        <span class="smtit">所有状态</span>
+        <ul>
+          <li><a href="javascript:;">所有状态</a></li>
+          <li><a href="javascript:;">已启动</a></li>
+          <li><a href="javascript:;">已暂停</a></li>
+          <li><a href="javascript:;">已删除</a></li>
+          <li><a href="javascript:;">已锁定</a></li>
+          <li><a href="javascript:;">已暂停</a></li>
+        </ul>
+      </div>
+      
+      <div id="leixing" class="selMenu smlx ml10">
+        <span class="smtit">所有类型</span>
+        <ul>
+          <li><a href="javascript:;">所有类型</a></li>
+          <li><a href="javascript:;">品牌广告</a></li>
+          <li><a href="javascript:;">效果广告</a></li>
+        </ul>
+      </div>
+      
+      <div class="selMenu ml10">
+        <div class="smtbg">
+          <input type="text" class="itxt_1 fl idate" value="2012-05-23" size="15" />
+          <input type="text" class="itxt_1 fl idate" value="结束时间" size="15" />
+        </div>
+      </div>
+      
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgba" href="#">今天</a>
+          <a class="tbgba sel" href="#">昨天</a>
+          <a class="tbgba" href="#">本周</a>
+          <a class="tbgba" href="#">上周</a>
+          <a class="tbgba" href="#">本月</a>
+          <a class="tbgba nobr" href="#">上月</a>
+        </span>
+      </div><div class="clear"></div>
+    </div>
+    <!--toolbar end--> 
+  
+    <div class="chartCon mt20">
+      <div class="chartData">
+        <div class="cdli">时间段：<strong>2013-05-14</strong> 至 <strong>2013-06-12</strong></div>
+        <div class="cdli">展示次数：<strong>980</strong>次</div>
+        <div class="cdli">点击次数：<strong>789</strong>次</div>
+        <div class="cdli">点击率：<strong>32.5%</strong></div>
+        <div class="cdli">费用：<strong>685</strong>元</span></div>
+      </div>
+      <div class="chartShow"><img src="../images/tmp_chart.gif" /></div>
+    </div>
+    
+    <div class="toolbar mt30">
+      <div id="zhuantai" class="selMenu smzt">
+        <span class="smtit">所有状态</span>
+        <ul>
+          <li><a href="javascript:;">所有状态</a></li>
+          <li><a href="javascript:;">已启动</a></li>
+          <li><a href="javascript:;">已暂停</a></li>
+          <li><a href="javascript:;">已删除</a></li>
+          <li><a href="javascript:;">已锁定</a></li>
+          <li><a href="javascript:;">已暂停</a></li>
+        </ul>
+      </div>
+      
+      <div class="selMenu ml10">
+        <div class="smtbg">
+          <input type="text" class="itxt_1 idate fc7" value="2012-05-23" size="15" />
+          <input type="text" class="itxt_1 idate fc7" value="结束时间" size="15" />
+        </div>
+      </div>
+      
+      <div class="tbGroup ml30">
+        <span class="tbgBtn">
+          <a class="tbgiba" href="#"><i class="iplay"></i></a>
+          <a class="tbgiba nobr" href="#"><i class="ipause"></i></a>
+        </span>
+      </div>
+      
+      <div class="tbGroup ml10">
+        <span class="tbgBtn">
+          <a class="tbgiba" href="#"><i class="iset"></i></a>
+          <a class="tbgiba" href="#"><i class="icopy"></i></a>
+          <a class="tbgiba nobr" href="#"><i class="idel"></i></a>
+        </span>
+      </div>
+    </div>
+    <div class="clear"></div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告计划</th>
+        <th>状态</th>
+        <th>有效期</th>
+        <th class="tac">日预算</th>
+        <th class="tac">展现数</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总费用</th>
+        <th class="tac">平均点击成本</th>
+        <th>报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>大众汽车推广</td>
+        <td>启用</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>加多宝品牌营销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td><a href="#">下载</a></td>
+      </tr>
+    </table>
+    
+    <!--turnpage start-->
+    <div class="turnpage">
+      <a href="#"><em>&lt;</em> 上一页</a>
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <span>...</span>
+      <a href="#">65</a>
+      <a href="#">下一页 <em>&gt;</em></a>
+    </div>
+    <!--turnpage end-->
+    
+    
+    <div class="toolbar mt30">
+      <span class="sbtng fl"><a class="ibtng" href="#">查看已归档的广告计划</a></span>
+      <div class="tbGroup ml30">
+        <span class="tbgBtn"><a class="tbgiba nobor" href="#" title="启动"><i class="iplay"></i></a></span>
+      </div><div class="clear"></div>
+    </div>
+    
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reportab mt20">
+      <tr>
+        <th class="tac"><input name="" type="checkbox" value="" /></th>
+        <th>广告计划</th>
+        <th>状态</th>
+        <th>有效期</th>
+        <th class="tac">日预算</th>
+        <th class="tac">展现数</th>
+        <th class="tac">点击数</th>
+        <th class="tac">点击率</th>
+        <th class="tac">总费用</th>
+        <th class="tac">平均点击成本</th>
+        <th>报表</th>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>大众汽车推广</td>
+        <td>启用</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td><a href="#">下载</a></td>
+      </tr>
+      <tr>
+        <td class="tac"><input name="" type="checkbox" value="" /></td>
+        <td>加多宝品牌营销</td>
+        <td>暂停</td>
+        <td>2011.05.26 - 2012.07.15</td>
+        <td class="tac">65</td>
+        <td class="tac">27</td>
+        <td class="tac">185</td>
+        <td class="tac">75</td>
+        <td class="tac">35%</td>
+        <td class="tac">658</td>
+        <td><a href="#">下载</a></td>
+      </tr>
+    </table>
+    
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+
+
+
+<!--版权-->
+<div class="footer">
+  <div class="ftcon">
+    Copyright © 2013 All rights reserved. 设计广告平台有限公司 版权所有<br /> 
+    京ICP证68976143.3号 京公网安备XKD89756号
+  </div>
+</div>
+
+</body>
+</html>

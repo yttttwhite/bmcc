@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.media"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<!--main-->
+
+<!--main-->
+<div class="main">
+  <div class="side">
+  {part ("/media.main.nav.media.add")} 
+  </div>
+  
+  <!--mcon start-->
+  <div class="mcon">
+  	<div class="toolbar-bc fl" style="margin-bottom:13px;">
+    	<div class="fl sub-title sc-title">
+    		<a href="/baichuan_advertisement_manage/media">媒体管理</a>
+			<i class="fa fa-angle-double-right"></i>
+			{if !empty($media_id)}修改{else}新建{/if}
+    	</div>
+    	<div class="fr">
+			<a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/media">媒体列表</a>
+		</div>
+	</div>
+	<form action="/media.main.add{if !empty($media_id)}.{$media_id}{/if}" method="post">
+    <!--基本信息-->
+    <div class="comForm">
+      <h1>新建媒体</h1>
+{if !empty($result)}<h2><font color="red">{$result}</font></h2>{/if}
+      <dl>
+        <dt>媒体名称：</dt>
+        <dd><input type="text" class="itxt" name="web_name" size="30" value="{$media['web_name']}"/></dd>
+        <dd style="display:none" class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>媒体尺寸：</dt>
+        <dd><input type="text" class="itxt" name="size" size="30" value="{$media['size']}"/>类似200x50</dd>
+        <dd style="display:none" class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>域名：</dt>
+        <dd><input type="text" class="itxt" name="domain_name" size="30" value="{$media['domain_name']}"/></dd>
+        <dd style="display:none" class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>位置说明：</dt>
+        <dd><input type="text" class="itxt" name="apspace_name" size="30" value="{$media['apspace_name']}"/></dd>
+        <dd style="display:none" class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>引用pv说明：</dt>
+        <dd><input type="text" class="itxt" name="referencePV" size="30" value="{$media['referencePV']}"/></dd>
+        <dd style="display:none" class="tips_correct"></dd>
+      </dl>
+      <dl>
+        <dt>媒体分类：</dt>
+        <dd>
+			<select name="category" value="{$media['category']}">
+{foreach $categorys->items as $category}
+				<option {if $media['category'] == $category['category']}selected{/if} value='{$category['category']}'>{$category['category']}</option>
+{/foreach}
+			</select>
+		</dd>
+      </dl>
+      <dl>
+        <dt>类型：</dt>
+        <dd>
+			<select name="type" value="{$media['type']}">
+{foreach $types->items as $type}
+				<option {if $media['type']==$type['type']}selected{/if} value='{$type['type']}'>{$type['type']}</option>
+{/foreach}
+			</select>
+		</dd>
+      </dl>
+      <dl>
+        <dt>位置：</dt>
+        <dd>
+			<select name="location" value="{$media['location']}">
+{foreach $locations->items as $location}
+				<option {if $media['location']==$location['location']}selected{/if} value='{$location['location']}'>{$location['location']}</option>
+{/foreach}
+			</select>
+		</dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea name="comment" cols="50" rows="5">{$media['comment']}</textarea></dd>
+      </dl>
+      
+      <h2>媒体联系人</h2>
+      <dl>
+        <dt>姓名：</dt>
+        <dd><input type="text" class="itxt" value="{$media['contact_name']}" name="contact_name" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>邮箱：</dt>
+        <dd><input type="text" class="itxt" value="{$media['contact_email']}" name="contact_email" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>电话：</dt>
+        <dd><input type="text" class="itxt" value="{$media['contact_mobile']}" name="contact_mobile" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>地址：</dt>
+        <dd><input type="text" class="itxt" value="{$media['contact_address']}" name="contact_address" size="70" /></dd>
+      </dl>
+      <dl>
+        <dt>邮编：</dt>
+        <dd><input type="text" class="itxt" value="{$media['contact_zipcode']}" name="contact_zipcode" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>公司网址：</dt>
+        <dd><input type="text" class="itxt" value="{$media['contact_website']}" name="contact_website" size="30" /></dd>
+      </dl>
+      <dl>
+        <dt>备注：</dt>
+        <dd><textarea cols="50" rows="5" name="contact_comment" >{$media['contact_comment']}</textarea></dd>
+      </dl>
+    </div>
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt>
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="保存"  />
+          </span>
+          <span class="sbtng ml20">
+            <input name="" type="reset" onclick="location='/baichuan_advertisement_manage/media.main.add'" class="ibtng" value="取消" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+	</form>
+    
+  </div>
+  <!--mcon end-->
+  
+</div>
+{part "/main.main.footer"}
+</body>
+</html>

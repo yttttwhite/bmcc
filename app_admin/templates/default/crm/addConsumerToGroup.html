@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+	<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+	{part "/main.main.header"}
+	</head>
+	<body>
+		{part "/main.main.nav.ad"}
+		<div class="container-content">
+				<div class="content" style="margin:0;">
+					<div class="content-inside">
+						<form method="post" action="crm.consumer.addConsumerToGroup">
+							<div class="content-line"  style="padding-top:0;">
+								<div class="panel panel-primary w-full">
+									<div class="panel-heading border-light active">
+										<div class="panel-title">
+											选择要添加到的分组：
+										</div>
+									</div>
+									<div class="panel-body partition-white">
+									{foreach $groups as $group}
+										<label class="radio-inline groupRadio">
+											<input type="radio" class="square-red" name="groupRadio" value="{$group['id']}">
+											<span>{$group['name']}</span>
+										</label>
+									{/foreach}
+									</div>
+									<div class="table-footer">
+										<p style="float:left; padding-left:20px;">
+											已经选中{$consumers['count']}位用户，将会被添加所选分组。
+										</p>
+										<input type="text" value="{$consumers['cids']}" readonly="readonly" name="cids"/>
+										<button type="submit" class="btn btn-100-30 btn-success btn-squared" style="float: right; margin-right: 20px;">添加到所选分组</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		<div class="footer"></div>
+		
+		<div id="123" style="width:400px; height:200px; display:none;">
+			<div class="form-container form-addGroup">
+				<form class="form-inline" action="crm.consumer.addGroup" method="post" id="addGroupFrom">
+				<div class="input-group w-230">
+					<input type="text" name="groupName" value="请输入分组名称" class="form-control form-sm"
+						onFocus="if(value==defaultValue) { value='';this.style.color='#000' } "
+						onBlur="if(!value) { value=defaultValue;this.style.color='#999' } "
+					>
+				</div>
+				<input id="addGroupSubmit" type="submit" value="确认添加" class="btn btn-success btn-squared">
+				</form>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function()  {
+			$('input').iCheck( {
+				checkboxClass : 'icheckbox_square-red',
+				radioClass : 'iradio_square-red',
+				increaseArea : '10%'
+			} );
+			
+			
+			$('#addGroup').on('click', function() {
+				layerById(123);
+			} );
+			
+			
+			$('#copyConsumerToGroup').on('click', function() {
+				$("#consumerListForm").attr("action","crm.consumer.addConsumerToGroup");
+				$("#consumerListForm").submit();
+			} );
+			
+		} );
+	</script>
+</html>

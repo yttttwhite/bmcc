@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.ad"}
+<script src="/baichuan_advertisement_manage/assets_admin/highcharts/js/highcharts.js" ></script>
+<script>
+function func(){
+	
+         if( document.getElementById("manager").checked){
+    document.getElementById("js").value = "";
+	document.getElementById('js').disabled=true;
+}else{
+	document.getElementById("js").value = document.getElementById("dm").value;
+    document.getElementById('js').disabled=false;
+}}
+</script>
+<!--main-->
+<div class="main">
+
+  <!--side-->
+  <div class="side">
+  
+        <div class="leftNav">
+      <ul>
+        <li><a href="/baichuan_advertisement_manage/audient">监控管理</a></li>
+        <li class="nobotbor"><a href="/baichuan_advertisement_manage/audient.main.renqun">人群管理</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <script>function func(){
+	
+         if( document.getElementById("manager").checked){
+    document.getElementById("js").value = "";
+	document.getElementById('js').disabled=true;
+}else{
+	document.getElementById("js").value = document.getElementById("dm").value;
+    document.getElementById('js').disabled=false;
+}}
+</script>
+  
+  <!--mcon-->
+  <div class="mcon">
+    <div class="crumbLink"><a href="#">人群管理</a>&nbsp;&gt;&nbsp;<a href="#">监控管理</a>&nbsp;&gt;&nbsp;新增</div>
+    
+    <h1 class="mtit">新增监控管理</h1>
+   <form method="POST">
+    <div class="comForm clear"
+      <dl>
+        <dt>站点名：</dt>
+        <dd><input type="text" class="itxt" size="30" value="我的站点" name="name" /></dd>
+      </dl>
+      <dl>
+        <dt>域名：</dt>
+        <dd><input type="text" class="itxt" size="30" value="example.com" name="domain_name" id="dm"/></dd>
+      </dl>
+      
+      <dl>
+        <dt>是否托管</dt>
+        <dd><input type="checkbox" id="manager" name="manage" value ="1" onclick="func()">托管</dd>
+        </dl>
+					<dl>
+					     <dt>JS服务器</dt>
+						 <dt><input type="text" id="js" class="text_3" name="jsserver" value ="www.example.com" /><br></dt>
+					</dl>
+      
+    </div>
+    
+    
+    <!--btn-->
+    <div class="comForm">
+      <dl>
+        <dt>&nbsp;</dt> 
+        <dd>
+          <span class="sbtnb">
+            <input name="" type="submit" class="ibtnb" value="添加" /><!--onclick="location.href='step_2.html'" />-->
+          </span>
+          <span class="sbtng ml15">
+            <input name="" type="button" class="ibtng" value="取消" onclick="location.href='/audient'" />
+          </span>
+        </dd>
+      </dl>
+    </div>
+    </form>
+  </div>
+</div>
+</div>
+<div class="clear"></div>
+
+{part "/main.main.footer"}
+
+</body>
+</html>

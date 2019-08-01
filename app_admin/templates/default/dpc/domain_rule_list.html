@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
+{part "/main.main.header"}
+</head>
+<body>
+	{part "/main.main.nav.ad"}
+	<div class="container-content">
+		<div class="contianer-left">
+			{part "/dpc.manage.left"}
+		</div>
+		<div class="content">
+			<div class="content-inside">
+				
+				<div class="panel panel-white" style="border:1px solid #EEEEEE;">
+					<div class="panel-heading border-light panel-head-md">
+						<form id="queryFrom" action="{$url['search']}" method="get">
+							<input type="text" name="type" class="form-control input-small"  value="{$get['type']}" style="display:none;"/>
+							<input type="text" name="group_id" class="form-control input-small"  value="{$get['group_id']}" style="display:none;"/>
+							<div class="fl" style="position: relative;">
+								<input type="text" name="key" class="form-control input-small"  placeholder="关键字" value="{$get['key']}"/>
+							</div>
+							<div class="fl" style="position: relative; width:60px; margin-left:10px;">
+								<input type="text" name="perpage" class="form-control input-small"  placeholder="每页" value="{$get['perpage']}"/>
+							</div>
+							<div class="fl" style="position: relative;">
+								<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
+							</div>
+						</form>
+						<a	class="btn btn-sm btn-squared btn-default ml10"  style="position: relative;" href="{$url['search']}">清除关键字</a>
+						<a	class="btn btn-sm btn-squared btn-default"  style="position: relative;"
+							onclick="layerIframe('添加域名分组','/dpc.manage.AddDomainRule?mongo={$mongo}',600,700);">添加</a>
+					</div>
+					<div class="panel-body">
+						<form id="consumerListForm" name="consumerList" method="post"
+						action="">
+							<table class="table table-striped table-hover table-bordered" id="sample-table-2">
+								<thead>
+									<tr>
+										<th class="center">域名</th>
+										<th class="center">规则</th>
+										<th class="center">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									{foreach($list as $groupId=>$item)}
+									<tr>
+										<td style="text-align:left;">{$item['domain']}</td>
+										<td>{$item['rule']}</td>
+										<td class="center">
+											<a onclick="deleteFromMongo('{$item['_id']}')">删除</a>
+										</td>
+										<script>
+											function deleteFromMongo(id){
+												var msg = "确认删除这条数据？";
+												var url = "/dpc.manage.delete?mongo={$mongo}&id="+id;
+												layerConfirmGet(url,msg);
+											}
+										</script>
+									</tr>
+									{/foreach}
+								</tbody>
+							</table>
+						</form>
+						
+                        <div class="text-right">
+                            <ul class="pagination margin-bottom-10">
+                                <li>
+                                    <a href="{$page['url']}page=1">上一页</a>
+                                </li>
+								{for($i = 1; $i<=$page['count']; $i++)}
+                                <li {if($page['current']==$i)}class="active"{/if}>
+                                    <a href="{$page['url']}page={$i}">{$i}</a>
+                                </li>
+								{/for}
+                                <li>
+                                    <a href="{$page['url']}page={$page['count']}">下一页</a>
+                                </li>
+                            </ul>
+                        </div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer"></div>
+
+	<!-- 弹层 -->
+	
+</body>
+<script>
+		$(document).ready(function()  {
+			$('.icheck').iCheck( {
+				checkboxClass : 'icheckbox_minimal-aero',
+				radioClass : 'iradio_minimal',
+				increaseArea : '-10%'
+			} );
+		} );
+	</script>
+</html>

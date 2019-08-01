@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+{part "/main.main.header"}
+</head>
+<body>
+{part "/main.main.nav.admin"}
+<!--main-->
+<div class="main">
+  <!--side-->
+  <div class="side">
+	  {part ("/admin.user.left")} 
+  </div>
+  
+<div class="mcon">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: FORM VALIDATION 1 PANEL -->
+			<div class="panel panel-white">
+				<div class="panel-heading" style="display:none;">
+					<h4 class="panel-title">创建用户</h4>
+				</div>
+				<div class="panel-body" style="padding-right:100px; padding-top: 0;">
+					<form action="/admin.user.edit.{$user->uid}" method="post" role="form" id="form">
+						<div class="row">
+							<div class="col-md-12">
+								{if($error['count']>0)}
+								<div class="errorHandler alert alert-danger">
+									<i class="fa fa-times-sign"></i> 表单包含错误信息，请仔细核对：{$error['msg']}
+								</div>
+								{/if}
+								<div class="errorHandler alert alert-danger no-display">
+									<i class="fa fa-times-sign"></i> 表单包含错误信息，请仔细核对：
+								</div>
+								<div class="successHandler alert alert-success no-display">
+									<i class="fa fa-ok"></i> 表单验证通过!
+								</div>
+							</div>
+							<div class="col-md-4">
+								<h5><i class="fa fa-pencil-square"></i> 账号信息</h5>
+								<hr style="margin:5px 0;">
+								<div class="form-group">
+									<label class="control-label">
+										用户名： <span class="symbol required"></span>
+									</label>
+									<input type="text" placeholder="用来登录系统的用户名" class="form-control" name="user_name" value="{$user->user_name}">
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										账号类型： <span class="symbol required"></span>
+									</label>
+									<select class="form-control" name="role_id">
+						        		{foreach($roleList as $roleId => $role)}
+						        		<option value="{$roleId}" {if($user->role_id==$roleId)}selected="selected"{/if}>{$role['name']}</option>
+										{/foreach}
+						        	</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										设置状态： <span class="symbol required"></span>
+									</label>
+									<select class="form-control" name="account_status">
+						        		<option value="1" {if $user->account_status==1}selected{/if} >正常</option>
+										<option value="2" {if $user->account_status==2}selected{/if}>禁用</option>
+						        	</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										密码： <span class="symbol required"></span>
+										<a href="#" onclick="setPassword()">设置密码</a>
+										<a href="#" onclick="unSetPassword()">不设置密码</a>
+									</label>
+									<input type="password" class="form-control" name="passwd" id="password" disabled="true">
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										确认密码： <span class="symbol required"></span>
+									</label>
+									<input type="password" class="form-control" id="password_again" name="password_again" disabled="true">
+								</div>
+								<script>
+									function setPassword(){
+										$("#password").attr('disabled',false);
+										$("#password_again").attr('disabled',false);
+									}
+									function unSetPassword(){
+										$("#password").attr('disabled',true);
+										$("#password_again").attr('disabled',true);
+									}
+								</script>
+							</div>
+							
+							<div class="col-md-4">
+								<h5><i class="fa fa-pencil-square"></i>  结算信息</h5>
+								<hr style="margin:5px 0;">
+								<div class="form-group">
+									<label class="control-label">
+										结算类型:
+									</label>
+									<select class="form-control" name="type">
+											<option value="0" {if $user->type==0}selected{/if} >实际花费结算</option>
+											<option value="1" {if $user->type==1}selected{/if} >差价结算方式</option>
+											<option value="2" {if $user->type==2}selected{/if} >固定CPM方式</option>
+											<option value="3" {if $user->type==3}selected{/if} >固定CPC方式</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										差价率
+									</label>
+									<input type="text" class="form-control" size="30" name="diffrate" value="{$user->diffrate}"/>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										技术支持费
+									</label>
+									<input type="text" class="form-control" size="30" name="supportfee" value="{$user->supportfee}"/>
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										CPM结算价格
+									</label>
+									<input type="text" class="form-control" size="30" name="cpm_charge" value="{$user->cpm_charge}"/>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-30">
+							<div class="col-md-8">
+								<h5><i class="fa fa-pencil-square"></i> 客户资料</h5>
+								<hr style="margin:5px 0;">
+								<div class="form-group">
+									<label class="control-label">
+										公司/联系人姓名： <span class="symbol required"></span>
+									</label>
+									<input type="text" class="form-control" id="contact"  name="host" value="{$user->host}">
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										电话： <span class="symbol required"></span>
+									</label>
+									<input type="text" class="form-control" id="cellphone" name="cell_phone" value="{$user->cell_phone}"/>
+								</div>
+								<!--
+								<div class="form-group">
+									<label class="control-label">
+										Email： <span class="symbol"></span>
+									</label>
+									<input type="email" class="form-control" id="email" name="email">
+								</div>
+								-->
+								<div class="form-group">
+									<label class="control-label">
+										办公地址：
+									</label>
+									<input type="text" class="form-control" id="address" name="address" value="{$user->address}">
+								</div>
+								<div class="form-group">
+									<label class="control-label">
+										描述：
+									</label>
+									<textarea type="text" class="form-control" row="10" name="colum2">{$user->colum2}</textarea>
+								</div>
+								
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8">
+								<hr>
+								<button class="btn btn-squared btn-success btn-block btn-100-30 fr" type="submit">
+									提交 <i class="fa fa-arrow-circle-right"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- end: FORM VALIDATION 1 PANEL -->
+		</div>
+	</div>
+</div>
+</div>
+<script>
+	$(document).ready(function()  {
+		$('.icheck').iCheck( {
+			//checkboxClass : 'icheckbox_minimal-green',
+			checkboxClass : 'icheckbox_square-green',
+			radioClass : 'iradio_minimal',
+			increaseArea : '-10%'
+		} );
+	} );
+	
+	FormValidator.init();
+</script>
+{part "/main.main.footer"}
+</body>
+</html>
