@@ -24,7 +24,7 @@
             <td>{$item['api_address']}</td>
             <td>{$item['api_charge']}</td>
             <td>
-            	<a href="#" onclick="layerIframe('添加分组','/crm.chudian.add?uid={$item['uid']}&id={$item['id']}',800,400);">修改</a>
+            	<a href="#" onclick="layerIframe('添加分组','/baichuan_advertisement_manage/crm.chudian.add?uid={$item['uid']}&id={$item['id']}',800,400);">修改</a>
 				<a href="#" onclick="deleteChudianById('{$item['id']}')">删除</a>
             </td>
         </tr>
@@ -36,7 +36,7 @@
 ;
 function deleteChudianById(id){
     var msg = "确认删除这条数据？";
-    var url = "/crm.chudian.delete?id=" + id;
+    var url = "/baichuan_advertisement_manage/crm.chudian.delete?id=" + id;
     layerConfirmGet(url, msg);
 }
 </script>

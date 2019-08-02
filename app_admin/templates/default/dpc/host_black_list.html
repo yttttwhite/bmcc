@@ -22,10 +22,10 @@
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li>
-                                <a href="dpc.host.hostlist?mongo={$get['mongo']}&type=1">HOST黑名单</a>
+                                <a href="/baichuan_advertisement_manage/dpc.host.hostlist?mongo={$get['mongo']}&type=1">HOST黑名单</a>
                             </li>
                             <li>
-                                <a href="dpc.host.hostlist?mongo={$get['mongo']}&type=2">HOST白名单</a>
+                                <a href="/baichuan_advertisement_manage/dpc.host.hostlist?mongo={$get['mongo']}&type=2">HOST白名单</a>
                             </li>
                         </ul>
                     </ul>
@@ -41,7 +41,7 @@
                     </form>
                     <a	class="btn btn-sm btn-squared btn-default"  style="left: 160px; position: relative;" href="{$url['search']}">清除关键字</a>
                     <a	class="btn btn-sm btn-squared btn-default"  style="left: 170px; position: relative;"
-                          onclick="layerIframe('添加HOST黑/白名单','/dpc.host.HostaddIframe?mongo={$get['mongo']}',800,480);">添加</a>
+                          onclick="layerIframe('添加HOST黑/白名单','/baichuan_advertisement_manage/dpc.host.HostaddIframe?mongo={$get['mongo']}',800,480);">添加</a>
                     <a href="/baichuan_advertisement_manage/dpc.host.hostlist?export=1&mongo={$get['mongo']}"	class="btn btn-sm btn-squared btn-default"  style="left: 170px; position: relative;">导出</a>
                 </div>
                 <div class="panel-body">
@@ -67,8 +67,8 @@
                                 <td style="text-align:left;">{$item['keyword']}</td>
                                 <td>{date("Y-m-d H:i:s",$item['uptime'])}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-squared btn-default" onclick="layerIframe('编辑HOST{$host['type']}','/dpc.host.HostEditIframe?mongo={$get['mongo']}&id={$item['_id']}',800,480);">编辑</a>
-                                    <a class="btn btn-sm btn-squared btn-default" onclick="deleteHost('/dpc.host.HostDel?mongo={$get['mongo']}&id={$item['_id']}')">删除</a>
+                                    <a class="btn btn-sm btn-squared btn-default" onclick="layerIframe('编辑HOST{$host['type']}','/baichuan_advertisement_manage/dpc.host.HostEditIframe?mongo={$get['mongo']}&id={$item['_id']}',800,480);">编辑</a>
+                                    <a class="btn btn-sm btn-squared btn-default" onclick="deleteHost('/baichuan_advertisement_manage/dpc.host.HostDel?mongo={$get['mongo']}&id={$item['_id']}')">删除</a>
                                 </td>
                             </tr>
                             {/foreach}

@@ -14,7 +14,7 @@
             <td>{$item['gid']}</td>
             <td><a href="/baichuan_advertisement_manage/crm.number.list?group_id={$item['gid']}">{$item['gname']}</a></td>
             <td>
-            	<a href="#" onclick="layerConfirmGet('/crm.number.authDelete?id={$item['id']}', '确认取消该授权？');">取消授权</a>
+            	<a href="#" onclick="layerConfirmGet('/baichuan_advertisement_manage/crm.number.authDelete?id={$item['id']}', '确认取消该授权？');">取消授权</a>
 			</td>
         </tr>
         {/foreach}

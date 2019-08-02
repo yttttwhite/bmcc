@@ -103,7 +103,7 @@
 												<td width="100">
 													<a class="btn" href="#" onclick="showPlan(this,'plan-detail-{$item['plan']['plan_id']}')">详情</a>
 													<a class="btn" href="/baichuan_advertisement_manage/crm.group.NumberList?plan_id={$item['plan']['plan_id']}" target="_blank">清单</a>
-													<a class="btn" href="#" onclick="layerIframe('添加审核信息','/crm.shenhe.ShenheIframe?plan_id={$item['plan']['plan_id']}',800,480);">审核</a>
+													<a class="btn" href="#" onclick="layerIframe('添加审核信息','/baichuan_advertisement_manage/crm.shenhe.ShenheIframe?plan_id={$item['plan']['plan_id']}',800,480);">审核</a>
 												</td>
 										      </tr>
 										</tbody>
@@ -202,7 +202,7 @@
 		;
 	function deleteNumberById(id){
 	    var msg = "确认删除这条数据？";
-	    var url = "/crm.number.delete?id=" + id;
+	    var url = "/baichuan_advertisement_manage/crm.number.delete?id=" + id;
 	    layerConfirmGet(url, msg);
 	}
 	

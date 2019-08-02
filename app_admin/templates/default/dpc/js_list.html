@@ -32,7 +32,7 @@
 						</form>
 						<a	class="btn btn-sm btn-squared btn-default"  style="left: 160px; position: relative;" href="{$url['search']}">清除关键字</a>
 						<a	class="btn btn-sm btn-squared btn-default"  style="left: 170px; position: relative;"
-							onclick="layerIframe('添加ADSL黑/白名单','/dpc.manage.jsAddIframe?mongo={$get['mongo']}',800,480);">添加</a>
+							onclick="layerIframe('添加ADSL黑/白名单','/baichuan_advertisement_manage/dpc.manage.jsAddIframe?mongo={$get['mongo']}',800,480);">添加</a>
 					</div>
 					<div class="panel-body">
 						<form id="consumerListForm" name="consumerList" method="post"
@@ -64,7 +64,7 @@
 										<script>
 											function deleteFromMongo(id){
 												var msg = "确认删除这条数据？";
-												var url = "/dpc.manage.delete?mongo={$collection}&id="+id;
+												var url = "/baichuan_advertisement_manage/dpc.manage.delete?mongo={$collection}&id="+id;
 												layerConfirmGet(url,msg);
 											}
 										</script>

@@ -14,7 +14,7 @@
     </div>
     <!--mcon start-->
     <div class="mcon">
-    	<div class="crumbLink"><a href="report.ad.list">查询可投js广告</a></div>
+    	<div class="crumbLink"><a href="/baichuan_advertisement_manage/report.ad.list">查询可投js广告</a></div>
 		<div class="panel panel-white" style="border:1px solid #EEEEEE;">
 			<!--表头-->
 			<div class="panel-heading border-light panel-head-md">
@@ -59,7 +59,7 @@
                             <td style="text-align:left;">{$amount['plan_name']}</td>
                             <td style="text-align:left;">{$amount['group_name']}</td>
                             <td style="text-align:left"><a class="btn btn-sm btn-squared btn-default" style="left: 0px; position: relative;"
-							onclick="layerIframe('广告计划内容','/report.ad.detail?adid={$amount['adid']}&planid={$amount['plan_id']}',800,460);">广告内容</a></td>
+							onclick="layerIframe('广告计划内容','/baichuan_advertisement_manage/report.ad.detail?adid={$amount['adid']}&planid={$amount['plan_id']}',800,460);">广告内容</a></td>
                             <td style="text-align:left;"><a class="btn btn-sm btn-squared btn-default"  style="left: 0px; position: relative;"
 							onclick="layerIframe('可投js广告实时走势图 (广告id:{$amount['adid']})','https://115.239.138.137:8000/chart',800,480);">实时走势图</a></td>
                         </tr>

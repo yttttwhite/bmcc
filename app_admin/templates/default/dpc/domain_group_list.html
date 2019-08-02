@@ -27,7 +27,7 @@
 						</form>
 						<a	class="btn btn-sm btn-squared btn-default ml10"  style="position: relative;" href="{$url['search']}">清除关键字</a>
 						<a	class="btn btn-sm btn-squared btn-default"  style="position: relative;"
-							onclick="layerIframe('添加域名分组','/dpc.manage.AddDomainGroup?mongo={$mongo}',600,360);">添加</a>
+							onclick="layerIframe('添加域名分组','/baichuan_advertisement_manage/dpc.manage.AddDomainGroup?mongo={$mongo}',600,360);">添加</a>
 					</div>
 					<div class="panel-body">
 						<form id="consumerListForm" name="consumerList" method="post"
@@ -56,7 +56,7 @@
 										<script>
 											function deleteFromMongo(id){
 												var msg = "确认删除这条数据？";
-												var url = "/dpc.manage.deleteDomainGroup?mongo={$mongo}&id="+id;
+												var url = "/baichuan_advertisement_manage/dpc.manage.deleteDomainGroup?mongo={$mongo}&id="+id;
 												layerConfirmGet(url,msg);
 											}
 										</script>

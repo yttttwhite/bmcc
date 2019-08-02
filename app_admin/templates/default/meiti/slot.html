@@ -124,7 +124,7 @@ $(document).ready(function(){
         <td>{$id2name[$item->creator_id]}</td>
         <td>
             <a href="/baichuan_advertisement_manage/media.position.add.{$item->id}?media_id={$item->media_id}&channel_id={$item->channel_id}&nav=2">编辑</a>
-            <a class="btn_read" onclick='showWindow("/media.position.detail?position_id={$item->id}&media_id={$item->media_id}&channel_id={$item->channel_id}")'>
+            <a class="btn_read" onclick='showWindow("/baichuan_advertisement_manage/media.position.detail?position_id={$item->id}&media_id={$item->media_id}&channel_id={$item->channel_id}")'>
             查看详情
             </a>
         </td>

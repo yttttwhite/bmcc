@@ -108,7 +108,7 @@
 						        <td>
                                     <a data-toggle="collapse"
                                        href=".collapseThree">{if isset($_user->lower_level_user)}<span class="showDetail" style="font-weight: bold;color: red;">+</span>{/if}</a>
-						        	<a onclick='showWindow("/admin.caiwu.detail?uid={$_user->uid}")'>
+						        	<a onclick='showWindow("/baichuan_advertisement_manage/admin.caiwu.detail?uid={$_user->uid}")'>
 						        		{$_user->user_name}
 									</a>
 								</td>
@@ -144,7 +144,7 @@
                                     {$lower_user->uid}
                                 </td>
                                 <td>
-                                    <a style="font-size: small;color: red;" onclick='showWindow("/admin.caiwu.detail?uid={$lower_user->uid}")'>
+                                    <a style="font-size: small;color: red;" onclick='showWindow("/baichuan_advertisement_manage/admin.caiwu.detail?uid={$lower_user->uid}")'>
                                         {$lower_user->user_name}
                                     </a>
                                 </td>
@@ -192,12 +192,12 @@
 <script>
 function deleteUserByUid(uid){
     var msg = "确认禁用该用户？";
-    var url = "/admin.user.delete?uid=" + uid;
+    var url = "/baichuan_advertisement_manage/admin.user.delete?uid=" + uid;
     layerConfirmGet(url, msg);
 }
 function refreshUserByUid(uid){
     var msg = "确认启用该用户？";
-    var url = "/admin.user.refresh?uid=" + uid;
+    var url = "/baichuan_advertisement_manage/admin.user.refresh?uid=" + uid;
     layerConfirmGet(url, msg);
 }
 function showWindow(url){

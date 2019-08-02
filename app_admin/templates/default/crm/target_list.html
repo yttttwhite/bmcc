@@ -22,8 +22,8 @@
 							<div class="fl" style="position: relative; left: 10px;">
 								<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
 								<a href="/baichuan_advertisement_manage/crm.number.list?group_id={$get['group_id']}" class="btn btn-squared btn-sm btn-default ml-10">全部</a>
-								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('添加','/crm.target.add',800,480);">添加号码</a>
-								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('从文件导入','/crm.target.import',800,480);">文件导入</a>
+								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('添加','/baichuan_advertisement_manage/crm.target.add',800,480);">添加号码</a>
+								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('从文件导入','/baichuan_advertisement_manage/crm.target.import',800,480);">文件导入</a>
 							</div>
 						</form>
 						<ul class="panel-heading-tabs border-light" style="display:none;">
@@ -66,7 +66,7 @@
 								        <td>{$item['tags']}</td>
 								        <td>{date('Y-m-d H:i:s',$item['ctime'])}</td>
 								        <td>
-									        <a href="#" onclick="layerConfirmGet('/crm.target.delete?id={$item['id']}', '确认删除这条数据？');">删除</a>
+									        <a href="#" onclick="layerConfirmGet('/baichuan_advertisement_manage/crm.target.delete?id={$item['id']}', '确认删除这条数据？');">删除</a>
 										</td>
 								      </tr>
 								{/foreach}
@@ -100,7 +100,7 @@
 		;
 	function deleteNumberGroupById(id){
 	    var msg = "确认删除这条数据？";
-	    var url = "/crm.number.groupDelete?id=" + id;
+	    var url = "/baichuan_advertisement_manage/crm.number.groupDelete?id=" + id;
 	    layerConfirmGet(url, msg);
 	}
 	</script>

@@ -60,7 +60,7 @@
         var ad_type=$(this).val();
             command_name=$("#command_name").val();
             collection=$("#collection").val();
-        $.getJSON("/dpc.main.getAreaPushInterval?collection="+collection+"&command_name="+command_name+"&ad_type="+ad_type,
+        $.getJSON("/baichuan_advertisement_manage/dpc.main.getAreaPushInterval?collection="+collection+"&command_name="+command_name+"&ad_type="+ad_type,
             function(data){
                 var sm="";
                 var si="";

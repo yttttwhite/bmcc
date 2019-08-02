@@ -119,29 +119,29 @@
 			} );
 			
 			$('#addConsumer').on('click', function() {
-				var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer';
+				var url = 'https://'+window.location.host + '/baichuan_advertisement_manage/crm.consumer.iframeAddConsumer';
 				var layerIndex = layerIframe(url,800,430);
 			} );
 			
 			$('#copyConsumerToGroup').on('click', function() {
-				$("#consumerListForm").attr("action","crm.consumer.addConsumerToGroup");
+				$("#consumerListForm").attr("action","/baichuan_advertisement_manage/crm.consumer.addConsumerToGroup");
 				$("#consumerListForm").submit();
 			} );
 			
 			$('#deleteSelectedConsumers').on('click', function() {
-				$("#consumerListForm").attr("action","crm.consumer.operation.delete");
+				$("#consumerListForm").attr("action","/baichuan_advertisement_manage/crm.consumer.operation.delete");
 				$("#consumerListForm").submit();
 			} );
 		} );
 		
 		function deleteConsumerByCid(cid){
 			var msg = "确认删除这条数据？";
-			var url = "crm.consumer.operation.delete."+cid;
+			var url = "/baichuan_advertisement_manage/crm.consumer.operation.delete."+cid;
 			layerConfirmGet(url,msg);
 		}
 		
 		function editConsumerByCid(cid){
-			var url = 'https://'+window.location.host + '/crm.consumer.iframeAddConsumer.'+cid;
+			var url = 'https://'+window.location.host + '/baichuan_advertisement_manage/crm.consumer.iframeAddConsumer.'+cid;
 			var layerIndex = layerIframe(url,800,430);
 		}
 	</script>

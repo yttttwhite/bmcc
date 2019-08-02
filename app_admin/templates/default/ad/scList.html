@@ -175,7 +175,7 @@
 									<td class="tac narrow-hide">{if(!empty($ad->report->show))}{round($ad->report->click*100/$ad->report->show,3)}%{/if}</td>
 								{/if}
 								<td class="tac" style="text-align:center;">
-									<a class="btn btn-squared btn-xs btn-primary" style="margin-right:0;" href="#tr_{$ad->adid}"  onclick="layerIframeNew('广告：#{$ad->adid}','/ad.ad.info?aid={$ad->adid}',720,650)">快速操作</a><br>
+									<a class="btn btn-squared btn-xs btn-primary" style="margin-right:0;" href="#tr_{$ad->adid}"  onclick="layerIframeNew('广告：#{$ad->adid}','/baichuan_advertisement_manage/ad.ad.info?aid={$ad->adid}',720,650)">快速操作</a><br>
 									<a class="btn btn-squared btn-xs btn-default mt-10" style="margin-right:0;" href="/baichuan_advertisement_manage/ad.ad.info?aid={$ad->adid}" target="_blank">查看详情</a>
 								</td>
 							</tr>

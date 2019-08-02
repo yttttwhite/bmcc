@@ -222,8 +222,8 @@
         <td>{date("Y-m-d H:i:s",$group['ctime'])|default:'未设置'}</td>
         <td class="tac">
         	<a href="/baichuan_advertisement_manage/crm.group.detail?group_id={$group['group_id']}">详情</a>
-        	<a href="#" onclick="layerConfirmGet('/crm.group.delete?group_id={$group['group_id']}', '确认删除这条数据？');">删除</a>
-        	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" onclick="layerIframe('新建素材','/crm.ad.addIframe?type=1&group_id={$group['group_id']}',640,480)">新建素材</a>
+        	<a href="#" onclick="layerConfirmGet('/baichuan_advertisement_manage/crm.group.delete?group_id={$group['group_id']}', '确认删除这条数据？');">删除</a>
+        	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" onclick="layerIframe('新建素材','/baichuan_advertisement_manage/crm.ad.addIframe?type=1&group_id={$group['group_id']}',640,480)">新建素材</a>
 		</td>
       </tr>
 {/foreach}

@@ -18,7 +18,7 @@
 						<li>所属分组：{$groupInfo['group_name']}</li>
 						<li>投放频次：{$groupInfo['max_push_times']}</li>
 						<li><a onclick="addHost()">添加</a></li>
-						<li><a href="dpc.main.host.{$collection}">返回</a></li>
+						<li><a href="/baichuan_advertisement_manage/dpc.main.host.{$collection}">返回</a></li>
 					</ul>
 				</div>
 				<div class="table-container" style="border:none;">
@@ -81,20 +81,20 @@
 		
 		//增加Host
 		function addHost(){
-			var url = 'dpc.main.host.{$collection}.add?gid='+{$groupInfo['group_id']};
+			var url = '/baichuan_advertisement_manage/dpc.main.host.{$collection}.add?gid='+{$groupInfo['group_id']};
 			var layerIndex = layerIframe("添加HOST",url,800,600);
 		}
 		
 		//编辑HostGroup
 		function editHost(url){
-			var url = 'dpc.main.host.{$collection}.edit?url='+url;
+			var url = '/baichuan_advertisement_manage/dpc.main.host.{$collection}.edit?url='+url;
 			var layerIndex = layerIframe("编辑HOST",url,800,600);
 		}
 		
 		//删除HostGroup
 		function deleteHost(url){
 			var msg = "确认删除这条数据？";
-			var url = "dpc.main.host.{$collection}.delete?url="+url;
+			var url = "/baichuan_advertisement_manage/dpc.main.host.{$collection}.delete?url="+url;
 			layerConfirmGet(url,msg);
 		}
 	</script>

@@ -42,7 +42,7 @@
 							        <td>{date('Y-m-d H:i:s',$item['ctime'])}</td>
 							        <td>
 							        	<a href="/baichuan_advertisement_manage/crm.number.list?group_id={$item['id']}">查看</a>
-										<a href="#" onclick="layerIframe('修改','/crm.number.GroupAddIframe?group_id={$item['id']}',800,480);">修改</a>
+										<a href="#" onclick="layerIframe('修改','/baichuan_advertisement_manage/crm.number.GroupAddIframe?group_id={$item['id']}',800,480);">修改</a>
 								        <a href="#" onclick="deleteNumberGroupById('{$item['id']}')">删除</a>
 									</td>
 							      </tr>
@@ -58,7 +58,7 @@
 		;
 	function deleteNumberGroupById(id){
 	    var msg = "确认删除这条数据？";
-	    var url = "/crm.number.groupDelete?id=" + id;
+	    var url = "/baichuan_advertisement_manage/crm.number.groupDelete?id=" + id;
 	    layerConfirmGet(url, msg);
 	}
 	</script>

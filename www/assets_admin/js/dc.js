@@ -1,5 +1,5 @@
 function report_dc_user(divid,para){
-	$.getJSON('/dc.main.ReportUserChar',para, function (data) {
+	$.getJSON('/baichuan_advertisement_manage/dc.main.ReportUserChar',para, function (data) {
         var options ={
                 chart: {
                     type: 'column'
@@ -46,7 +46,7 @@ function report_dc_user(divid,para){
 }
 
 function report_dc_plan(divid,para){
-	$.getJSON('/dc.main.ReportPlanChar',para, function (data) {
+	$.getJSON('/baichuan_advertisement_manage/dc.main.ReportPlanChar',para, function (data) {
         var options ={
                 chart: {
                     type: 'column'
@@ -93,7 +93,7 @@ function report_dc_plan(divid,para){
 }
 //获取广告计划top10数据默认以click为基准
 function getPlanTop10(paras){
-    $.get("/dc.main.ReportPlanTop10", paras, function(data){ 
+    $.get("/baichuan_advertisement_manage/dc.main.ReportPlanTop10", paras, function(data){ 
             var lis = "";
             $.each(data,function(i,n){
                 lis+="<li>" + j + ":" + data[i]['province'] +"</li>";   
@@ -102,21 +102,21 @@ function getPlanTop10(paras){
     });
 }
 function getUserReportTable(paras){
-    $.get("/dc.main.ReportUserTable",paras,function(data){
+    $.get("/baichuan_advertisement_manage/dc.main.ReportUserTable",paras,function(data){
           $(".reportab").remove();
           $(".turnpage").remove();
           $(".mcon").append(data);
     });
 }
 function getPlanReportTable(paras){
-    $.get("/dc.main.ReportPlanTable",paras,function(data){
+    $.get("/baichuan_advertisement_manage/dc.main.ReportPlanTable",paras,function(data){
           $(".reportab").remove();
           $(".turnpage").remove();
           $(".mcon").append(data);
     });
 }
 function getGroupReportTable(paras){
-    $.get("/dc.main.ReportGroupTable",paras,function(data){
+    $.get("/baichuan_advertisement_manage/dc.main.ReportGroupTable",paras,function(data){
           $(".reportab").remove();
           $(".turnpage").remove();
           $(".mcon").append(data);
@@ -138,7 +138,7 @@ var tableToExcel = (function() {
 function map_report_dc_plan(divid,paras){
     $(divid).empty();
     $(".jvectormap-label").remove();
-    $.getJSON("/dc.main.AjaxGetMapData",paras,function(data){
+    $.getJSON("/baichuan_advertisement_manage/dc.main.AjaxGetMapData",paras,function(data){
             $(divid).vectorMap({map: 'china_zh',
                                 color: "#53FF53", //地图颜色B4B4B4
 //                                onRegionOver:function(event,code){

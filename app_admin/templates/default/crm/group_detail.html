@@ -132,7 +132,7 @@
 												<td>{$item['name']}</td>
 												-->
 												<td>{$item['text']}</td>
-												<td><a href="#" onclick="layerConfirmGet('/crm.ad.delete?adid={$item['adid']}','确认删除这条数据？')">删除</a></td>
+												<td><a href="#" onclick="layerConfirmGet('/baichuan_advertisement_manage/crm.ad.delete?adid={$item['adid']}','确认删除这条数据？')">删除</a></td>
 												<!--
 												<td>{if($item['enabled'] == 2)}审核通过{elseif($item['enabled'] == 3)}未通过{else}正在审核{/if}</td>
 												-->
@@ -146,7 +146,7 @@
                                     	<!--
                                     	<a type="button" class="btn btn-success btn-squared btn-sm w-100 fr mr-15">导入素材</a>
 										-->
-                                    	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" onclick="layerIframe('新建素材','/crm.ad.addIframe?type=1&group_id={$get['group_id']}',640,480)">新建素材</a>
+                                    	<a type="button" class="btn btn-default btn-squared btn-sm w-100 fr mr-15" onclick="layerIframe('新建素材','/baichuan_advertisement_manage/crm.ad.addIframe?type=1&group_id={$get['group_id']}',640,480)">新建素材</a>
                                     </div>
                                 </div>
                             </div>

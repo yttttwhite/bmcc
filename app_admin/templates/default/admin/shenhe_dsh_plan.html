@@ -66,7 +66,7 @@
 		<td>{$_plan->plan_id}</td>
         <td>
         	<!--<a href="/baichuan_advertisement_manage/ad.plan?status=0&uid={$_plan->bind_id}" target="_blank">-->
-        	<a onclick='showWindow("/admin.user.detail?uid={$_plan->bind_id}")' target="_blank">
+        	<a onclick='showWindow("/baichuan_advertisement_manage/admin.user.detail?uid={$_plan->bind_id}")' target="_blank">
 			{$adSopnsorArray[$_plan->bind_id]}
 			</a>
 			<br>
@@ -118,7 +118,7 @@
       				<a href="javascript:void(0)" onclick="setStatusById(3, this)">拒绝</a>
       			{/if}
       		{/if}
-            <a onclick='showWindow("/admin.shenhe.detail?plan_id={$_plan->plan_id}&type={$currentStatus}")'>
+            <a onclick='showWindow("/baichuan_advertisement_manage/admin.shenhe.detail?plan_id={$_plan->plan_id}&type={$currentStatus}")'>
                 查看详情
             </a>
       	</td>

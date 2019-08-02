@@ -121,7 +121,7 @@
                                 <td>{date('Y-m-d H:i:s',$_data[op_time])}</td>
                                 <td>{$_data[operator_name]}</td>
                                 <!--<td><a href="/baichuan_advertisement_manage/admin.caiwu.detail?uid={$_data[target_uid]}" target="_blank">查看</a></td>-->
-                                <td><span class="btn btn-xs btn-squared btn-info"  onclick='showWindow("/admin.caiwu.detail?uid={$_data[target_uid]}")'>查看</span></td>
+                                <td><span class="btn btn-xs btn-squared btn-info"  onclick='showWindow("/baichuan_advertisement_manage/admin.caiwu.detail?uid={$_data[target_uid]}")'>查看</span></td>
 						      </tr>
 						{/foreach}
 					</tbody>
@@ -137,12 +137,12 @@
 <script>
 function deleteUserByUid(uid){
     var msg = "确认禁用该用户？";
-    var url = "/admin.user.delete?uid=" + uid;
+    var url = "/baichuan_advertisement_manage/admin.user.delete?uid=" + uid;
     layerConfirmGet(url, msg);
 }
 function refreshUserByUid(uid){
     var msg = "确认启用该用户？";
-    var url = "/admin.user.refresh?uid=" + uid;
+    var url = "/baichuan_advertisement_manage/admin.user.refresh?uid=" + uid;
     layerConfirmGet(url, msg);
 }
 function showWindow(url){

@@ -47,7 +47,7 @@
 										{if $group['group_id'] != 0 && $group['group_id'] != 1}
 										<a class="btn btn-default btn-squared btn-xs bg-fff" onclick="editHostGroup({$group['group_id']})">编辑</a>
 										<a class="btn btn-default btn-squared btn-xs bg-fff" onclick="deleteHostGroup({$group['group_id']})">删除</a>
-										<a class="btn btn-default btn-squared btn-xs bg-fff" href="dpc.main.host.{$collection}?gid={$group['group_id']}" target="_blank">查看分组</a>
+										<a class="btn btn-default btn-squared btn-xs bg-fff" href="/baichuan_advertisement_manage/dpc.main.host.{$collection}?gid={$group['group_id']}" target="_blank">查看分组</a>
 										{else}
 										<a class="btn btn-default btn-squared btn-xs bg-fff" onclick="editHostGroup({$group['group_id']})">编辑投放频次</a>
 										{/if}
@@ -77,20 +77,20 @@
 		
 		//增加HostGroup
 		function addHostGroup(){
-			var url = 'dpc.main.hostGroup.{$collection}.add';
+			var url = '/baichuan_advertisement_manage/dpc.main.hostGroup.{$collection}.add';
 			var layerIndex = layerIframe("添加分组",url,800,240);
 		}
 		
 		//编辑HostGroup
 		function editHostGroup(gid){
-			var url = 'dpc.main.hostGroup.{$collection}.edit?gid='+gid;
+			var url = '/baichuan_advertisement_manage/dpc.main.hostGroup.{$collection}.edit?gid='+gid;
 			var layerIndex = layerIframe("编辑分组",url,800,240);
 		}
 		
 		//删除HostGroup
 		function deleteHostGroup(gid){
 			var msg = "确认删除这条数据？";
-			var url = "dpc.main.hostGroup.{$collection}.delete?gid="+gid;
+			var url = "/baichuan_advertisement_manage/dpc.main.hostGroup.{$collection}.delete?gid="+gid;
 			layerConfirmGet(url,msg);
 		}
 	</script>

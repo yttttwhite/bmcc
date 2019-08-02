@@ -276,7 +276,7 @@ var bmap = {
 		tagData.area_info = areaStr;
 		tagData.area_center = centerStr;
 		
-		var saveUrl = "/tag.area.save";
+		var saveUrl = "/baichuan_advertisement_manage/tag.area.save";
 		$.post(saveUrl,tagData,function(response){
 			if(response.status == 1){
 				layer.msg(response.msg);

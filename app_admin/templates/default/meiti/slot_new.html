@@ -163,7 +163,7 @@
 $(function(){
   $("form").validate({ errorClass:"fcr"});
   var channel_tag_el = $('#channel_tag');
-  $.get('/media.position.GetTagIdent?nav=2', null , function(data){
+  $.get('/baichuan_advertisement_manage/media.position.GetTagIdent?nav=2', null , function(data){
     var tag_val = '{$position->tag_identification|default:''}';
     channel_tag_el.append($("<option value=0 selected>请选择广告为类型</option>"));
     for (var i = data.length - 1; i >= 0; i--) {

@@ -1,5 +1,5 @@
 function report(divid,para){
-	$.getJSON('/report.main.data',para, function (data) {
+	$.getJSON('/baichuan_advertisement_manage/report.main.data',para, function (data) {
         var options ={
 		chart: {
 		type: 'column'
@@ -54,7 +54,7 @@ var data_test = {
         cost: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     };
 function report_echarts(divid,para){
-	$.getJSON('/report.main.dataEcharts',para, function (data) {
+	$.getJSON('/baichuan_advertisement_manage/report.main.dataEcharts',para, function (data) {
         var default_data = {
             id: [''],
             pv: [],

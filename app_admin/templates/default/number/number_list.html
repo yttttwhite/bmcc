@@ -21,8 +21,8 @@
 							<div class="fl" style="position: relative; left: 10px;">
 								<input class="btn btn-squared btn-sm btn-success ml-10" type="submit" value="查询">
 								<a href="/baichuan_advertisement_manage/crm.number.list?group_id={$get['group_id']}" class="btn btn-squared btn-sm btn-default ml-10">全部</a>
-								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('添加号码','/crm.number.AddIframe?group_id={$get['group_id']}',800,480);">添加号码</a>
-								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('从文件批量导入','/crm.number.importIframe?group_id={$get['group_id']}',800,480);">文件导入</a>
+								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('添加号码','/baichuan_advertisement_manage/crm.number.AddIframe?group_id={$get['group_id']}',800,480);">添加号码</a>
+								<a class="btn btn-squared btn-sm btn-default ml-10" onclick="layerIframe('从文件批量导入','/baichuan_advertisement_manage/crm.number.importIframe?group_id={$get['group_id']}',800,480);">文件导入</a>
 							</div>
 						</form>
 						<ul class="panel-heading-tabs border-light" style="display:none;">
@@ -65,7 +65,7 @@
 								        <td>{date('Y-m-d H:i:s',$item['ctime'])}</td>
 								        <td>{date('Y-m-d H:i:s',$item['mtime'])}</td>
 								        <td>
-								        	<a href="#" onclick="layerIframe('修改','/crm.number.UpdateIframe?id={$item['id']}&number={$item['number']}',800,480);">修改</a>
+								        	<a href="#" onclick="layerIframe('修改','/baichuan_advertisement_manage/crm.number.UpdateIframe?id={$item['id']}&number={$item['number']}',800,480);">修改</a>
 								        	<a href="#" onclick="deleteNumberById('{$item['id']}')">删除</a>
 										</td>
 								      </tr>
@@ -99,7 +99,7 @@
 		;
 	function deleteNumberById(id){
 	    var msg = "确认删除这条数据？";
-	    var url = "/crm.number.delete?id=" + id;
+	    var url = "/baichuan_advertisement_manage/crm.number.delete?id=" + id;
 	    layerConfirmGet(url, msg);
 	}
 	</script>
