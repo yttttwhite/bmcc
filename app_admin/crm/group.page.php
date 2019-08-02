@@ -74,7 +74,7 @@ class crm_group extends STpl{
     public function pageSave($inPath){
         
         if(empty($inPath[3])){
-            $this->parentReload("请选择广告计划","/crm.plan.list",2);
+            $this->parentReload("请选择广告计划","/baichuan_advertisement_manage/crm.plan.list",2);
             exit();
         }
         $plan_id = $inPath[3];
@@ -164,9 +164,9 @@ class crm_group extends STpl{
                 $groupData['number_group'] = json_encode($groupNumberGroup);
                 $this->groupModel->updateData($groupData,$groupCondition);
             }
-            $this->success("添加成功，所选号码库有： ".$receiverRepeat." 个联系人重复，已经去除","/crm.plan.detail?plan_id=".$plan_id,5);
+            $this->success("添加成功，所选号码库有： ".$receiverRepeat." 个联系人重复，已经去除","/baichuan_advertisement_manage/crm.plan.detail?plan_id=".$plan_id,5);
         }else{
-            $this->success("添加失败","/crm.plan.list");
+            $this->success("添加失败","/baichuan_advertisement_manage/crm.plan.list");
         }
     }
     

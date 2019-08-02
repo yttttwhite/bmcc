@@ -4,7 +4,7 @@ class crm_shenhe extends STpl{
     public $sendType, $week;
     public function __construct($inPath){
         if(!user_api::auth("shenhe")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
         $this->init();
@@ -105,7 +105,7 @@ class crm_shenhe extends STpl{
         }
         
         $url = array();
-        $url['search'] = '/crm.shenhe.list?complete=1';
+        $url['search'] = '/baichuan_advertisement_manage/crm.shenhe.list?complete=1';
         $this->assign("url",$url);
         $this->assign("get",$_GET);
         $this->assign("planList",$planList);
@@ -117,7 +117,7 @@ class crm_shenhe extends STpl{
     
     public function pageShenheIframe(){
         $staus = array(1=>"等待审核",2=>"审核通过",3=>"驳回");
-        $url['formAction'] = "/crm.shenhe.ChangeStatus";
+        $url['formAction'] = "/baichuan_advertisement_manage/crm.shenhe.ChangeStatus";
         $this->assign('url',$url);
         $this->assign('get',$_GET);
         $this->assign('post',$_POST);

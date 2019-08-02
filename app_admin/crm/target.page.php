@@ -33,7 +33,7 @@ class crm_target extends STpl{
         $page['perpage'] = 100;
         $page['count'] = ceil($count/$page['perpage']);
         $getArray = $this->unsetGet('page');
-        $page['url'] = $this->setGet('/crm.target.list', $getArray);
+        $page['url'] = $this->setGet('/baichuan_advertisement_manage/crm.target.list', $getArray);
         if(isset($_GET['page'])){
             $page['current'] = $_GET['page'];
         }else{
@@ -57,7 +57,7 @@ class crm_target extends STpl{
         return $this->render('crm/target_add.html');
     }
     public function pageImport(){
-        $url['formAction'] = '/crm.target.save';
+        $url['formAction'] = '/baichuan_advertisement_manage/crm.target.save';
         $groupList = $this->targetGroupModel->getData();
         $this->assign("url",$url);
         $this->assign("groupList",$groupList);

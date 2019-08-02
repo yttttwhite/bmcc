@@ -16,7 +16,7 @@ class crm_consumer extends STpl{
     
     private function customRedirect($redirect){
         if(!isset($redirect['url'])){
-            $redirect['url'] = "/crm.consumer.list";
+            $redirect['url'] = "/baichuan_advertisement_manage/crm.consumer.list";
         }
         if(!isset($redirect['msg'])){
             $redirect['msg'] = "正在准备跳转……";
@@ -52,7 +52,7 @@ class crm_consumer extends STpl{
         }
         $page = $page < 1?1:$page;
         $pageInfo = array();
-        $pageInfo['url'] = "crm.consumer.list.";
+        $pageInfo['url'] = "/baichuan_advertisement_manage/crm.consumer.list.";
         $pageInfo['current'] = $page;
         $amount = $this->crm->getConsumerCountByUid($this->uid);
         $pageInfo['count'] = ceil($amount/$this->perPage);
@@ -183,7 +183,7 @@ class crm_consumer extends STpl{
         
         if($error > 0){
             $redirect = array();
-            $redirect['url'] = "crm.consumer.list";
+            $redirect['url'] = "/baichuan_advertisement_manage/crm.consumer.list";
             $redirect['time'] = 3;
             $redirect['msg'] = "您没有浏览该分组的权限！";
             
@@ -226,7 +226,7 @@ class crm_consumer extends STpl{
             $this->crm->updateCountByGid($groupId);
         }
         
-        $redirect['url'] = "/crm.consumer";
+        $redirect['url'] = "/baichuan_advertisement_manage/crm.consumer";
         $this->customRedirect($redirect);
     }
     

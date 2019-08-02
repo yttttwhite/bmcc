@@ -2,7 +2,7 @@
 class caiwu_main extends STpl{
 	public function __construct($inPath){
 	    if(!user_api::auth("financial")){
-	        $this->success("没有权限",'/user',1);
+	        $this->success("没有权限",'/baichuan_advertisement_manage/user',1);
 	        exit();
 	    }
 	}

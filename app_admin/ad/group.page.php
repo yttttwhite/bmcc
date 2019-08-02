@@ -190,7 +190,7 @@ class ad_group extends STpl{
             foreach ($word as $value) {
                 $re = $filter->filter(trim($value), 0);
                 if($re == false){
-                    $this->success("您输入的有敏感词请检查后，再创建", "/ad.plan") ;
+                    $this->success("您输入的有敏感词请检查后，再创建", "/baichuan_advertisement_manage/ad.plan") ;
                     exit;
                 }
             }

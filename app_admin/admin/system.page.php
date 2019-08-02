@@ -65,7 +65,7 @@ class admin_system extends STpl{
             foreach ($word as $value) {
                 $re = $filter->filter(trim($value), 0);
                 if($re == false){
-                    $this->success("您输入的有敏感词请检查后，再创建", "/admin.system.tag") ;
+                    $this->success("您输入的有敏感词请检查后，再创建", "/baichuan_advertisement_manage/admin.system.tag") ;
                     exit;
                 }
             }

@@ -54,7 +54,7 @@ class crm_plan extends STpl{
     }
     public function pageSave(){
         if(!isset($_POST['plan_name']) || strlen($_POST['plan_name'])<1){
-            $this->success("广告名称不能为空","/crm.plan.list",3);
+            $this->success("广告名称不能为空","/baichuan_advertisement_manage/crm.plan.list",3);
             exit();
         }
         
@@ -109,9 +109,9 @@ class crm_plan extends STpl{
             $this->resetStatus($id, 1,"新建广告");
         }
         if($id > 0){
-            $this->success("操作成功","/crm.plan.list");
+            $this->success("操作成功","/baichuan_advertisement_manage/crm.plan.list");
         }else{
-            $this->success("写入数据失败","/crm.plan.list",3);
+            $this->success("写入数据失败","/baichuan_advertisement_manage/crm.plan.list",3);
         }
     }
     

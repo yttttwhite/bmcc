@@ -31,7 +31,7 @@ class crm_word extends STpl{
         return $this->render("crm/word_list.html");
     }
     public function pageAddIframe(){
-        $url['formAction'] = "/crm.word.save";
+        $url['formAction'] = "/baichuan_advertisement_manage/crm.word.save";
         $this->assign('url',$url);
         $this->assign('get',$_GET);
         return $this->render("/crm/word_add_iframe.html");
@@ -72,7 +72,7 @@ class crm_word extends STpl{
     }
     
     public function pageImportIframe(){
-        $url['formAction'] = "/crm.word.import";
+        $url['formAction'] = "/baichuan_advertisement_manage/crm.word.import";
         $this->assign('url',$url);
         $this->assign('get',$_GET);
         return $this->render("/crm/word_import_iframe.html");
@@ -118,7 +118,7 @@ class crm_word extends STpl{
     }
     public function pageUpdateIframe(){
         if(isset($_GET['id'])){
-            $url['formAction'] = "/crm.word.updateSave";
+            $url['formAction'] = "/baichuan_advertisement_manage/crm.word.updateSave";
             $this->assign('url',$url);
             $this->assign('get',$_GET);
             return $this->render("/crm/word_update_iframe.html");

@@ -455,7 +455,7 @@ class ad_stufflibrary extends STpl{
 							}
 						}
 
-						$url="https://".$host->admin."/baichuan_advertisement_manage/ad.stufflibrary.List"."?nav=8";
+						$url="/baichuan_advertisement_manage/ad.stufflibrary.List"."?nav=8";
 						$this->success("提交成功", $url, 2);
 						exit();
 //						ob_start();

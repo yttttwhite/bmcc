@@ -15,13 +15,13 @@ class admin_log extends STpl{
     public function pageList(){
         $date = date('Ymd',time());
         $url = array();
-        $url['this'] = parent::setGet("/admin.log.list", $_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/admin.log.list", $_GET);
         $get = parent::unsetGet(array('date','dateStart','dateEnd','page','nav'));
-        $url['type'] = parent::setGet("/admin.log.list", $get);
+        $url['type'] = parent::setGet("/baichuan_advertisement_manage/admin.log.list", $get);
         $get = parent::unsetGet(array('order','orderType'));
-        $url['order'] = parent::setGet("/admin.log.list", $get);
+        $url['order'] = parent::setGet("/baichuan_advertisement_manage/admin.log.list", $get);
         $get = parent::unsetGet(array('order','orderType','page','type'));
-        $url['detail'] = parent::setGet("/admin.log.detail", $get);
+        $url['detail'] = parent::setGet("/baichuan_advertisement_manage/admin.log.detail", $get);
 
         $sql = "";
         $condition = array();
@@ -116,7 +116,7 @@ class admin_log extends STpl{
                 $page['current'] = 1;
             }
             $get = parent::unsetGet('page');
-            $page['url'] = parent::setGet("/admin.log.Detail", $get);
+            $page['url'] = parent::setGet("/baichuan_advertisement_manage/admin.log.Detail", $get);
 
             $indexStart = ($page['current']-1)*$perpage;
             $indexEnd   = ($page['current'])*$perpage;
@@ -148,7 +148,7 @@ class admin_log extends STpl{
             // $this->assign("roleList",user_api::getRoleList());
             return $this->render("/admin/log_detail.html");
         }else {
-            $this->success("对应的明细信息不存在","/admin.log.list");
+            $this->success("对应的明细信息不存在","/baichuan_advertisement_manage/admin.log.list");
         }
     }
 }

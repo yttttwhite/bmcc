@@ -34,7 +34,7 @@ class crm_call extends STpl{
         $page['perpage'] = 100;
         $page['count'] = ceil($count/$page['perpage']);
         $getArray = $this->unsetGet('page');
-        $page['url'] = $this->setGet('/crm.target.list', $getArray);
+        $page['url'] = $this->setGet('/baichuan_advertisement_manage/crm.target.list', $getArray);
         if(isset($_GET['page'])){
             $page['current'] = $_GET['page'];
         }else{

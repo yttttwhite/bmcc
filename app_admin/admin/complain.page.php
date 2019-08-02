@@ -23,9 +23,9 @@ class admin_complain extends STpl{
         $date = date('Ymd',time());
 
         $url = array();
-        $url['this'] = parent::setGet("/admin.complain.list", $_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/admin.complain.list", $_GET);
         $get = parent::unsetGet(array('date','key','start_date','end_date','page'));
-        $url['date'] = parent::setGet("/admin.complain.list", $get);
+        $url['date'] = parent::setGet("/baichuan_advertisement_manage/admin.complain.list", $get);
        /* $get = parent::unsetGet(array('order','orderType'));
         $url['order'] = parent::setGet("/admin.complain.list", $get);
         $get = parent::unsetGet(array('order','orderType','page','type'));*/
@@ -101,7 +101,7 @@ class admin_complain extends STpl{
         }
         
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/admin.complain.List", $get);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/admin.complain.List", $get);
 
         //$Complainlist2 = array();
         //$Complainlist2 = array_slice($Complainlist,$indexStart,30);
@@ -125,9 +125,9 @@ class admin_complain extends STpl{
         $date = date('Ymd',time());
     
         $url = array();
-        $url['this'] = parent::setGet("/admin.complain.miitlist", $_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/admin.complain.miitlist", $_GET);
         $get = parent::unsetGet(array('date','key','BDate','EDate','page'));
-        $url['date'] = parent::setGet("/admin.complain.miitlist", $get);
+        $url['date'] = parent::setGet("/baichuan_advertisement_manage/admin.complain.miitlist", $get);
     
         $sql = "";
         $condition = array();
@@ -178,7 +178,7 @@ class admin_complain extends STpl{
             $page['current'] = 1;
         }
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/admin.complain.MIITList", $get);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/admin.complain.MIITList", $get);
         
         $indexStart = ($page['current']-1)*$perpage;
         $indexEnd   = ($page['current'])*$perpage;

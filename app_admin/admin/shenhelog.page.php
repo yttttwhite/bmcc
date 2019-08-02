@@ -2,7 +2,7 @@
 class admin_shenhelog extends STpl {
  	public function __construct($inPath){
 	    if(!user_api::auth("shenhe")){
-	        $this->success("没有审核权限",'/user',3);
+	        $this->success("没有审核权限",'/baichuan_advertisement_manage/user',3);
 	        exit();
 	    }
 	}

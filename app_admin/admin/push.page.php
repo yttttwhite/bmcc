@@ -4,7 +4,7 @@ class admin_push extends STpl{
 
     function __construct($inPath){
         if(!user_api::auth("dpc")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
     
@@ -28,9 +28,9 @@ class admin_push extends STpl{
         $date = date('Ymd',time());
 
         $url = array();
-        $url['this'] = parent::setGet("/admin.push.list",$_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/admin.push.list",$_GET);
         $get = parent::unsetGet(array('pushDate','page'));
-        $url['date'] = parent::setGet("/admin.push.list",$get);
+        $url['date'] = parent::setGet("/baichuan_advertisement_manage/admin.push.list",$get);
 
         $sql = "";
         $condition = array();
@@ -60,7 +60,7 @@ class admin_push extends STpl{
             $page['current'] = 1;
         }
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/admin.push.List",$page);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/admin.push.List",$page);
 
         $indexStart = ($page['current']-1)*$perpage;
         $indexEnd = ($page['current'])*$perpage;

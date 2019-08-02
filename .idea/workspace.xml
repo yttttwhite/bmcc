@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="672cf3ff-89b7-4597-99c6-c1f5cb43ffe6" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/app_admin/account/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/account/main.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/ad/group.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/ad/group.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/ad/plan.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/ad/plan.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/ad/stufflibrary.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/ad/stufflibrary.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/caiwu.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/caiwu.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/complain.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/complain.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/contract.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/contract.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/log.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/log.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/push.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/push.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/shenhe.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/shenhe.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/shenhelog.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/shenhelog.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/system.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/system.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/admin/user.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/admin/user.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/audient/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/audient/main.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/caiwu/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/caiwu/main.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/call.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/call.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/chudian.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/chudian.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/consumer.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/consumer.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/group.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/group.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/number.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/number.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/plan.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/plan.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/shenhe.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/shenhe.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/target.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/target.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/crm/word.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/crm/word.page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/dc/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/dc/main.page.php" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>success</find>
+      <find>location</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app_admin/ad/group.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/ad/plan.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/ad/stufflibrary.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/shenhe.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/caiwu.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/complain.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/contract.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/log.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/push.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/shenhelog.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/system.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/admin/user.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/audient/main.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/caiwu/main.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/account/main.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/call.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/chudian.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/consumer.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/group.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/number.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/plan.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/shenhe.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/target.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/crm/word.page.php" />
+        <option value="$PROJECT_DIR$/app_admin/dc/main.page.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="1934" />
+    <option name="height" value="1037" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="bs_bj_mb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bs_bj_mb" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bs_bj_mb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bs_bj_mb" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app_admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bs_bj_mb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bs_bj_mb" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="www" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="672cf3ff-89b7-4597-99c6-c1f5cb43ffe6" name="Default" comment="" />
+      <created>1564708487383</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1564708487383</updated>
+      <workItem from="1564708490088" duration="6327000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="6327000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="0" width="1934" height="1037" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2497332" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app_admin/ad/group.page.php.bak">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/ad/group.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8736">
+          <caret line="194" column="17" lean-forward="true" selection-start-line="194" selection-start-column="17" selection-end-line="194" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/advertiser.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3470" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/caiwu.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11259">
+          <caret line="680" column="91" selection-start-line="680" selection-start-column="91" selection-end-line="680" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/plugins/STpl.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/complain.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="189" column="71" lean-forward="true" selection-start-line="189" selection-start-column="71" selection-end-line="189" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/contract.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9670">
+          <caret line="405" column="60" selection-start-line="405" selection-start-column="60" selection-end-line="405" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/contractlogapi.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-50" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/loaddatapage.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/log.class.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/log.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="148" column="59" lean-forward="true" selection-start-line="148" selection-start-column="59" selection-end-line="148" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/user.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3710">
+          <caret line="712" column="91" selection-start-line="712" selection-start-column="91" selection-end-line="712" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/system.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-456">
+          <caret line="67" column="86" selection-start-line="67" selection-start-column="86" selection-end-line="67" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/sms.page.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/shenhelog.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/shenhe.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6256">
+          <caret line="404" column="37" lean-forward="true" selection-start-line="404" selection-start-column="37" selection-end-line="404" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/push.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="62" column="69" selection-start-line="62" selection-start-column="69" selection-end-line="62" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/plan.page.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/outbound.page.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/main.page.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/admin/logapi.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-36" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/api/stuff.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1250" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/api/sms.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1576" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/api/mongo.page.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/api/common.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1096" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/api/app.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2356" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/api/ad.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2496" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/area/db.class.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/bigdata/tag.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1670" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/bigdata/main.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5236" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/audient/main.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="411" column="58" lean-forward="true" selection-start-line="411" selection-start-column="58" selection-end-line="411" selection-end-column="58" />
+          <folding>
+            <element signature="e#68#74#1" expanded="true" />
+            <element signature="e#111#117#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/account/main.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10">
+          <caret line="105" column="96" selection-start-line="105" selection-start-column="96" selection-end-line="105" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/caiwu/main.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" column="75" lean-forward="true" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/audient/db.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/ad.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1730">
+          <caret line="34" column="52" lean-forward="true" selection-start-line="34" selection-start-column="52" selection-end-line="34" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/call.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="36" column="68" selection-start-line="36" selection-start-column="68" selection-end-line="36" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/chudian.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-396">
+          <caret line="70" column="14" lean-forward="true" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/word.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-450">
+          <caret line="135" column="40" lean-forward="true" selection-start-line="135" selection-start-column="40" selection-end-line="135" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/target.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-620">
+          <caret line="59" column="60" selection-start-line="59" selection-start-column="60" selection-end-line="59" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/tag.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3636" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/shenhe.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-636">
+          <caret line="119" column="60" selection-start-line="119" selection-start-column="60" selection-end-line="119" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/plan.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2156">
+          <caret line="116" column="4" lean-forward="true" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/number.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="421" column="52" lean-forward="true" selection-start-line="421" selection-start-column="52" selection-end-line="421" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/main.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1260" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/group.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3236">
+          <caret line="168" column="65" selection-start-line="168" selection-start-column="65" selection-end-line="168" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/creative.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/dpc/dpc.class.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/dc/main.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="1415" column="32" lean-forward="true" selection-start-line="1415" selection-start-column="32" selection-end-line="1415" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/dc/db.class.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/dc/api.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-336" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/crm/consumer.page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1740">
+          <caret line="228" column="58" selection-start-line="228" selection-start-column="58" selection-end-line="228" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

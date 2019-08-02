@@ -6,7 +6,7 @@ class ad_plan extends STpl{
         if(!user_api::auth("ad")){
 //	        $this->success("没有权限",'/user',3);
 //	        exit();
-            header("Location: /dc.main.ad?nav=3&menu_left=1");
+            header("Location: /baichuan_advertisement_manage/dc.main.ad?nav=3&menu_left=1");
 	    }
 	    if(user_api::auth("adReadonly")){
 	        $readonly = " disabled='disabled'  readonly='readonly' ";

@@ -25,10 +25,10 @@ class crm_chudian extends STpl{
                 $this->assign("apiType",$this->apiType);
                 return $this->render("/crm/chudian_list_by_user.html");
             }else{
-                $this->success("改用户不存在","/admin.user.list");
+                $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
             }
         }else{
-            $this->success("改用户不存在","/admin.user.list");
+            $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
         }
     }
     public function pageMyList(){
@@ -41,7 +41,7 @@ class crm_chudian extends STpl{
             $this->assign("apiType",$this->apiType);
             return $this->render("/crm/chudian_list_by_user.html");
         }else{
-            $this->success("改用户不存在","/admin.user.list");
+            $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
         }
     }
     public function pageAdd(){
@@ -56,7 +56,7 @@ class crm_chudian extends STpl{
             $chudian = array();
         }
 
-        $url['formAction'] = "/crm.chudian.Save";
+        $url['formAction'] = "/baichuan_advertisement_manage/crm.chudian.Save";
         $this->assign('url',$url);
         
         if(isset($_GET['uid'])){
@@ -66,10 +66,10 @@ class crm_chudian extends STpl{
                 $this->assign("chudian",$chudian);
                 return $this->render("/crm/chudian_add_iframe.html");
             }else{
-                $this->success("改用户不存在","/admin.user.list");
+                $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
             }
         }else{
-            $this->success("改用户不存在","/admin.user.list");
+            $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
         }
     }
     

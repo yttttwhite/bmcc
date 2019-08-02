@@ -39,7 +39,7 @@ class account_main extends STpl{
 			$this->assign('email', $this->getMyEmail());
 	        return $this->render("account/user_detail.html");
 	    }else{
-	        $this->success("该用户不存在，或者已经被冻结","/admin.user.list");
+	        $this->success("该用户不存在，或者已经被冻结","/baichuan_advertisement_manage/admin.user.list");
 	    }
 	}
 
@@ -64,7 +64,7 @@ class account_main extends STpl{
             foreach ($word as $value) {
                 $re = $filter->filter($value, 0);
                 if($re == false){
-                    $this->success("您输入的有敏感词请检查后，再创建", "/admin.user.list") ;
+                    $this->success("您输入的有敏感词请检查后，再创建", "/baichuan_advertisement_manage/admin.user.list") ;
                     exit;
                 }
             }
@@ -103,7 +103,7 @@ class account_main extends STpl{
             if (isset($_POST['email'])) {
                 $this->setMyEmail($_POST['email']);
             }
-            if($change_pw)  return $this->success("密码修改成功，请重新登陆","/user.main.logout");
+            if($change_pw)  return $this->success("密码修改成功，请重新登陆","/baichuan_advertisement_manage/user.main.logout");
             $this->assign("error","修改成功！");
         }
         $this->assign('email', $this->getMyEmail());

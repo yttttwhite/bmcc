@@ -8,7 +8,7 @@ class dc_main extends STpl
     public function __construct($inPath)
     {
         if (! user_api::auth("dc")) {
-            $this->success("没有权限", '/user', 3);
+            $this->success("没有权限", '/baichuan_advertisement_manage/user', 3);
             exit();
         }
     }

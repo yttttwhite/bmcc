@@ -100,7 +100,7 @@ class admin_contract extends STpl
         $totalPage = ceil($total / $pageSize);
         $this->assign("totalPage", $totalPage);
         $this->assign("pageNum", $pageNum);
-        $url['formAction'] = "/admin.contract.list";
+        $url['formAction'] = "/baichuan_advertisement_manage/admin.contract.list";
         $this->assign("url", $url);
         $pager = pager_api::page(pager_api::toData($contractInfo),"?pageNum=%p");
         $this->assign("pager",$pager);
@@ -122,7 +122,7 @@ class admin_contract extends STpl
             foreach ($word as $value) {
                 $re = $filter->filter(trim($value), 0);
                 if ($re == false) {
-                    $this->success("您输入的有敏感词请检查后，再创建", "/admin.contract.list");
+                    $this->success("您输入的有敏感词请检查后，再创建", "/baichuan_advertisement_manage/admin.contract.list");
                     exit();
                 }
             }
@@ -331,7 +331,7 @@ class admin_contract extends STpl
                     }
                 }
             }
-            $this->success("successful", '/admin.contract.list.');
+            $this->success("successful", '/baichuan_advertisement_manage/admin.contract.list.');
         }
         $condition = array();
         $contractModel = new model_contractInfo();
@@ -403,7 +403,7 @@ class admin_contract extends STpl
         $this->assign("totalPage", $totalPage);
         $this->assign("pageNum", $pageNum);
         // $pager = pager_api::page(pager_api::toData($usersTemp),"?page=%p&status=$status&account_type=");
-        $url['formAction'] = "/admin.contract.list";
+        $url['formAction'] = "/baichuan_advertisement_manage/admin.contract.list";
         $this->assign("url", $url);
         $this->assign("pager", $pager);
         $this->assign('total', $total);

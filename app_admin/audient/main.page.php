@@ -2,7 +2,7 @@
 class audient_main extends STpl{
     public function __construct(){
         if(!user_api::auth("audient")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
     }
@@ -92,8 +92,8 @@ class audient_main extends STpl{
             foreach ($result as $k => $v) {
                 $result[$k]['IndexCode_Status'] = '未检测';
                 $result[$k]['Code_Status'] = $v['is_valid'] == 1 ? '启用' : '禁用';
-                $result[$k]['Code_op'] = "<a href='/audient.main.getcode?websiteid=${v['id']}'>获取代码</a>&nbsp;<a href='javascript:void(0)'><S>自动安装</S></a>";
-                $result[$k]['Status_op'] = "<a onclick='return confirm(\"你确定要删除吗？\")' href='/audient.main.deletewebsite?websiteid=${v['id']}'>删除</a>&nbsp;<a href='/audient.main.websitestatusswitch?websiteid=${v['id']}&status=${v['is_valid']}'>" . ( $v['is_valid'] == 1 ? '禁用' : '启用' ) . "</a>";
+                $result[$k]['Code_op'] = "<a href='/baichuan_advertisement_manage/audient.main.getcode?websiteid=${v['id']}'>获取代码</a>&nbsp;<a href='javascript:void(0)'><S>自动安装</S></a>";
+                $result[$k]['Status_op'] = "<a onclick='return confirm(\"你确定要删除吗？\")' href='/baichuan_advertisement_manage/audient.main.deletewebsite?websiteid=${v['id']}'>删除</a>&nbsp;<a href='/audient.main.websitestatusswitch?websiteid=${v['id']}&status=${v['is_valid']}'>" . ( $v['is_valid'] == 1 ? '禁用' : '启用' ) . "</a>";
             }
 			$pager = pager_api::page($ret,"?&page=%p");
 			$this->assign("pager",$pager);
@@ -281,7 +281,7 @@ class audient_main extends STpl{
             $result[$k]['wname'] = $ret['name'];
             #var_dump($result);
             $result[$k]['status'] = $result[$k]['status']==1?'有效':'无效';
-            $result[$k]['op'] = "<a href='#'><S>统计</S></a> <a href='/audient.main.ModifyCrowd?crowdid=${v['id']}'>修改</a> <a href='/audient.main.deletecrowd?crowdid=${v['id']}'>删除</a> <a href='#'><S>添加投放</S></a>";
+            $result[$k]['op'] = "<a href='#'><S>统计</S></a> <a href='/baichuan_advertisement_manage/audient.main.ModifyCrowd?crowdid=${v['id']}'>修改</a> <a href='/audient.main.deletecrowd?crowdid=${v['id']}'>删除</a> <a href='#'><S>添加投放</S></a>";
         }
         
         STpl::assign("result", $result);

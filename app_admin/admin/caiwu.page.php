@@ -434,7 +434,7 @@ class admin_caiwu extends STpl
             $this->assign('total', $total);
             return $this->render("admin/caiwu_stream.html");
         } else {
-            $this->success("请输入有效用户ID", "/admin.caiwu.list");
+            $this->success("请输入有效用户ID", "/baichuan_advertisement_manage/admin.caiwu.list");
         }
     }
 
@@ -459,7 +459,7 @@ class admin_caiwu extends STpl
             $this->assign("data", $data[0]);
             return $this->render("admin/caiwu_detail.html");
         } else {
-            $this->success("请输入有效用户ID", "/admin.caiwu.list");
+            $this->success("请输入有效用户ID", "/baichuan_advertisement_manage/admin.caiwu.list");
         }
     }
 
@@ -473,7 +473,7 @@ class admin_caiwu extends STpl
             foreach ($word as $value) {
                 $re = $filter->filter(trim($value), 0);
                 if($re == false){
-                    $this->success("您输入的有敏感词请检查后，再创建", "/admin.caiwu.list") ;
+                    $this->success("您输入的有敏感词请检查后，再创建", "/baichuan_advertisement_manage/admin.caiwu.list") ;
                     exit;
                 }
             }
@@ -640,10 +640,10 @@ class admin_caiwu extends STpl
             } elseif (isset($user['creator_id']) && $user['creator_id'] > 0 && $user['creator_id'] == user_api::id()) {
                 $a->delAdUserById($_GET['uid']);
             } else {
-                $this->success("您不是该用户创建人，无法禁用", "/admin.user.list");
+                $this->success("您不是该用户创建人，无法禁用", "/baichuan_advertisement_manage/admin.user.list");
             }
         } else {
-            $this->success("请输入用户ID", "/admin.user.list");
+            $this->success("请输入用户ID", "/baichuan_advertisement_manage/admin.user.list");
         }
     }
 
@@ -659,10 +659,10 @@ class admin_caiwu extends STpl
             } elseif (isset($user->creator_id) && $user->creator_id > 0 && $user->creator_id == user_api::id()) {
                 $a->updateAdUserInfo($user);
             } else {
-                $this->success("您不是该用户创建人，无法启用", "/admin.user.list");
+                $this->success("您不是该用户创建人，无法启用", "/baichuan_advertisement_manage/admin.user.list");
             }
         } else {
-            $this->success("请输入用户ID", "/admin.user.list");
+            $this->success("请输入用户ID", "/baichuan_advertisement_manage/admin.user.list");
         }
     }
 
@@ -678,7 +678,7 @@ class admin_caiwu extends STpl
             $user = user_api::getUserById($_POST['uid']);
             $old_account = $user->account;
             if (! in_array($opcode, $_POST['code'])) {
-                $this->success("failed to operate finance", "/admin.user.Topup");
+                $this->success("failed to operate finance", "/baichuan_advertisement_manage/admin.user.Topup");
             }
             if ($_POST['code'] == 1 || $_POST['code'] == 2) {
                 $user->account += $_POST['topup'];

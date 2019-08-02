@@ -50,7 +50,7 @@ class crm_number extends STpl{
         }else{
             $group = array();
         }
-        $url['formAction'] = "/crm.number.groupsave";
+        $url['formAction'] = "/baichuan_advertisement_manage/crm.number.groupsave";
         $this->assign('group',$group);
         $this->assign('url',$url);
         return $this->render("/number/group_add_iframe.html");
@@ -129,10 +129,10 @@ class crm_number extends STpl{
                 $this->assign("authList",$authList);
                 return $this->render("/number/auth_list_by_user.html");
             }else{
-                $this->success("改用户不存在","/admin.user.list");
+                $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
             }
         }else{
-            $this->success("改用户不存在","/admin.user.list");
+            $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
         }
     }
     public function pageMyAuthList(){
@@ -144,14 +144,14 @@ class crm_number extends STpl{
             $this->assign("authList",$authList);
             return $this->render("/number/auth_list_by_user.html");
         }else{
-            $this->success("改用户不存在","/admin.user.list");
+            $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
         }
     }
     public function pageAuthAdd(){
         $condition = array();
         $condition['type'] = 1;
         $groupList = $this->numberGroupModel->getData($condition);
-        $url['formAction'] = "/crm.number.AuthSave";
+        $url['formAction'] = "/baichuan_advertisement_manage/crm.number.AuthSave";
         $this->assign('url',$url);
         $this->assign('groupList',$groupList);
         
@@ -161,10 +161,10 @@ class crm_number extends STpl{
                 $this->assign("user",$user);
                 return $this->render("/number/auth_add_iframe.html");
             }else{
-                $this->success("改用户不存在","/admin.user.list");
+                $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
             }
         }else{
-            $this->success("改用户不存在","/admin.user.list");
+            $this->success("改用户不存在","/baichuan_advertisement_manage/admin.user.list");
         }
     }
     public function pageAuthDelete(){
@@ -278,15 +278,15 @@ class crm_number extends STpl{
                 $this->assign("groupList",$groupList);
                 return $this->render("number/number_list.html");
             }else{
-                $this->success("没有找到该分组，即将返回分组列表","/crm.number.grouplist");
+                $this->success("没有找到该分组，即将返回分组列表","/baichuan_advertisement_manage/crm.number.grouplist");
             }
         }else{
-            $this->success("请选择分组，即将返回分组列表","/crm.number.grouplist");
+            $this->success("请选择分组，即将返回分组列表","/baichuan_advertisement_manage/crm.number.grouplist");
         }
     }
     public function pageAddIframe(){
         if(isset($_GET['group_id'])){
-            $url['formAction'] = "/crm.number.save";
+            $url['formAction'] = "/baichuan_advertisement_manage/crm.number.save";
             $this->assign('url',$url);
             $this->assign('get',$_GET);
             return $this->render("/number/add_iframe.html");
@@ -296,7 +296,7 @@ class crm_number extends STpl{
     }
     public function pageImportIframe(){
         if(isset($_GET['group_id'])){
-            $url['formAction'] = "/crm.number.import";
+            $url['formAction'] = "/baichuan_advertisement_manage/crm.number.import";
             $this->assign('url',$url);
             $this->assign('get',$_GET);
             return $this->render("/number/import_iframe.html");
@@ -361,7 +361,7 @@ class crm_number extends STpl{
     }
     public function pageUpdateIframe(){
         if(isset($_GET['id'])){
-            $url['formAction'] = "/crm.number.updateSave";
+            $url['formAction'] = "/baichuan_advertisement_manage/crm.number.updateSave";
             $this->assign('url',$url);
             $this->assign('get',$_GET);
             return $this->render("/number/update_iframe.html");

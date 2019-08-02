@@ -11,7 +11,7 @@ class admin_user extends STpl
         $info = user_api::info();
         $roleId = $info->role_id;
         if(!in_array($roleId,array(10000,1000,18,17,12))){
-              $this->success("没有权限",'/user',3);
+              $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
 	          exit();
         }
     }
@@ -247,7 +247,7 @@ class admin_user extends STpl
         $this->assign("totalPage", $totalPage);
         $this->assign("pageNum", $pageNum);
         //$pager = pager_api::page(pager_api::toData($usersTemp),"?page=%p&status=$status&account_type=");
-        $url['formAction'] = "/admin.user.list";
+        $url['formAction'] = "/baichuan_advertisement_manage/admin.user.list";
         $this->assign("url", $url);
         $this->assign("pager", $pager);
         $this->assign('total', $total);
@@ -360,10 +360,10 @@ class admin_user extends STpl
                 $this->assign("roleList", user_api::getRoleList());
                 return $this->render("admin/user_detail.html");
             } else {
-                $this->success("该用户不存在，或者已经被冻结", "/admin.user.list");
+                $this->success("该用户不存在，或者已经被冻结", "/baichuan_advertisement_manage/admin.user.list");
             }
         } else {
-            $this->success("请输入有效用户ID", "/admin.user.list");
+            $this->success("请输入有效用户ID", "/baichuan_advertisement_manage/admin.user.list");
         }
     }
 
@@ -634,7 +634,7 @@ class admin_user extends STpl
             }
             if ($a->updateAdUserInfo($user)) {}
             $user = user_api::getUserByName($user->user_name);
-            $this->success("successful", '/admin.user.list.' . $user->uid);
+            $this->success("successful", '/baichuan_advertisement_manage/admin.user.list.' . $user->uid);
         }
         $roleList = user_api::getRoleList();
         if (! user_api::auth("system")) {
@@ -668,14 +668,14 @@ class admin_user extends STpl
             $user = (array) $a->getAdUserById($_POST['uid']);
             if (user_api::auth("system") || user_api::auth("admin")) {
                 $a->delAdUserById($_POST['uid']);
-                $this->success("修改成功", "/admin.user.list");
+                $this->success("修改成功", "/baichuan_advertisement_manage/admin.user.list");
             } elseif (isset($user['creator_id']) && $user['creator_id'] > 0 && $user['creator_id'] == user_api::id()) {
                 $a->delAdUserById($_POST['uid']);
             } else {
-                $this->success("您不是该用户创建人，无法禁用", "/admin.user.list");
+                $this->success("您不是该用户创建人，无法禁用", "/baichuan_advertisement_manage/admin.user.list");
             }
         } else {
-            $this->success("请输入用户ID", "/admin.user.list");
+            $this->success("请输入用户ID", "/baichuan_advertisement_manage/admin.user.list");
         }
     }
 
@@ -691,10 +691,10 @@ class admin_user extends STpl
             } elseif (isset($user->creator_id) && $user->creator_id > 0 && $user->creator_id == user_api::id()) {
                 $a->updateAdUserInfo($user);
             } else {
-                $this->success("您不是该用户创建人，无法启用", "/admin.user.list");
+                $this->success("您不是该用户创建人，无法启用", "/baichuan_advertisement_manage/admin.user.list");
             }
         } else {
-            $this->success("请输入用户ID", "/admin.user.list");
+            $this->success("请输入用户ID", "/baichuan_advertisement_manage/admin.user.list");
         }
     }
 
@@ -710,7 +710,7 @@ class admin_user extends STpl
             $user = user_api::getUserById($_POST['uid']);
             $old_account = $user->account;
             if (! in_array($opcode, $_POST['code'])) {
-                $this->success("failed to operate finance", "/admin.user.Topup");
+                $this->success("failed to operate finance", "/baichuan_advertisement_manage/admin.user.Topup");
             }
             if ($_POST['code'] == 1 || $_POST['code'] == 2) {
                 $user->account += $_POST['topup'];
