@@ -26,9 +26,9 @@ class report_ad extends STpl{
         $this->typeArray = array(1=>"DPC引导的js流量",2=>"Bidder收到的js流量",3=>"Bidder投放量",4=>"DPC重定向流");
         
         $url = array();
-        $url['this'] = parent::setGet("/report.ad.list",$_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/report.ad.list",$_GET);
         $get = parent::unsetGet(array('adid','adname','page'));
-        $url['date'] = parent::setGet("/report.ad.list",$get);
+        $url['date'] = parent::setGet("/baichuan_advertisement_manage/report.ad.list",$get);
         
         $sql = " a.verified_or_not=2 ";
         $condition = array();
@@ -63,7 +63,7 @@ class report_ad extends STpl{
             $page['current'] = 1;
         }
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/report.ad.List",$page);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/report.ad.List",$page);
         
         $indexStart = ($page['current']-1)*$perpage;
         $indexEnd = ($page['current'])*$perpage;
