@@ -68,7 +68,7 @@ class dpc_ip extends STpl{
     public function pageIpGroupList(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.ip.ipgrouplist", $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.ip.ipgrouplist", $get);
 
         $condition = array();
         if( isset($_GET['key']) && strlen($_GET['key'])>0 ){
@@ -88,7 +88,7 @@ class dpc_ip extends STpl{
             $page['current'] = 1;
         }
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/dpc.ip.ipgrouplist", $get);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.ip.ipgrouplist", $get);
 
         $order = array("uptime"=>-1);
         $list = $this->mongoModel->getData($condition, ($page['current']-1)*$perpage,$perpage,$order);
@@ -130,7 +130,7 @@ class dpc_ip extends STpl{
     }
 
     public function pageIpGroupAddIframe(){
-        $url['formAction'] = "/dpc.ip.IpGroupadd?mongo=".$this->mogoName;
+        $url['formAction'] = "/baichuan_advertisement_manage/dpc.ip.IpGroupadd?mongo=".$this->mogoName;
         $this->assign('url',$url);
         return $this->render("/dpc/ipgroup_add_iframe.html");
     }
@@ -234,7 +234,7 @@ class dpc_ip extends STpl{
     public function pageIpList(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.ip.iplist", $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.ip.iplist", $get);
 
         $condition = array();
         if( isset($_GET['gid']) && strlen($_GET['gid'])>0 && isset($_GET['gname']) && strlen($_GET['gname'])>0){
@@ -270,7 +270,7 @@ class dpc_ip extends STpl{
                     $page['current'] = 1;
                 }
                 $get = parent::unsetGet('page');
-                $page['url'] = parent::setGet("/dpc.ip.iplist", $get);
+                $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.ip.iplist", $get);
                 //分组名称
                 $page['gname'] = $_GET['gname'];
                 $url['gname'] = $gname;
@@ -366,7 +366,7 @@ class dpc_ip extends STpl{
     public function pageIpAddIframe(){
         if(isset($_GET['gid']) && strlen($_GET['gid'])>0 && isset($_GET['gname']) && strlen($_GET['gname'])>0)
         {
-            $url['formAction'] = "/dpc.ip.Ipadd?mongo=".$this->mogoName;
+            $url['formAction'] = "/baichuan_advertisement_manage/dpc.ip.Ipadd?mongo=".$this->mogoName;
             $url['gid'] = $_GET['gid'];
             $url['gname'] = $_GET['gname'];
             $this->assign('url',$url);
@@ -446,7 +446,7 @@ class dpc_ip extends STpl{
                 {
                     $item['gname'] = base64_encode($gname);
                 }
-                $url['formAction'] = "/dpc.ip.IpEdit?mongo=".$this->mogoName;
+                $url['formAction'] = "/baichuan_advertisement_manage/dpc.ip.IpEdit?mongo=".$this->mogoName;
                 $this->assign('url',$url);
                 $this->assign('item',$item);
                 return $this->render("/dpc/ip_edit_iframe.html");

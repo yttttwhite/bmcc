@@ -21,7 +21,7 @@ class dpc_main extends STpl{
     
     private function dpcRedirect($redirect){
         if(!isset($redirect['url'])){
-            $redirect['url'] = "/dpc.main.host";
+            $redirect['url'] = "/baichuan_advertisement_manage/dpc.main.host";
         }
         if(!isset($redirect['msg'])){
             $redirect['msg'] = "正在准备跳转……";

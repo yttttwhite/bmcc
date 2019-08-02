@@ -64,7 +64,7 @@ class dpc_host extends STpl {
     public function pageHostList(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.host.hostlist", $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.host.hostlist", $get);
 
         $condition = array();
         if( isset($_GET['key']) && strlen($_GET['key'])>0 ){
@@ -121,7 +121,7 @@ class dpc_host extends STpl {
                 $page['current'] = 1;
             }
             $get = parent::unsetGet('page');
-            $page['url'] = parent::setGet("/dpc.host.hostlist", $get);
+            $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.host.hostlist", $get);
             
             $order = array("uptime"=>-1);
             $list = $this->mongoModel->getData($condition, ($page['current']-1)*$perpage,$perpage,$order);
@@ -168,7 +168,7 @@ class dpc_host extends STpl {
     }
 
     public function pageHostAddIframe(){
-        $url['formAction'] = "/dpc.host.Hostadd?mongo=".$this->mogoName;
+        $url['formAction'] = "/baichuan_advertisement_manage/dpc.host.Hostadd?mongo=".$this->mogoName;
         $this->assign('url',$url);
         return $this->render("/dpc/host_add_iframe.html");
     }
@@ -191,7 +191,7 @@ class dpc_host extends STpl {
                 $item['typetext'] = $result[$item['id']]['command']=='host_black'?'HOST黑名单':'HOST名白单';
                 $item['type'] = $result[$item['id']]['command']=='host_black'?'1':'2';
                 //记
-                $url['formAction'] = "/dpc.host.Hostupdate?mongo=".$this->mogoName;
+                $url['formAction'] = "/baichuan_advertisement_manage/dpc.host.Hostupdate?mongo=".$this->mogoName;
                 $this->assign('url',$url);
                 $this->assign('item',$item);
                 return $this->render("/dpc/host_edit_iframe.html");

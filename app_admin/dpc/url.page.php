@@ -65,7 +65,7 @@ class dpc_url extends STpl {
     public function pageUrlList(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.url.urllist", $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.url.urllist", $get);
 
         $condition = array();
         if( isset($_GET['key']) && strlen($_GET['key'])>0 ){
@@ -117,7 +117,7 @@ class dpc_url extends STpl {
                 $page['current'] = 1;
             }
             $get = parent::unsetGet('page');
-            $page['url'] = parent::setGet("/dpc.url.urllist", $get);
+            $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.url.urllist", $get);
             
             $order = array("_id"=>-1);
             $list = $this->mongoModel->getData($condition, ($page['current']-1)*$perpage,$perpage,$order);
@@ -164,7 +164,7 @@ class dpc_url extends STpl {
     }
 
     public function pageUrlAddIframe(){
-        $url['formAction'] = "/dpc.url.Urladd?mongo=".$this->mogoName;
+        $url['formAction'] = "/baichuan_advertisement_manage/dpc.url.Urladd?mongo=".$this->mogoName;
         $url['type'] = "";
         $this->assign('url',$url);
         return $this->render("/dpc/url_add_iframe.html");
@@ -188,7 +188,7 @@ class dpc_url extends STpl {
                 $item['typetext'] = $result[$item['id']]['command']=='url_black'?'URL黑名单':'URL白名单';
                 $item['type'] = $result[$item['id']]['command']=='url_black'?'1':'2';
                 //记
-                $url['formAction'] = "/dpc.url.Urlupdate?mongo=".$this->mogoName;
+                $url['formAction'] = "/baichuan_advertisement_manage/dpc.url.Urlupdate?mongo=".$this->mogoName;
                 $this->assign('url',$url);
                 $this->assign('item',$item);
                 return $this->render("/dpc/url_edit_iframe.html");

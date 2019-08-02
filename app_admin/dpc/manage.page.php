@@ -68,10 +68,10 @@ class dpc_manage extends STpl{
     public function pageAdslList(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.manage.adsllist", $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.adsllist", $get);
         $exportGet = $get;
         $exportGet['export'] = 1;
-        $url['export'] = parent::setGet("/dpc.manage.adsllist", $exportGet);
+        $url['export'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.adsllist", $exportGet);
         
         $condition = array();
         if( isset($_GET['key']) && strlen($_GET['key'])>0 ){
@@ -126,7 +126,7 @@ class dpc_manage extends STpl{
                 $page['current'] = 1;
             }
             $get = parent::unsetGet('page');
-            $page['url'] = parent::setGet("/dpc.manage.adsllist", $get);
+            $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.adsllist", $get);
             
             $order = array("uptime"=>-1);
             $list = $this->mongoModel->getData($condition, ($page['current']-1)*$perpage,$perpage,$order);
@@ -174,7 +174,7 @@ class dpc_manage extends STpl{
     }
     
     public function pageAdslAddIframe(){
-        $url['formAction'] = "/dpc.manage.Adsladd?mongo=".$this->mongoName;
+        $url['formAction'] = "/baichuan_advertisement_manage/dpc.manage.Adsladd?mongo=".$this->mongoName;
         $this->assign('url',$url);
         return $this->render("/dpc/adsl_add_iframe.html");
     }
@@ -182,11 +182,11 @@ class dpc_manage extends STpl{
     public function pageJsList(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.manage.jslist", $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.jslist", $get);
         $title = "JS黑名单";
         $exportGet = $get;
         $exportGet['export'] = 1;
-        $url['export'] = parent::setGet("/dpc.manage.jslist", $exportGet);
+        $url['export'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.jslist", $exportGet);
     
         $condition = array();
         if( isset($_GET['key']) && strlen($_GET['key'])>0 ){
@@ -206,7 +206,7 @@ class dpc_manage extends STpl{
             $page['current'] = 1;
         }
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/dpc.manage.jslist", $get);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.jslist", $get);
 
         $order = array("uptime"=>-1);
         $list = $this->mongoModel->getData($condition, ($page['current']-1)*$perpage,$perpage,$order);
@@ -220,7 +220,7 @@ class dpc_manage extends STpl{
     }
     
     public function pageJsAddIframe(){
-        $url['formAction'] = "/dpc.manage.jsadd?mongo=".$this->mongoName;
+        $url['formAction'] = "/baichuan_advertisement_manage/dpc.manage.jsadd?mongo=".$this->mongoName;
         $this->assign('url',$url);
         return $this->render("/dpc/js_add_iframe.html");
     }
@@ -340,7 +340,7 @@ class dpc_manage extends STpl{
                 exit();
             }
         }
-        $url['action'] = "dpc.manage.AddDomainGroup?mongo=".$this->mongoName;
+        $url['action'] = "/baichuan_advertisement_manage/dpc.manage.AddDomainGroup?mongo=".$this->mongoName;
         $this->assign('url',$url);
         return $this->render('/dpc/domain_group_add_iframe.html');
     }
@@ -348,7 +348,7 @@ class dpc_manage extends STpl{
     public function pageDomainRule(){
         $url = array();
         $get = parent::unsetGet(array('key','page'));
-        $url['search'] = parent::setGet("/dpc.manage.domainrule.".$this->mongoName, $get);
+        $url['search'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.domainrule.".$this->mongoName, $get);
         
         if(isset($_GET['group_id'])){
             $condition = array();
@@ -375,7 +375,7 @@ class dpc_manage extends STpl{
                 $page['current'] = 1;
             }
             $get = parent::unsetGet('page');
-            $page['url'] = parent::setGet("/dpc.manage.domainrule.".$this->mongoName, $get);
+            $page['url'] = parent::setGet("/baichuan_advertisement_manage/dpc.manage.domainrule.".$this->mongoName, $get);
             
             $order = array("domain"=>1);
             $list = $this->mongoModel->getData($condition, ($page['current']-1)*$perpage,$perpage,$order);
@@ -408,7 +408,7 @@ class dpc_manage extends STpl{
             $condition = array();
             $condition['table'] = "domain_group";
             $groups = $this->mongoModel->getData($condition);
-            $url['action'] = "dpc.manage.AddDomainRule?mongo=".$this->mongoName;
+            $url['action'] = "/baichuan_advertisement_manage/dpc.manage.AddDomainRule?mongo=".$this->mongoName;
             $this->assign('url',$url);
             $this->assign('groups',$groups);
             return $this->render('/dpc/domain_rule_add_iframe.html');
