@@ -69,7 +69,7 @@
                             <h4 class="panel-title">创建用户</h4>
                         </div>
                         <div class="panel-body" style="padding-right:100px; padding-top: 0;">
-                            <form action="/admin.user.edit.{$user->uid}" method="post" role="form" enctype="multipart/form-data" id="useradd">
+                            <form action="/baichuan_advertisement_manage/admin.user.edit.{$user->uid}" method="post" role="form" enctype="multipart/form-data" id="useradd">
                                 <input type="hidden" id="names" value="{$names}" />
                                 <div class="row">
                                     <div class="col-md-12">
@@ -428,7 +428,7 @@
         var MarketList, ManagerList;
         $.ajax({
             method: 'get',
-            url: "/admin.user.GetMarketList",
+            url: "/baichuan_advertisement_manage/admin.user.GetMarketList",
             success: function (rep) {
                 try {
                     MarketList = $.parseJSON(rep);
@@ -441,7 +441,7 @@
         });
         $.ajax({
             method: 'get',
-            url: "/admin.user.GetmanagerListById",
+            url: "/baichuan_advertisement_manage/admin.user.GetmanagerListById",
             success: function (rep) {
                 try {
                     ManagerList = $.parseJSON(rep);

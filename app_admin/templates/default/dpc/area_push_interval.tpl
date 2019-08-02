@@ -1,5 +1,5 @@
 <div id="pdomain_{$command_name}" class="popdiv pop_domain" style="display:block">
-<form method="post" action="/dpc.main.add.{$collection}">
+<form method="post" action="/baichuan_advertisement_manage/dpc.main.add.{$collection}">
   <div class="dbg">
      <div class="pmain">
         <div class="ptit">

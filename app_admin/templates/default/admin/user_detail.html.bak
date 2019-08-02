@@ -20,7 +20,7 @@
 					<h4 class="panel-title">用户详情</h4>
 				</div>
 				<div class="panel-body" style="padding-right:100px; padding-top: 0;">
-					<form action="/admin.user.edit.{$user->uid}" method="post" role="form" id="form">
+					<form action="/baichuan_advertisement_manage/admin.user.edit.{$user->uid}" method="post" role="form" id="form">
 						<div class="row">
 							<div class="col-md-4">
 								<h5><i class="fa fa-pencil-square"></i> 账号信息</h5>

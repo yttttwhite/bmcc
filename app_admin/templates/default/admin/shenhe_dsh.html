@@ -139,7 +139,7 @@
     function genSet(type, checke_list){
         var currentStatus = $("#status").val();
         $.ajax({
-          type: "POST", url: "/admin.shenhe.stuffSet?type="+type+"&currentStatus="+currentStatus,
+          type: "POST", url: "/baichuan_advertisement_manage/admin.shenhe.stuffSet?type="+type+"&currentStatus="+currentStatus,
             data: { 'data_list':checke_list },
             dataType:"json",
           success: function(msg){ 

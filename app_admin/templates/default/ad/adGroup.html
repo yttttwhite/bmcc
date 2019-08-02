@@ -228,7 +228,7 @@
 					 planid.push($(item).val());
 				 })
 				 $.ajax({ 
-					type: "POST", url: "/ad.group.status."+type, data: { group_ids:planid }, dataType:"json",
+					type: "POST", url: "/baichuan_advertisement_manage/ad.group.status."+type, data: { group_ids:planid }, dataType:"json",
 					success: function(msg){ 
 						location.reload();
 					}

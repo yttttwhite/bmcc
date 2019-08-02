@@ -1,5 +1,5 @@
 {if( !user_api::auth("adReadonly") )}
-    <a class="btn btn-squared btn-success" href="/ad.plan.add" style="width: 100%; background: #12C043;">新增广告计划</a>
+    <a class="btn btn-squared btn-success" href="/baichuan_advertisement_manage/ad.plan.add" style="width: 100%; background: #12C043;">新增广告计划</a>
 {/if}
     <a class="btn btn-squared btn-success" style="width: 100%; color:#333333; background: #EFEFEF; border:1px solid #CCCCCC; {if( !user_api::auth("adReadonly") )} margin-top:5px;" {/if} onclick="$('.nav-no-plan').toggle(100)">显示/隐藏 空闲用户</a>
 	<script type="text/javascript">
@@ -32,12 +32,12 @@
 	<div class="accordion">
         <h2 {if($user_id == $my->uid)} class="left-nav-title-active" {/if} style="background: #1478DC;">
         	<span style="margin-right: 10px; color:#0D6FB8; font-weight:bold;">
-        		<a href="/ad.plan?status=1&uid={$my->uid}" style="color:#FFFFFF; font-weight:normal;">
+        		<a href="/baichuan_advertisement_manage/ad.plan?status=1&uid={$my->uid}" style="color:#FFFFFF; font-weight:normal;">
 				 	我的广告
         		</a>
         	</span>
         	<span style="float:right;">
-        		<a href="/ad.plan?status=0&uid={$my->uid}" style="color:#FFFFFF; font-weight:normal;">全部广告计划</a>
+        		<a href="/baichuan_advertisement_manage/ad.plan?status=0&uid={$my->uid}" style="color:#FFFFFF; font-weight:normal;">全部广告计划</a>
         	</span>
         </h2>
 		{if( is_array($userPlans[$my->uid]) )}
@@ -47,7 +47,7 @@
 	          <ul>
 				{if($userPlan->plan_id == $plan_id)}
 					{foreach $groups as $_group}
-	            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}">{$_group->name}</a></li>
+	            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/baichuan_advertisement_manage/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}">{$_group->name}</a></li>
 					{/foreach}
 				{/if}
 	          </ul>
@@ -62,12 +62,12 @@
 				{if(is_array($userPlans[$user->uid]) )}
 			        <h2 {if($user_id == $user->uid)} class="left-nav-title-active" {/if} style="background: #1478DC;">
 			        	<span style="margin-right: 10px; color:#1478DC; font-weight:bold;">
-			        		<a href="/ad.plan?status=1&uid={$user->uid}" style="color:#FFFFFF; font-weight:normal;">
+			        		<a href="/baichuan_advertisement_manage/ad.plan?status=1&uid={$user->uid}" style="color:#FFFFFF; font-weight:normal;">
 			        			{$user->user_name}
 			        		</a>
 			        	</span>
 			        	<span style="float:right;">
-			        		<a href="/ad.plan?status=0&uid={$user->uid}" style="color:#FFFFFF; font-weight:normal;">全部广告计划</a>
+			        		<a href="/baichuan_advertisement_manage/ad.plan?status=0&uid={$user->uid}" style="color:#FFFFFF; font-weight:normal;">全部广告计划</a>
 			        	</span>
 			        </h2>
 				{else}
@@ -76,7 +76,7 @@
 			        		{$user->user_name}
 			        	</span>
 			        	<span style="float:right;">
-			        		<a href="/ad.plan?status=0&uid={$user->uid}" style="color:#0D6FB8; font-weight:normal; font-size:12px;">全部广告计划</a>
+			        		<a href="/baichuan_advertisement_manage/ad.plan?status=0&uid={$user->uid}" style="color:#0D6FB8; font-weight:normal; font-size:12px;">全部广告计划</a>
 			        	</span>
 			        </h2>
 				{/if}
@@ -88,7 +88,7 @@
 			          <ul>
 						{if($userPlan->plan_id == $plan_id)}
 							{foreach $groups as $_group}
-			            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}">{$_group->name}</a></li>
+			            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/baichuan_advertisement_manage/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}">{$_group->name}</a></li>
 							{/foreach}
 						{/if}
 			          </ul>

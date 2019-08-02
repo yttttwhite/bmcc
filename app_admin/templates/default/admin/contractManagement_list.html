@@ -254,7 +254,7 @@
         layerConfirmCb(msg,function(){
             $.ajax({
                 type: "POST",
-                url: "/admin.contract.del?contract_id="+contract_id+"&nav=7",
+                url: "/baichuan_advertisement_manage/admin.contract.del?contract_id="+contract_id+"&nav=7",
                 dataType:"json",
                 success: function(msg){
                     location.reload();
@@ -271,7 +271,7 @@
             alert($(".del_id").text());
             var contract_id = $(".del_id").text();
             $.ajax({
-                url:"/admin.contract.new?id="+contract_id,
+                url:"/baichuan_advertisement_manage/admin.contract.new?id="+contract_id,
                 type: "get",
                 success: function (res) {
 //                $("#cId").val(returnValue);

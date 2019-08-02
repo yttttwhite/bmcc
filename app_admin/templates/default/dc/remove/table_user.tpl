@@ -9,7 +9,7 @@
           </tr>
         {foreach($user_report as $k=>$v)}
             <tr>
-                <td><span><a href="/dc.main.ListUserPlan.{$v['user_id']}"></>{$k}</span></td>
+                <td><span><a href="/baichuan_advertisement_manage/dc.main.ListUserPlan.{$v['user_id']}"></>{$k}</span></td>
                 <td>{$v['show']|default:0}</td> 
                 <td>{$v['click']|default:0}</td> 
                 <td>{if(!empty($v['show']))}{round($v['click']*100/$v['show'],3)}{else}0.00{/if}%</td>
@@ -27,7 +27,7 @@
          </tr>
         {foreach($plans as $k=>$v)}
             <tr>
-                <td><span><a href="/dc.main.ReportGroup.{$v->plan_id}">{$v->plan_name}</></span></td>
+                <td><span><a href="/baichuan_advertisement_manage/dc.main.ReportGroup.{$v->plan_id}">{$v->plan_name}</></span></td>
                 <td>{$v->report->show|default:0}</td>
                 <td>{$v->report->click|default:0}</td>
                 <td>{if(!empty($v->report->show))}{round($v->report->click*100/$v->report->show,3)}%{/if}</td>
@@ -45,7 +45,7 @@
          </tr>
         {foreach($groups as $k=>$v)}
             <tr>
-                <td><span><a href="/dc.main.ReportStuffMap.{$v->group_id}">{$v->name}</></span></td>
+                <td><span><a href="/baichuan_advertisement_manage/dc.main.ReportStuffMap.{$v->group_id}">{$v->name}</></span></td>
                 <td>{$v->report->show|default:0}</td>
                 <td>{$v->report->click|default:0}</td>
                 <td>{if(!empty($v->report->show))}{round($v->report->click*100/$v->report->show,3)}%{/if}</td>

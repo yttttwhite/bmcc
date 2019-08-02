@@ -163,7 +163,7 @@
 					 planid.push($(item).val());
 				 })
 				 $.ajax({ 
-					type: "POST", url: "/admin.shenhe.stuffSet?type="+type, data: { stuff_ids:planid }, dataType:"json",
+					type: "POST", url: "/baichuan_advertisement_manage/admin.shenhe.stuffSet?type="+type, data: { stuff_ids:planid }, dataType:"json",
 					success: function(msg){ 
 						location.reload();
 					}

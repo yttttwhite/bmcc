@@ -136,7 +136,7 @@
 					 planid.push($(item).val());
 				 })
 				 $.ajax({ 
-					type: "POST", url: "/admin.shenhe.planSet?type="+type, data: { plan_ids:planid }, dataType:"json",
+					type: "POST", url: "/baichuan_advertisement_manage/admin.shenhe.planSet?type="+type, data: { plan_ids:planid }, dataType:"json",
 					success: function(msg){ 
 						location.reload();
 					}

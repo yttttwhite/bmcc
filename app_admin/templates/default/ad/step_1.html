@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <form method="post" action="/ad.plan.add.{$plan->plan_id|default:0}"  id="plan_form">
+        <form method="post" action="/baichuan_advertisement_manage/ad.plan.add.{$plan->plan_id|default:0}"  id="plan_form">
             <input type="hidden" name="plan_id" value="{$plan->plan_id|default:0}" />
             <input type="hidden"  value="0" id="hidden_price"/>
             <!-- <input type="hidden"  value="{$media_extra['channel_id']}" id="hidden_channel_id"/> -->
@@ -2028,7 +2028,7 @@ function addSubmit(){
             $.ajax({
                 cache: true,
                 type: "GET",
-                url:"/ad.plan.GetWebsites."+media_id,
+                url:"/baichuan_advertisement_manage/ad.plan.GetWebsites."+media_id,
                 async: false,
                 error: function(request) {
                     alert("获取频道出错");
@@ -2134,7 +2134,7 @@ function addSubmit(){
         $.ajax({
             cache: true,
             type: "GET",
-            url:"/ad.plan.getWebsites."+ source_id,
+            url:"/baichuan_advertisement_manage/ad.plan.getWebsites."+ source_id,
             async: false,
             error: function(request) {
                 alert("获取频道 出错");
@@ -2179,7 +2179,7 @@ function addSubmit(){
         $.ajax({
             cache: true,
             type: "GET",
-             url:"/ad.plan.GetPositions."+ channel_id+"."+unit+"."+price+"."+plan_id,
+             url:"/baichuan_advertisement_manage/ad.plan.GetPositions."+ channel_id+"."+unit+"."+price+"."+plan_id,
             async: false,
             error: function(request) {
                 alert("获取广告位出错");
@@ -2235,7 +2235,7 @@ function addSubmit(){
             $.ajax({
                 cache: true,
                 type: "GET",
-                url:"/admin.user.Getcarriers."+ carriers_id+ userType,
+                url:"/baichuan_advertisement_manage/admin.user.Getcarriers."+ carriers_id+ userType,
                 async: false,
                 error: function(request) {
                     alert("获取客户经理出错");
@@ -2271,7 +2271,7 @@ function addSubmit(){
             $.ajax({
                 cache: true,
                 type: "GET",
-                url:"/admin.user.Getcarriers."+ account_manager_id+ userType,
+                url:"/baichuan_advertisement_manage/admin.user.Getcarriers."+ account_manager_id+ userType,
                 async: false,
                 error: function(request) {
                     alert("获取广告主出错");
@@ -2304,7 +2304,7 @@ function addSubmit(){
              $.ajax({
                  cache: true,
                  type: "GET",
-                 url:"/admin.user.GetAdInfo."+ ad_id,
+                 url:"/baichuan_advertisement_manage/admin.user.GetAdInfo."+ ad_id,
                  async: false,
                  error: function(request) {
                      alert("获取广告主账号信息出错");
@@ -2390,7 +2390,7 @@ function addSubmit(){
             $.ajax({
                 cache: true,
                 type: "GET",
-                url:"/ad.plan.GetPositions."+ channel_id,
+                url:"/baichuan_advertisement_manage/ad.plan.GetPositions."+ channel_id,
                 async: false,
                 error: function(request) {
                     alert("获取广告位置出错");
@@ -2417,7 +2417,7 @@ function addSubmit(){
             $.ajax({
                 cache: true,
                 type: "GET",
-                url:"/ad.plan.GetPrice."+ position_id,
+                url:"/baichuan_advertisement_manage/ad.plan.GetPrice."+ position_id,
                 async: false,
                 error: function(request) {
                     alert("获取广告价格出错");

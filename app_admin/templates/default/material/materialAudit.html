@@ -192,7 +192,7 @@
   function genSet(type, checke_list){
       $.ajax({
           type: "POST",
-          url: "/ad.stufflibrary.UpdateStatus?type="+type,
+          url: "/baichuan_advertisement_manage/ad.stufflibrary.UpdateStatus?type="+type,
           data: { 'data_list':checke_list },
           dataType:"json",
           success: function(data){

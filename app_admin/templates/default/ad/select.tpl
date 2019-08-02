@@ -88,7 +88,7 @@
                                };
                  //  console.log(para);
                    $.ajax({
-                       url:"/dc.main.ajaxresplans",
+                       url:"/baichuan_advertisement_manage/dc.main.ajaxresplans",
                        data:para,
                        type:"GET",
                        success:function(data){
@@ -126,7 +126,7 @@
                                 };
                   //  console.log(para);
                     $.ajax({
-                        url:"/dc.main.ajaxRes",
+                        url:"/baichuan_advertisement_manage/dc.main.ajaxRes",
                         data:para,
                         type:"GET",
                         success:function(data){

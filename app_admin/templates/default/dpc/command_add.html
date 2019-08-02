@@ -45,7 +45,7 @@
                     pathname=location.pathname.split(".");
                     collection=pathname[pathname.length-1];
                 $.ajax({
-                    url:"/dpc.main.template."+collection+"."+command_name,
+                    url:"/baichuan_advertisement_manage/dpc.main.template."+collection+"."+command_name,
                     async:true,
                     type:"GET",
                     success:function(data){

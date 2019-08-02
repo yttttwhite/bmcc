@@ -148,7 +148,7 @@
 
       $.ajax({
         type: 'post',
-         url: '/admin.shenhe.prioritySet',
+         url: '/baichuan_advertisement_manage/admin.shenhe.prioritySet',
         data: {
           data_list: data_list,
           priority: $(el).val()
@@ -173,7 +173,7 @@
 
         $.ajax({
           type: 'post',
-           url: '/admin.shenhe.clickrateSet',
+           url: '/baichuan_advertisement_manage/admin.shenhe.clickrateSet',
           data: {
             data_list: data_list,
             clickrate: $(el).val()
@@ -230,7 +230,7 @@
         if(ext){ $.extend(postData,ext) }
         $.ajax({
           type: "post",
-          url: "/admin.shenhe.planSet?type="+type+"&currentStatus="+currentStatus,
+          url: "/baichuan_advertisement_manage/admin.shenhe.planSet?type="+type+"&currentStatus="+currentStatus,
             data: postData,
             dataType:"json",
           success: function(msg){

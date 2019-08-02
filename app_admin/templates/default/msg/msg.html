@@ -17,7 +17,7 @@
                     <h4 class="panel-title">筛选</h4>
                 </div>
                 <div class="panel-body">
-                    <form action="/message" method="get">
+                    <form action="/baichuan_advertisement_manage/message" method="get">
                         <div class="form-group">
                             <label class="col-sm-1"><input type="radio"  name="msg_status" value="1" {if $status ==1 }checked="checked"{/if}>未读</label>
                             <label class="col-sm-1"><input type="radio"  name="msg_status" value="0" {if $status ==0 }checked="checked"{/if}>已读</label>
@@ -90,7 +90,7 @@
  function setMsg(msg_id, msg_status, obj) {
     $.ajax({
           type: "GET", 
-          url: "/message.main.msgset", 
+          url: "/baichuan_advertisement_manage/message.main.msgset", 
           data: { 'msg_id':msg_id, 'msg_status':msg_status}, 
           dataType:"json",
           success: function(msg){ 

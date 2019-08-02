@@ -81,7 +81,7 @@ a.a12, a.a12:visited, a.a12:hover,
 .nav a:hover{background-color:#0c67c1; text-decoration:none;}
 
 /*addad*/
-.addad a{width:235px;height:35px;display:block; background:url(/assets_admin/img/btn.png) no-repeat;}
+.addad a{width:235px;height:35px;display:block; background:url(/baichuan_advertisement_manage/assets_admin/img/btn.png) no-repeat;}
 .addad a:hover{background-position:0 -45px;}
 
 /*accordion*/
@@ -108,11 +108,11 @@ a.a12, a.a12:visited, a.a12:hover,
 	color:#000;
 	cursor:pointer;
 	border-bottom:1px solid #fff;
-	background:#f2f2f2 url(/assets_admin/img/i_show.png) no-repeat 10px 10px;
+	background:#f2f2f2 url(/baichuan_advertisement_manage/assets_admin/img/i_show.png) no-repeat 10px 10px;
 	}
 .accordion h3:hover{color:#000;background-color:#f7f7f7;}
 .accordion h3.active,
-.accordion h3.sel{color:#fff;background:#1478dc url(/assets_admin/img/i_hide.png) no-repeat 10px 10px;}
+.accordion h3.sel{color:#fff;background:#1478dc url(/baichuan_advertisement_manage/assets_admin/img/i_hide.png) no-repeat 10px 10px;}
 .accordion .snav{ display:none;}
 .accordion .snav li{padding:0 10px 0 40px;height:34px; line-height:34px;border-bottom:1px solid #fff;background:#eff6fd url(/assets_admin/img/i_dotted.png) no-repeat 30px center;} 
 .accordion .snav li.nobor{border-bottom:0;}
@@ -120,12 +120,12 @@ a.a12, a.a12:visited, a.a12:hover,
 .accordion .snav li.snlsel a, .snav dd li.snlsel a:visited, .snav dd li.snlsel a:hover{font-size:14px;font-weight:normal;color:#950004;}
 .accordion .snav li.sel{font-weight:bold;}
 .accordion .snav li a, .snav dd li a:visited, .snav dd li a:hover{font-size:12px;font-weight:normal;}
-.accordion .snav li.sel{background:#fff url(/assets_admin/img/i_dotted.png) no-repeat 30px center;}
+.accordion .snav li.sel{background:#fff url(/baichuan_advertisement_manage/assets_admin/img/i_dotted.png) no-repeat 30px center;}
 .accordion .snav li.sel a, .snav dd li.sel a:visited, .snav dd li.sel a:hover{font-size:12px;font-weight:bold;color:#000;}
 
 /*step*/
 .step{clear:both;overflow:hidden;zoom:1;}
-.step .step1, .step .step2, .step .step3{width:704px;height:35px;background:url(/assets_admin/img/step.png) no-repeat;}
+.step .step1, .step .step2, .step .step3{width:704px;height:35px;background:url(/baichuan_advertisement_manage/assets_admin/img/step.png) no-repeat;}
 .step .step1{background-position:0 0;}
 .step .step2{background-position:0 -45px;}
 .step .step3{background-position:0 -90px;}
@@ -164,8 +164,8 @@ textarea.txarCode{width:550px;height:300px;}
 .comForm dd{}
 .comForm dd.tips_correct,
 .comForm dd.tips_error{margin:0 0 0 10px;padding-left:22px;height:31px;line-height:31px;}
-.comForm dd.tips_correct{background:url(/assets_admin/img/i_correct.gif) no-repeat 0 7px;}
-.comForm dd.tips_error{color:#f00;background:url(/assets_admin/img/i_error.gif) no-repeat 0 7px;}
+.comForm dd.tips_correct{background:url(/baichuan_advertisement_manage/assets_admin/img/i_correct.gif) no-repeat 0 7px;}
+.comForm dd.tips_error{color:#f00;background:url(/baichuan_advertisement_manage/assets_admin/img/i_error.gif) no-repeat 0 7px;}
 .comForm dd select{padding:5px;font-size:14px;border:1px solid #ddd;}
 label.irad,
 label.iche{height:32px;line-height:32px;}
@@ -228,7 +228,7 @@ a.abtnGray{
 	height:24px;
 	line-height:24px;
 	text-align:center;
-	background:url(/assets_admin/img/form.gif) no-repeat 0 -190px;
+	background:url(/baichuan_advertisement_manage/assets_admin/img/form.gif) no-repeat 0 -190px;
 	display:block;
 	}
 
@@ -242,7 +242,7 @@ h1.mtit{margin-top:15px;font-size:18px;clear:both;overflow:hidden;zoom:1;}
 #BgDiv{background-color:#777; position:absolute; z-index:99;left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
 .popdiv{position:absolute;height:auto; z-index:100;}
 .popdiv .dcon{padding:20px;}
-  .dbg{padding:5px;background:url(/assets_admin/img/layer_bg.png) repeat;}
+  .dbg{padding:5px;background:url(/baichuan_advertisement_manage/assets_admin/img/layer_bg.png) repeat;}
 	.pmain{border:1px solid #999;background:#fff;}
 	  .ptit{padding:0 10px;height:30px;line-height:30px;color:#000;border-top:1px solid #f5f5f5;border-bottom:1px solid #ddd;background:#eee;cursor:move;}
 	  .ptname{float:left;font-size:14px;font-weight:bold;}
@@ -283,7 +283,7 @@ dd.dwtlcld{margin-bottom:1px;padding:10px 15px 15px 15px;width:218px;border:1px 
 .dwtright{float:left;margin-left:20px;width:578px;}
 
 .pop_sucai{width:900px;margin:-330px 0 0 -150px;}/*实际内容显示区域宽度：width-52px*/
-.pscltit{margin-bottom:15px;height:32px;border:0 solid #ddd;background:url(/assets_admin/img/bg_1.gif) repeat-x bottom;}
+.pscltit{margin-bottom:15px;height:32px;border:0 solid #ddd;background:url(/baichuan_advertisement_manage/assets_admin/img/bg_1.gif) repeat-x bottom;}
 .pscltit li{float:left;margin-right:15px;padding:5px 80px;height:20px;line-height:20px;font-size:14px;border:1px solid #ddd;border-bottom:1px solid #aaa;cursor:pointer;}
 .pscltit li:hover{background:#f5f5f5;}
 .pscltit li.sel{font-weight:bold;border:1px solid #aaa;border-bottom:1px solid #fff;background:#fff;}
@@ -348,7 +348,7 @@ a.isicon{position:absolute;margin:8px 0 0 170px;width:20px; height:20px; overflo
 .tbGroup span.tbgBtn a.tbgba{float:left;padding:0 15px 0 15px;height:33px;line-height:33px;font-size:12px;color:#000;border-right:1px solid #ddd;overflow:hidden;display:inline-block;}
 
 .tbGroup span.tbgBtn a.tbgiba{width:16px;}
-.tbGroup span.tbgBtn a.tbgiba i{position:absolute;margin:7px 15px 0 0;width:16px;height:16px;display:inline-block; background:url(/assets_admin/img/toolicon.png) no-repeat;}
+.tbGroup span.tbgBtn a.tbgiba i{position:absolute;margin:7px 15px 0 0;width:16px;height:16px;display:inline-block; background:url(/baichuan_advertisement_manage/assets_admin/img/toolicon.png) no-repeat;}
 .tbGroup span.tbgBtn a.tbgiba i.iplay{ background-position:0 0;}
 .tbGroup span.tbgBtn a.tbgiba i.ipause{ background-position:0 -16px;}
 .tbGroup span.tbgBtn a.tbgiba i.ilock{ background-position:0 -80px;}
@@ -428,7 +428,7 @@ h1.logtit{font-size:22px; font-family:"微软雅黑";font-weight:normal}
 
 /*fpwstep*/
 .fwmcon{margin:auto;width:620px;min-height:310px;}
-.fpwstep{margin:20px auto 0 auto;font-size:14px;color:#333;width:620px;height:32px; line-height:32px;background:url(/assets_admin/img/fwstep.png) no-repeat;}
+.fpwstep{margin:20px auto 0 auto;font-size:14px;color:#333;width:620px;height:32px; line-height:32px;background:url(/baichuan_advertisement_manage/assets_admin/img/fwstep.png) no-repeat;}
 .step1, .step2, .step3, .step4{float:left;font-size:14px;color:#333;}
 .step1{padding-left:35px;width:115px;}
 .step2{padding-left:40px;width:140px;}
@@ -456,7 +456,7 @@ a.abtnGray{
 	height:24px;
 	line-height:24px;
 	text-align:center;
-	background:url(/assets_admin/img/form.gif) no-repeat 0 -190px;
+	background:url(/baichuan_advertisement_manage/assets_admin/img/form.gif) no-repeat 0 -190px;
 	display:block;
 	}
 	
@@ -545,7 +545,7 @@ label.rqxz{width:180px;display:inline-block;}
 	zoom:1;
 	}
 .sidelist h3 a{float:left;height:40px;padding-right:35px;line-height:40px;font-size:14px;font-weight:bold;color:#fff;text-decoration:none;display:block;}
-.sidelist h3 em.harrow{ position:absolute;right:22px;top:17px;width:7px;height:5px;display:block; background:url(/assets_admin/img//i_arrowWhite.gif) no-repeat right center;}
+.sidelist h3 em.harrow{ position:absolute;right:22px;top:17px;width:7px;height:5px;display:block; background:url(/baichuan_advertisement_manage/assets_admin/img//i_arrowWhite.gif) no-repeat right center;}
 
 .sidelist h3 a:hover{color:#fff;}
 

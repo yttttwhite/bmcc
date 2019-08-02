@@ -43,20 +43,20 @@
 	<h3 class="bort ">地域报表</h3>
 	<div class="snav" style="display: none;">
 		<ul>
-			<li><a href="/dc.main.area?type=uid"><b>总数</b></a></li>
-			<li><a href="/dc.main.area?type=pid">广告计划</a></li>
-			<li><a href="/dc.main.area?type=gid">广告组</a></li>
-			<li><a href="/dc.main.area?type=adid">广告</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=uid"><b>总数</b></a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=pid">广告计划</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=gid">广告组</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=adid">广告</a></li>
 		</ul>
 	</div>
 
 	<h3 class="bort">媒体报表</h3>
 	<div class="snav" style="display:none;">
 		<ul>
-			<li><a href="/dc.main.host?type=uid"><b>总数</b></a></li>
-			<li><a href="/dc.main.host?type=pid">广告计划</a></li>
-			<li><a href="/dc.main.host?type=gid">广告组</a></li>
-			<li><a href="/dc.main.host?type=adid">广告</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=uid"><b>总数</b></a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=pid">广告计划</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=gid">广告组</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=adid">广告</a></li>
 		</ul>
 	</div>
 *}

@@ -29,7 +29,7 @@ input.itxt{
     <!--<h1 class="mtit">修改信息</h1>-->
 {if !empty($error)}<h1 class="mtit">{$error}</h1>{/if}
     <!--基本信息-->
-	<form action="/admin.user.edit.{$user->uid}" method="post">
+	<form action="/baichuan_advertisement_manage/admin.user.edit.{$user->uid}" method="post">
 	<input type="hidden" name="uid" value="{$user->uid}" />
     <div class="comForm">
       <dl>

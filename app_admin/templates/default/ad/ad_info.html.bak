@@ -83,7 +83,7 @@
 		<div class="ad_option_bottom">
 			<div class="row">
 				<div class="col-xs-12">
-					<form action="/ad.preview.entry.{$ad['adid']}" method="get" target="_blank">
+					<form action="/baichuan_advertisement_manage/ad.preview.entry.{$ad['adid']}" method="get" target="_blank">
 						<label class="col-xs-2 control-label" for="bidder_host_select">广告预览：</label>
 						<div class="col-xs-10 form-group">
 							<input style="display:none;" type="text" name="aid" value="{$ad['adid']}"/>

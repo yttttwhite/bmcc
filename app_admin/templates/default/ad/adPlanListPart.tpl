@@ -47,7 +47,7 @@
 	          <ul>
 				{if($userPlan->plan_id == $plan_id)}
 					{foreach $groups as $_group}
-	            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}?nav=1" title="{$_group->name}">{$_group->name|wordbraek:20}</a></li>
+	            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/baichuan_advertisement_manage/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}?nav=1" title="{$_group->name}">{$_group->name|wordbraek:20}</a></li>
 					{/foreach}
 				{/if}
 	          </ul>
@@ -88,7 +88,7 @@
 			          <ul>
 						{if($userPlan->plan_id == $plan_id)}
 							{foreach $groups as $_group}
-			            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}?nav=1">{$_group->name}</a></li>
+			            	<li {if($group_id == $_group->group_id)}class="sel"{/if}><a href="/baichuan_advertisement_manage/ad.group.list.{$userPlan->plan_id}.{$_group->group_id}?nav=1">{$_group->name}</a></li>
 							{/foreach}
 						{/if}
 			          </ul>

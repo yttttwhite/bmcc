@@ -30,30 +30,30 @@
 	<h3 class="bort ">广告位报表</h3>
 	<div class="snav" style="display: none;">
 		<ul>
-			<li><a href="/dc.main.ad?type=uid"><b>总数</b></a></li>
-			<li><a href="/dc.main.ad?type=pid">广告计划</a></li>
-			<li><a href="/dc.main.ad?type=gid">广告组</a></li>
-			<li><a href="/dc.main.ad?type=adid">广告</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.ad?type=uid"><b>总数</b></a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.ad?type=pid">广告计划</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.ad?type=gid">广告组</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.ad?type=adid">广告</a></li>
 		</ul>
 	</div>
 
 	<h3 class="bort ">地域报表</h3>
 	<div class="snav" style="display: none;">
 		<ul>
-			<li><a href="/dc.main.area?type=uid"><b>总数</b></a></li>
-			<li><a href="/dc.main.area?type=pid">广告计划</a></li>
-			<li><a href="/dc.main.area?type=gid">广告组</a></li>
-			<li><a href="/dc.main.area?type=adid">广告</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=uid"><b>总数</b></a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=pid">广告计划</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=gid">广告组</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.area?type=adid">广告</a></li>
 		</ul>
 	</div>
 
 	<h3 class="bort  active" current="active" onclick="location='/baichuan_advertisement_manage/admin.user.list'">媒体报表</h3>
 	<div class="snav" style="display:block;" current="active">
 		<ul>
-			<li><a href="/dc.main.host?type=uid"><b>总数</b></a></li>
-			<li><a href="/dc.main.host?type=pid">广告计划</a></li>
-			<li><a href="/dc.main.host?type=gid">广告组</a></li>
-			<li><a href="/dc.main.host?type=adid">广告</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=uid"><b>总数</b></a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=pid">广告计划</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=gid">广告组</a></li>
+			<li><a href="/baichuan_advertisement_manage/dc.main.host?type=adid">广告</a></li>
 		</ul>
 	</div>
 
@@ -62,20 +62,20 @@
       <ul>
         <span> DSP&nbsp;  <span>
         <ul>
-            <li><a href="/dc.dsp">DSP竞价</a></li>
+            <li><a href="/baichuan_advertisement_manage/dc.dsp">DSP竞价</a></li>
         </ul>
         <span> 媒体&nbsp;  <span>
       <ul>
-        <li><a href="/dc.media">媒体收益</a></li>
-        <li><a href="dc.mediaarea">地域 报表</a></li>
-        <li><a href="dc.mediahour">小时 报表</a></li>
-        <li><a href="dc.mediaflag">渠道 报表</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.media">媒体收益</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.mediaarea">地域 报表</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.mediahour">小时 报表</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.mediaflag">渠道 报表</a></li>
       </ul>
         <span> 广告位&nbsp;  <span>
       <ul>
-        <li><a href="/dc.adv">详细广告位</a></li>
-        <li><a href="dc.advarea">地域 报表</a></li>
-        <li><a href="dc.advhour">小时 报表</a></li>
-        <li><a href="dc.advflag">渠道 报表</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.adv">详细广告位</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.advarea">地域 报表</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.advhour">小时 报表</a></li>
+        <li><a href="/baichuan_advertisement_manage/dc.advflag">渠道 报表</a></li>
       </ul>
 *}

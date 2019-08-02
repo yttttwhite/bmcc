@@ -25,8 +25,8 @@
 <script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/report.js"></script> 
 <script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/dc.js"></script> 
 <script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/jquery.ddslick.js"></script>
-<!--<script type="text/javascript" src='/assets_admin/js/echarts-2.0.0/build/echarts-plain-map.js'></script>-->
-<script type="text/javascript" src='/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts.min.js'></script>
+<!--<script type="text/javascript" src='/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts-plain-map.js'></script>-->
+<script type="text/javascript" src='/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts.min.js'></script>
 
 <!--插件：highcharts-->
 <script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/highcharts/js/highcharts.js"></script>

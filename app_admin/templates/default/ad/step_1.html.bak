@@ -32,7 +32,7 @@ height: 460px;
             </div>
       </div>
   </div>
-    <form method="post" action="/ad.plan.add.{$plan->plan_id|default:0}"  id="plan_form"> 
+    <form method="post" action="/baichuan_advertisement_manage/ad.plan.add.{$plan->plan_id|default:0}"  id="plan_form"> 
     <input type="hidden" name="plan_id" value="{$plan->plan_id|default:0}" />
     <!--基本信息-->
     <div class="comForm clear">
