@@ -24,9 +24,9 @@ class report_hostwhite extends STpl{
         $date = date('Ymd',time());
         $this->typeArray = array(1=>"DPC引导的js流量",2=>"Bidder收到的js流量",3=>"Bidder投放量",4=>"DPC重定向流");
         $url = array();
-        $url['this'] = parent::setGet("/report.hostwhite.list",$_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/report.hostwhite.list",$_GET);
         $get = parent::unsetGet(array('key','pushDate'));
-        $url['date'] = parent::setGet("/report.hostwhite.list",$get);
+        $url['date'] = parent::setGet("/baichuan_advertisement_manage/report.hostwhite.list",$get);
     
         $sql = "1=1";
         //$sql = " a.verified_or_not=2 ";
@@ -68,7 +68,7 @@ class report_hostwhite extends STpl{
             $page['current'] = 1;
         }
         $get = parent::unsetGet('page');
-        $page['url'] = parent::setGet("/report.hostwhite.List",$page);
+        $page['url'] = parent::setGet("/baichuan_advertisement_manage/report.hostwhite.List",$page);
     
         $indexStart = ($page['current']-1)*$perpage;
         $indexEnd = ($page['current'])*$perpage;

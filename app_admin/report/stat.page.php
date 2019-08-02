@@ -28,15 +28,15 @@ class report_stat extends STpl
         $this->typeArray = array(1=>"DPC引导的js流量",2=>"Bidder收到的js流量",3=>"Bidder投放量",4=>"DPC重定向流");
         
         $url = array();
-        $url['this'] = parent::setGet("/report.stat.host", $_GET);
+        $url['this'] = parent::setGet("/baichuan_advertisement_manage/report.stat.host", $_GET);
         $get = parent::unsetGet(array('date','dateStart','dateEnd','page'));
-        $url['date'] = parent::setGet("/report.stat.host", $get);
+        $url['date'] = parent::setGet("/baichuan_advertisement_manage/report.stat.host", $get);
         $get = parent::unsetGet(array('type','page'));
-        $url['type'] = parent::setGet("/report.stat.host", $get);
+        $url['type'] = parent::setGet("/baichuan_advertisement_manage/report.stat.host", $get);
         $get = parent::unsetGet(array('order','orderType'));
-        $url['order'] = parent::setGet("/report.stat.host", $get);
+        $url['order'] = parent::setGet("/baichuan_advertisement_manage/report.stat.host", $get);
         $get = parent::unsetGet(array('order','orderType','page','type'));
-        $url['detail'] = parent::setGet("/report.stat.detail", $get);
+        $url['detail'] = parent::setGet("/baichuan_advertisement_manage/report.stat.detail", $get);
         
         $condition = array();
         if( isset($_GET['dateStart']) && isset($_GET['dateEnd']) && strlen($_GET['dateStart'])>0 && strlen($_GET['dateEnd'])>0 ){
@@ -139,7 +139,7 @@ class report_stat extends STpl
                 $page['current'] = 1;
             }
             $get = parent::unsetGet('page');
-            $page['url'] = parent::setGet("/report.stat.host", $get);
+            $page['url'] = parent::setGet("/baichuan_advertisement_manage/report.stat.host", $get);
             
             $hostList = array_keys($stat);
             $indexStart = ($page['current']-1)*$perpage;
