@@ -112,22 +112,22 @@ a.a12, a.a12:visited, a.a12:hover,
 	color:#000;
 	cursor:pointer;
 	border-bottom:1px solid #fff;
-	background:#f2f2f2 url(/assets_admin/img/i_show.png) no-repeat 10px 10px;
+	background:#f2f2f2 url(/baichuan_advertisement_manage/assets_admin/img/i_show.png) no-repeat 10px 10px;
 	}
 .accordion h3:hover{color:#000;background-color:#f7f7f7;}
-.accordion h3.active, .accordion h3.sel{color:#fff; background:#666666 url(/assets_admin/img/i_hide.png) no-repeat 10px 10px;}
+.accordion h3.active, .accordion h3.sel{color:#fff; background:#666666 url(/baichuan_advertisement_manage/assets_admin/img/i_hide.png) no-repeat 10px 10px;}
 .accordion h2 a{font-family:Microsoft Yahei; font-size:12px;}
 .left-nav-title-active{background:#925EC0 !important;}
 .left-nav-title-active a, .left-nav-title-active span{color:#FFFFFF !important;}
 .accordion h3.active a{color:#FFFFFF;}
 .accordion .snav{ display:none;}
-.accordion .snav li{padding:0 10px 0 40px;height:34px; line-height:34px;border-bottom:1px solid #fff;background:#eff6fd url(/assets_admin/img/i_dotted.png) no-repeat 30px center;} 
+.accordion .snav li{padding:0 10px 0 40px;height:34px; line-height:34px;border-bottom:1px solid #fff;background:#eff6fd url(/baichuan_advertisement_manage/assets_admin/img/i_dotted.png) no-repeat 30px center;} 
 .accordion .snav li.nobor{border-bottom:0;}
 .accordion .snav li.snlsel{background:#eee;}
 .accordion .snav li.snlsel a, .snav dd li.snlsel a:visited, .snav dd li.snlsel a:hover{font-size:14px;font-weight:normal;color:#950004;}
 .accordion .snav li.sel{font-weight:bold;}
 .accordion .snav li a, .snav dd li a:visited, .snav dd li a:hover{font-size:12px;font-weight:normal;}
-.accordion .snav li.sel{background:#fff url(/assets_admin/img/i_dotted.png) no-repeat 30px center;}
+.accordion .snav li.sel{background:#fff url(/baichuan_advertisement_manage/assets_admin/img/i_dotted.png) no-repeat 30px center;}
 .accordion .snav li.sel a, .snav dd li.sel a:visited, .snav dd li.sel a:hover{font-size:12px;font-weight:bold;color:#000;}
 
 /*step*/
@@ -138,14 +138,14 @@ a.a12, a.a12:visited, a.a12:hover,
 .step .step3{background-position:0 -90px;}
 
 /* Form kongjian */
-span.sbtnb, span.sbtnb .ibtnb{float:left;height:33px;line-height:33px;font-size:14px;font-weight:bold;border:0;background:transparent url(/assets_admin/img/btn.png) no-repeat;display:block;}
+span.sbtnb, span.sbtnb .ibtnb{float:left;height:33px;line-height:33px;font-size:14px;font-weight:bold;border:0;background:transparent url(/baichuan_advertisement_manage/assets_admin/img/btn.png) no-repeat;display:block;}
 span.sbtnb{background-position:0 -90px;}
 span.sbtnb .ibtnb{padding:0 20px;color:#fff;background-position:right -262px;cursor:pointer;}
 span.sbtnb:hover{background-position:0 -133px;}
 span.sbtnb:hover .ibtnb{background-position:right -305px;}
 span.sbtnb a.ibtnb, span.sbtng a.ibtng{font-size:12px;font-weight:normal; text-decoration:none;}
 
-span.sbtng, span.sbtng .ibtng{float:left;height:33px;line-height:33px;font-size:12px;font-weight:bold;border:0;background:transparent url(/assets_admin/img/btn.png) no-repeat;display:block;}
+span.sbtng, span.sbtng .ibtng{float:left;height:33px;line-height:33px;font-size:12px;font-weight:bold;border:0;background:transparent url(/baichuan_advertisement_manage/assets_admin/img/btn.png) no-repeat;display:block;}
 span.sbtng{background-position:0 -176px;}
 span.sbtng .ibtng{padding:0 20px;color:#333;background-position:right -348px;cursor:pointer;}
 span.sbtng:hover{background-position:0 -219px;}
@@ -177,7 +177,7 @@ textarea.txarCode{width:550px;height:300px;}
 .comForm dd select{padding:5px;font-size:14px;border:1px solid #ddd;}
 label.irad,
 label.iche{height:32px;line-height:32px;}
-input.idate{background:#fff url(/assets_admin/img/i_cal.png) no-repeat right;cursor:pointer;}
+input.idate{background:#fff url(/baichuan_advertisement_manage/assets_admin/img/i_cal.png) no-repeat right;cursor:pointer;}
 .comForm .tipstxtc,
 .tipstxt{font-size:12px;color:#777;}
 .comForm .tipstxt{margin:5px 0 0 150px;}
@@ -366,7 +366,7 @@ a.isicon{position:absolute;margin:8px 0 0 170px;width:20px; height:20px; overflo
 .tbGroup span.tbgBtn a.tbgba:hover, .tbGroup span.tbgBtn a.tbgiba:hover{ background:#f5f5f5;}
 .tbGroup span.tbgBtn a.sel{font-weight:bold;color:#000; background:#fff;}
 .selMenu{position:relative;float:left;height:33px;cursor:pointer;}
-.selMenu .smtit, .selMenu .smtbg{padding:0 10px;height:34px;line-height:31px;font-size:12px;display:inline-block;border:1px solid #ddd; background:#eee url(/assets_admin/img/i_arrow.gif) no-repeat right 14px;}
+.selMenu .smtit, .selMenu .smtbg{padding:0 10px;height:34px;line-height:31px;font-size:12px;display:inline-block;border:1px solid #ddd; background:#eee url(/baichuan_advertisement_manage/assets_admin/img/i_arrow.gif) no-repeat right 14px;}
 .selMenu .smtit:hover{background-color:#f5f5f5;}
 .selMenu ul{position:absolute;top:33px;left:0;border:1px solid #ddd;border-top:0;display:none; background:#fff;}
 .selMenu ul li a{padding-left:8px;height:31px;line-height:31px;text-decoration:none;font-size:12px;color:#313131;background:#fff;display:block;}
@@ -533,7 +533,7 @@ label.rqxz{width:180px;display:inline-block;}
 
 #sidebar_help h2{ position:relative; z-index:0; height:32px; line-height:32px; font-size:14px; font-weight:normal; }
 #sidebar_help h2 a{ padding-left:20px; font-size:14px; text-decoration:none; display:block; width:auto; height:auto; color:#333;}
-#sidebar_help h2 a:hover{ color:#000; font-weight:bold; border:1px solid #b5a449; background:#fff url(/assets_admin/img//help_arrow_right.gif) 8px 12px no-repeat; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
+#sidebar_help h2 a:hover{ color:#000; font-weight:bold; border:1px solid #b5a449; background:#fff url(/baichuan_advertisement_manage/assets_admin/img//help_arrow_right.gif) 8px 12px no-repeat; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
 #sidebar_help h3{ padding-left:20px;}*/
 
 .nav{height:40px;line-height:40px;padding: 0 20px;}
