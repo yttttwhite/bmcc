@@ -1,6 +1,6 @@
 <div>
 <div class="left-nav-title bg-green">
-	<a href="dpc.main.host.{$collection}">全部分组</a>
+	<a href="/baichuan_advertisement_manage/dpc.main.host.{$collection}">全部分组</a>
 </div>
 <div class="left-nav">
 <form id="consumerGroupForm" name="consumerGroup" method="post" action="">
@@ -8,7 +8,7 @@
 	{foreach $groupList as $group}
 		<li>
 			<label>
-				<a href="dpc.main.host.{$collection}?gid={$group['group_id']}">{$group['group_name']}</a>
+				<a href="/baichuan_advertisement_manage/dpc.main.host.{$collection}?gid={$group['group_id']}">{$group['group_name']}</a>
 			</label>
 		</li>
 	</ul>

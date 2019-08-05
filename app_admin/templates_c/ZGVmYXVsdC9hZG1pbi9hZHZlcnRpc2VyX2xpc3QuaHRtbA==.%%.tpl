@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-{part "/main.main.header"}
+<?php echo htmlspecialchars(tpl_function_part("/main.main.header"), ENT_QUOTES); ?>
 </head>
 <body>
-{part "/main.main.nav.admin"}
+<?php echo htmlspecialchars(tpl_function_part("/main.main.nav.admin"), ENT_QUOTES); ?>
 <!--main-->
 <div class="main" >
 	<nav class="side">
 		<div class="accordion" style="margin-top: 0;">
 			<h2 style="background: #1478DC;">账户类型</h2>
-			<a href="/baichuan_advertisement_manage/admin.advertiser.list?admin={$admin}&nav=3">
-				<!--<h3 class="bort {if(!isset($GET['role']))}active{/if}">全部账户</h3>-->
-				<h3 class="bort {if(empty($GET['role']))}active{/if}">全部账户</h3>
+			<a href="/baichuan_advertisement_manage/admin.advertiser.list?admin=<?php echo htmlspecialchars(Tpl::$_tpl_vars["admin"], ENT_QUOTES); ?>&nav=3">
+				<!--<h3 class="bort <?php if(!isset(Tpl::$_tpl_vars["GET"]['role'])){; ?>active<?php }; ?>">全部账户</h3>-->
+				<h3 class="bort <?php if(empty(Tpl::$_tpl_vars["GET"]['role'])){; ?>active<?php }; ?>">全部账户</h3>
 			</a>
-			{foreach($roleList as $roleId=>$role)}
-				<a href="/baichuan_advertisement_manage/admin.advertiser.list?role={$roleId}&admin={$admin}&nav=3">
-					<h3 class="bort {if(isset($GET['role'])&&$GET['role']==$roleId)}active{/if}">{$role['name']}</h3>
+			<?php foreach(Tpl::$_tpl_vars["roleList"] as Tpl::$_tpl_vars["roleId"]=>Tpl::$_tpl_vars["role"]){; ?>
+				<a href="/baichuan_advertisement_manage/admin.advertiser.list?role=<?php echo htmlspecialchars(Tpl::$_tpl_vars["roleId"], ENT_QUOTES); ?>&admin=<?php echo htmlspecialchars(Tpl::$_tpl_vars["admin"], ENT_QUOTES); ?>&nav=3">
+					<h3 class="bort <?php if(isset(Tpl::$_tpl_vars["GET"]['role'])&&Tpl::$_tpl_vars["GET"]['role']==Tpl::$_tpl_vars["roleId"]){; ?>active<?php }; ?>"><?php echo htmlspecialchars(Tpl::$_tpl_vars["role"]['name'], ENT_QUOTES); ?></h3>
 				</a>
-			{/foreach}
+			<?php }; ?>
 		</div>
 	</nav>
 	
@@ -30,7 +30,7 @@
                 <i class="fa fa-angle-double-right" ></i>
                 <a href="/baichuan_advertisement_manage/admin.advertiser.list?nav=3">投放概况</a>
                 <i class="fa fa-angle-double-right" ></i>
-				<span>{$roleList[$GET['role']]['name']|default:'全部账户'}</span>
+				<span><?php echo htmlspecialchars(tpl_modifier_default(Tpl::$_tpl_vars["roleList"][Tpl::$_tpl_vars["GET"]['role']]['name'],'全部账户'), ENT_QUOTES); ?></span>
             </div>
         </div>
         <div class="clear"></div>
@@ -42,8 +42,8 @@
 				<form action="" method="get">
 					<div class="form-group">
 						<div class="input-group">
-							<input type="hidden" name="role" value="{$_GET['role']}">
-							<input type="text" class="form-control" name="key" value="{$_GET['key']}" placeholder="用户名">
+							<input type="hidden" name="role" value="<?php echo htmlspecialchars(Tpl::$_tpl_vars["_GET"]['role'], ENT_QUOTES); ?>">
+							<input type="text" class="form-control" name="key" value="<?php echo htmlspecialchars(Tpl::$_tpl_vars["_GET"]['key'], ENT_QUOTES); ?>" placeholder="用户名">
 							<input type="hidden" name="nav" class="form-control input-small"  value="5"/>
 							<span class="input-group-btn">
 								<input class="btn btn-success btn-squared" type="submit" value="搜索">
@@ -52,15 +52,15 @@
 					</div>
 					
 					<div>
-						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?nav=3&role={$GET['role']}">全部</a>
-						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?planStatus=1&nav=3&role={$GET['role']}">有广告投放</a>
-						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?planVerify=1&nav=3&role={$GET['role']}">有广告待审</a>
+						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?nav=3&role=<?php echo htmlspecialchars(Tpl::$_tpl_vars["GET"]['role'], ENT_QUOTES); ?>">全部</a>
+						<a class="btn btn-xs btn-squared btn-default" href="admin.advertiser.list?planStatus=1&nav=3&role=<?php echo htmlspecialchars(Tpl::$_tpl_vars["GET"]['role'], ENT_QUOTES); ?>">有广告投放</a>
+						<a class="btn btn-xs btn-squared btn-default" href="admin.advertiser.list?planVerify=1&nav=3&role=<?php echo htmlspecialchars(Tpl::$_tpl_vars["GET"]['role'], ENT_QUOTES); ?>">有广告待审</a>
 						<a class="btn btn-xs btn-squared btn-default" href="#" onclick="hideItem()">隐藏项目</a>
 						<label class="radio-inline" style="margin-top: 10px !important;">
-							<input type="radio" class="flat-red" name="keyType" value="name" {if($_GET['keyType']=="name" or empty($_GET['keyType']))}checked="checked"{/if}>  搜索用户
+							<input type="radio" class="flat-red" name="keyType" value="name" <?php if(Tpl::$_tpl_vars["_GET"]['keyType']=="name" or empty(Tpl::$_tpl_vars["_GET"]['keyType'])){; ?>checked="checked"<?php }; ?>>  搜索用户
 						</label>
 						<label class="radio-inline" style="margin-top: 10px !important;">
-							<input type="radio" class="flat-red" name="keyType" {if($_GET['keyType']=="company")}checked="checked"{/if} value="company">  搜索公司
+							<input type="radio" class="flat-red" name="keyType" <?php if(Tpl::$_tpl_vars["_GET"]['keyType']=="company"){; ?>checked="checked"<?php }; ?> value="company">  搜索公司
 						</label>
 					</div>
 					<style>
@@ -100,12 +100,12 @@
 					<td style="text-align:center;" class="hidden-item"></td>
 					<td style="text-align:center;" class="hidden-item"></td>
 					<td style="text-align:center;" class="hidden-item"></td>
-					<td style="text-align:center;">{$summary['total']}</td>
-					<td style="text-align:center;">{$summary['verify_1']}</td>
-					<td style="text-align:center;">{$summary['verify_2']}</td>
-					<td style="text-align:center;">{$summary['enable_1']}</td>
-					<td style="text-align:center;">{$sum_cpm}</td>
-					<td style="text-align:center;">{$summary['total_cpt']}</td>
+					<td style="text-align:center;"><?php echo htmlspecialchars(Tpl::$_tpl_vars["summary"]['total'], ENT_QUOTES); ?></td>
+					<td style="text-align:center;"><?php echo htmlspecialchars(Tpl::$_tpl_vars["summary"]['verify_1'], ENT_QUOTES); ?></td>
+					<td style="text-align:center;"><?php echo htmlspecialchars(Tpl::$_tpl_vars["summary"]['verify_2'], ENT_QUOTES); ?></td>
+					<td style="text-align:center;"><?php echo htmlspecialchars(Tpl::$_tpl_vars["summary"]['enable_1'], ENT_QUOTES); ?></td>
+					<td style="text-align:center;"><?php echo htmlspecialchars(Tpl::$_tpl_vars["sum_cpm"], ENT_QUOTES); ?></td>
+					<td style="text-align:center;"><?php echo htmlspecialchars(Tpl::$_tpl_vars["summary"]['total_cpt'], ENT_QUOTES); ?></td>
 					<td style="text-align:center;"></td>
 				</tr>
 			</tfoot>
@@ -125,14 +125,14 @@ function deleteUserByUid(uid){
     layerConfirmGet(url, msg);
 }
 </script>
-{part "/main.main.footer"}
+<?php echo htmlspecialchars(tpl_function_part("/main.main.footer"), ENT_QUOTES); ?>
 </body>
 <script>
 	$(function(){
 		var rowsTable={
 			dataArr:[],            //将$list的php变量转化为json
 			adArr:null,            //将$adList的php变量转化为json
-			currentUid:"{$currentUser->uid}", //当前登录平台的用户
+			currentUid:"<?php echo htmlspecialchars(Tpl::$_tpl_vars["currentUser"]->uid, ENT_QUOTES); ?>", //当前登录平台的用户
 			parentDom:$("#layoutActive tbody"), //需要动态渲染的上级dom
 			/**
 			 * 初始化
@@ -148,22 +148,22 @@ function deleteUserByUid(uid){
 			 */
 			changeDataPhpRoleToObject:function(){
 				this.adArr=new Object();
-				{foreach $adList as $key=>$val}
-					{if is_array($val)}var obj=new Object();{foreach $val as $key1=>$val1}obj["{$key1}"]="{$val1}";{/foreach}this.adArr["{$key}"]=obj;{else}this.adArr["{$key}"]="{$val}";
-					{/if}
-				{/foreach}
+				<?php foreach(Tpl::$_tpl_vars["adList"] as Tpl::$_tpl_vars["key"]=>Tpl::$_tpl_vars["val"]){; ?>
+					<?php if(is_array(Tpl::$_tpl_vars["val"])){; ?>var obj=new Object();<?php foreach(Tpl::$_tpl_vars["val"] as Tpl::$_tpl_vars["key1"]=>Tpl::$_tpl_vars["val1"]){; ?>obj["<?php echo htmlspecialchars(Tpl::$_tpl_vars["key1"], ENT_QUOTES); ?>"]="<?php echo htmlspecialchars(Tpl::$_tpl_vars["val1"], ENT_QUOTES); ?>";<?php }; ?>this.adArr["<?php echo htmlspecialchars(Tpl::$_tpl_vars["key"], ENT_QUOTES); ?>"]=obj;<?php }else{; ?>this.adArr["<?php echo htmlspecialchars(Tpl::$_tpl_vars["key"], ENT_QUOTES); ?>"]="<?php echo htmlspecialchars(Tpl::$_tpl_vars["val"], ENT_QUOTES); ?>";
+					<?php }; ?>
+				<?php }; ?>
 			},
 			/**
 			 * 将$list的php变量转化为json
 			 */
 			changeDataPhpToObject:function(){
-				{foreach $list as $item}
-					var dataObj= new Object();{foreach $item as $key=>$val}dataObj["{$key}"]="{$val}";{/foreach}this.dataArr.push(dataObj);
-				{/foreach}
+				<?php foreach(Tpl::$_tpl_vars["list"] as Tpl::$_tpl_vars["item"]){; ?>
+					var dataObj= new Object();<?php foreach(Tpl::$_tpl_vars["item"] as Tpl::$_tpl_vars["key"]=>Tpl::$_tpl_vars["val"]){; ?>dataObj["<?php echo htmlspecialchars(Tpl::$_tpl_vars["key"], ENT_QUOTES); ?>"]="<?php echo htmlspecialchars(Tpl::$_tpl_vars["val"], ENT_QUOTES); ?>";<?php }; ?>this.dataArr.push(dataObj);
+				<?php }; ?>
 			},
 			/**
 			 * 判断是否为上级
-			 * @param {Object} uid
+			 * @param <?php echo htmlspecialchars(Object, ENT_QUOTES); ?> uid
 			 */
 			isParent:function(uid){
 				var that=this,bol=false;
@@ -177,9 +177,9 @@ function deleteUserByUid(uid){
 			},
 			/**
 			 * 
-			 * @param {Object} data 当前数据
-			 * @param {Object} bol  是否有分支
-			 * @param {Object} index 当前分支级别
+			 * @param <?php echo htmlspecialchars(Object, ENT_QUOTES); ?> data 当前数据
+			 * @param <?php echo htmlspecialchars(Object, ENT_QUOTES); ?> bol  是否有分支
+			 * @param <?php echo htmlspecialchars(Object, ENT_QUOTES); ?> index 当前分支级别
 			 */
 			layoutTr:function(data, bol ,index){
 				return '<tr data-level='+index+' '+(index?("show-for="+data.creator_id):"")+' class='+(index?"hidden-item":"")+'>'+
@@ -238,8 +238,8 @@ function deleteUserByUid(uid){
 			},
 			/**
 			 * 递归渲染table
-			 * @param {Object} uid
-			 * @param {Object} index
+			 * @param <?php echo htmlspecialchars(Object, ENT_QUOTES); ?> uid
+			 * @param <?php echo htmlspecialchars(Object, ENT_QUOTES); ?> index
 			 */
 			layoutTable:function(uid,index){
 				var index_=index?index:0;
