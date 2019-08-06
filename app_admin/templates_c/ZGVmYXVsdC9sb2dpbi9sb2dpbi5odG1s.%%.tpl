@@ -2,10 +2,10 @@
 <html>
     <head>
         <meta https-equiv="Content-Type" content="text/html; charset=utf-8" />
-        {part "/main.main.header"}
+        <?php echo htmlspecialchars(tpl_function_part("/main.main.header"), ENT_QUOTES); ?>
 		<style>
 			html, body{ height:100%; }
-			.full-bg{ position: fixed; width: 100%; height: 100%; z-index: -10; background: rgba(0,0,0,0.5);}
+			.full-bg{ position: fixed; width: 100%; height: 100%; z-index: -10; background: rgba(0,0,0,0.5)}
 			.login-top{ width:100%; position:absolute; background:#FFFFFF; height: 70px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);  -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5); }
 			.login-top .top{ float: none; margin: auto; width: 61.8%; min-width:840px; height: 100%; }
 			.login-block{ width: 61.8%; height:480px; margin:auto; min-width:840px; }
@@ -20,7 +20,7 @@
 		<div class="login-top">
 			<div class="top">
                 <div class="tlogo">
-                    <img src="{$loginLogo}" alt="广告推广平台" height="50"/>
+                    <img src="<?php echo htmlspecialchars(Tpl::$_tpl_vars["loginLogo"], ENT_QUOTES); ?>" alt="广告推广平台" height="50"/>
                 </div>
             </div>
 		</div>
@@ -32,10 +32,10 @@
                         <span style="color: red;">浏览器版本过低，部分功能无法使用，建议升级浏览器</span><br><br>
                     <![endif]-->
 		            <h1 class="logtit" style="font-size:14px;">用户登录:
-                        {if !empty($error)}
+                        <?php if(!empty(Tpl::$_tpl_vars["error"])){; ?>
 		                <font color="red">
-		                    {$error}
-		                </font>{/if}
+		                    <?php echo htmlspecialchars(Tpl::$_tpl_vars["error"], ENT_QUOTES); ?>
+		                </font><?php }; ?>
 		            </h1>
 		            <form class="logfr" action="/baichuan_advertisement_manage/user.main.login" method="post" id="keydown">
 		                <div>
@@ -65,7 +65,7 @@
 		        </div>
 			</div>
         </div>
-        {part "/main.main.loginfooter"}
+        <?php echo htmlspecialchars(tpl_function_part("/main.main.loginfooter"), ENT_QUOTES); ?>
         <script src="/baichuan_advertisement_manage/assets_admin/js/jquery.md5.js"></script>
         <script src="/baichuan_advertisement_manage/assets_admin/js/base64.js"></script>
 
