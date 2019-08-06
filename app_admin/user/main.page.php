@@ -19,7 +19,7 @@ class user_main extends STpl
     public function pageLogin($inPath)
     {
         if (user_api::loginStatus()) {
-            $this->success('已经登录', '/account.main.detail');
+            $this->success('已经登录', '/baichuan_advertisement_manage/account.main.detail');
         } else {
             if (!empty($_POST)) {
                 if (strtolower(trim($_POST['code'])) !== strtolower($_SESSION['authnum_session'])) {

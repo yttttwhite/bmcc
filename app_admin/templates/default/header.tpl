@@ -14,30 +14,30 @@
 
 <!-- JS框架 -->
 <!--[if lte IE 8]>
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/jquery1.9.0.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/js/jquery.min.js"></script>
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/jquery-ui-1.10.3.custom.min.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/jquery.form.min.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/thickbox_plus.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/jquery.base64.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/formSel.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/report.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/dc.js"></script> 
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/jquery.ddslick.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/v5/js/jquery.min.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/thickbox_plus.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/jquery.base64.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/formSel.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/report.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/dc.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/jquery.ddslick.js"></script>
 <!--<script type="text/javascript" src='/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts-plain-map.js'></script>-->
-<script type="text/javascript" src='/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts.min.js'></script>
+<script type="text/javascript" src='/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts.min.js'></script>
 
 <!--插件：highcharts-->
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/highcharts/js/highcharts.js"></script>
-<script type="text/javascript" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/highcharts/js/modules/exporting.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/v5/plugins/highcharts/js/highcharts.js"></script>
+<script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/v5/plugins/highcharts/js/modules/exporting.js"></script>
 <!--插件：bootstrap-->
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/js/bootstrap.min.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/v5/js/bootstrap.min.js"></script>
 <!--插件：icheck-->
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/iCheck/jquery.icheck.min.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/iCheck/jquery.icheck.min.js"></script>
 <!--插件：jquery-validation-->
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/js/form-validation.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/v5/js/form-validation.js"></script>
 <script type="text/javascript">
 (function(factory){ if ( typeof define === "function" && define.amd ) {
 define(["jquery", "../jquery.validate"], factory );}else{ factory( jQuery );}
@@ -62,15 +62,15 @@ define(["jquery", "../jquery.validate"], factory );}else{ factory( jQuery );}
 }));
 </script>
 <!--插件：jquery-layer-->
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/layer/layer.min.js"></script>
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/js/layer/layer.js"></script>
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/js/custom.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/js/layer/layer.min.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/js/layer/layer.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/v5/js/custom.js"></script>
 <!-- C3框架 -->
-<link href="/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/c3.min.css" rel="stylesheet">
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/c3.min.js"></script>
-<script src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/d3.min.js"></script>
+<link href="/assets_admin/v5/plugins/c3/c3.min.css" rel="stylesheet">
+<script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/c3.min.js"></script>
+<script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/d3.min.js"></script>
 
 <!--前端样式-->
-<link href="/baichuan_advertisement_manage/assets_admin/v5/css/styles.css" rel="stylesheet">
-<link href="/baichuan_advertisement_manage/assets_admin/v5/css/custom.css" rel="stylesheet">
-<link href="/baichuan_advertisement_manage/assets_admin/v5/css/bcdata.css" rel="stylesheet">
+<link href="/assets_admin/v5/css/styles.css" rel="stylesheet">
+<link href="/assets_admin/v5/css/custom.css" rel="stylesheet">
+<link href="/assets_admin/v5/css/bcdata.css" rel="stylesheet">

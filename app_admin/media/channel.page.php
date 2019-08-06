@@ -2,7 +2,7 @@
 class media_channel extends STpl{
     public function __construct(){
         if(!user_api::auth("media")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
     }

@@ -7,7 +7,7 @@ class dpc_manage extends STpl{
 
     function __construct($inPath){
         if(!user_api::auth("dpc") && !user_api::auth("dpcRule")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
         

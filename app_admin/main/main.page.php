@@ -54,9 +54,9 @@ class main_main extends STpl{
 		$this->assign("currentUser",$currentUser);
 		$currentUrl = explode('?',$_SERVER['REQUEST_URI']);
 		$nav = 0;
-		if($currentUrl[0] =="/admin.contract.Audited"){
+		if($currentUrl[0] =="/baichuan_advertisement_manage/admin.contract.Audited"){
 			$nav =7;
-		}elseif($currentUrl[0] =="/admin.caiwu.list"){
+		}elseif($currentUrl[0] =="/baichuan_advertisement_manage/admin.caiwu.list"){
 			$nav =5;
 		}else{
 			if(isset($_GET['nav']) && $_GET['nav'] >0){

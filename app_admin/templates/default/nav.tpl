@@ -24,7 +24,7 @@
 </script>
 <div class="top">
 	<div class="tlogo">
-		<img src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/img/{$logo}" alt="广告推广平台" />
+		<img src="/baichuan_advertisement_manage/assets_admin/img/{$logo}" alt="广告推广平台" />
 	</div>
 	<div class="tr">
 		<div class="weluser">
@@ -51,11 +51,11 @@
 		</div>
 		<div class="trlink">
 			<a href="#">
-				<img class="fl" src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/img/i_email.gif" alt="消息" />
+				<img class="fl" src="/baichuan_advertisement_manage/assets_admin/img/i_email.gif" alt="消息" />
 				<span class="trlmsg"></span>
 			</a>
 			<a href="#">
-				<img src="/baichuan_advertisement_manage/baichuan_advertisement_manage/assets_admin/img/i_help.gif" alt="帮助" align="absmiddle" />
+				<img src="/baichuan_advertisement_manage/assets_admin/img/i_help.gif" alt="帮助" align="absmiddle" />
 			</a>
 		</div>
 	</div>

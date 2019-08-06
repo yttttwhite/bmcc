@@ -3,7 +3,7 @@ class media_position extends STpl{
     public function __construct($inPath){
 	$exclude_arr = array("getwebsites","getpositions","getprice");
         if(!user_api::auth("media")&& !in_array($inPath[2],$exclude_arr)){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
     }
