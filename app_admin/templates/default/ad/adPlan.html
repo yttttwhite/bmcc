@@ -354,20 +354,20 @@
       <div class="cp-page-select">
         <ul class="cp-page-ul">
           {if($pageNum<4)}
-          <li><a {if($pageNum==1)}style="background:white;color:black" {/if} {if(!isset($pageNum))}style="background:white;color:black" {/if} {if($maxPage<1)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=1&pageSel={$pageSel}&key={$key}">1</a></li>
-          <li><a {if($pageNum==2)}style="background:white;color:black" {/if} {if($maxPage<2)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=2&pageSel={$pageSel}&key={$key}">2</a></li>
-          <li><a {if($pageNum==3)}style="background:white;color:black" {/if} {if($maxPage<3)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=3&pageSel={$pageSel}&key={$key}">3</a></li>
-          <li><a {if($pageNum==4)}style="background:white;color:black" {/if} {if($maxPage<4)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=4&pageSel={$pageSel}&key={$key}">4</a></li>
-          <li><a {if($pageNum==5)}style="background:white;color:black" {/if} {if($maxPage<5)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=5&pageSel={$pageSel}&key={$key}">5</a></li>
-          <li><a {if($maxPage<6)}style="display:none;"{/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">&raquo;</a></li>
+          <li><a {if($pageNum==1)}style="background:white;color:black" {/if} {if(!isset($pageNum))}style="background:white;color:black" {/if} {if($maxPage<1)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=1&pageSel={$pageSel}&key={$key}">1</a></li>
+          <li><a {if($pageNum==2)}style="background:white;color:black" {/if} {if($maxPage<2)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=2&pageSel={$pageSel}&key={$key}">2</a></li>
+          <li><a {if($pageNum==3)}style="background:white;color:black" {/if} {if($maxPage<3)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=3&pageSel={$pageSel}&key={$key}">3</a></li>
+          <li><a {if($pageNum==4)}style="background:white;color:black" {/if} {if($maxPage<4)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=4&pageSel={$pageSel}&key={$key}">4</a></li>
+          <li><a {if($pageNum==5)}style="background:white;color:black" {/if} {if($maxPage<5)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum=5&pageSel={$pageSel}&key={$key}">5</a></li>
+          <li><a {if($maxPage<6)}style="display:none;"{/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">&raquo;</a></li>
           {else}
-          <li><a  href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-1}&pageSel={$pageSel}&key={$key}">&laquo;</a></li>
-          <li><a  href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-2}&pageSel={$pageSel}&key={$key}">{$pageNum-2}</a></li>
-          <li><a  href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-1}&pageSel={$pageSel}&key={$key}">{$pageNum-1}</a></li>
-          <li><a style="background:white;color:black"  {if($maxPage<$pageNum)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum}&pageSel={$pageSel}&key={$key}">{$pageNum}</a></li>
-          <li><a {if($maxPage<$pageNum+1)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">{$pageNum+1}</a></li>
-          <li><a {if($maxPage<$pageNum+2)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+2}&pageSel={$pageSel}&key={$key}">{$pageNum+2}</a></li>
-          <li><a {if($maxPage<$pageNum+1)}style="display:none;" {/if} href="ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">&raquo;</a></li>
+          <li><a  href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-1}&pageSel={$pageSel}&key={$key}">&laquo;</a></li>
+          <li><a  href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-2}&pageSel={$pageSel}&key={$key}">{$pageNum-2}</a></li>
+          <li><a  href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum-1}&pageSel={$pageSel}&key={$key}">{$pageNum-1}</a></li>
+          <li><a style="background:white;color:black"  {if($maxPage<$pageNum)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum}&pageSel={$pageSel}&key={$key}">{$pageNum}</a></li>
+          <li><a {if($maxPage<$pageNum+1)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">{$pageNum+1}</a></li>
+          <li><a {if($maxPage<$pageNum+2)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+2}&pageSel={$pageSel}&key={$key}">{$pageNum+2}</a></li>
+          <li><a {if($maxPage<$pageNum+1)}style="display:none;" {/if} href="/baichuan_advertisement_manage/ad.plan?start={$start}&end={$end}&status={$status}&uid={$userId}&pageNum={$pageNum+1}&pageSel={$pageSel}&key={$key}">&raquo;</a></li>
           {/if}
         </ul>
       </div>

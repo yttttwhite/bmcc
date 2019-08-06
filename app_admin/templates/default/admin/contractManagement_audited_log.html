@@ -72,8 +72,8 @@
 							{foreach $list as $item}
 							<tr>
 								<td style="text-align:center;">{$item['id']}</td>
-								<td style="text-align:left;"><a href="admin.user.detail?uid={$item['operate_uid']}">{$item['operate_uid']}</a></td>
-								<td style="text-align:left;"><a href="admin.user.detail?uid={$item['target_uid']}">{$item['target_uid']}</a></td>
+								<td style="text-align:left;"><a href="/baichuan_advertisement_manage/admin.user.detail?uid={$item['operate_uid']}">{$item['operate_uid']}</a></td>
+								<td style="text-align:left;"><a href="/baichuan_advertisement_manage/admin.user.detail?uid={$item['target_uid']}">{$item['target_uid']}</a></td>
 								<td style="text-align:left;">{$item['object_id']}</td>
 								<td style="text-align:center;">{$item['operate_num']}</td>
 								<td style="text-align:center;">{date('Y-m-d H:i:s',$item['time'])}</td>

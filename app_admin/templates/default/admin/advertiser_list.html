@@ -53,8 +53,8 @@
 					
 					<div>
 						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?nav=3&role={$GET['role']}">全部</a>
-						<a class="btn btn-xs btn-squared btn-default" href="admin.advertiser.list?planStatus=1&nav=3&role={$GET['role']}">有广告投放</a>
-						<a class="btn btn-xs btn-squared btn-default" href="admin.advertiser.list?planVerify=1&nav=3&role={$GET['role']}">有广告待审</a>
+						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?planStatus=1&nav=3&role={$GET['role']}">有广告投放</a>
+						<a class="btn btn-xs btn-squared btn-default" href="/baichuan_advertisement_manage/admin.advertiser.list?planVerify=1&nav=3&role={$GET['role']}">有广告待审</a>
 						<a class="btn btn-xs btn-squared btn-default" href="#" onclick="hideItem()">隐藏项目</a>
 						<label class="radio-inline" style="margin-top: 10px !important;">
 							<input type="radio" class="flat-red" name="keyType" value="name" {if($_GET['keyType']=="name" or empty($_GET['keyType']))}checked="checked"{/if}>  搜索用户

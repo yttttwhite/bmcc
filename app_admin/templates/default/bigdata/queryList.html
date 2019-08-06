@@ -30,7 +30,7 @@
 							{foreach $queryList as $query}
 								<tr>
 									<td>{$query['id']}</td>
-									<td><a href="bigdata.main.queryDetail?qid={$query['id']}">{$query['query_name']}</a></td>
+									<td><a href="/baichuan_advertisement_manage/bigdata.main.queryDetail?qid={$query['id']}">{$query['query_name']}</a></td>
 									<td>{$typeInfo[$query['type']]}</td>
 									<td>{if(strlen($query['count'])>0)}$query['count']{else}-{/if}</td>
 									<td>{$statusInfo[$query['query_status']]}</td>

@@ -68,20 +68,20 @@
 			{/if}
 		</td>
 		<td class="tac">
-			<a href="admin.user.edit.{$_stuff->uid}" target="_blank">
+			<a href="/baichuan_advertisement_manage/admin.user.edit.{$_stuff->uid}" target="_blank">
 			{$adSopnsorArray[$_stuff->uid]}
 			</a>
 			<br>
 			<span style="color:#666666;">{$adSopnsorList[$_stuff->uid]->host}</span>
 		</td>
         <td style="max-width: 120px;word-break: break-all;word-break: break-word;">
-        	<a href="ad.plan.list.{$_stuff->plan_id}" target="_blank"> {$_stuff->plan_name} </a>
+        	<a href="/baichuan_advertisement_manage/ad.plan.list.{$_stuff->plan_id}" target="_blank"> {$_stuff->plan_name} </a>
           <hr style="margin: 4px;border-top: 1px solid #333333;">     
-        	<a href="ad.group.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank"> {$_stuff->group_name} </a>
+        	<a href="/baichuan_advertisement_manage/ad.group.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank"> {$_stuff->group_name} </a>
         </td>
 
         <td class="textflow" style="max-width: 110px;word-break: break-all;word-break: break-word;" title="{$_stuff->adName}">
-        	<a href="ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank">
+        	<a href="/baichuan_advertisement_manage/ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}" target="_blank">
         	{$_stuff->adName}
         	</a>
         </td>
@@ -89,7 +89,7 @@
         <td>{if $_stuff->verified_or_not==1}待审{elseif $_stuff->verified_or_not==2}通过{elseif $_stuff->verified_or_not==3}未通过{/if}</td>
 		<td>{$_stuff->last_operator}</td>
       	<td>
-      		<a href="ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}?nav=4" target="_blank">修改</a>
+      		<a href="/baichuan_advertisement_manage/ad.stuff.add.{$_stuff->plan_id}.{$_stuff->group_id}?nav=4" target="_blank">修改</a>
       		{if(user_api::auth("shenhe"))}
       			{if ($currentStatus == 1 or $currentStatus == 3) }
       				<a href="javascript:void(0)" onclick="setStatusById(2, this)">通过</a>
