@@ -178,7 +178,6 @@ class discuz_database {
 
 		if (is_string($str))
 			return '\'' . mysql_escape_string($str) . '\'';
-//			return '\'' . mysql_real_escape_string($str) . '\'';
 
 		if (is_int($str) or is_float($str))
 			return '\'' . $str . '\'';
