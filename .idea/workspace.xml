@@ -3,23 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="672cf3ff-89b7-4597-99c6-c1f5cb43ffe6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/dpc/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/dpc/main.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/dpc/manage.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/dpc/manage.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/main/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/main/main.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/media/channel.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/media/channel.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/media/position.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/media/position.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/report/ad.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/report/ad.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/report/hostwhite.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/report/hostwhite.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/report/stat.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/report/stat.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/default/ad/ad_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/default/ad/ad_info.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/templates/default/header.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/default/header.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/default/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/default/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/default/material/materialList.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/default/material/materialList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/default/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/default/nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/default/nav.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/default/nav.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/user/main.page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/user/main.page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/db/discuz_database.php" beforeDir="false" afterPath="$PROJECT_DIR$/libs/db/discuz_database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/image/bg-random/US_CA_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/www/assets_admin/images/US_CA_1.jpg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,14 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app_admin/templates/default/login/login.html">
+      <file leaf-file-name="header.tpl" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_admin/templates/default/header.tpl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" column="70" lean-forward="true" selection-start-line="22" selection-start-column="70" selection-end-line="22" selection-end-column="70" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="1400">
+              <caret line="70" column="91" lean-forward="true" selection-start-line="70" selection-start-column="91" selection-end-line="70" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -84,7 +65,6 @@
         <option value="$PROJECT_DIR$/app_admin/crm/word.page.php" />
         <option value="$PROJECT_DIR$/app_admin/dc/main.page.php" />
         <option value="$PROJECT_DIR$/app_admin/templates/default/ad/ad_info.html" />
-        <option value="$PROJECT_DIR$/app_admin/templates/default/header.tpl" />
         <option value="$PROJECT_DIR$/app_admin/templates/default/nav.tpl" />
         <option value="$PROJECT_DIR$/app_admin/ad/group.page.php" />
         <option value="$PROJECT_DIR$/app_admin/user/main.page.php" />
@@ -101,6 +81,7 @@
         <option value="$PROJECT_DIR$/app_admin/templates/default/material/materialList.html" />
         <option value="$PROJECT_DIR$/app_admin/templates/default/material/materialAudit.html" />
         <option value="$PROJECT_DIR$/app_admin/templates/default/login/login.html" />
+        <option value="$PROJECT_DIR$/app_admin/templates/default/header.tpl" />
       </list>
     </option>
   </component>
@@ -147,14 +128,6 @@
               <item name="app_admin" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="bs_bj_mb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bs_bj_mb" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app_admin" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="default" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="login" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="bs_bj_mb" type="b2602c69:ProjectViewProjectNode" />
@@ -228,12 +201,12 @@
       <option name="presentableId" value="Default" />
       <updated>1564708487383</updated>
       <workItem from="1564708490088" duration="14052000" />
-      <workItem from="1564978551423" duration="17076000" />
+      <workItem from="1564978551423" duration="19947000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31128000" />
+    <option name="totallyTimeSpent" value="33999000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -463,13 +436,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/templates/default/header.tpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_admin/templates/default/nav.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1411">
@@ -549,11 +515,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_admin/templates/default/login/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" column="70" lean-forward="true" selection-start-line="22" selection-start-column="70" selection-end-line="22" selection-end-column="70" />
+        <state relative-caret-position="200">
+          <caret line="19" column="31" lean-forward="true" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/templates/default/header.tpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="70" column="91" lean-forward="true" selection-start-line="70" selection-start-column="91" selection-end-line="70" selection-end-column="91" />
         </state>
       </provider>
     </entry>

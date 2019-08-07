@@ -66,11 +66,11 @@ define(["jquery", "../jquery.validate"], factory );}else{ factory( jQuery );}
 <script src="/baichuan_advertisement_manage/assets_admin/js/layer/layer.js"></script>
 <script src="/baichuan_advertisement_manage/assets_admin/v5/js/custom.js"></script>
 <!-- C3框架 -->
-<link href="/assets_admin/v5/plugins/c3/c3.min.css" rel="stylesheet">
+<link href="/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/c3.min.css" rel="stylesheet">
 <script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/c3.min.js"></script>
 <script src="/baichuan_advertisement_manage/assets_admin/v5/plugins/c3/d3.min.js"></script>
 
 <!--前端样式-->
-<link href="/assets_admin/v5/css/styles.css" rel="stylesheet">
-<link href="/assets_admin/v5/css/custom.css" rel="stylesheet">
-<link href="/assets_admin/v5/css/bcdata.css" rel="stylesheet">
+<link href="/baichuan_advertisement_manage/assets_admin/v5/css/styles.css" rel="stylesheet">
+<link href="/baichuan_advertisement_manage/assets_admin/v5/css/custom.css" rel="stylesheet">
+<link href="/baichuan_advertisement_manage/assets_admin/v5/css/bcdata.css" rel="stylesheet">
