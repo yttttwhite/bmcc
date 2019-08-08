@@ -64,10 +64,22 @@ function layerDom(selector){
 	});
 }
 
+function layerHtml(html) {
+	layer.open({
+	    type: 1,
+		shade: [0.5,'#000'],
+		shadeClose: true,
+		area: ['360px', '160px'],
+	    title: false, //不显示标题
+	    content: html
+	});
 
+}
 
 //以前版本的
 function lightBox(html) {
+	layerHtml(html)
+	return ;
 	//弹出一个页面层
 	$.layer({
 		type: 1,
@@ -115,6 +127,9 @@ function layerIframe(title, url, width, height){
 }
 
 function layerConfirmGet(url,msg){
+	layerConfirm(url, msg, true);
+	return;
+
 	$.layer({
 	    area: ['auto','auto'],
 	    offset: ['20%',''],
