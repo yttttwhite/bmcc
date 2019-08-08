@@ -3,7 +3,7 @@ class report_ad extends STpl{
     public $typeArray;
     public function __construct(){
         if(!user_api::auth("stat")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
         $this->init();
@@ -98,10 +98,10 @@ class report_ad extends STpl{
                 $this->assign("plan",$AdItem);
                 return $this->render("/report/ad_detail.html");
             }else{
-                $this->success("对应的详情信息不存在","/report.ad.list");
+                $this->success("对应的详情信息不存在","/baichuan_advertisement_manage/report.ad.list");
             }
         }else{
-            $this->success("请输入有效广告ID","/report.ad.list");
+            $this->success("请输入有效广告ID","/baichuan_advertisement_manage/report.ad.list");
         }
     }
     

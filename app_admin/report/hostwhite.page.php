@@ -3,7 +3,7 @@ class report_hostwhite extends STpl{
     public $typeArray;
     public function __construct(){
         if(!user_api::auth("stat")){
-            $this->success("没有权限",'/user',3);
+            $this->success("没有权限",'/baichuan_advertisement_manage/user',3);
             exit();
         }
         $this->init();

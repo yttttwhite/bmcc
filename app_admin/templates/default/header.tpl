@@ -24,6 +24,7 @@
 <script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/formSel.js"></script> 
 <script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/report.js"></script> 
 <script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/dc.js"></script> 
+
 <script type="text/javascript" src="/baichuan_advertisement_manage/assets_admin/js/jquery.ddslick.js"></script>
 <!--<script type="text/javascript" src='/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts-plain-map.js'></script>-->
 <script type="text/javascript" src='/baichuan_advertisement_manage/assets_admin/js/echarts-2.0.0/build/echarts.min.js'></script>

@@ -369,7 +369,7 @@ class ad_group extends STpl{
                 $group->usertype = $_REQUEST['usertype'];
                 $group->policys = $policys;
                 $group->exchanges=@implode(",",$_POST['exchanges']);
-                if(!empty($inPath[4])){//修改
+                if(!empty($inPath[4]))  {//修改
                     //修改
                     $group->mtime=time();
                     $group->bid_price = $plan->setting_price;
