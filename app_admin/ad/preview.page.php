@@ -32,9 +32,9 @@ class ad_preview extends STpl{
 	    }else{
 	        $getStr = '';
 	    }
-	
-	    if(stripos($url, 'https') === false){
-	        $url = 'https://'.$url;
+		
+		if(stripos($url, 'https') === false && stripos($url, 'http') === false) {
+	        $url = 'http://'.$url;
 	    }
 	
 	    if(stripos($url, '?') !== false){
