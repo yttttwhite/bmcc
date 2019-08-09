@@ -28,7 +28,7 @@ class ad_preview extends STpl{
 	        $param[] = $key.'='.$value;
 	    }
 	    if(count($param)>0){
-	        $getStr = implode($param, '&');
+	        $getStr = implode('&', $param);
 	    }else{
 	        $getStr = '';
 	    }
