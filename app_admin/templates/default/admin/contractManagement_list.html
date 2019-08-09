@@ -230,6 +230,14 @@
     });
 
     function layerConfirmCb(msg,fn){
+        var index = layer.confirm(msg, {btn: ['确认','取消'], shade: 0.8,shadeClose: true}, 
+            function(index){
+                fn();
+                layer.close(index);
+            }, 
+            function(){layer.close(index);}
+        );
+        return ;
         $.layer({
             area: ['auto','auto'],
             offset: ['20%',''],
