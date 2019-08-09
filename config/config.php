@@ -1,5 +1,7 @@
 <?php
 $config = array();
+//edit by 方正 2019.8.9，上传素材时指定的media_name。每个广告系统不一样
+$config['media_name'] = "bmcc";
 $config['partner'] = "zhejiang";
 //数据库配置
 //ADP

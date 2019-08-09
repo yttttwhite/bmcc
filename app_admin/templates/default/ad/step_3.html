@@ -255,6 +255,30 @@ float:none;
 					<embed src="{$ad->stuff->addr}" width="{$ad->stuff->width}" height="{$ad->stuff->height}" style="max-width:180px;max-height:80px"></embed>
 					{elseif $ad->stuff->type==1}
 					<a href="{$ad->stuff->addr}" target="_blank"><img class="addr" style="max-width:180px;max-height:80px" src="{$ad->stuff->addr}" /></a>
+					{elseif($ad->stuff->type==6)}
+                  	<video width="320" controls="controls">
+                      <source src="{$ad->stuff->addr}" type="application/octet-stream" />
+                      <source src="{$ad->stuff->addr}" type="video/x-ms-asf" />
+                      <source src="{$ad->stuff->addr}" type="video/x-mplayer2" />
+                      <source src="{$ad->stuff->addr}" type="video/mp4" />
+                      <source src="{$ad->stuff->addr}" type="video/ogg" />
+                      <source src="{$ad->stuff->addr}" type="video/webm" />
+                      <object data="{$ad->stuff->addr}" width="320">
+                          <embed src="{$ad->stuff->addr}" width="320"/>
+                      </object>
+                  </video>
+                  {elseif($ad->stuff->type ==10)}
+                  <video width="320" controls="controls">
+                      <source src="{$ad->stuff->addr}" type="application/octet-stream" />
+                      <source src="{$ad->stuff->addr}" type="video/x-ms-asf" />
+                      <source src="{$ad->stuff->addr}" type="video/x-mplayer2" />
+                      <source src="{$ad->stuff->addr}" type="video/mp4" />
+                      <source src="{$ad->stuff->addr}" type="video/ogg" />
+                      <source src="{$ad->stuff->addr}" type="video/webm" />
+                      <object data="{$ad->stuff->addr}" width="320">
+                          <embed src="{$ad->stuff->addr}" width="320"/>
+                      </object>
+                  </video>
 					{else}
 					<textarea style="width:200px;height:100px" name="text[{$ad->adid}]">{$ad->stuff->text}</textarea>
 					{/if}
@@ -390,7 +414,7 @@ float:none;
 				<td>
 					<span class="ltlink a12">
 						<!--<a href="#">重新上传</a><a href="#">检测代码</a>-->
-						<a href="{$ad->stuff->addr}" target="_blank">预览</a><br />
+						<!-- <a href="{$ad->stuff->addr}" target="_blank">预览</a><br /> -->
 						<!-- <a class="copyset" href="#" title="复制上面的设置(类型，目标地址，JS设置)到本素材">复制</a> -->
 						<a href="javascript:void(0)" onclick="lightHtml({$ad->adid});">删除</a>
 						{*<a href="#">下载</a><br />*}

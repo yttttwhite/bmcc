@@ -129,7 +129,7 @@ class ad_stufflibrary extends STpl{
 
 								$stuff_width = $wid;
 								$stuff_height = $hei;
-								if($flag == 0){
+								if(false && $flag == 0){
 									$response['error']++;
 									$response['message'] .="视频实际尺寸(宽度*长度)为：".$wid.'*'."$hei";
 									$response['message'] .="\n预期值为:".implode("或", $size_arr);
@@ -362,6 +362,9 @@ class ad_stufflibrary extends STpl{
 				}else{
 					$stuffInfo['verified_or_not'] = 1;
 				}
+				//edit by 方正 2019.8.9
+				$config = SConfig::getConfigArray(ROOT_CONFIG."/config.php");
+				$stuffInfo['media_name'] = $config['media_name'];
 
 				$stufflibraryModel = new model_stuffLibrary();
 				$stuffStatusModel = new model_stuffStatus();

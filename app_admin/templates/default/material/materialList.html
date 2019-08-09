@@ -96,9 +96,9 @@
                   {if $_stuff->type==2}
                   <embed src="{$_stuff->addr}" width="{$_stuff->width}" height="{$_stuff->height}" style="max-width:180px;max-height:80px"></embed>
                   {elseif $_stuff->type==1}
-                  <!--<a href="{$_stuff->addr}" target="_blank">-->
+                  <a href="{$_stuff->addr}" target="_blank">
                       <img class="addr" style="max-width:180px;max-height:80px" src="{$_stuff->addr}" />
-                  <!--</a>-->
+                  </a>
                   {elseif($_stuff->type==6)}
                   <video width="320" controls="controls">
                       <source src="{$_stuff->addr}" type="application/octet-stream" />
