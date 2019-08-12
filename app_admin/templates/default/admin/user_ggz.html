@@ -89,7 +89,7 @@
 						      <tr>
 						        <td>{$_user->uid}</td>
 						        <td>
-						        	<a onclick='showWindow("/baichuan_advertisement_manage/admin.user.detail?uid={$_user->uid}")'>
+						        	<a href="#" onclick='showWindow("/baichuan_advertisement_manage/admin.user.detail?uid={$_user->uid}")'>
 						        		{$_user->user_name}
 									</a>
 								</td>
@@ -138,7 +138,7 @@
                                 </td>
                                 <td>{$creator[$_user->creator_id]}</td>
 						        <td>
-                                    <a class="btn btn-squared btn-xs btn-info"  onclick='showWindow("/baichuan_advertisement_manage/admin.user.detail?uid={$_user->uid}")'>查看</a>
+                                    <a class="btn btn-squared btn-xs btn-info" href="#" onclick='showWindow("/baichuan_advertisement_manage/admin.user.detail?uid={$_user->uid}")'>查看</a>
                                     {if(user_api::auth(["system","admin"],"or"))}
                                     {if $_user->edit==1}
                                     <a class="btn btn-squared btn-xs btn-success " href="/baichuan_advertisement_manage/admin.user.edit.{$_user->uid}?nav=5&role={$_user->role_id}">编辑</a>
@@ -168,7 +168,9 @@ function layerConfirmCb(msg,fn){
                 fn();
                 layer.close(index);
             }, 
-            function(){layer.close(index);}
+            function(){ //
+                layer.close(index);
+            }
         );
         return ;
 

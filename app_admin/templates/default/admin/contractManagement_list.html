@@ -267,7 +267,9 @@
                 fn();
                 layer.close(index);
             },
-            function () { layer.close(index); }
+            function () { //
+                layer.close(index); 
+            }
         );
         return;
         $.layer({
