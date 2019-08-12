@@ -160,8 +160,10 @@
 </div>
 <script>
 function layerConfirmCb(msg,fn){
-
-    var index = layer.confirm(msg, {btn: ['确认','取消'], shade: 0.8,shadeClose: true}, 
+    var params = { //
+        btn: ['确认','取消'], shade: 0.8,shadeClose: true
+    }
+    var index = layer.confirm(msg, params, 
             function(index){
                 fn();
                 layer.close(index);

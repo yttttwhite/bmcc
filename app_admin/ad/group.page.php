@@ -380,11 +380,73 @@ class ad_group extends STpl
                     $r = $b->updateAdGroup($group);
                     $group_id = $group->group_id;
 
-                    $db = new SDb();
-                    $db->useConfig("adp");
-                    $sql = "UPDATE `adp_group_info` SET `usertags_type`={$usertags_type} WHERE `group_id`={$group_id}";
-                    $res = $db->execute($sql);
-                    header("location:/baichuan_advertisement_manage/ad.group.list.$plan_id.$group_id");
+                    //edit by 方正 2019.8.9,编辑时也可以新增广告和素材
+                    $stufflibraryModel = new model_stuffLibrary();
+                    if (!empty($_REQUEST['adid']) && !empty($group_id)) {
+                        $stuff_id_list = implode(',', $_REQUEST['adid']);
+                        $sql = "SELECT * FROM `adp_stuff_library` WHERE stuff_id IN ($stuff_id_list)";
+                        $result = $stufflibraryModel->fetch_all($sql);
+                        if (!empty($result)) {
+                            $adInfo = [];
+                            foreach ($result as $key => $val) {
+                                $adInfo['media_name'] = $val['media_name'];
+                                $adInfo['adname'] = $val['name'];
+                                $adInfo['uid'] = user_api::id();
+                                $adInfo['group_id'] = $group_id;
+                                $adInfo['plan_id'] = $plan_id;
+                                $adInfo['adType'] = $_REQUEST['view_type'][$val['stuff_id']];
+                                $adInfo['colum1'] = $_REQUEST['view_position'][$val['stuff_id']];;
+                                $adInfo['width'] = $val['width'];
+                                $adInfo['height'] = $val['height'];
+                                $adInfo['show_js'] = $val['show_js'];
+                                $adInfo['click_js'] = $val['click_js'];
+                                if (user_api::auth("admin")) {
+                                    $adInfo['play_status'] = 1;
+                                    $adInfo['verified_or_not'] = 2;
+                                } else {
+                                    $adInfo['play_status'] = 3;
+                                    $adInfo['verified_or_not'] = 1;
+                                }
+                                $adInfo['media_type'] = 1; //0:固网，1：移动互联网
+                                $adInfo['ctime'] = $adInfo['mtime'] = time();
+
+                                $adInfoModel     = new model_adInfo();
+                                $adid = $adInfoModel->addData($adInfo);
+
+                                unset($val['adType']);
+                                unset($val['valid_startTime']);
+                                unset($val['valid_endTime']);
+                                unset($val['tel_number']);
+                                unset($val['industry_id']);
+                                unset($val['show_js']);
+                                unset($val['click_js']);
+                                
+                                $val['adid'] = $adid;
+                                $val['ctime'] = $data['mtime'] = time();
+                                $val['uid'] = user_api::id();
+
+                                $stuffInfoModel  = new model_stuffInfo();
+                                $id = $stuffInfoModel->addData($val);
+                                
+                                //edit by 方正, 由于数据库将adid修改为主键，所以update操作取消
+                                // $data['ctime'] = $data['mtime'] = time();
+                                // $data['uid'] = user_api::id();
+                                // $data['adid'] = $adid;
+                                // $update_id = $stuffInfoModel->updateData($data, array("stuff_id" => $val['stuff_id']));
+                            }
+                        }
+                    }
+
+                    if (empty($group_id)) {
+                        $error = "建立失败";
+                        $this->assign("group", $group);
+                    } else {
+                        $db = new SDb();
+                        $db->useConfig("adp");
+                        $sql = "UPDATE `adp_group_info` SET `usertags_type`={$usertags_type} WHERE `group_id`={$group_id}";
+                        $res = $db->execute($sql);
+                        header("location:/baichuan_advertisement_manage/ad.group.list.$plan_id.$group_id");
+                    }
                 } else {
                     //增加
                     $group->bid_price = $plan->setting_price;
@@ -574,10 +636,13 @@ class ad_group extends STpl
         if (!empty($inPath[4])) {
             $adInfoModel     = new model_adInfo();
             $stuffInfoModel     = new model_stuffInfo();
-            $adInfos = $adInfoModel->getData(array("plan_id" => $plan_id, "group_id" => $group_id));
+            // $adInfos = $adInfoModel->getData(array("plan_id" => $plan_id, "group_id" => $group_id));
+            //edit by 方正 2019.8.9 去除删除的广告
+            $query_sql_adinfo = "SELECT * FROM `adp_ad_info` WHERE plan_id = ($plan_id) and group_id = ($group_id) and play_status != 4";
+            $adInfos = $adInfoModel->fetch_all($query_sql_adinfo);
             if (count($adInfos) > 0) {
                 $adid_list = implode(',', array_column($adInfos, "adid"));
-                $query_sql = "SELECT * FROM `adp_stuff_info` WHERE adid IN ($adid_list)";
+                $query_sql = "SELECT * FROM `adp_stuff_info` WHERE adid IN ($adid_list) and enabled != 4";
                 $stu_result = $stuffInfoModel->fetch_all($query_sql);
             }
             if (!empty($stu_result)) {

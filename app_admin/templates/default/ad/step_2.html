@@ -1020,6 +1020,8 @@ function select_all(flag,name){ //全选或取消
                   <span>选择素材</span>
                   <img class="addr" style="width:100%;height:100%;display: none;"/>
                   <embed width="100%" height="100%" style="width:100%;height:100%;display: none;"></embed>
+                  <video width="320" controls="controls" style="width:100%;height:100%;display: none;">
+                  </video>
                 </div>
               </td>
               <td rowspan="1">
@@ -1086,6 +1088,17 @@ function select_all(flag,name){ //全选或取消
                   {/if}
                   <img class="addr" style="width:100%;height:100%;{if $stuff[type]!=1}display: none;{/if}" {if $stuff[type]==1} src="{$stuff[addr]}"{/if}/>
                   <embed width="100%" height="100%" style="width:100%;height:100%;{if $stuff[type]!=2}display: none;{/if}" {if $stuff[type]==2} src="{$stuff[addr]}"{/if}></embed>
+                  <video width="320" controls="controls" style="width:100%;height:100%;{if $stuff[type]!=6}display: none;{/if}">
+                    <source src="{$stuff[addr]}" type="application/octet-stream" />
+                    <source src="{$stuff[addr]}" type="video/x-ms-asf" />
+                    <source src="{$stuff[addr]}" type="video/x-mplayer2" />
+                    <source src="{$stuff[addr]}" type="video/mp4" />
+                    <source src="{$stuff[addr]}" type="video/ogg" />
+                    <source src="{$stuff[addr]}" type="video/webm" />
+                    <object data="{$stuff[addr]}" width="320">
+                        <embed src="{$stuff[addr]}" width="320"/>
+                    </object>
+                  </video>
                 </div>
               </td>
               <td rowspan="1">
@@ -1306,7 +1319,7 @@ function select_all(flag,name){ //全选或取消
                 var iframeWin = window[layero.find('iframe')[0]['name']];
                 var data = iframeWin.getSelected();
                 if(data){
-                  var $adid = $this.find('input[accept=adid]'), $img = $this.find("img"), $embed = $this.find("embed"), $tr = $this.closest('tr')
+                  var $adid = $this.find('input[accept=adid]'), $img = $this.find("img"), $embed = $this.find("embed"), $video = $this.find("video"),$tr = $this.closest('tr')
                   , $name = $tr.find("[item-name]"), $wh = $tr.find('[item-wh]'), $span = $this.find('span') ,
                   $viewType = $tr.find("[accept=view_type]"), $viewPos = $tr.find("[accept=view_position]");
                   $span.hide();
@@ -1319,10 +1332,18 @@ function select_all(flag,name){ //全选或取消
                   if(data.type * 1 === 2){
                     $embed.attr('src', data.addr).show();
                     $img.hide();
+                    $video.hide();
+                  } else if (data.type * 1 === 6) {
+                    $html = $('<source src="" type="application/octet-stream" /><source src="'+data.addr+'" type="video/x-ms-asf" /><source src="'+data.addr+'" type="video/x-mplayer2" /><source src="'+data.addr+'" type="video/mp4" /><source src="'+data.addr+'" type="video/ogg" /><source src="'+data.addr+'" type="video/webm" /><object data="'+data.addr+'" width="320"><embed src="'+data.addr+'" width="320"/></object>');
+                    $video.append($html);
+                    $video.show();
+                    $img.hide();
+                    $embed.hide();
                   }
                   else{
                     $img.attr('src', data.addr).show();
                     $embed.hide();
+                    $video.hide();
                   }
                 }
                 layer.close(index)
